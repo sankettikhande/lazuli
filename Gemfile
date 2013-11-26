@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth'
 
+
 group :development do
   gem 'quiet_assets'
   gem 'unicorn'
