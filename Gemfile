@@ -7,7 +7,7 @@ gem 'turbolinks'
 gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth'
-
+gem 'omniauth-facebook'
 
 group :development do
   gem 'quiet_assets'
