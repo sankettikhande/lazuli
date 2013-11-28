@@ -252,11 +252,11 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   require "omniauth-facebook"
-  config.omniauth :facebook, "555568701184796", "8be3e8bbf6ba33053c1635e3b38dbc43"
+  config.omniauth :facebook, Settings.oauth_apps.facebook.app_key, Settings.oauth_apps.facebook.app_secret
 
   require "omniauth-google-oauth2"
-  config.omniauth :google_oauth2, "855183869640-k0f0a48779u0mip395k7kth0ceco17sh", "bPUgQt2j5rBw_MkkxL2ij0I_", { access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_oauth2, Settings.oauth_apps.google.app_key, Settings.oauth_apps.google.app_key, { access_type: "offline", approval_prompt: "" }
 
   require "omniauth-linkedin"
-  config.omniauth :linkedin, "75daqaxxahxm83", "1pYcj5AkWpcHqjEM", :scope => 'r_emailaddress'
+  config.omniauth :linkedin, Settings.oauth_apps.linkedin.app_key, Settings.oauth_apps.linkedin.app_secret, :scope => 'r_emailaddress'
 end

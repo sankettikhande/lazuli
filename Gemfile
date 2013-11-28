@@ -10,6 +10,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
+gem 'rails_config'
 
 group :development do
   gem 'quiet_assets'
