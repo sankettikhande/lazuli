@@ -1,0 +1,35 @@
+<div class="row">
+  <a href="add-new-user.html"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new user
+  </button></a>
+</div>
+<div class="row">
+  <div class="seperator5"></div>
+  <div class="portlet-body flip-scroll">
+    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
+      <thead class="flip-content">
+        <tr>
+            <th>Username</th>
+            <th>Email ID<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th>Courses Subscribed for<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th>Channels Subscibed to<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th>Type of Subscription</th>
+            <th>Subscription Expiring on</th>
+            <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.first_name %></td>
+            <td><%= user.email %></td>
+            <td>Excel</td>
+            <td>Study Express</td>
+            <td>Trial Version</td>
+            <td>02-15-2014</td>
+            <td><a href="#"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+
+.handcursor{cursor:pointer;}
+.top-menu li a{text-transform:uppercase;}
+
+footer a{text-transform:uppercase;color:#fff;padding:0;}
+footer li {display:inline}
+footer li a{float:left;}
+footer .navbar {margin-bottom:0}
+.panel {margin-top:0.6em}
+.table th {color:#e02222;}
+
+.seperator5 {min-height:0.5em}
+.seperator10 {min-height:1em}
+.seperator15 {min-height:1.5em}
+.nopadding {padding:0;}
+.nomargin {margin:0}
+.nospace {margin:0;padding:0}
+
+/************** MULTIPLE FILE UPLOAD *****************/
+.upload-list {margin-bottom:0}
+.upload-list td:nth-child(2){text-align:right;width:15%;}
+.upload-list td:nth-child(3){width:10%}
+.upload-list td:nth-child(4){width:5%}
+
+/******************** ADD ATTRIBUTES ****************************/
+.panel, .panel-default, .panel-heading {margin:0;padding:0}
+a.accordion-toggle {color:#000;}
+.panel-title {padding-left:10px;}
+.panel-title {background: #f0f0f0}
+
+.light-grey {background: #f0f0f0}
+
+.portlet {margin-bottom: 0}
+ul.coll-head {list-style-type: none;}
+ul.coll-head li:nth-child(4) {width: 4%;float: right;}
+.portlet > .portlet-title > .caption {line-height: 1.5em;}
+section {margin-bottom: 1em}
+/**************  MEDIA QUERIES ******************/
+@media only screen and (max-width:47.938em) {
+	footer li {display:inline-block}	
+	footer li a{float:left}
+	}
+	
+@media only screen and (min-width:48em) {
+	footer li {display:inline-block}	
+	footer li a{float:left}
+	}	
