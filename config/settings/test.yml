@@ -1,0 +1,12 @@
+oauth_apps: 
+  facebook:
+    app_key: ""
+    app_secret: ""
+
+  google:
+    app_key: ""
+    app_secret: ""
+
+  linkedin:
+    app_key: ""
+    app_secret: ""
