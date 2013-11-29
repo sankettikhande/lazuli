@@ -11,12 +11,15 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-linkedin'
 gem 'rails_config'
+gem 'rack-mini-profiler'
 
 group :development do
   gem 'quiet_assets'
   gem 'unicorn'
   gem 'pry-rails'
   gem 'capistrano', '2.15.4', require: false
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :assets do

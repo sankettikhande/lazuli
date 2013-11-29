@@ -2,7 +2,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   
   def facebook
     # You need to implement the method below in your model (e.g. app/models/user.rb)
-    @user = User.find_for_facebook_oauth(request.env["omniauth.auth"], current_user)
+    @user = User.find_for_oauth(request.env["omniauth.auth"], request.env["omniauth.auth"].extra.raw_info, current_user)
  
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
@@ -14,7 +14,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-    @user = User.find_for_google_oauth2(request.env["omniauth.auth"], current_user)
+    @user = User.find_for_oauth(request.env["omniauth.auth"], request.env["omniauth.auth"].info, current_user)
     if @user.persisted?
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Google"
       sign_in_and_redirect @user, :event => :authentication
@@ -25,9 +25,9 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end  
 
   def linkedin
-    @user = User.find_for_linkedin(request.env["omniauth.auth"], current_user)
+    @user = User.find_for_oauth(request.env["omniauth.auth"], request.env["omniauth.auth"].info, find_for_oauthcurrent_user)
     if @user.persisted?
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Linkedin"
+      flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
       sign_in_and_redirect @user, :event => :authentication
     else
       session["devise.linkedin_data"] = request.env["omniauth.auth"]
