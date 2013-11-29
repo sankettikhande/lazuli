@@ -255,7 +255,7 @@ Devise.setup do |config|
   config.omniauth :facebook, Settings.oauth_apps.facebook.app_key, Settings.oauth_apps.facebook.app_secret
 
   require "omniauth-google-oauth2"
-  config.omniauth :google_oauth2, Settings.oauth_apps.google.app_key, Settings.oauth_apps.google.app_key, { access_type: "offline", approval_prompt: "" }
+  config.omniauth :google_oauth2, Settings.oauth_apps.google.app_key, Settings.oauth_apps.google.app_secret, { access_type: "offline", approval_prompt: "" }
 
   require "omniauth-linkedin"
   config.omniauth :linkedin, Settings.oauth_apps.linkedin.app_key, Settings.oauth_apps.linkedin.app_secret, :scope => 'r_emailaddress'

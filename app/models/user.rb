@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid ,:first_name, :last_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name
   # attr_accessible :title, :body
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -17,8 +17,7 @@ class User < ActiveRecord::Base
       if registered_user
         return registered_user
       else
-        user = User.create!(first_name:auth.extra.raw_info.first_name,
-        										last_name:auth.extra.raw_info.last_name,
+        user = User.create!(name:auth.extra.raw_info.name,
                             provider:auth.provider,
                             uid:auth.uid,
                             email:auth.extra.raw_info.email,
@@ -38,13 +37,12 @@ class User < ActiveRecord::Base
       if registered_user
         return registered_user
       else
-        user = User.create!(first_name: data["first_name"],
-        										last_name: data["last_name"],
-									          provider:access_token.provider,
-									          email: data["email"],
-									          uid: access_token.uid ,
-									          password: Devise.friendly_token[0,20],
-									        )
+        user = User.create!(name: data["name"],
+	                     provider:access_token.provider,
+	                     email: data["email"],
+	                     uid: access_token.uid ,
+	                     password: Devise.friendly_token[0,20],
+	                   )
       end
     end
   end
@@ -58,13 +56,12 @@ class User < ActiveRecord::Base
       if registered_user
         return registered_user
       else
-        user = User.create!(first_name:auth.info.first_name,
-        										last_name:auth.info.last_name,
-                            provider:auth.provider,
-                            uid:auth.uid,
-                            email:auth.info.email,
-                            password:Devise.friendly_token[0,20],
-                          )
+        user = User.create!(name:auth.info.name,
+	        	     provider:auth.provider,
+	        	     uid:auth.uid,
+	        	     email:auth.info.email,
+	        	     password:Devise.friendly_token[0,20],
+	        	   )
       end
     end
   end
