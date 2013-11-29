@@ -2,8 +2,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
       ## Bio fields
-      t.string :first_name
-      t.string :last_name
+      t.string :name
 
       ## Database authenticatable
       t.string :email,              :null => false, :default => ""

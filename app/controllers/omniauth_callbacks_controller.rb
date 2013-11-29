@@ -12,7 +12,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end  
 
   def linkedin
-    @user = User.find_for_oauth(request.env["omniauth.auth"], request.env["omniauth.auth"].info, find_for_oauthcurrent_user)
+    @user = User.find_for_oauth(request.env["omniauth.auth"], request.env["omniauth.auth"].info, current_user)
     login_or_redirect("Linkedin")
   end 
 
