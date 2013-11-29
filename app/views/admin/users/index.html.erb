@@ -1,5 +1,5 @@
 <div class="row">
-  <a href="add-new-user.html"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new user
+  <a href="/admin/users/new"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new user
   </button></a>
 </div>
 <div class="row">
@@ -20,7 +20,7 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= user.first_name %></td>
+            <td><%= user.name %></td>
             <td><%= user.email %></td>
             <td>Excel</td>
             <td>Study Express</td>

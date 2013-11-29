@@ -36,6 +36,15 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <script src="/assets/ie/respond.min.js"></script>
     <script src="/assets/ie/excanvas.min.js"></script> 
     <![endif]-->   
+
     <%= javascript_include_tag 'admin' %>
+
+    <script>
+      jQuery(document).ready(function() {       
+         // initiate layout and plugins
+         App.init();
+         FormComponents.init();
+      });
+    </script>
 </body>
 </html>
