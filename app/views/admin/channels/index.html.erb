@@ -17,7 +17,16 @@
         </tr>
       </thead>
       <tbody>
-        
+        <% @channels.each do |channel| %>
+          <tr>
+            <td><%= channel.name %></td>
+            <td><%= channel.channel_type %></td>
+            <td>Excel</td>
+            <td></td>
+            <td>59</td>
+            <td><a href="/admin/channels/<%= channel.id %>/edit"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/channels/<%= channel.id %>" data-method="delete"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   </div>
