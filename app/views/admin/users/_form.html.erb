@@ -1,0 +1,150 @@
+ 	<div class="row">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<%= form_for [:admin, @user] do |f| %>
+					<% if @user.errors.any? %>
+					  <ul style='color: red;padding-left:15px;'>
+					    <% @user.errors.full_messages.each do |msg| %>
+					      <li><%= msg %></li>
+					    <% end %>
+					  </ul>
+					<% end %>
+					 	<div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label for="uname">User Name</label>
+				    	</div>
+				    	<div class="col-md-9">
+			    		  <%= f.text_field 'name', :class => 'form-control' %>
+				    	</div>
+				    </div>
+				    <div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label for="emailID">Email ID</label>
+				    	</div>
+				    	<div class="col-md-9">
+			    			<%= f.text_field 'email', :class => 'form-control' %>
+				    	</div>
+				    </div>
+				    <div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label for="emailID">Password</label>
+				    	</div>
+				    	<div class="col-md-9">
+			    			<%= f.password_field 'password', :class => 'form-control' %>
+				    	</div>
+				    </div>
+				    <div class="row">
+				    	<div class="col-md-3">
+				    		<label for="emailID">Confirm Password </label>
+				    	</div>
+				    	<div class="col-md-9">
+			    			<%= f.password_field 'password_confirmation', :class => 'form-control' %>
+				    	</div>
+				    </div>
+				    <hr>	
+			    	<div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label for="channelsS2">Channels Subscribed To</label>
+				    	</div>
+				    	<div class="col-md-9">
+			    			<select class="form-control" name="channelsS2" id="channelsS2">
+			    				<option value="channel-1">Select</option>
+			    				<option value="channel-1">Select A</option>
+			    			</select>
+				    	</div>
+				    </div>	
+			    	<div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label>Channels Subscribed For</label>
+				    	</div>
+				    	<div class="col-md-9">
+				    		<div class="col-md-3"><input name="channelsS41" id="channelsS41" type="checkbox" value="Excel"> Excel</div>
+				    		<div class="col-md-3"><input name="channelsS42" id="channelsS42" type="checkbox" value="Powerpoint"> Powerpoint</div> 
+				    		<div class="col-md-3"><input name="channelsS43" id="channelsS43" type="checkbox" value="SQL"> Sql</div>
+				    		<div class="col-md-3">						
+								<input name="channelsS44" id="channelsS44" type="checkbox" value="Word"> Word 
+							</div>
+				    	</div>
+				    </div>	
+			    	<div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label>Type of Subscription</label>
+				    	</div>
+				    	<div class="col-md-9">
+				    		<div class="col-md-4"><input name="typeOSub1" id="typeOSub1" type="checkbox" value="trial"> Trial Subscription</div> 
+				    		<div class="col-md-4"><input name="typeOSub2" id="typeOSub2" type="checkbox" value="yearly"> Yearly Subscription</div>
+				    		<div class="col-md-4">						
+								<input name="typeOSub3" id="typeOSub3" type="checkbox" value="2years"> Two Year Subscription 
+							</div>
+				    	</div>
+				    </div>	
+			    	<div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label>Date of Subscription</label>
+				    	</div>
+				    	<div class="col-md-9">
+				    		<div class="col-md-5">
+								<div class="input-group input-medium date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+									<input type="text" class="form-control" readonly>
+									<span class="input-group-btn">
+									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+									</span>
+								</div>
+				    		</div>
+					    		<div class="col-md-2">
+						    		<label>Date of Expiry</label>
+					    		</div>
+				    		<div class="col-md-5">
+								<div class="input-group input-medium date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+									<input type="text" class="form-control" readonly>
+									<span class="input-group-btn">
+									<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+									</span>
+								</div>
+				    		</div>
+				    	</div>
+				    </div>	
+			    	<div class="row form-group">
+				    	<div class="col-md-3">
+				    		<label>User Permissions</label>
+				    	</div>
+				    	<div class="col-md-9">
+				    		<div class="col-md-4">
+				    			<input type="checkbox" name="UserPerm" id="UPwatch" value="trial"> Watch</div> 
+				    		<div class="col-md-4">
+				    			<input type="checkbox" name="UserPerm" id="UPshare" value="yearly"> Share</div>
+				    		<div class="col-md-4">						
+								<input type="checkbox" name="UserPerm" id="UPcreate" value="2years"> Create 
+							</div>
+				    	</div>
+				    </div>	
+				    <div class="row form-group">
+				    	<div class="col-md-3"></div>
+				    	<div class="col-md-9">
+				    		<a href="#"><i class="fa fa-3x fa-plus"></i> (Add another Course)</a>
+				    	</div>
+				    </div>
+				    <div class="seperator5"></div>
+				    <div class="row form-group">
+				    	<div class="col-md-3"></div>
+				    	<div class="col-md-9">
+				    		<%= f.submit 'Save', :class => 'btn green' %>
+				    	</div>
+				    </div>
+			    <% end %> 
+			  </div>  
+			</div> 
+		</div>
+        <div class="col-md-3">
+        	<aside style="text-align:center">
+            	<h5>Queries</h5>
+            	<ol class="text-left">
+            		<li>Can the user be given the option to multiselect the courses?</li>
+            		<li>In case a user wants to extend the subscription for a few days, is there a provision for that?</li>
+            		<li>What other metadata for users need to be added?</li>
+            		<li>What is the nomenclature to be used?</li>
+            	</ol>
+            </aside>
+        </div>
+	</div>
