@@ -51,6 +51,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    dalli (2.6.4)
     debug_inspector (0.0.2)
     devise (3.2.2)
       bcrypt-ruby (~> 3.0)
@@ -77,6 +78,9 @@ GEM
     json (1.8.1)
     jwt (0.1.8)
       multi_json (>= 1.5)
+    kaminari (0.15.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     kgio (2.8.1)
     libv8 (3.16.14.3)
     mail (2.5.4)
@@ -200,9 +204,11 @@ DEPENDENCIES
   binding_of_caller
   capistrano (= 2.15.4)
   coffee-rails (~> 3.2.1)
+  dalli
   devise
   jquery-rails
   jquery-turbolinks
+  kaminari
   mysql2
   omniauth
   omniauth-facebook
