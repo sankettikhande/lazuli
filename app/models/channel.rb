@@ -13,7 +13,8 @@ class Channel < ActiveRecord::Base
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
 
   #VALIDATIONS
-  validates :name, :presence => true
+  validates :name, :company_name, :company_number, :presence => true
+  validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :presence => true
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
 
