@@ -52,7 +52,7 @@
 		   				<%= f.label :channel_type, :class => "control-label" %>
 			   		</div>
 			   		<div class="col-md-5">
-			   			<%= f.select :channel_type, options_for_select([["Public","public"], ["Private","private"]]), :class => "form-control" %>
+			   			<%= f.select :channel_type, options_for_select([["Public","public"], ["Private","private"]], @channel.channel_type), :class => "form-control" %>
 			   		</div>
 		   		</div>
 		   	</div>
