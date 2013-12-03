@@ -3,6 +3,7 @@ Lazuli::Application.routes.draw do
   
   namespace :admin do
     resources :users
+    resources :channels
   end
 
   root :to => "home#index"
