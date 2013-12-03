@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_number, :company_address, :company_description, :company_number, :admin_user_id, :created_by
   #ASSOCIATIONS
   has_many :channel_courses
   has_many :courses, :through => :channel_courses
@@ -12,12 +12,11 @@ class Channel < ActiveRecord::Base
   #VALIDATIONS
   validates :name, :presence => true
 
-
   #SCOPES
 
 
   #INSTANCE METHODS
-
+  
 
   #CLASS METHODS
 end
