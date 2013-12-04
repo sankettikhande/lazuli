@@ -3,6 +3,7 @@ class Course < ActiveRecord::Base
   #ASSOCIATIONS
   has_many :channel_courses
   has_many :channels, :through => :channel_courses
+  has_many :topics
 
   #VALIDATIONS
   validates :name, :presence => true
