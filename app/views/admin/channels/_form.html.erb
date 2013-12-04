@@ -37,13 +37,14 @@
 								<div id="collapse_1" class="panel-collapse collapse">
 									<div class="panel-body form-group">
 										<div class="row">
+
 											<div class="col-sm-2">
-												<label for="actual-name" class="control-label">Actual Name</label>
+												<label for="cont-no" class="control-label">Actual Name</label>
 											</div>
 											<div class="col-sm-4">
-												<input type="hidden" id="select2_sample6" class="form-control select2">
-												<!-- <input type="text" class="form-control" id="actual-name" name="actual-name"> -->
+												<input type="hidden" id="select2_sample_modal_6" class="form-control select2">
 											</div>
+
 											<div class="col-sm-2">
 												<label for="cont-no" class="control-label">Contact Number</label>
 											</div>
@@ -144,7 +145,6 @@
 												<%= f.hidden_field :admin_user_id, :value => current_user.id if current_user %>
 		  									<%= f.hidden_field :created_by, :value => current_user.id if current_user %>
 											</div>
-											
 										</div>
 
 									</div>

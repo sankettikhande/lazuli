@@ -15,6 +15,7 @@ gem 'rack-mini-profiler'
 gem 'dalli'
 gem 'kaminari'
 gem 'paperclip'
+gem 'jbuilder'
 
 group :development do
   gem 'quiet_assets'
