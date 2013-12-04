@@ -11,6 +11,9 @@ Lazuli::Application.routes.draw do
     	end
     end
     resources :channels
+    resources	:contents
+    resources :courses
+    resources :topics
   end
 
   match '/course_subscription_types', :controller => "admin/users", :action => "course_subscription_types"

@@ -8,7 +8,8 @@ class Channel < ActiveRecord::Base
   has_many :courses, :through => :channel_courses
   has_many :channel_subscriptions
   has_many :subscriptions, :through => :channel_subscriptions
-
+  has_many :course_permissions
+  
   belongs_to :admin, :class_name => User, :foreign_key => :admin_user_id
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
 
