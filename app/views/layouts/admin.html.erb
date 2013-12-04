@@ -22,6 +22,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
   <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>
+  <%= javascript_include_tag 'admin' %>
   <%= render 'layouts/admin/header' %>
     <section class="container">
       <%= yield %>
@@ -37,8 +38,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <script src="/assets/ie/excanvas.min.js"></script> 
     <![endif]-->   
 
-    <%= javascript_include_tag 'admin' %>
-
+    
     <script>
       jQuery(document).ready(function() {       
          // initiate layout and plugins
