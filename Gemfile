@@ -15,6 +15,7 @@ gem 'rack-mini-profiler'
 gem 'dalli'
 gem 'kaminari'
 gem 'paperclip'
+gem 'jbuilder'
 gem 'nested_form'
 
 group :development do

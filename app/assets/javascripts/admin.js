@@ -17,7 +17,7 @@
 //= require ./admin/jquery-ui-1.10.3.custom.min.js
 //= require ./admin/bootstrap.min.js
 //= require ./admin/bootstrap-datepicker.js
-//= require ./admin/form-components.js
+
 //= require ./admin/jquery.blockui.min.js
 //= require ./admin/jquery.cookie.min.js
 //= require ./admin/jquery.slimscroll.min.js
@@ -25,7 +25,9 @@
 //= require ./admin/jquery-migrate-1.2.1.min.js
 //= require ./admin/table-advanced.js
 //= require ./admin/twitter-bootstrap-hover-dropdown.min.js
+//= require ./admin/select2.min
 //= require ./admin/index.js
 //= require ./admin/tasks.js
 //= require ./admin/app.js
 //= require jquery_nested_form
+//= require ./admin/form-components.js

@@ -40,7 +40,21 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       format.html { redirect_to admin_users_url}   
     end  
-  end  
+  end
+
+  def search_user
+    @users = User.where("name like ?", "%#{params[:name]}%").limit(20)
+    respond_to do |format|
+      format.json {}   
+    end  
+  end
+
+  def get_user
+    @user = User.find_by_id(params[:id])
+    respond_to do |format|
+      format.json {}   
+    end  
+  end 
 
   def course_subscription_types
     if params[:id]
