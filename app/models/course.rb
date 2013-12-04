@@ -1,6 +1,7 @@
 class Course < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :name, :description, :trainer_name, :trainer_biography
+
   #ASSOCIATIONS
   has_many :channel_courses
   has_many :channels, :through => :channel_courses

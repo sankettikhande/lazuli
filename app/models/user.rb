@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
   attr_accessible :user_channel_subscriptions_attributes
   has_many :user_channel_subscriptions
   has_many :subscriptions, :through => :user_channel_subscriptions
-
+ 
   has_many :channel_permissions, :class_name => UserPermission, :foreign_key => :channel_permission_id
   has_many :course_permissions, :class_name => UserPermission, :foreign_key => :channel_permission_id
-
+ 
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => lambda { |a| a[:channel_id].blank? || a[:subscription_id].blank? }, :allow_destroy => true
 
 
