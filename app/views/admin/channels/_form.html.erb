@@ -1,170 +1,240 @@
-<div class="portlet-body form">
-	<!-- BEGIN FORM-->
-	<%= form_for [:admin, @channel], :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
-		<div class="form-body">
-			<h3 class="form-section">Administrator Details</h3>
-			<%= render 'channel_error' %>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Actual Name: </label>
-						<div class="col-md-9">
-							<%= f.text_field :name, :class => "form-control" %>
-							<span class="help-block"></span>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Contact Number: </label>
-						<div class="col-md-9">
-							<%= f.text_field :contact_number, :class => "form-control" %>
-							<span class="help-block"></span>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-			</div>
-
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Email: </label>
-						<div class="col-md-9">
-							<%= f.text_field :email, :class => "form-control" %>
-							<span class="help-block"></span>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">User Name: </label>
-						<div class="col-md-9">
-							<%= f.text_field :user_name, :class => "form-control" %>
-							<span class="help-block"></span>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-			</div>
-
-			<!--/row-->
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Channel Type: </label>
-						<!-- <label class="control-label col-md-3">Gender</label> -->
-						<div class="col-md-9">
+<%= form_for [:admin, @channel], :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
+	<section class="container">
+		<div class="form-group">
+			<div class="panel panel-default">
+				<div class="panel-body seperator5">
+					<div class="seperator5"></div>
+					<div class="row">
+						<div class="col-sm-2"><label class="control-label">Channel Type</label></div>
+						<div class="col-sm-2">
 							<%= f.select :channel_type, options_for_select([["Public","public"], ["Private","private"]], @channel.channel_type), {}, { :class => 'form-control' } %>
-							<span class="help-block">.</span>
+						</div>
+						<div class="col-sm-2">
+							<label for="channel-name" class="control-label">Channel Name</label>
+						</div>
+						<div class="col-sm-2">
+							<%= f.text_field :name, :class => "form-control" %>
+						</div>
+						<div class="col-sm-1 col-sm-offset-3">
+							<a href="#"><i class="fa fa-question-circle fa-3x"></i></a>
 						</div>
 					</div>
-				</div>
-				<!--/span-->
-				<div class="col-md-6">
-					<!-- <div class="form-group">
-						<label class="control-label col-md-3">Date of Birth</label>
-						<div class="col-md-9">
-							<input type="text" class="form-control" placeholder="dd/mm/yyyy">
-						</div>
-					</div> -->
-				</div>
-				<!--/span-->
-			</div>
-			
-			<h3 class="form-section">Company Details</h3>
-			<!--/row-->                   
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Company Name: </label>
-						<div class="col-md-9">
-							<%= f.text_field :company_name, :class => "form-control" %>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Contact Name: </label>
-						<div class="col-md-9">
-							<%= f.text_field :company_contact_name, :class => "form-control" %>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Address: </label>
-						<div class="col-md-9">
-							<%= f.text_field :company_address, :class => "form-control" %>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Company Logo: </label>
-						<div class="col-md-9">
-							<%= f.file_field :image, :class => "form-control" %>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-			</div>
-			
-			<!--/row-->           
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Postal Address: </label>
-						<div class="col-md-9">
-							<%= f.text_field :company_postal_address, :class => "form-control" %>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Australian Business/Company Number: </label>
-						<div class="col-md-9">
-							<%= f.text_field :company_number, :class => "form-control" %>
-						</div>
-					</div>
-				</div>
-				<!--/span-->
-			</div>
-			<!--/row-->
+					<div class="seperator5"></div>
+					<div class="row">
+						<div class="col-sm-12">
+					<!-- ACCOIRDION START -->
+					<div class="portlet-body">
+						<div class="panel-group accordion" id="accordion1">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="panel-title">
+											<div class="row">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+												<div class="col-sm-12"><h5>Administrator Details</h5></div></a>
+											</div>
+									</div>
+								</div>
+								<div id="collapse_1" class="panel-collapse collapse">
+									<div class="panel-body form-group">
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="actual-name" class="control-label">Actual Name</label>
+											</div>
+											<div class="col-sm-4">
+												<input type="hidden" id="select2_sample6" class="form-control select2">
+												<!-- <input type="text" class="form-control" id="actual-name" name="actual-name"> -->
+											</div>
+											<div class="col-sm-2">
+												<label for="cont-no" class="control-label">Contact Number</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :contact_number, :class => "form-control" %>
+												<!-- <input type="tel" class="form-control" id="cont-no" name="cont-no"> -->
+											</div>
+										</div>
+										<div class="seperator10"></div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="u-email" class="control-label">Email</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :email, :class => "form-control", :placeholder => "@example.com" %>
+												<!-- <input type="email" class="form-control" id="u-email" name="u-email" placeholder="@example.com"> -->
+											</div>
+											<div class="col-sm-2">
+												<label for="u-name" class="control-label">Username</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :user_name, :class => "form-control" %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="panel-title">
+											<div class="row">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2">
+												<div class="col-sm-12"><h5>Company Details</h5></div></a>
+											</div>
+									</div>
+								</div>
+								<div id="collapse_2" class="panel-collapse collapse">
+									<div class="panel-body form-group">
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="comp-name" class="control-label">Company Name</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :company_name, :class => "form-control" %>
+											</div>
+											<div class="col-sm-2">
+												<label for="cont-name" class="control-label">Contact Name</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :company_contact_name, :class => "form-control" %>
+											</div>
+										</div>
+										<div class="seperator10"></div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="u-add" class="control-label">Address</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :company_address, :class => "form-control" %>
+											</div>
+											<div class="col-sm-2">
+												<label for="comp-logo" class="control-label">Company Logo</label>
+											</div>
+											<div class="col-sm-4">
+		<!--													<input type="file" class="form-control" id="comp-logo" name="comp-logo"> -->
+													<span class="btn green fileinput-button">
+														<i class="fa fa-plus"></i>
+														<span>Upload Logo</span>
+														<input type="file" name="files[]" multiple>
+													</span>
 
-			<!--/row-->           
-			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label class="control-label col-md-3">Description: </label>
-						<div class="col-md-9">
-							<%= f.text_area :company_description, :size => "15*10", :class => "form-control" %>
+											</div>
+										</div>
+										<div class="seperator10"></div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="post-add" class="control-label">Postal Address</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :company_postal_address, :class => "form-control" %>
+											</div>
+											<div class="col-sm-2">
+												<label for="comp-desc" class="control-label">Description</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_area :company_description, :rows => 3, :class => "form-control" %>
+												<!-- <textarea class="form-control" id="comp-desc" name="comp-desc" rows="3"></textarea>  -->
+											</div>
+										</div>
+										<div class="seperator10"></div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="ab-id" class="control-label">Australian Business/ Company Number</label>
+											</div>
+											<div class="col-sm-4">
+												<%= f.text_field :company_number, :class => "form-control" %>
+												<!-- <input type="text" name="ab-id" id="ab-id" class="form-control"> -->
+												<%= f.hidden_field :admin_user_id, :value => current_user.id if current_user %>
+		  									<%= f.hidden_field :created_by, :value => current_user.id if current_user %>
+											</div>
+											
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="panel-title">
+											<div class="row">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
+												<div class="col-sm-12"><h5>Course Details</h5></div></a>
+											</div>
+									</div>
+								</div>
+								<div id="collapse_3" class="panel-collapse collapse">
+									<div class="panel-body form-group">
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="course-name" class="control-label">Course Name</label>
+											</div>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" id="course-name" name="course-name">
+											</div>
+											<div class="col-sm-2">
+												<label for="trainer-name" class="control-label">Name of Trainer</label>
+											</div>
+											<div class="col-sm-4">
+												<input type="text" class="form-control" id="trainer-name" name="trainer-name">
+											</div>
+										</div>
+										<div class="seperator10"></div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="course-descr" class="control-label">Description</label>
+											</div>
+											<div class="col-sm-4">
+												<textarea class="form-control" id="course-descr" name="course-descr"></textarea>
+											</div>
+											<div class="col-sm-2">
+												<label for="trainer-bio" class="control-label">Biography of Trainer</label>
+											</div>
+											<div class="col-sm-4">
+												<textarea class="form-control" id="trainer-bio" name="trainer-bio"></textarea>
+											</div>
+										</div>
+										<div class="seperator10"></div>
+										<div class="row">
+											<div class="col-sm-2">
+												<label for="course-logo" class="control-label">Course Logo</label>
+											</div>
+											<div class="col-sm-4">
+													<span class="btn green fileinput-button">
+														<i class="fa fa-plus"></i>
+														<span>Upload Logo</span>
+														<input type="file" name="files[]" multiple>
+													</span>
+											</div>
+											<div class="col-sm-2">
+												<label class="control-label">Permissions</label>
+											</div>
+											<div class="col-sm-4">
+												<div class="checkbox-list">
+													<label class="checkbox-inline">
+													<input type="checkbox" id="inlineCheckbox1" value="watch"> Watch
+													</label>
+													<label class="checkbox-inline">
+													<input type="checkbox" id="inlineCheckbox2" value="create"> Create
+													</label>
+													<label class="checkbox-inline">
+													<input type="checkbox" id="inlineCheckbox3" value="share"> Share
+													</label>  
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+		<!-- ACCORDION END -->
+						</div>
+					</div>
+					<div class="seperator5"></div>
+					<div class="row">
+						<div class="col-sm-12">
+							<button type="submit" class="btn green" value="Save">Save</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<%= f.hidden_field :admin_user_id, :value => current_user.id if current_user %>
-		  <%= f.hidden_field :created_by, :value => current_user.id if current_user %>
-
 		</div>
-		<div class="form-actions fluid">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="col-md-offset-3 col-md-9">
-						<button type="submit" class="btn green">Submit</button>
-						<!-- <button type="button" class="btn default">Cancel</button>  -->                             
-					</div>
-				</div>
-				<div class="col-md-6">
-				</div>
-			</div>
-		</div>
-	<% end %>
-	<!-- END FORM-->                
-</div>
+	</section>
+<% end %>
