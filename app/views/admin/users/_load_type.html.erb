@@ -1,5 +1,1 @@
-<% if @channel_courses %>
- <%#= select_tag 'course_id', options_for_select(@channel_courses.collect {|c| [ c.name, c.id ] }), :class => 'form-control' %>
-<% elsif @channel_subscriptions %>
 <%= select('user_channel_subscriptions', 'subscription_id', options_for_select(@channel_subscriptions.collect {|s| [ s.name, s.id ] }), :class => 'form-control' ) %>
-<% end %>

@@ -1,6 +1,7 @@
 <hr>	
 <% @channels = Channel.all %>
 <% @subscriptions = Subscription.all %>
+<% @courses = Course.all %>
 <div class="row-align form-group">
 	<div class="col-md-3">
 		<label for="channelsS2">Channels Subscribed To</label>
@@ -10,11 +11,11 @@
 	</div>
 </div>
 	<div class="row form-group">
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<label for="uname">Course Subscribed For</label>
 	</div>
-	<div class="col-md-3" id="channel_course">
-	  <%= select_tag 'course_id', options_for_select(["Select", ""]), :class => 'form-control'%>
+	<div class="col-md-3">
+	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Select"}, :class => 'form-control courses_id' if @courses %>
 	</div>
 </div>
 
@@ -31,7 +32,7 @@
 		<label>Date of Subscription</label>
 	</div>
 	<div class="col-md-9">
-		<div class="col-md-5">
+		<div class="col-md-4">
 		<div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
 			<%= f.text_field 'subscription_date', :class => "form-control" %>
 			<span class="input-group-btn">
@@ -43,7 +44,7 @@
   		<div class="col-md-2">
     		<label>Date of Expiry</label>
   		</div>
-		<div class="col-md-5">
+		<div class="col-md-4">
 		<div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
 			<!-- <input type="text" class="form-control" readonly> -->
 			<%= f.text_field 'expiry_date', :class => "form-control" %>
@@ -79,14 +80,15 @@
 	$(document).ready(function(){
 
 		$('.channels_id').change(function(){
-			var filed_id = $(this).closest(".form-group").next().next().find(".subscriptions_id").attr('id');
-		  var val = $("option:selected",this).val();
+			var subscription_id = $(this).closest(".form-group").next().next().find(".subscriptions_id").attr('id');
+			var course_id = $(this).closest(".form-group").next().find(".courses_id").attr('id');
+			var val = $("option:selected",this).val();
 			$.ajax({
 	            type: "GET",
 	            url: "/course_subscription_types.js?",
-	            data: {id: val, field: filed_id}       
-	          }); 
-		});
+	            data: {id: val, subscription: subscription_id, course: course_id}       
+	          });     
+		 });
 
 		$('.date-picker').datepicker({
                 rtl: App.isRTL(),
