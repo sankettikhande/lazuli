@@ -1,0 +1,96 @@
+<hr>	
+<% @channels = Channel.all %>
+<% @subscriptions = Subscription.all %>
+<div class="row-align form-group">
+	<div class="col-md-3">
+		<label for="channelsS2">Channels Subscribed To</label>
+	</div>
+	<div class="col-md-3">
+	  <%= f.select 'channel_id', options_for_select(@channels.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Select"}, :class => 'form-control channels_id' if @channels %>
+	</div>
+</div>
+	<div class="row form-group">
+	<div class="col-md-3">
+		<label for="uname">Course Subscribed For</label>
+	</div>
+	<div class="col-md-3" id="channel_course">
+	  <%= select_tag 'course_id', options_for_select(["Select", ""]), :class => 'form-control'%>
+	</div>
+</div>
+
+<div class="row form-group">
+	<div class="col-md-3">
+		<label for="uname">Type of Subscription</label>
+	</div>
+	<div class="col-md-3 subscription_type">
+	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|c| [ c.name, c.id ] }, f.object.subscription_id), {:include_blank => "Select"}, :class => 'form-control subscriptions_id' if @subscriptions %>
+	</div>
+</div>
+<div class="row form-group">
+	<div class="col-md-3">
+		<label>Date of Subscription</label>
+	</div>
+	<div class="col-md-9">
+		<div class="col-md-5">
+		<div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+			<%= f.text_field 'subscription_date', :class => "form-control" %>
+			<span class="input-group-btn">
+			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+			</span>
+		</div>
+
+		</div>
+  		<div class="col-md-2">
+    		<label>Date of Expiry</label>
+  		</div>
+		<div class="col-md-5">
+		<div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+			<!-- <input type="text" class="form-control" readonly> -->
+			<%= f.text_field 'expiry_date', :class => "form-control" %>
+			<span class="input-group-btn">
+			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+			</span>
+		</div>
+		</div>
+	</div>
+</div>	
+<div class="row form-group">
+	<div class="col-md-3">
+		<label>User Permissions</label>
+	</div>
+	<div class="col-md-9">
+		<div class="col-md-4">
+			<input type="checkbox" name="UserPerm" id="UPwatch" value="trial"> Watch</div> 
+		<div class="col-md-4">
+			<input type="checkbox" name="UserPerm" id="UPshare" value="yearly"> Share</div>
+		<div class="col-md-4">						
+		<input type="checkbox" name="UserPerm" id="UPcreate" value="2years"> Create 
+	</div>
+	</div>
+</div>
+<!-- <div class="row form-group">
+  <div class="col-md-3"></div>
+  <div class="col-md-9">
+   	<%#= f.link_to_remove "Remove this Course", :class => "fa fa-3x" %>
+  </div>
+</div> -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('.channels_id').change(function(){
+			var filed_id = $(this).closest(".form-group").next().next().find(".subscriptions_id").attr('id');
+		  var val = $("option:selected",this).val();
+			$.ajax({
+	            type: "GET",
+	            url: "/course_subscription_types.js?",
+	            data: {id: val, field: filed_id}       
+	          }); 
+		});
+
+		$('.date-picker').datepicker({
+                rtl: App.isRTL(),
+                autoclose: true
+    }); 
+	})
+</script>

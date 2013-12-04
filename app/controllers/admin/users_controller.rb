@@ -5,6 +5,7 @@ class Admin::UsersController < AdminController
 
   def new
   	@user = User.new
+    @user.user_channel_subscriptions.build
   end	
 
   def create
@@ -40,5 +41,16 @@ class Admin::UsersController < AdminController
       format.html { redirect_to admin_users_url}   
     end  
   end  
+
+  def course_subscription_types
+    if params[:id]
+      # @channel_courses = Channel.find_by_id(params[:id]).try(:courses)
+      @channel_subscriptions = Channel.find_by_id(params[:id]).try(:subscriptions)
+      respond_to do |format|
+        format.js
+      end
+    end  
+  end  
+
 
 end
