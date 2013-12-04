@@ -28,3 +28,4 @@
 //= require ./admin/index.js
 //= require ./admin/tasks.js
 //= require ./admin/app.js
+//= require jquery_nested_form
