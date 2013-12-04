@@ -46,6 +46,13 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       format.json {}   
     end  
-  end  
+  end
+
+  def get_user
+    @user = User.find_by_id(params[:id])
+    respond_to do |format|
+      format.json {}   
+    end  
+  end 
 
 end

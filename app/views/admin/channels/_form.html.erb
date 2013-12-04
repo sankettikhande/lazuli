@@ -1,4 +1,5 @@
 <%= form_for [:admin, @channel], :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
+	<%= render 'channel_error' %>
 	<section class="container">
 		<div class="form-group">
 			<div class="panel panel-default">
@@ -42,7 +43,8 @@
 												<label for="cont-no" class="control-label">Actual Name</label>
 											</div>
 											<div class="col-sm-4">
-												<input type="hidden" id="select2_sample_modal_6" class="form-control select2">
+												<%= f.hidden_field :admin_user_id, :class => 'form-control select2', :id => "select2_user_search_modal_6" %>
+												<!-- <input type="hidden" id="select2_user_search_modal_6" class="form-control select2"> -->
 											</div>
 
 											<div class="col-sm-2">
@@ -142,7 +144,7 @@
 											<div class="col-sm-4">
 												<%= f.text_field :company_number, :class => "form-control" %>
 												<!-- <input type="text" name="ab-id" id="ab-id" class="form-control"> -->
-												<%= f.hidden_field :admin_user_id, :value => current_user.id if current_user %>
+												<%#= f.hidden_field :admin_user_id, :value => current_user.id if current_user %>
 		  									<%= f.hidden_field :created_by, :value => current_user.id if current_user %>
 											</div>
 										</div>

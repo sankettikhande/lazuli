@@ -1,1 +1,3 @@
-json.array! @users, :id, :name
+json.set! :data do
+	json.array! @users, :id, :name
+end

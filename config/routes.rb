@@ -6,6 +6,9 @@ Lazuli::Application.routes.draw do
     	collection do
     		get 'search_user'
     	end
+    	member do
+    		get 'get_user'
+    	end
     end
     resources :channels
   end
