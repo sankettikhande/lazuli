@@ -98,6 +98,7 @@ GEM
     multi_json (1.8.2)
     multipart-post (1.2.0)
     mysql2 (0.3.14)
+    nested_form (0.3.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -223,6 +224,7 @@ DEPENDENCIES
   jquery-turbolinks
   kaminari
   mysql2
+  nested_form
   omniauth
   omniauth-facebook
   omniauth-google-oauth2
