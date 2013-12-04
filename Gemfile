@@ -16,6 +16,7 @@ gem 'dalli'
 gem 'kaminari'
 gem 'paperclip'
 gem 'jbuilder'
+gem 'nested_form'
 
 group :development do
   gem 'quiet_assets'
