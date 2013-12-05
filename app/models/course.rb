@@ -1,6 +1,6 @@
 class Course < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image
+  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :course_permissions_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png", :path => ":rails_root/public/images/courses/:id/:style/:basename.:extension"
 
@@ -16,6 +16,7 @@ class Course < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
 
+  accepts_nested_attributes_for :course_permissions
   #SCOPES
 
   #INSTANCE METHODS
