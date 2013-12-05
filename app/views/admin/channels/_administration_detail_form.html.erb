@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">
+				<div class="row">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+					<div class="col-sm-12"><h5>Administrator Details</h5></div></a>
+				</div>
+		</div>
+	</div>
+	<div id="collapse_1" class="panel-collapse collapse">
+		<div class="panel-body form-group">
+			<div class="row">
+
+				<div class="col-sm-2">
+					<label for="cont-no" class="control-label">Actual Name</label>
+				</div>
+				<div class="col-sm-4">
+					<%= f.hidden_field :admin_user_id, :class => 'form-control select2', :id => "select2_user_search_modal_6" %>
+					<!-- <input type="hidden" id="select2_user_search_modal_6" class="form-control select2"> -->
+				</div>
+
+				<div class="col-sm-2">
+					<label for="cont-no" class="control-label">Contact Number</label>
+				</div>
+				<div class="col-sm-4">
+					<%= f.text_field :contact_number, :class => "form-control" %>
+					<!-- <input type="tel" class="form-control" id="cont-no" name="cont-no"> -->
+				</div>
+			</div>
+			<div class="seperator10"></div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label for="u-email" class="control-label">Email</label>
+				</div>
+				<div class="col-sm-4">
+					<%= f.text_field :email, :class => "form-control", :placeholder => "@example.com" %>
+					<!-- <input type="email" class="form-control" id="u-email" name="u-email" placeholder="@example.com"> -->
+				</div>
+				<div class="col-sm-2">
+					<label for="u-name" class="control-label">Username</label>
+				</div>
+				<div class="col-sm-4">
+					<%= f.text_field :user_name, :class => "form-control" %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

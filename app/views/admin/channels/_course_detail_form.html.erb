@@ -1,0 +1,72 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div class="panel-title">
+				<div class="row">
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
+					<div class="col-sm-12"><h5>Course Details</h5></div></a>
+				</div>
+		</div>
+	</div>
+	<div id="collapse_3" class="panel-collapse collapse">
+		<div class="panel-body form-group">
+			<div class="row">
+				<div class="col-sm-2">
+					<label for="course-name" class="control-label">Course Name</label>
+				</div>
+				<div class="col-sm-4">
+					<%= course_form.text_field :name, :class => "form-control" %>
+				</div>
+				<div class="col-sm-2">
+					<label for="trainer-name" class="control-label">Name of Trainer</label>
+				</div>
+				<div class="col-sm-4">
+					<%= course_form.text_field :trainer_name, :class => "form-control" %>
+				</div>
+			</div>
+			<div class="seperator10"></div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label for="course-descr" class="control-label">Description</label>
+				</div>
+				<div class="col-sm-4">
+					<%= course_form.text_area :description, :rows => 2, :class => "form-control" %>
+				</div>
+				<div class="col-sm-2">
+					<label for="trainer-bio" class="control-label">Biography of Trainer</label>
+				</div>
+				<div class="col-sm-4">
+					<%= course_form.text_area :trainer_biography, :rows => 2, :class => "form-control" %>
+				</div>
+			</div>
+			<div class="seperator10"></div>
+			<div class="row">
+				<div class="col-sm-2">
+					<label for="course-logo" class="control-label">Course Logo</label>
+				</div>
+				<div class="col-sm-4">
+						<span class="btn green fileinput-button">
+							<i class="fa fa-plus"></i>
+							<span>Upload Logo</span>
+							<%= course_form.file_field :image %>
+						</span>
+				</div>
+				<div class="col-sm-2">
+					<label class="control-label">Permissions</label>
+				</div>
+				<div class="col-sm-4">
+					<div class="checkbox-list">
+						<label class="checkbox-inline">
+						<input type="checkbox" id="inlineCheckbox1" value="watch"> Watch
+						</label>
+						<label class="checkbox-inline">
+						<input type="checkbox" id="inlineCheckbox2" value="create"> Create
+						</label>
+						<label class="checkbox-inline">
+						<input type="checkbox" id="inlineCheckbox3" value="share"> Share
+						</label>  
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
