@@ -40,4 +40,13 @@ class Admin::ChannelsController < AdminController
       format.html { redirect_to admin_channels_url}   
     end  
   end
+
+  def get_channel
+    if params[:id]
+      @channel = Channel.find_by_id(params[:id])
+      respond_to do |format|
+        format.json{}
+      end
+    end
+  end
 end
