@@ -44,4 +44,7 @@ section {margin-bottom: 1em}
 @media only screen and (min-width:48em) {
 	footer li {display:inline-block}	
 	footer li a{float:left}
-	}	
+	}
+/******** Add new course *******************/
+.add-new-course h4 {padding: 5px 15px;font-weight: bold !important;font-size: 1.1em !important}
+/*********** Add new course ends **********/
