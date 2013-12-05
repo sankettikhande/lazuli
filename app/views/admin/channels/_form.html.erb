@@ -28,8 +28,8 @@
 								<div class="panel-group accordion" id="accordion1">
 									<%= render 'administration_detail_form', :f => f %>
 									<%= render 'company_detail_form', :f => f %>
-									<%= f.fields_for :courses do |course_form| %>
-										<%= render 'course_detail_form', :course_form => course_form %>
+									<%= f.fields_for :courses do |course_form| %> 
+										<%= render 'course_detail_form', :f => course_form %>
 									<% end %>
 								</div>
 							</div>
