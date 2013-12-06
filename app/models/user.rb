@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :channel_permissions, :class_name => UserPermission, :foreign_key => :channel_permission_id
   has_many :course_permissions, :class_name => UserPermission, :foreign_key => :channel_permission_id
  
-  accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => lambda { |a| a[:channel_id].blank? || a[:subscription_id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
 
 
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
