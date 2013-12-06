@@ -1,11 +1,10 @@
 class UserChannelSubscription < ActiveRecord::Base
-  attr_accessible :user_id, :channel_id, :subscription_id, :subscription_date, :expiry_date, :course_id
-  attr_accessible :user_permission_attributes
+  attr_accessible :user_id, :channel_id, :subscription_id, :subscription_date, :expiry_date, :course_id, :permission_watch, :permission_create, :permission_share
+  
   belongs_to :user
   belongs_to :subscription
   belongs_to :channel
-  has_one :user_permission, :dependent => :destroy
-  accepts_nested_attributes_for :user_permission
+  belongs_to :course
 
   validates_presence_of :channel_id, :subscription_id, :subscription_date, :expiry_date, :course_id
 end
