@@ -50,6 +50,7 @@
 							<%= f.file_field :image %>
 						</span>
 				</div>
+				<%= puts "<<<<<<<<<<<<<<<<<<called"%>
 				<%= f.fields_for :course_permissions do |course_permission_form| %> 
 					<%= render 'course_permission_form', :f => course_permission_form %>
 				<% end %>

@@ -3,15 +3,14 @@ class Admin::CoursesController < AdminController
 	def new
 		@course = Course.new
 		@channels = Channel.all
-		@course.channel_courses.build()
-		@course.build_course_permission
+		@course.channel_courses.build
 	end
 
 	def create
 		@course = Course.new(params[:course])
 		respond_to do |format|
 			if @course.save
-				format.html {redirect_to admin_contents_url}
+				format.html {redirect_to "#{admin_contents_url}#courses"}
 			else
 				@channels = Channel.all
 				format.html {render "new"}
@@ -28,7 +27,7 @@ class Admin::CoursesController < AdminController
 		@course = Course.find_by_id(params[:id])
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
-				format.html {redirect_to admin_contents_url}
+				format.html {redirect_to "#{admin_contents_url}#courses"}
 			else
 				@channels = Channel.all
 				format.html {render "edit"}
@@ -37,10 +36,10 @@ class Admin::CoursesController < AdminController
 	end
 
 	def destroy
-		@course = Course.find_by_id(param[:id])
+		@course = Course.find_by_id(params[:id])
 		@course.destroy
 		respond_to do |format|
-			format.html {redirect_to admin_contents_url}
+			format.html {redirect_to "#{admin_contents_url}#courses"}
 		end
 	end
 end

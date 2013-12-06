@@ -6,7 +6,7 @@
 			<div class="row">
 				<%= f.fields_for :channel_courses do |channel_courses_fields| %>
 					<%= render 'channel' , :f => channel_courses_fields%>
-				<% end%>
+				<%# end%>
 			</div>
 		</div>
 	</div>
@@ -25,10 +25,10 @@
     	  			<div class="col-sm-2">
     	  				<label for="crs-name" class="control-label">Course Name</label>
     	  			</div>
-    	  			<div class="col-sm-3">
+    	  			<div class="col-sm-4">
     	  				<%=f.text_field 'name', :class => "form-control"%>
     	  			</div>
-    	  			<div class="col-sm-3">
+    	  			<div class="col-sm-2">
     	  				<label for="name-trainer" class="control-label">Name of Trainer</label>
     	  			</div>
     	  			<div class="col-sm-4">
@@ -40,10 +40,10 @@
     	  			<div class="col-sm-2">
     	  				<label for="crs-descr" class="control-label">Description</label>
     	  			</div>
-    	  			<div class="col-sm-3">
+    	  			<div class="col-sm-4">
     	  				<%=f.text_area 'description', :rows =>4, :class => "form-control"%>
     	  			</div>
-    	  			<div class="col-sm-3">
+    	  			<div class="col-sm-2">
     	  				<label for="name-trainer" class="control-label">Biography of Trainer</label>
     	  			</div>
     	  			<div class="col-sm-4">
@@ -55,15 +55,14 @@
 							<div class="col-sm-2">
 								<label for="course-logo" class="control-label">Course Logo</label>
 							</div>
-							<div class="col-sm-3">
+							<div class="col-sm-4">
 									<span class="btn green fileinput-button">
 										<i class="fa fa-plus"></i>
 										<span>Upload Logo</span>
-										<input type="file" name="files[]" multiple>
+										<%= f.file_field :image %>
 									</span>
 							</div>
-							<%= f.fields_for :course_permission do |course_permission_fields| %>
-							<%= render 'course_permission' , :f => course_permission_fields%>	
+							<%= render 'course_permission' , :f => channel_courses_fields%>	
 							<% end %>
 						</div>
 	  			</div>
