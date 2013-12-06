@@ -1,7 +1,4 @@
 <hr>	
-<% @channels = Channel.all %>
-<% @subscriptions = Subscription.all %>
-<% @courses = Course.all %>
 <div class="row-align form-group">
 	<div class="col-md-3">
 		<label for="channelsS2">Channels Subscribed To</label>
@@ -54,21 +51,26 @@
 		</div>
 		</div>
 	</div>
-</div>	
-<div class="row form-group">
-	<div class="col-md-3">
-		<label>User Permissions</label>
-	</div>
-	<div class="col-md-9">
-		<div class="col-md-4">
-			<input type="checkbox" name="UserPerm" id="UPwatch" value="trial"> Watch</div> 
-		<div class="col-md-4">
-			<input type="checkbox" name="UserPerm" id="UPshare" value="yearly"> Share</div>
-		<div class="col-md-4">						
-		<input type="checkbox" name="UserPerm" id="UPcreate" value="2years"> Create 
-	</div>
-	</div>
 </div>
+	<%= f.fields_for :user_permission, f.object.build_user_permission do |permission| %>
+		<div class="row form-group">
+			<div class="col-md-3">
+				<label>User Permissions</label>
+			</div>
+			<div class="col-md-9">
+				<div class="col-md-2">
+					<%= permission.check_box 'watch' %>Watch
+				</div>
+				<div class="col-md-2">
+					<%= permission.check_box 'share' %>Share
+				</div>
+				<div class="col-md-2">
+					<%= permission.check_box 'produce' %>Create
+				</div>
+			</div>
+		</div>
+	<% end %>
+
 <!-- <div class="row form-group">
   <div class="col-md-3"></div>
   <div class="col-md-9">
