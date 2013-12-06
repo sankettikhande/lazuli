@@ -10,7 +10,12 @@ Lazuli::Application.routes.draw do
     		get 'get_user'
     	end
     end
-    resources :channels
+    resources :channels do
+      member do
+        get 'get_channel'
+      end
+    end
+
     resources	:contents
     resources :courses
     resources :topics

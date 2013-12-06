@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-md-12">
+  	<a href= "courses/new" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New Course</a>
+	</div>
+</div>
+<section class="container">
+	<div class="row">
+		<div class="seperator5"></div>
+		<div class="portlet-body flip-scroll">
+		<table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_3">
+			<thead class="flip-content">
+				<tr>
+			      <th>Course<i class="fa fa-3x fa-filter pull-right"></i></th>
+			      <th>Partner Name</th>
+			      <th>&nbsp;</th>
+			      <th>Number of Users</th>
+			      <th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @courses.each do |course| %>
+				<tr>
+				  <td><%= course.name %></td>
+			      <td>Global Study Inc.</td>
+			      <td rowspan="3">img path</td>
+			      <td>426</td>
+			      <td><a href="/admin/courses/<%=course.id%>/edit"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/courses/<%=course.id%>" data-method="delete" data-confirm="Are you sure you want to delete?">><i class="fa fa-3x fa-ban pull-right"></i></a></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		</div>
+	</div>
+</section>
