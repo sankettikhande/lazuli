@@ -51,22 +51,7 @@
 						</span>
 				</div>
 				<%= f.fields_for :course_permissions do |course_permission_form| %> 
-					<div class="col-sm-2">
-						<label class="control-label">Permissions</label>
-					</div>
-					<div class="col-sm-4">
-						<div class="checkbox-list">
-							<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox1" value="watch"> Watch
-							</label>
-							<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox2" value="create"> Create
-							</label>
-							<label class="checkbox-inline">
-							<input type="checkbox" id="inlineCheckbox3" value="share"> Share
-							</label>  
-						</div>
-					</div>
+					<%= render 'course_permission_form', :f => course_permission_form %>
 				<% end %>
 			</div>
 		</div>
