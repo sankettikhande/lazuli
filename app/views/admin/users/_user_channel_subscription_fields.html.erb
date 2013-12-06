@@ -52,24 +52,22 @@
 		</div>
 	</div>
 </div>
-	<%= f.fields_for :user_permission, f.object.build_user_permission do |permission| %>
-		<div class="row form-group">
-			<div class="col-md-3">
-				<label>User Permissions</label>
-			</div>
-			<div class="col-md-9">
-				<div class="col-md-2">
-					<%= permission.check_box 'watch' %>Watch
-				</div>	
-				<div class="col-md-2">
-					<%= permission.check_box 'share' %>Share
-				</div>	
-				<div class="col-md-2">						
-					<%= permission.check_box 'produce' %>Create
-				</div>
-			</div>
+<div class="row form-group">
+	<div class="col-md-3">
+		<label>User Permissions</label>
+	</div>
+	<div class="col-md-9">
+		<div class="col-md-2">
+			<%= f.check_box 'permission_watch' %>Watch
+		</div>	
+		<div class="col-md-2">
+			<%= f.check_box 'permission_share' %>Share
+		</div>	
+		<div class="col-md-2">						
+			<%= f.check_box 'permission_create' %>Create
 		</div>
-	<% end %>	
+	</div>
+</div>
 
 <!-- <div class="row form-group">
   <div class="col-md-3"></div>

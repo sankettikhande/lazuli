@@ -9,6 +9,7 @@ class Course < ActiveRecord::Base
   has_many :channels, :through => :channel_courses
   has_many :topics
   has_many :course_permissions
+  has_many :user_channel_subscriptions
 
 
   #VALIDATIONS
