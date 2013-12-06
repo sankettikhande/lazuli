@@ -29,4 +29,7 @@ class Channel < ActiveRecord::Base
   
 
   #CLASS METHODS
+  def name_with_initial
+    "#{name}"
+  end
 end

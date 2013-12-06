@@ -12,13 +12,13 @@ class Admin::UsersController < AdminController
   def create
   	@user = User.new(params[:user])
   	respond_to do |format|
-        if @user.save
-          format.html {redirect_to admin_users_url}
-        else
-          set_instance
-          format.html { render :action => "new" }
-        end	
-  	end	
+      if @user.save
+        format.html {redirect_to admin_users_url}
+      else
+        set_instance
+        format.html { render :action => "new" }
+      end
+    end
   end	
 
   def edit
@@ -34,8 +34,8 @@ class Admin::UsersController < AdminController
       else
         set_instance
         format.html{ render :action => "edit"}       
-      end  
-    end  
+      end
+    end
   end   
 
   def destroy
@@ -69,14 +69,14 @@ class Admin::UsersController < AdminController
         format.js
       end
     end  
-  end  
+  end
 
 private
 
-  def set_instance 
+  def set_instance
     @channels = Channel.all
     @subscriptions = Subscription.all
     @courses = Course.all
-  end  
+  end
 
 end
