@@ -2,7 +2,7 @@
 	<label class="control-label">Channel</label>
 </div>
 <div class="col-sm-2">
-	<%= f.collection_select :channel_id , @channels, :id, :name_with_initial ,{}, {:class =>"form-control channel_id" }%>
+	<%= f.collection_select :channel_id , @channels, :id, :name_with_initial ,{:prompt => true}, {:class =>"form-control channel_id" }%>
 </div>
 <div class="col-sm-2">
 	<label class="control-label">Channel Type</label>

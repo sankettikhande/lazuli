@@ -6,7 +6,7 @@ class Admin::ChannelsController < AdminController
   def new
   	@channel = Channel.new
     course = @channel.courses.build()
-    course.course_permissions.build()
+    course.channel_courses.build()
   end	
 
   def create

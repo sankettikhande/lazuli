@@ -21,8 +21,8 @@
 				<% @courses.each do |course| %>
 				<tr>
 				  <td><%= course.name %></td>
-			      <td>Global Study Inc.</td>
-			      <td rowspan="3">img path</td>
+			      <td><%= course.channels.first.name if !course.channels.blank? %></td>
+			      <td>img path</td>
 			      <td>426</td>
 			      <td><a href="/admin/courses/<%=course.id%>/edit"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/courses/<%=course.id%>" data-method="delete" data-confirm="Are you sure you want to delete?">><i class="fa fa-3x fa-ban pull-right"></i></a></td>
 				</tr>
