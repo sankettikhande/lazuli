@@ -1,3 +1,381 @@
-<% form_for [:admin , @topic] do |f| %>
+<%= form_for [:admin , @topic] do |f| %>
+	<div class="form-group">
+		<div class="panel panel-default">
+			<div class="panel-body seperator5">
+				<div class="row">
+					<div class="col-sm-11">
+						<h4 class="heading">Navigating &amp; Selecting</h4>
+					</div>
+					<div class="col-sm-1 text-right">
+						<a href="#"><i class="fa fa-2x fa-question-circle"></i></a>
+					</div>
+				</div>
+				<div class="seperator20"></div>
+				<div class="row">
+					<div class="col-sm-1">
+						<label for="t-topic" class="control-label">Topic</label>
+					</div>
+					<div class="col-sm-3">
+						<%= f.text_field 'title', :class => "form-control"%>
+					</div>
+					<div class="col-sm-1 col-sm-offset-2">
+						<label class="control-label" for="t-course">Course</label>
+					</div>
+					<div class="col-sm-3">
+						<%=f.collection_select :course_id , @courses, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control channel_id" }%>
+					</div>
+				</div>
+				<div class="seperator10"></div>
+				<div class="row">
+					<div class="col-sm-1">
+						<label for="t-descr" class="control-label">Description</label>
+					</div>
+					<div class="col-sm-3">
+						<%= f.text_area 'description', :rows => 4, :class => "form-control" %>
+					</div>
+					<div class="col-sm-1 col-sm-offset-2">
+						<label class="control-label" for="t-channel">Channel</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" name="t-channel" id="t-channel">
+					</div>
+				</div>
+				<div class="seperator10"></div>
+				<div class="row">
+					<div class="col-sm-12">
+				<!-- ACCOIRDION START -->
+				<div class="portlet-body">
+					<div class="panel-group accordion" id="accordion1">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+										<div class="row">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_1">
+											<div class="col-sm-8"><h5>Navigation between Workbooks</h5></div></a>
+											<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
+											<div class="col-sm-1"><input class="form-control" type="number" min="1" name="seqNum1" id="seqNum1"></div>
+											<div class="col-sm-1 nopadding">
+												<div class="btn-group">
+													<button type="button" class="btn btn-grey"><i class="fa fa-ban"></i></button>
+													<div class="btn-group">
+														<button type="button" class="btn btn-grey">
+														<i class="fa fa-chevron-down"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+
+										</div>
+								</div>
+							</div>
+							<div id="collapse_1" class="panel-collapse collapse">
+								<div class="panel-body form-group">
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Title of Video</label></div>
+										<div class="col-sm-4"><input class="form-control" type="text" name="VideoTitle1" id="VideoTitle1"></div>
+										<div class="col-sm-2"><label class="control-label">Thumbnail</label></div>
+										<div class="col-sm-4">
+
+											<div class="fileupload fileupload-new" data-provides="fileupload">
+												<div class="fileupload-new thumbnail" style="width: 180px; height: 135px;">
+													<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" title="Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only">
+												</div>
+												<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 180px; max-height: 135px; line-height: 20px;"></div>
+												<div>
+													<span class="btn purple btn-file">
+													<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Edit</span>
+													<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+													<input type="file" class="default" />
+													</span>
+													<a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Description</label></div>
+										<div class="col-sm-4"><textarea name="VideoDescr" id="VideoDiscr1" rows="4" class="form-control"></textarea></div>
+										<div class="col-sm-2"><label class="control-label">Video Summary</label></div>
+										<div class="col-sm-4"><textarea name="VideoSumr" id="VideoSummr1" rows="4" class="form-control"></textarea></div>
+									</div>
+									<div class="seperator5"></div>
+									<div class="row">
+										<div class="col-sm-2">
+											<label class="control-label" for="tags_1">Tags</label>
+										</div>
+										<div class="col-sm-4">
+											<input type="text" id="tags_1" class="form-control tags" value="Excel, Navigate">
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label">Available for</label>
+										</div>
+										<div class="col-sm-4">
+											<div class="checkbox-list">
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="demo"> Demo
+												</label>
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="trial"> Trial
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+										<div class="row">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_2">
+											<div class="col-sm-8"><h5>Navigation between Workbooks</h5></div></a>
+											<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
+											<div class="col-sm-1"><input class="form-control" type="number" min="1" name="seqNum2"></div>
+											<div class="col-sm-1 nopadding">
+												<div class="btn-group">
+													<button type="button" class="btn btn-grey"><i class="fa fa-ban"></i></button>
+													<div class="btn-group">
+														<button type="button" class="btn btn-grey">
+														<i class="fa fa-chevron-down"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+								</div>
+							</div>
+							<div id="collapse_2" class="panel-collapse collapse">
+								<div class="panel-body form-group">
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Title of Video</label></div>
+										<div class="col-sm-4"><input class="form-control" type="text" name="VideoTitle2" id="VideoTitle"></div>
+										<div class="col-sm-2"><label class="control-label">Thumbnail</label></div>
+										<div class="col-sm-4">
+
+											<div class="fileupload fileupload-new" data-provides="fileupload">
+												<div class="fileupload-new thumbnail" style="width: 180px; height: 135px;">
+													<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" title="Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only">
+												</div>
+												<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 180px; max-height: 135px; line-height: 20px;"></div>
+												<div>
+													<span class="btn purple btn-file">
+													<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Edit</span>
+													<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+													<input type="file" class="default" />
+													</span>
+													<a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Description</label></div>
+										<div class="col-sm-4"><textarea name="VideoDescr" id="VideoDiscr2" rows="4" class="form-control"></textarea></div>
+										<div class="col-sm-2"><label class="control-label">Video Summary</label></div>
+										<div class="col-sm-4"><textarea name="VideoSumr" id="VideoSummr2" rows="4" class="form-control"></textarea></div>
+									</div>
+									<div class="seperator5"></div>
+									<div class="row">
+										<div class="form-group">
+										<div class="col-sm-2">
+											<label class="control-label" for="tags_2">Tags</label>
+										</div>
+										<div class="col-sm-4">
+											<input id="tags_2" type="text" class="form-control tags" value="excel, tables,">
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label">Available for</label>
+										</div>
+										<div class="col-sm-4">
+											<div class="checkbox-list">
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="demo"> Demo
+												</label>
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="trial"> Trial
+												</label>
+											</div>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+										<div class="row">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_3">
+											<div class="col-sm-8"><h5>Navigation between Workbooks</h5></div></a>
+											<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
+											<div class="col-sm-1"><input class="form-control" type="number" min="1" name="seqNum"></div>
+											<div class="col-sm-1 nopadding">
+												<div class="btn-group">
+													<button type="button" class="btn btn-grey"><i class="fa fa-ban"></i></button>
+													<div class="btn-group">
+														<button type="button" class="btn btn-grey">
+														<i class="fa fa-chevron-down"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+								</div>
+							</div>
+							<div id="collapse_3" class="panel-collapse collapse">
+								<div class="panel-body form-group">
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Title of Video</label></div>
+										<div class="col-sm-4"><input class="form-control" type="text" name="VideoTitle3" id="VideoTitle3"></div>
+										<div class="col-sm-2"><label class="control-label">Thumbnail</label></div>
+										<div class="col-sm-4">
+
+											<div class="fileupload fileupload-new" data-provides="fileupload">
+												<div class="fileupload-new thumbnail" style="width: 180px; height: 135px;">
+													<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" title="Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only">
+												</div>
+												<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 180px; max-height: 135px; line-height: 20px;"></div>
+												<div>
+													<span class="btn purple btn-file">
+													<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Edit</span>
+													<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+													<input type="file" class="default" />
+													</span>
+													<a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Description</label></div>
+										<div class="col-sm-4"><textarea name="VideoDescr3" id="VideoDiscr3" rows="4" class="form-control"></textarea></div>
+										<div class="col-sm-2"><label class="control-label">Video Summary</label></div>
+										<div class="col-sm-4"><textarea name="VideoSumr3" id="VideoSummr3" rows="4" class="form-control"></textarea></div>
+									</div>
+									<div class="seperator5"></div>
+									<div class="row">
+										<div class="form-group">
+										<div class="col-sm-2">
+											<label class="control-label" for="tags_3">Tags</label>
+										</div>
+										<div class="col-sm-4">
+											<input id="tags_3" type="text" class="form-control tags" value="excel, tables,">
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label">Available for</label>
+										</div>
+										<div class="col-sm-4">
+											<div class="checkbox-list">
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="demo"> Demo
+												</label>
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="trial"> Trial
+												</label>
+											</div>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<div class="panel-title">
+										<div class="row">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_4">
+											<div class="col-sm-8"><h5>Navigation between Workbooks</h5></div></a>
+											<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
+											<div class="col-sm-1"><input class="form-control" type="number" min="1" name="seqNum4"></div>
+											<div class="col-sm-1 nopadding">
+												<div class="btn-group">
+													<button type="button" class="btn btn-grey"><i class="fa fa-ban"></i></button>
+													<div class="btn-group">
+														<button type="button" class="btn btn-grey">
+														<i class="fa fa-chevron-down"></i>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+								</div>
+							</div>
+							<div id="collapse_4" class="panel-collapse collapse">
+								<div class="panel-body form-group">
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Title of Video</label></div>
+										<div class="col-sm-4"><input class="form-control" type="text" name="VideoTitle4" id="VideoTitle4"></div>
+										<div class="col-sm-2"><label class="control-label">Thumbnail</label></div>
+										<div class="col-sm-4">
+
+											<div class="fileupload fileupload-new" data-provides="fileupload">
+												<div class="fileupload-new thumbnail" style="width: 180px; height: 135px;">
+													<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" title="Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only">
+												</div>
+												<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 180px; max-height: 135px; line-height: 20px;"></div>
+												<div>
+													<span class="btn purple btn-file">
+													<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Edit</span>
+													<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+													<input type="file" class="default" />
+													</span>
+													<a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-2"><label class="control-label">Description</label></div>
+										<div class="col-sm-4"><textarea name="VideoDescr4" id="VideoDiscr4" rows="4" class="form-control"></textarea></div>
+										<div class="col-sm-2"><label class="control-label">Video Summary</label></div>
+										<div class="col-sm-4"><textarea name="VideoSummr4" id="VideoSummr4" rows="4" class="form-control"></textarea></div>
+									</div>
+									<div class="seperator5"></div>
+									<div class="row">
+										<div class="form-group">
+										<div class="col-sm-2">
+											<label class="control-label" for="tags_4">Tags</label>
+										</div>
+										<div class="col-sm-4">
+											<input id="tags_4" type="text" class="form-control tags" value="excel, tables,">
+										</div>
+										<div class="col-sm-2">
+											<label class="control-label">Available for</label>
+										</div>
+										<div class="col-sm-4">
+											<div class="checkbox-list">
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="demo"> Demo
+												</label>
+												<label class="checkbox-inline">
+												<input class="form-control" type="checkbox" value="trial"> Trial
+												</label>
+											</div>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div> <!-- ACCORDION END -->
+				<div class="seperator5"></div>
+						<div class="row">
+							<div class="col-sm-12">
+								<a href="#"><i class="fa fa-plus"></i> (Add another video)</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="seperator5"></div>
+				<div class="row">
+					<div class="col-sm-12">
+						<button type="submit" class="btn green" value="Save">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <% end %>

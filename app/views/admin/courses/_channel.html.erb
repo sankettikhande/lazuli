@@ -2,13 +2,13 @@
 	<label class="control-label">Channel</label>
 </div>
 <div class="col-sm-2">
-	<%= f.collection_select :channel_id , @channels, :id, :name_with_initial ,{:prompt => true}, {:class =>"form-control channel_id" }%>
+	<%= f.collection_select :channel_id , @channels, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control channel_id" }%>
 </div>
 <div class="col-sm-2">
 	<label class="control-label">Channel Type</label>
 </div>
 <div class="col-sm-2">
-	<%= text_field_tag 'channel_type', nil ,:class => "form-control" %>
+	<%= text_field_tag 'channel_type', nil ,:class => "form-control", :readonly => true%>
 </div>
 <div class="col-sm-1 col-sm-offset-4">
 	<a href="#"><i class="fa fa-question-circle"></i></a>
