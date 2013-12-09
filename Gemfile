@@ -18,6 +18,8 @@ gem 'paperclip'
 gem 'jbuilder'
 gem 'nested_form'
 gem 'acts-as-taggable-on'
+gem 'cancan'
+gem 'rolify'
 
 group :development do
   gem 'quiet_assets'
