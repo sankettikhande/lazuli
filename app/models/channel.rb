@@ -26,10 +26,8 @@ class Channel < ActiveRecord::Base
 
 
   #INSTANCE METHODS
-  
+
 
   #CLASS METHODS
-  def name_with_initial
-    "#{name}"
-  end
+  
 end
