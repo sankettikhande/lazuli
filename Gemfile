@@ -17,6 +17,8 @@ gem 'kaminari'
 gem 'paperclip'
 gem 'jbuilder'
 gem 'nested_form'
+gem 'cancan'
+gem 'rolify'
 
 group :development do
   gem 'quiet_assets'
