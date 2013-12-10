@@ -3,14 +3,11 @@
 </div>
 <div class="col-sm-4">
 	<div class="checkbox-list">
-		<label class="checkbox-inline">
-			<%= f.check_box :permission_watch %> Watch
-		</label>
-		<label class="checkbox-inline">
-			<%= f.check_box :permission_create %> Create
-		</label>
-		<label class="checkbox-inline">
-			<%= f.check_box :permission_share %> Share
-		</label>  
+		<%= f.check_box :permission_watch %>
+		<label class="checkbox-inline"> Watch </label>
+		<%= f.check_box :permission_create %>
+		<label class="checkbox-inline"> Create</label>
+		<%= f.check_box :permission_share %>
+		<label class="checkbox-inline"> Share </label>
 	</div>
 </div>
