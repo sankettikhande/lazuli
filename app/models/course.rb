@@ -2,7 +2,7 @@ class Course < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :name, :description, :trainer_name, :trainer_biography, :image
   attr_accessible :channel_courses_attributes
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png", :path => ":rails_root/public/images/courses/:id/:style/:basename.:extension"
+  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => ":class/missing.gif", :path => ":rails_root/public/images/courses/:id/:style/:basename.:extension"
 
   #ASSOCIATIONS
   has_many :channel_courses

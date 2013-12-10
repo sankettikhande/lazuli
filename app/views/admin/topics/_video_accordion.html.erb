@@ -1,12 +1,13 @@
 <!-- ACCOIRDION START -->
 <div class="portlet-body">
 	<div class="panel-group accordion" id="accordion1">
+		<% index = 0 %>
 		<%= f.fields_for :videos do |video_form| %> 
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="panel-title">
 							<div class="row">
-								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= video_form.options[:child_index] %>">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>">
 								<div class="col-sm-8"><h5>Navigation between Workbooks</h5></div></a>
 								<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
 								<div class="col-sm-1">
@@ -27,7 +28,7 @@
 							</div>
 					</div>
 				</div>
-				<div id="collapse_<%= video_form.options[:child_index] %>" class="panel-collapse collapse">
+				<div id="collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>" class="panel-collapse collapse">
 					<div class="panel-body form-group">
 						<div class="row">
 							<div class="col-sm-2">
@@ -44,7 +45,7 @@
 
 								<div class="fileupload fileupload-new" data-provides="fileupload">
 									<div class="fileupload-new thumbnail" style="width: 180px; height: 135px;">
-										<img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" title="Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only">
+										<%= image_tag video_form.object.image(:thumb) %>
 									</div>
 									<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 180px; max-height: 135px; line-height: 20px;"></div>
 									<div>
@@ -78,7 +79,7 @@
 								<label class="control-label" for="tags_1">Tags</label>
 							</div>
 							<div class="col-sm-4">
-								<%= video_form.hidden_field :tag_list, :class => "form-control select2 select2_sample5", :value => "Excel, Navigate" %>
+								<%= video_form.hidden_field :tag_list, :class => "form-control select2 select2_sample5" %>
 								<!-- <input type="hidden" id="select2_sample5" class="form-control select2" value="Excel, Navigate"> -->
 							</div>
 							<div class="col-sm-2">
@@ -106,6 +107,7 @@
         });
       </script>
 			<div class="seperator5"></div>
+			<% index += 1 %>
 		<% end %>
 	</div>
 </div> <!-- ACCORDION END -->
