@@ -3,6 +3,7 @@ class Admin::TopicsController < AdminController
 	def new
 		@courses = Course.all
 		@topic = Topic.new
+		@topic.videos.build();
 	end
 
 	def create

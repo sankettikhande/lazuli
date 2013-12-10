@@ -1,6 +1,6 @@
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number
+  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list
   belongs_to :topic
   acts_as_taggable
 

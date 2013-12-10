@@ -86,7 +86,7 @@ var FormComponents = function () {
         $('#tags_1').tagsInput({
             width: 'auto',
             'onAddTag': function () {
-                //alert(1);
+                // alert(1);
             },
         });
         $('#tags_2').tagsInput({
@@ -752,7 +752,7 @@ var FormComponents = function () {
             handleClockfaceTimePickers();
             handleColorPicker();
             handleSelect2UserSearchModal();
-            // handleSelect2();
+            handleSelect2();
             // handleSelect2Modal();
             // handleInputMasks();
             // handleIPAddressInput();

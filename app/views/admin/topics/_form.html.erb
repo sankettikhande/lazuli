@@ -1,4 +1,4 @@
-<%= form_for [:admin , @topic] do |f| %>
+<%= nested_form_for [:admin , @topic] do |f| %>
 	<div class="form-group">
 		<div class="panel panel-default">
 			<div class="panel-body seperator5">
@@ -43,17 +43,7 @@
 				<div class="seperator10"></div>
 				<div class="row">
 					<div class="col-sm-12">
-						<!-- ACCOIRDION START -->
-							<%= f.fields_for :videos do |video_form| %> 
-								<%= render 'video_accordion', :f => video_form %>
-							<% end %>
-						<!-- ACCORDION END -->
-				<div class="seperator5"></div>
-						<div class="row">
-							<div class="col-sm-12">
-								<a href="#"><i class="fa fa-plus"></i> (Add another video)</a>
-							</div>
-						</div>
+						<%= render 'video_accordion', :f => f %>
 					</div>
 				</div>
 				<div class="seperator5"></div>
