@@ -65,7 +65,7 @@
 					    <div class="col-md-6">
 						    <div class="row form-group">
 						    	<div class="col-md-4">
-						    		<label for="emailID">Buisness/Personal Address:</label>
+						    		<label for="emailID">Business/Personal Address:</label>
 						    	</div>
 						    	<div class="col-md-8">
 					    			<%= f.text_area 'address', :class => 'form-control', :size => '10x3' %>
@@ -89,7 +89,8 @@
 				    <div class="row form-group">
 				    	<div class="col-md-3"></div>
 				    	<div class="col-md-9">
-				    		<%= f.link_to_add "Add another Course", :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'fa fa-3x fa-plus' %>
+				    		<a href="#"><i class='fa fa-3x fa-plus'></i><a/>
+				    		<%= f.link_to_add "Add another course", :user_channel_subscriptions, :data => { :target => "#user_channels" }%>
 				    	</div>
 				    </div>
 				    <div class="seperator5"></div>
