@@ -4,7 +4,7 @@
 		<label for="channelsS2">Channels Subscribed To</label>
 	</div>
 	<div class="col-md-3">
-	  <%= f.select 'channel_id', options_for_select(@channels.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Select"}, :class => 'form-control channels_id' if @channels %>
+	  <%= f.select 'channel_id', options_for_select(@channels.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
 	</div>
 </div>
 	<div class="row form-group">
@@ -12,7 +12,7 @@
 		<label for="uname">Course Subscribed For</label>
 	</div>
 	<div class="col-md-3">
-	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Select"}, :class => 'form-control courses_id' if @courses %>
+	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
 	</div>
 </div>
 
@@ -21,17 +21,18 @@
 		<label for="uname">Type of Subscription</label>
 	</div>
 	<div class="col-md-3 subscription_type">
-	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|c| [ c.name, c.id ] }, f.object.subscription_id), {:include_blank => "Select"}, :class => 'form-control subscriptions_id' if @subscriptions %>
+	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ s.name, s.id, {'data-calculated_days' => s.calculated_days} ] }, f.object.subscription_id), {:include_blank => "Select"}, :class => 'form-control subscriptions_id' %>
 	</div>
 </div>
 <div class="row form-group">
 	<div class="col-md-3">
 		<label>Date of Subscription</label>
 	</div>
-	<div class="col-md-9">
+	<div class="col-md-9 parent_div">
 		<div class="col-md-4">
-		<div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-			<%= f.text_field 'subscription_date', :class => "form-control" %>
+		<% current_date	= Date.today.try(:strftime,'%d-%m-%Y') %>
+		<div class="input-group date date-picker" data-date="#{current_date}" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+			<%= f.text_field 'subscription_date', :class => "form-control subscription_date" %>
 			<span class="input-group-btn">
 			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 			</span>
@@ -42,11 +43,10 @@
     		<label>Date of Expiry</label>
   		</div>
 		<div class="col-md-4">
-		<div class="input-group date date-picker" data-date="12-02-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-			<!-- <input type="text" class="form-control" readonly> -->
-			<%= f.text_field 'expiry_date', :class => "form-control" %>
+		<div class="input-group date date-picker" data-date="12-12-2012" data-date-format="dd-mm-yyyy" data-date-viewmode="years" >
+			<%= f.text_field 'expiry_date', :class => "form-control expiry_date", :disabled => true %>
 			<span class="input-group-btn">
-			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+			<button class="btn default" type="button" disabled="disabled"><i class="fa fa-calendar"></i></button>
 			</span>
 		</div>
 		</div>
@@ -78,6 +78,10 @@
 </div> -->
 
 <script type="text/javascript">
+
+  $('body').on('focus',".date-picker", function(){
+    $(this).datepicker();
+	});
 	$(document).ready(function(){
 
 		$('.channels_id').change(function(){
@@ -86,14 +90,27 @@
 			var val = $("option:selected",this).val();
 			$.ajax({
 	            type: "GET",
-	            url: "/course_subscription_types.js?",
+	            url: "/course_subscription_types.js",
 	            data: {id: val, subscription: subscription_id, course: course_id}       
-	          });     
+	          });
 		 });
 
 		$('.date-picker').datepicker({
-                rtl: App.isRTL(),
-                autoclose: true
-    }); 
+		 rtl: App.isRTL(),
+	         autoclose: true
+	       }).on('changeDate',function(ev){
+	     	 var date_id = $(this).closest(".parent_div").find(".expiry_date").attr('id');
+	     	 var subscription_id = $(this).closest(".form-group").prev().find(".subscriptions_id").attr('id');
+	    	 var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
+	    	 var expiry_date = get_expiry_date(ev.date, calculated_days)
+	    	 $("#"+date_id).val(expiry_date);
+	      });
+
+	      function get_expiry_date(subscription_date, calculated_days){
+	    	  var end_date = new Date(subscription_date.setDate(subscription_date.getDate() + calculated_days));
+	    	  end_date = (end_date.getDate() + "-" + (end_date.getMonth() + 1) + "-" + end_date.getFullYear());
+	    	  return end_date;
+	      }
+
 	})
 </script>

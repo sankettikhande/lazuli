@@ -1,1 +1,1 @@
-<%= select('user_channel_subscriptions', 'subscription_id', options_for_select(@channel_subscriptions.collect {|s| [ s.name, s.id ] }), :class => 'form-control' ) %>
+<%= select('user_channel_subscriptions', 'subscription_id', options_for_select(@channel_subscriptions.collect {|s| [ s.name, s.id, {'data-calculated_days' => s.calculated_days} ] }), :class => 'form-control' ) %>
