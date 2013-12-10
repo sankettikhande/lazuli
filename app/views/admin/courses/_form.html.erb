@@ -6,6 +6,7 @@
 			<div class="row">
 				<%= f.fields_for :channel_courses do |channel_courses_fields| %>
 					<%= render 'channel' , :f => channel_courses_fields%>
+				<% end %>
 			</div>
 		</div>
 	</div>
@@ -61,7 +62,8 @@
 										<%= f.file_field :image %>
 									</span>
 							</div>
-							<%= render 'course_permission' , :f => channel_courses_fields%>	
+							<%= f.fields_for :channel_course_permissions do |channel_course_permissions_fields| %>
+								<%= render 'course_permission' , :f => channel_course_permissions_fields%>	
 							<% end %>
 						</div>
 	  			</div>
