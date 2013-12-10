@@ -26,10 +26,14 @@ class Course < ActiveRecord::Base
   def set_channel_permission
     self.channel_course_permissions.each do |permission|
       if self.channel_courses
-        permission.channel_id = self.channel_courses.first.channel_id
+        permission.channel_id = self.channel.id
         permission.save
       end
     end
+  end
+
+  def channel
+    channels.first
   end
 
   #CLASS METHODS

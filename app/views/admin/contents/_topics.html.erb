@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-  	<a href = "topics/new" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New Module
+  	<a href = "topics/new" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New Topic
   	</a>
 	</div>
 </div>
@@ -11,7 +11,7 @@
 			<table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_2">
 				<thead class="flip-content">
 					<tr>
-				      <th>Module Name<i class="fa fa-3x fa-filter pull-right"></i></th>
+				      <th>Topic Name<i class="fa fa-3x fa-filter pull-right"></i></th>
 				      <th>Course<i class="fa fa-3x fa-filter pull-right"></i></th>
 				      <th>Partner Name</th>
 				      <th>Vimeo URL</th>
@@ -23,9 +23,9 @@
 					<tr>
 				      <td><%= topic.title %></td>
 				      <td><%= topic.course.name %></td>
-				      <td><%= topic.course.channels.first.name %></td>
+				      <td><%= channel_name_for_topic(topic.channel_id)  %></td>
 				      <td>http://vimeo.com/url<span></span></td>
-				      <td><a href="#"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
+				      <td><a href="/admin/topics/<%=topic.id%>/edit"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
 					</tr>
 					<% end %>
 				</tbody>
