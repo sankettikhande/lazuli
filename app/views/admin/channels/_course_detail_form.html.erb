@@ -50,7 +50,7 @@
 							<%= f.file_field :image %>
 						</span>
 				</div>
-				<%= f.fields_for :channel_courses do |course_permission_form| %> 
+				<%= f.fields_for :channel_course_permissions do |course_permission_form| %>
 					<%= render 'course_permission_form', :f => course_permission_form %>
 				<% end %>
 			</div>
