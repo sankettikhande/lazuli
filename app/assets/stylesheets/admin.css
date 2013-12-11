@@ -12,3 +12,7 @@
  *= require_tree ./admin
  *= require_self
  */
+
+ #video_form_remove_link {
+ 	color: black;
+ }
