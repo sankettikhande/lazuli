@@ -86,7 +86,6 @@ var FormComponents = function () {
         $('#tags_1').tagsInput({
             width: 'auto',
             'onAddTag': function () {
-                // alert(1);
             },
         });
         $('#tags_2').tagsInput({
