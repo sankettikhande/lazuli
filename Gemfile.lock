@@ -73,7 +73,11 @@ GEM
     hashie (2.0.5)
     highline (1.6.20)
     hike (1.2.3)
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     httpauth (0.2.0)
+    httpclient (2.3.4.1)
     i18n (0.6.5)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -99,6 +103,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     multi_json (1.8.2)
+    multi_xml (0.5.5)
     multipart-post (1.2.0)
     mysql2 (0.3.14)
     nested_form (0.3.2)
@@ -210,6 +215,12 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    vimeo (1.5.3)
+      httparty (>= 0.4.5)
+      httpclient (>= 2.1.5.2)
+      json (>= 1.1.9)
+      multipart-post (>= 1.0.1)
+      oauth (>= 0.4.3)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -247,3 +258,4 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.0.3)
   unicorn
+  vimeo

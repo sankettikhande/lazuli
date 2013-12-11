@@ -20,6 +20,7 @@ gem 'nested_form'
 gem 'acts-as-taggable-on'
 gem 'cancan'
 gem 'rolify'
+gem 'vimeo'
 
 group :development do
   gem 'quiet_assets'
