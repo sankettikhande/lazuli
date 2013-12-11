@@ -15,7 +15,7 @@
 				    		<label for="uname">Actual Name:</label>
 				    	</div>
 				    	<div class="col-md-4">
-			    		  <%= text_field_tag 'actual_name', nil,:class => 'form-control' %>
+			    		  <%= f.text_field 'actual_name', :class => 'form-control' %>
 				    	</div>
 				    </div>
 					 	<div class="row form-group">
@@ -42,7 +42,6 @@
 			    			<%= f.text_field 'phone_number', :class => 'form-control' %>
 				    	</div>
 				    </div>
-
 				    <div class="row col-md-13">
 				    	<div class="col-md-6">	
 						    <div class="row form-group">
@@ -81,7 +80,7 @@
 				    	</div>
 				    </div>
 				    <hr>
-					  <div></div>
+					  <div><h4>List of User Courses</h4></div>
 						  <div class="seperator5"></div>
 						  <div class="portlet-body flip-scroll">
 						    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
