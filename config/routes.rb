@@ -1,5 +1,7 @@
 Lazuli::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+
+  get "/admin", :controller => "admin", :action => :index
   
   namespace :admin do
     resources :users do

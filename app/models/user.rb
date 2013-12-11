@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address, :actual_name
   attr_accessible :user_channel_subscriptions_attributes
   has_many :user_channel_subscriptions
   has_many :subscriptions, :through => :user_channel_subscriptions
@@ -22,5 +22,5 @@ class User < ActiveRecord::Base
                             password:Devise.friendly_token[0,20],
                           )
   end
-  
+
 end

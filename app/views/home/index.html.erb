@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
 	<P> Welcome <%= current_user.email %>
+  <%= link_to "Admin Panel", admin_url, :data => {"no-turbolink" => true} if current_user.is_admin? %>
 	<%= link_to 'Sign Out', destroy_user_session_path(), :method => :delete %></p>
 <% else %>	
 	<%= link_to 'Sign In', new_user_session_path() %>

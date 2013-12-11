@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   layout 'admin'
 
   def index
+    redirect_to admin_users_path
   end
 
   private
