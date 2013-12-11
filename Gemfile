@@ -25,6 +25,7 @@ group :development do
   gem 'unicorn'
   gem 'pry-rails'
   gem 'capistrano', '2.15.4', require: false
+  gem 'rvm-capistrano'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
