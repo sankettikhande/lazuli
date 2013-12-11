@@ -1,1 +1,1 @@
-<%= select('user_channel_subscriptions', 'course_id', options_for_select(@channel_courses.collect {|c| [ c.name, c.id ] }), :class => 'form-control') %>
+<%= select('user_channel_subscriptions', 'course_id', options_for_select(@channel_courses.collect {|c| [ c.name, c.id ] }), {:include_blank => "Please Select"}, :class => 'form-control') %>
