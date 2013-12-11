@@ -86,7 +86,6 @@ var FormComponents = function () {
         $('#tags_1').tagsInput({
             width: 'auto',
             'onAddTag': function () {
-                //alert(1);
             },
         });
         $('#tags_2').tagsInput({
@@ -672,23 +671,18 @@ var FormComponents = function () {
         });
 
 
-        function movieFormatResult(movie) {
+        function userFormatResult(user) {
             var markup = "<table class='movie-result'><tr>";
-            if (movie.posters !== undefined && movie.posters.thumbnail !== undefined) {
-                markup += "<td valign='top'><img src='" + movie.posters.thumbnail + "'/></td>";
-            }
-            markup += "<td valign='top'><h5>" + movie.name + "</h5>";
-            if (movie.critics_consensus !== undefined) {
-                markup += "<div class='movie-synopsis'>" + movie.critics_consensus + "</div>";
-            } else if (movie.synopsis !== undefined) {
-                markup += "<div class='movie-synopsis'>" + movie.synopsis + "</div>";
-            }
+            markup += "<td valign='top'><h5>" + user.name + "</h5>";
             markup += "</td></tr></table>"
             return markup;
         }
 
-        function movieFormatSelection(movie) {
-            return movie.name;
+        function userFormatSelection(user) {
+            $("#channel_email").val(user.email);
+            $("#channel_contact_number").val(user.phone_number);
+            $("#channel_user_name").val(user.name);
+            return user.name;
         }
 
         $("#select2_user_search_modal_6").select2({
@@ -728,8 +722,8 @@ var FormComponents = function () {
                     });
                 }
             },
-            formatResult: movieFormatResult, // omitted for brevity, see the source of this page
-            formatSelection: movieFormatSelection, // omitted for brevity, see the source of this page
+            formatResult: userFormatResult, // omitted for brevity, see the source of this page
+            formatSelection: userFormatSelection, // omitted for brevity, see the source of this page
             dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
             escapeMarkup: function (m) {
                 return m;
@@ -752,7 +746,7 @@ var FormComponents = function () {
             handleClockfaceTimePickers();
             handleColorPicker();
             handleSelect2UserSearchModal();
-            // handleSelect2();
+            handleSelect2();
             // handleSelect2Modal();
             // handleInputMasks();
             // handleIPAddressInput();
