@@ -12,7 +12,3 @@
  *= require_tree ./admin
  *= require_self
  */
-
-.fa-ban input{
-	color: black;
-}
