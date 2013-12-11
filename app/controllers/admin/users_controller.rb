@@ -23,7 +23,7 @@ class Admin::UsersController < AdminController
 
   def edit
     @user = User.find_by_id(params[:id])
-    set_instance
+    @user_channel = @user.user_channel_subscriptions
   end 
 
   def update
@@ -32,7 +32,7 @@ class Admin::UsersController < AdminController
       if @user.update_attributes(params[:user])
         format.html { redirect_to admin_users_url}
       else
-        set_instance
+        @user_channel = @user.user_channel_subscriptions
         format.html{ render :action => "edit"}       
       end
     end
