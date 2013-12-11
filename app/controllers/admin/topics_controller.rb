@@ -3,6 +3,7 @@ class Admin::TopicsController < AdminController
 	def new
 		@courses = Course.all
 		@topic = Topic.new
+		@topic.videos.build()
 	end
 
 	def create
@@ -18,7 +19,6 @@ class Admin::TopicsController < AdminController
 	def edit
 		@courses = Course.all
 		@topic = Topic.find_by_id(params[:id])
-		render "edit"
 	end
 
 	def update
@@ -27,8 +27,17 @@ class Admin::TopicsController < AdminController
 			if @topic.update_attributes(params[:topic])
 				format.html {redirect_to "#{admin_contents_url}#topics"}
 			else
+				@courses = Course.all
 				format.html {render "edit"}
 			end
+		end
+	end
+
+	def destroy
+		@topic = Topic.find_by_id(params[:id])
+		@topic.destroy
+		respond_to do |format|
+			format.html {redirect_to "#{admin_contents_url}#topics"}
 		end
 	end
 end

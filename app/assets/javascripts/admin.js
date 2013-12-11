@@ -31,3 +31,5 @@
 //= require ./admin/app.js
 //= require jquery_nested_form
 //= require ./admin/form-components.js
+//= require ./admin/bootstrap-fileupload.js
+

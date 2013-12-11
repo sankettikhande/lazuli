@@ -12,6 +12,8 @@ footer .navbar {margin-bottom:0}
 .seperator5 {min-height:0.5em}
 .seperator10 {min-height:1em}
 .seperator15 {min-height:1.5em}
+.seperator20 {min-height: 2em}
+.seperator30 {min-height:3em}
 .nopadding {padding:0;}
 .nomargin {margin:0}
 .nospace {margin:0;padding:0}
@@ -48,3 +50,7 @@ section {margin-bottom: 1em}
 /******** Add new course *******************/
 .add-new-course h4 {padding: 5px 15px;font-weight: bold !important;font-size: 1.1em !important}
 /*********** Add new course ends **********/
+ /*********  Transparent background buttons   **/
+.btn-trans {background: none;color:#000;}
+.btn-trans:hover {color:#f00;}
+/*********************************/

@@ -1,4 +1,4 @@
-<%= form_for [:admin , @topic] do |f| %>
+<%= nested_form_for [:admin , @topic] do |f| %>
 <%= errors_for @topic unless @topic.errors.blank? %>
 	<div class="form-group">
 		<div class="panel panel-default">
@@ -32,7 +32,7 @@
 						<label for="t-descr" class="control-label">Description</label>
 					</div>
 					<div class="col-sm-3">
-						<%= f.text_area 'description', :rows => 4, :class => "form-control" %>
+						<%= f.text_area :description, :rows => 4, :class => "form-control" %>
 					</div>
 					<div class="col-sm-1 col-sm-offset-2">
 						<label class="control-label" for="t-channel">Channel</label>
@@ -45,14 +45,7 @@
 				<div class="seperator10"></div>
 				<div class="row">
 					<div class="col-sm-12">
-				<!-- ACCOIRDION START -->
-				</div> <!-- ACCORDION END -->
-				<div class="seperator5"></div>
-						<div class="row">
-							<div class="col-sm-12">
-								<a href="#"><i class="fa fa-plus"></i> (Add another video)</a>
-							</div>
-						</div>
+						<%= render 'video_accordion', :f => f %>
 					</div>
 				</div>
 				<div class="seperator5"></div>
@@ -75,18 +68,18 @@
   function getChannelNames(){
 	 	var course = $(".course_id :selected").val();
 		if(course == undefined || course == ""){
-			$("#topic_channel_id").val("");
-			$("#t-channel").val("")
-		}else{
+		$("#topic_channel_id").val("");
+		$("#t-channel").val("")
+	}else{
 			$.ajax({
-			    url: "/admin/courses/"+ course +"/get_channel_info.json",
-			    success: function(responseData) {
+		    url: "/admin/courses/"+ course +"/get_channel_info.json",
+		    success: function(responseData) {
 						var item = responseData.data.channel
-		    		$("#topic_channel_id").val(item.id)
-      			$("#t-channel").val(item.name)
-			    }
-			})
-		}
-  }
-  
- </script>
+	    		$("#topic_channel_id").val(item.id)
+     			$("#t-channel").val(item.name)
+ 		    }
+		})
+	}
+ }
+</script>
+

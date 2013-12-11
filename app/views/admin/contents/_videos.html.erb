@@ -1,8 +1,4 @@
-<div class="row">
-	<div class="col-md-12">
-  	<a href="#file-upload" data-toggle="modal" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New Video</a>
-	</div>
-</div>
+<div class="seperator30"></div>
 <section class="container">
 	<div class="row">
 		<div class="seperator5"></div>
@@ -20,51 +16,21 @@
 					</tr>
 				</thead>
 				<tbody>
+					<% @videos.each do |video|%>
 					<tr>
-					  <td>Selecting a cell</td>
-				      <td>Navigating and Selecting</td>
-				      <td>Excel</td>
-				      <td>Excel, Selecting, Cells</td>
-				      <td>Global Study Inc.</td>
-				      <td>http://vimeo.com/url<span></span></td>
-				      <td><a href="#"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
-					</tr>
-					<tr>
-					  <td>Selecting a cell</td>
-				      <td>Navigating and Selecting</td>
-				      <td>Excel</td>
-				      <td>Excel, Selecting, Cells</td>
-				      <td>Global Study Inc.</td>
-				      <td>http://vimeo.com/url<span></span></td>
-				      <td><a href="#"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
-					</tr>
-					<tr>
-					  <td>Changing Units</td>
-				      <td>Graphs</td>
-				      <td>Excel</td>
-				      <td>Excel, Units</td>
-				      <td>Global Study Inc.</td>
-				      <td>http://vimeo.com/url<span></span></td>
-				      <td><a href="#"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
-					</tr>
-					<tr>
-					  <td>Options</td>
-				      <td>Graphs</td>
-				      <td>Excel</td>
-				      <td>Study Express</td>
-				      <td>Global Study Inc.</td>
-				      <td>http://vimeo.com/url<span></span></td>
-				      <td><a href="#"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
-					</tr>
-					<tr>
-					  <td>Alignment</td>
-				      <td>Graphics</td>
-				      <td>Word</td>
-				      <td>Study Express</td>
-				      <td>Global Study Inc.</td>
+					  <td><%= video.title %></td>
+				      <td><%= video.topic.title %></td>
+				      <td><%= video.topic.course.name %></td>
+				      <td><%= video.tag_list %></td>
+				      <td><%= channel_name_for_topic(video.topic.channel_id)%></td>
 				      <td>http://vimeo.com/url</td>
-				      <td><a href="#"><i class="fa fa-3x fa-edit"></i></a><a href="#"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
+				      <td>
+				      	<a href="/admin/videos/<%= video.id %>/edit" class="btn btn-trans" title="Edit"><i class="fa fa-edit"></i></a>
+								<a href="#" class="btn btn-trans" title="Delete"><i class="fa fa-ban"></i></a>
+				      	<a href="#" class="btn btn-trans" title="Publish"><i class="fa fa-cloud-upload"></i></a>
+				      </td>
 					</tr>
+					<% end %>
 				</tbody>
 			</table>
 		</div>
