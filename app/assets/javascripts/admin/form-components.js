@@ -688,6 +688,9 @@ var FormComponents = function () {
         }
 
         function movieFormatSelection(movie) {
+            $("#channel_email").val(movie.email);
+            $("#channel_contact_number").val(movie.phone_number);
+            $("#channel_user_name").val(movie.name);
             return movie.name;
         }
 
