@@ -673,15 +673,7 @@ var FormComponents = function () {
 
         function userFormatResult(user) {
             var markup = "<table class='movie-result'><tr>";
-            if (user.posters !== undefined && user.posters.thumbnail !== undefined) {
-                markup += "<td valign='top'><img src='" + user.posters.thumbnail + "'/></td>";
-            }
             markup += "<td valign='top'><h5>" + user.name + "</h5>";
-            if (user.critics_consensus !== undefined) {
-                markup += "<div class='movie-synopsis'>" + user.critics_consensus + "</div>";
-            } else if (user.synopsis !== undefined) {
-                markup += "<div class='movie-synopsis'>" + user.synopsis + "</div>";
-            }
             markup += "</td></tr></table>"
             return markup;
         }
