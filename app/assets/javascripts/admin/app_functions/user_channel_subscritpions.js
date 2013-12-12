@@ -8,8 +8,7 @@ $('body').on('focus',".date-picker", function(){
       var course_id = $(this).closest(".form-group").next().find(".courses_id").attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
-              type: "GET",
-              url: "/course_subscription_types.js",
+              url: "/admin/users/course_subscription_types",
               data: {id: val, subscription: subscription_id, course: course_id}       
             });
      });
