@@ -32,4 +32,4 @@
 //= require jquery_nested_form
 //= require ./admin/form-components.js
 //= require ./admin/bootstrap-fileupload.js
-
+//= require ./admin/app_functions/user_channel_subscritpions.js
