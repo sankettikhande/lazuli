@@ -1,5 +1,4 @@
 class Course < ActiveRecord::Base
-  include Cacheable
   # attr_accessible :title, :body
   attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_course_permissions_attributes, :channel_courses_attributes
 
@@ -15,6 +14,7 @@ class Course < ActiveRecord::Base
   has_many :user_channel_subscriptions
   has_many :channel_course_permissions
 
+  include Cacheable
   
   #VALIDATIONS
   validates :name, :presence => true
