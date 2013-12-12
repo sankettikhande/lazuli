@@ -1,4 +1,5 @@
 class Channel < ActiveRecord::Base
+  include Cacheable
   attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes
   # attr_accessible :courses_attributes
 

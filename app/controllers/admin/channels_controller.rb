@@ -1,6 +1,6 @@
 class Admin::ChannelsController < AdminController
   def index
-    @channels = Channel.all
+    @channels = Channel.cached_all
   end
 
   def new
@@ -22,15 +22,15 @@ class Admin::ChannelsController < AdminController
 
   def edit
     @channel = Channel.find(params[:id], :include => :courses)
-    if @channel.courses.count == 0
+    if @channel.courses.count.zero?
       course = @channel.courses.build()
       course.channel_course_permissions.build()
     end 
   end
 
   def update
-    @channel = Channel.find_by_id(params[:id])
-    respond_to do |format|
+    @channel = Channel.cached_find(params[:id])
+    respond_to do |format|  
       if @channel.update_attributes(params[:channel])
         format.html {redirect_to admin_channels_url}
       else
@@ -40,7 +40,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def destroy
-    channel = Channel.find_by_id(params[:id])
+    channel = Channel.cached_find(params[:id])
     channel.destroy
     respond_to do |format|
       format.html { redirect_to admin_channels_url}   
@@ -49,7 +49,7 @@ class Admin::ChannelsController < AdminController
 
   def get_channel
     if params[:id]
-      @channel = Channel.find_by_id(params[:id])
+      @channel = Channel.cached_find(params[:id])
       respond_to do |format|
         format.json{}
       end
