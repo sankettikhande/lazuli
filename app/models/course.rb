@@ -10,7 +10,7 @@ class Course < ActiveRecord::Base
   #ASSOCIATIONS
   has_many :channel_courses
   has_many :channels, :through => :channel_courses
-  has_many :topics
+  has_many :topics, :dependent => :destroy
   has_many :user_channel_subscriptions
   has_many :channel_course_permissions
 
@@ -28,11 +28,15 @@ class Course < ActiveRecord::Base
   #INSTANCE METHODS
   def set_channel_permission
     self.channel_course_permissions.each do |permission|
-      if self.channel_courses
-        permission.channel_id = self.channel_courses.first.channel_id
+      if !self.channel_courses.blank?
+        permission.channel_id = self.channel.id
         permission.save
       end
     end
+  end
+
+  def channel
+    channels.first
   end
 
   #CLASS METHODS

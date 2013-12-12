@@ -19,7 +19,11 @@ Lazuli::Application.routes.draw do
     end
 
     resources	:contents
-    resources :courses
+    resources :courses do
+      member do
+        get 'get_channel_info'
+      end
+    end
     resources :topics
   end
 

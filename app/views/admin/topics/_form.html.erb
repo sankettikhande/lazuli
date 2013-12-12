@@ -1,4 +1,5 @@
 <%= nested_form_for [:admin , @topic] do |f| %>
+<%= errors_for @topic unless @topic.errors.blank? %>
 	<div class="form-group">
 		<div class="panel panel-default">
 			<div class="panel-body seperator5">
@@ -22,7 +23,7 @@
 						<label class="control-label" for="t-course">Course</label>
 					</div>
 					<div class="col-sm-3">
-						<%=f.collection_select :course_id , @courses, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control channel_id" }%>
+						<%=f.collection_select :course_id , @courses, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control course_id" }%>
 					</div>
 				</div>
 				<div class="seperator10"></div>
@@ -37,7 +38,8 @@
 						<label class="control-label" for="t-channel">Channel</label>
 					</div>
 					<div class="col-sm-3">
-						<input type="text" class="form-control" name="t-channel" id="t-channel">
+						<input type="text" class="form-control" name="t-channel" id="t-channel" disabled = true>
+						<%=f.hidden_field 'channel_id',{:class => "form-control"}%>
 					</div>
 				</div>
 				<div class="seperator10"></div>
