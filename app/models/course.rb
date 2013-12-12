@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+  include Cacheable
   # attr_accessible :title, :body
   attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_course_permissions_attributes, :channel_courses_attributes
 
