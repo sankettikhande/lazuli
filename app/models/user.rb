@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   rolify
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
@@ -11,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :user_channel_subscriptions
   has_many :subscriptions, :through => :user_channel_subscriptions
  
+  include Cacheable
+
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
 
 
