@@ -2,34 +2,26 @@ require 'bundler/capistrano'
 require 'rvm/capistrano'
 
 set :application, "lazuli"
+set :scm, :git
 set :repository,  "https://pravinhmhatre@bitbucket.org/lazuli_sodel/lazuli.git"
-set :deploy_to,  "/home/sodel/rails_apps/lazuli"
-set :applicationdir,  "/home/sodel/rails_apps/lazuli"
+set :deploy_via, :remote_cache
 
 set :use_sudo, false
-set :scm, :git
 set :keep_releases, 3
-set :rails_env, "production"
-set :precompile_only_if_changed, true
 
+set :precompile_only_if_changed, true
 set :rvm_type, :user
 
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+default_run_options[:pty] = true 
 
-
-# deploy config
-set :deploy_to, applicationdir
-set :deploy_via, :export
-
-# additional settings
-default_run_options[:pty] = true  # Forgo errors when deploying from windows
-# default_run_options[:shell] = '/bin/bash --login'
-
-#ssh_options[:keys] = %w(/Path/To/id_rsa)            # If you are using ssh_keys
-#set :chmod755, "app config db lib public vendor script script/* public/disp*"
-#set :use_sudo, true
+before "deploy:setup", "db:configure"
+before "deploy:assets:precompile", "db:symlink"
+after  "deploy:update_code", "db:symlink"
+after "deploy:update_code", "deploy:migrate"
 
 task :qa do
+  set :rails_env, "staging"
+  set :deploy_to,  "/home/sodel/rails_apps/lazuli"
   set :domain, "192.168.1.119"
   set :user, "sodel"
   set :branch, "master"
@@ -37,8 +29,20 @@ task :qa do
   role :web, domain
   role :app, domain
   role :db, domain, :primary=>true
-  set :deploy_env, "qa"
 end
+
+# task :prod do
+#   set :rails_env, "production"
+#   set :deploy_to,  "/home/sodel/rails_apps/lazuli"
+#   set :domain, "192.168.1.119"
+#   set :user, "sodel"
+#   set :branch, "master"
+#   set :scm_verbose, true
+#   role :web, domain
+#   role :app, domain
+#   role :db, domain, :primary=>true
+#   set :deploy_env, "qa"
+# end
 
 namespace :deploy do
   desc "Restart passenger process"
@@ -52,26 +56,19 @@ namespace :deploy do
     end
 end
 
-
 namespace :rvm do
   task :trust_rvmrc do
     run "rvm rvmrc trust #{release_path}"
   end
 end
 
-
-
-
-before "deploy:setup", "db:configure"
-after  "deploy:update_code", "db:symlink"
-after "deploy:update_code", "deploy:migrate"
-before "deploy:assets:precompile", "db:symlink"
-
 namespace :db do
   desc "Create database yaml in shared path"
   task :configure do
+    set :database_name, "#{application}_#{rails_env.downcase}" 
+
     set :database_username do
-      "lazuli"
+      Capistrano::CLI.password_prompt "Database User Name: "
     end
 
     set :database_password do
@@ -79,7 +76,8 @@ namespace :db do
     end
 
     db_config = <<-EOF
-      base: &base
+      #{rails_env.downcase}:
+        database: #{database_name}
         adapter: mysql2
         encoding: utf8
         reconnect: false
@@ -87,26 +85,24 @@ namespace :db do
         username: #{database_username}
         password: #{database_password}
 
-      development:
-        database: #{application}_development
-        <<: *base
-
-      test:
-        database: #{application}_test
-        <<: *base
-
-      production:
-        database: #{application}_production
-        <<: *base
     EOF
 
     run "mkdir -p #{shared_path}/config"
     put db_config, "#{shared_path}/config/database.yml"
+
+    #CREATE DB USER AND DATABASE
+    logger.info "CREATING DATABASE #{database_name} AND GRANTING ACCESS TO USER. PLEASE PROVIDE PASSWORD FOR \"MYSQL ROOT USER\""
+    set :root_password do
+      Capistrano::CLI.password_prompt "MySQL Root Password: "
+    end
+    run "mysql --user=root --password=#{root_password} -e \"CREATE DATABASE IF NOT EXISTS #{database_name}\""
+    run "mysql --user=root --password=#{root_password} -e \"GRANT ALL PRIVILEGES ON #{database_name}.* TO '#{database_username}'@'localhost' IDENTIFIED BY '#{database_password}' WITH GRANT OPTION\""
   end
 
   desc "Make symlink for database yaml"
   task :symlink do
     run "ln -nfs #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
+
 end
 

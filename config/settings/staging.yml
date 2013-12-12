@@ -1,0 +1,12 @@
+oauth_apps: 
+  facebook:
+    app_key: "555568701184796"
+    app_secret: "8be3e8bbf6ba33053c1635e3b38dbc43"
+
+  google:
+    app_key: "855183869640-k0f0a48779u0mip395k7kth0ceco17sh"
+    app_secret: "bPUgQt2j5rBw_MkkxL2ij0I_"
+
+  linkedin:
+    app_key: "75daqaxxahxm83"
+    app_secret: "1pYcj5AkWpcHqjEM"
