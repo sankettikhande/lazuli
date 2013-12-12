@@ -20,6 +20,7 @@ gem 'nested_form'
 gem 'acts-as-taggable-on'
 gem 'cancan'
 gem 'rolify'
+gem 'exception_notification'
 gem 'vimeo'
 
 group :development do
@@ -30,6 +31,7 @@ group :development do
   gem 'rvm-capistrano'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "letter_opener"
 end
 
 group :assets do
