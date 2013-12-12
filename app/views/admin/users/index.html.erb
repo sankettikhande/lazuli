@@ -1,6 +1,7 @@
 <div class="row">
-  <a href="/admin/users/new"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new user
-  </button></a>
+ <div class="col-md-12 nopadding">
+          <a href="#add-user" data-toggle="modal" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New User</a>
+ </div>
 </div>
 <div class="row">
   <div class="seperator5"></div>
@@ -8,30 +9,71 @@
     <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
       <thead class="flip-content">
         <tr>
-            <th>Username</th>
-            <th>Email ID<i class="fa fa-3x fa-filter pull-right"></i></th>
-            <th>Courses Subscribed for<i class="fa fa-3x fa-filter pull-right"></i></th>
-            <th>Channels Subscibed to<i class="fa fa-3x fa-filter pull-right"></i></th>
-            <th>Type of Subscription</th>
-            <th>Subscription Expiring on</th>
-            <th>Action</th>
+            <th width='15%;'>Username<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th width='15%;'>Actual Name<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th width='18%;'>Email ID<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th width='15%;'>Contact Number<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th width='17%;'>Company Name<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th width='20%;'>Address</th>
+            <th width='15%;'>Action</th>
         </tr>
       </thead>
       <tbody>
-        <% @users.each do |user| %>
-          <% user.user_channel_subscriptions.each do |user_channel| %>
+        <% @users.each do |user| %>      
           <tr>
             <td><%= user.name %></td>
+            <td><%= user.actual_name %></td>
             <td><%= user.email %></td>
-            <td><%= user_channel.course.try(:name) %></td>
-            <td><%= user_channel.channel.try(:name) %></td>
-            <td><%= user_channel.subscription.name %></td>
-            <td><%= user_channel.expiry_date %></td>
+            <td><%= user.phone_number %></td>
+            <td><%= user.company_name %></td>
+            <td><%= user.address %></td>
             <td><a href="/admin/users/<%= user.id %>/edit"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/users/<%= user.id %>" data-method="delete" data-confirm="Are you sure you want to delete?"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
           </tr>
-          <% end %>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
+
+ <div class="modal fade" id="add-user" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">Add New User</h4>
+      </div>
+      <div class="modal-body form-group">
+        <div class="row">
+          <div class="col-md-2">
+          <label>Choose</label>
+          </div>
+          <div class="col-md-10">
+          <label>
+          <input type="radio" name="user_mode" id="user_mode1" value="single-user">Add Single User
+          </label><br>
+          <label>
+          <input type="radio" name="user_mode" id="user_mode2" value="multiple-user">Add Multiple Users
+          </label>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn blue" onclick="user_action();">Go</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script type="text/javascript">
+  function user_action(){
+      if ($("input[type='radio'][name='user_mode']:checked").val() == 'single-user'){
+        window.location = "<%= new_admin_user_path %>"
+      } else {
+        // window.location = "<%#= add_multiple_user_admin_users_path %>"
+      }
+  }
+</script>
+

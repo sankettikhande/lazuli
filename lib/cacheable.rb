@@ -21,11 +21,16 @@ module Cacheable
     reflections_arr.each do |r|
       Rails.cache.delete([self, r])
     end
+    Rails.cache.delete(self.class.name)
   end
 
   module ClassMethods
     def cached_find(id)
       Rails.cache.fetch([name, id]) { find(id) }
+    end
+
+    def cached_all
+      Rails.cache.fetch(name) {all}
     end
   end
 end
