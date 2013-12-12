@@ -14,6 +14,7 @@ class Course < ActiveRecord::Base
   has_many :user_channel_subscriptions
   has_many :channel_course_permissions
 
+  include Cacheable
   
   #VALIDATIONS
   validates :name, :presence => true

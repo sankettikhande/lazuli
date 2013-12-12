@@ -13,6 +13,8 @@ class Channel < ActiveRecord::Base
   has_many :channel_subscriptions
   has_many :subscriptions, :through => :channel_subscriptions
   has_many :channel_course_permissions
+
+  include Cacheable
   
   belongs_to :admin, :class_name => User, :foreign_key => :admin_user_id
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
