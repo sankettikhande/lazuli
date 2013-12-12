@@ -12,7 +12,8 @@ module Cacheable
     end
 
     ## EXPIRE CACHE AFTER COMMIT
-    base.after_touch :flush_cache
+    base.after_commit :flush_cache
+    # base.after_touch :flush_cache
   end
 
   def flush_cache
@@ -26,6 +27,7 @@ module Cacheable
 
   module ClassMethods
     def cached_find(id)
+
       Rails.cache.fetch([name, id]) { find(id) }
     end
 
@@ -34,4 +36,3 @@ module Cacheable
     end
   end
 end
-

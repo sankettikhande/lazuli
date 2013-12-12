@@ -30,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     acts-as-taggable-on (2.4.1)
       rails (>= 3, < 5)
+    addressable (2.3.5)
     arel (3.0.3)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
@@ -67,13 +68,20 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.0.2)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     hashie (2.0.5)
     highline (1.6.20)
     hike (1.2.3)
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     httpauth (0.2.0)
+    httpclient (2.3.4.1)
     i18n (0.6.5)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -92,6 +100,10 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.8.1)
+    launchy (2.4.2)
+      addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -99,6 +111,7 @@ GEM
     method_source (0.8.2)
     mime-types (1.25.1)
     multi_json (1.8.2)
+    multi_xml (0.5.5)
     multipart-post (1.2.0)
     mysql2 (0.3.14)
     nested_form (0.3.2)
@@ -212,6 +225,12 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    vimeo (1.5.3)
+      httparty (>= 0.4.5)
+      httpclient (>= 2.1.5.2)
+      json (>= 1.1.9)
+      multipart-post (>= 1.0.1)
+      oauth (>= 0.4.3)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -227,10 +246,12 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   dalli
   devise
+  exception_notification
   jbuilder
   jquery-rails
   jquery-turbolinks
   kaminari
+  letter_opener
   mysql2
   nested_form
   omniauth
@@ -250,3 +271,4 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.0.3)
   unicorn
+  vimeo

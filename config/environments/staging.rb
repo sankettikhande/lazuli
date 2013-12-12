@@ -31,7 +31,7 @@ Lazuli::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
@@ -46,7 +46,7 @@ Lazuli::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( admin.js admin.css admin/app_functions/*)
+  config.assets.precompile += %w( admin.js admin.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -64,4 +64,22 @@ Lazuli::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  config.action_mailer.delivery_method = :smtp
+  
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    
+    :user_name            => 'sodeltest2013@gmail.com',
+    :password             => 'p@ss1234',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Exception-Lazuli] ",
+      :sender_address => %{"Exception Notifier" <error@lazuli.com>},
+      :exception_recipients => %w{pravin.mhatre@sodelsolutions.com prakash.laxkar@sodelsolutions.com rakesh.patri@sodelsolutions.com nilesh.patil@sodelsolutions.com}
+    }
 end

@@ -7,6 +7,7 @@ Lazuli::Application.routes.draw do
     resources :users do
     	collection do
     		get 'search_user'
+               get 'course_subscription_types'
     	end
     	member do
     		get 'get_user'
@@ -25,9 +26,8 @@ Lazuli::Application.routes.draw do
       end
     end
     resources :topics
+    resources :videos
   end
-
-  match '/course_subscription_types', :controller => "admin/users", :action => "course_subscription_types"
 
   root :to => "home#index"
 end
