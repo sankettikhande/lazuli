@@ -43,4 +43,12 @@ class Admin::CoursesController < AdminController
 			format.html {redirect_to "#{admin_contents_url}#courses"}
 		end
 	end
+
+	def get_channel_info
+		@course = Course.find_by_id(params[:id], :include => :channels)
+		respond_to do |format|
+			format.json{}
+		end
+	end
+
 end
