@@ -5,4 +5,5 @@ class Topic < ActiveRecord::Base
   accepts_nested_attributes_for :videos, :allow_destroy => true
 
   validates :course_id, :presence => true
+  validates_presence_of :title ,:message => "of Topic can't be blank"
 end

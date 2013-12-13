@@ -26,6 +26,7 @@ Lazuli::Application.routes.draw do
       end
     end
     resources :topics
+    resources :videos
   end
 
   root :to => "home#index"
