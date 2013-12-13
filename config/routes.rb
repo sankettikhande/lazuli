@@ -7,6 +7,8 @@ Lazuli::Application.routes.draw do
     resources :users do
     	collection do
     		get 'search_user'
+               get 'new_bulk'
+               post 'create_bulk'
                get 'course_subscription_types'
     	end
     	member do
