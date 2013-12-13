@@ -34,3 +34,4 @@
 //= require ./admin/bootstrap-fileupload.js
 //= require ./admin/app_functions/user_channel_subscritpions.js
 //= require ./admin/app_functions/topics.js
+//= require ./admin/app_functions/users.js
