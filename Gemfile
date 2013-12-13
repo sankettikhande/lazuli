@@ -20,6 +20,7 @@ gem 'nested_form'
 gem 'acts-as-taggable-on'
 gem 'cancan'
 gem 'rolify'
+gem 'roo'
 gem 'exception_notification'
 gem 'vimeo'
 
