@@ -1,3 +1,4 @@
+<%= javascript_include_tag "admin/app_functions/topics.js"%>
 <%= nested_form_for [:admin , @topic] do |f| %>
 <%= errors_for @topic unless @topic.errors.blank? %>
 	<div class="form-group">
