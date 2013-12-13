@@ -42,7 +42,6 @@
 								<label class="control-label">Thumbnail</label>
 							</div>
 							<div class="col-sm-4">
-
 								<div class="fileupload fileupload-new" data-provides="fileupload">
 									<div class="fileupload-new thumbnail" style="width: 180px; height: 135px;">
 										<%= image_tag video_form.object.image(:medium) %>
@@ -80,7 +79,25 @@
 							</div>
 							<div class="col-sm-4">
 								<%= video_form.hidden_field :tag_list, :class => "form-control select2 select2_sample5" %>
-								<!-- <input type="hidden" id="select2_sample5" class="form-control select2" value="Excel, Navigate"> -->
+							</div>
+							<div class="col-sm-2">
+	  						<label for="video-upload" class="control-label">Video</label>
+	  					</div>
+	  					<div class="col-sm-4">
+								<span class="btn blue fileinput-button">
+									<i class="fa fa-plus"></i>
+									<span>Upload File(s)</span>
+									<input type="file" name="video-upload" id="video-upload">
+								</span>
+	  					</div>
+						</div>
+						<div class="seperator5"></div>
+						<div class="row">
+							<div class="col-sm-2">
+								<label class="control-label" for="vimeo-url1">Video URL</label>
+							</div>
+							<div class="col-sm-4">
+								<input type="url" name="vimeo-url1" id="vimeo-url1" class="form-control">
 							</div>
 							<div class="col-sm-2">
 								<label class="control-label">Available for</label>
@@ -95,20 +112,22 @@
 									<label class="checkbox-inline">
 									  Trial
 									</label>
-								</div>
+								</div> 
 							</div>
 						</div>
+						<div class="seperator5"></div>
 					</div>
 				</div>
 			</div>
 			<script>
         App.init();
+        FormComponents.init();
       </script>
-			<div class="seperator5"></div>
 			<% index += 1 %>
 		<% end %>
 	</div>
 </div> <!-- ACCORDION END -->
+<div class="seperator5"></div>
 <div class="row">
 	<div class="col-sm-12">
 		<%= f.link_to_add "(Add another video)", :videos %>
