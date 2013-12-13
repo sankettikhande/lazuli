@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
     return User.where("(provider = '#{oauth_raw_data.provider}' AND uid = '#{oauth_raw_data.uid}') OR email='#{oauth_user_data.email}'").first || User.create!(name:oauth_user_data.name,
+                            actual_name:oauth_user_data.name,
                             provider:oauth_raw_data.provider,
                             uid:oauth_raw_data.uid,
                             email:oauth_user_data.email,
