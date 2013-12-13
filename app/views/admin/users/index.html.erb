@@ -72,7 +72,7 @@
       if ($("input[type='radio'][name='user_mode']:checked").val() == 'single-user'){
         window.location = "<%= new_admin_user_path %>"
       } else {
-        // window.location = "<%#= add_multiple_user_admin_users_path %>"
+        window.location = "<%= new_bulk_admin_users_path %>"
       }
   }
 </script>
