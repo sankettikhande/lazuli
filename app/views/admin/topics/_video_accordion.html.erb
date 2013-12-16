@@ -78,7 +78,7 @@
 								<label class="control-label" for="tags_1">Tags</label>
 							</div>
 							<div class="col-sm-4">
-								<%= video_form.hidden_field :tag_list, :class => "form-control select2 select2_sample5" %>
+								<%= video_form.hidden_field :tag_list, :class => "form-control select2 select2_tag_list" %>
 							</div>
 							<div class="col-sm-2">
 	  						<label for="video-upload" class="control-label">Video</label>
@@ -118,11 +118,14 @@
 						<div class="seperator5"></div>
 					</div>
 				</div>
+				<script>
+					App.initUniform();
+					$(".select2_tag_list").select2({
+	            tags: []
+	        });
+				</script>
 			</div>
-			<script>
-        App.init();
-        FormComponents.init();
-      </script>
+			<div class="seperator5"></div>
 			<% index += 1 %>
 		<% end %>
 	</div>

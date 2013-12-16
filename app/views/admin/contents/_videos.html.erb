@@ -19,10 +19,10 @@
 					<% @videos.each do |video|%>
 					<tr>
 					  <td><%= video.title %></td>
-				      <td><%= video.topic.title if video.topic %></td>
-				      <td><%= video.topic.course.name if video.topic && video.topic.course %></td>
-				      <td><%= video.tag_list %></td>
-				      <td><%= channel_name_for_topic(video.topic.channel_id) if video.topic %></td>
+				      <td><%= video.presence.try(:topic).presence.try(:title) %></td>
+				      <td><%= video.presence.try(:topic).presence.try(:course).presence.try(:name) %></td>
+				      <td><%= video.presence.try(:tag_list) %></td>
+				      <td><%= channel_name_for_topic(video.presence.try(:topic).presence.try(:channel_id)) %></td>
 				      <td>http://vimeo.com/url</td>
 				      <td>
 				      	<a href="/admin/videos/<%= video.id %>/edit" class="btn btn-trans" title="Edit"><i class="fa fa-edit"></i></a>
