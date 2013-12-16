@@ -111,7 +111,7 @@
 </div> <!-- ACCORDION END -->
 <div class="row">
 	<div class="col-sm-12">
-		<%= f.link_to_add "(Add another video)", :videos %>
-		<!-- <a href="#"><i class="fa fa-plus"></i> (Add another video)</a> -->
+		<a href="#"><i class="fa fa-plus"></i></a>
+		<%= f.link_to_add "(Add another video)", :videos, :data => { :target => "#accordion1" } %>
 	</div>
 </div>

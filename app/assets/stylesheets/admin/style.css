@@ -36,7 +36,7 @@ Import fonts
 */
 
 /* load Open Sans Font from local */
-@import url(/assets/font.css);
+@import url(/assets/admin/font.css);
 
 /***
 Reset and overrides  
