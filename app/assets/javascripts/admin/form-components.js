@@ -311,10 +311,6 @@ var FormComponents = function () {
             tags: ["red", "green", "blue", "yellow", "pink"]
         });
 
-        $(".select2_tag_list").select2({
-            tags: []
-        });
-
         function movieFormatResult(movie) {
             var markup = "<table class='movie-result'><tr>";
             if (movie.posters !== undefined && movie.posters.thumbnail !== undefined) {
