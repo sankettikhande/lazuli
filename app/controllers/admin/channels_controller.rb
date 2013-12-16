@@ -6,7 +6,6 @@ class Admin::ChannelsController < AdminController
   def new
   	@channel = Channel.new
     course = @channel.courses.build()
-    course.channel_course_permissions.build()
   end	
 
   def create
@@ -23,9 +22,8 @@ class Admin::ChannelsController < AdminController
   def edit
     @channel = Channel.find(params[:id], :include => :courses)
     if @channel.courses.count.zero?
-      course = @channel.courses.build()
-      course.channel_course_permissions.build()
-    end 
+      @channel.courses.build()
+    end
   end
 
   def update
