@@ -27,10 +27,15 @@
 							<div class="portlet-body">
 								<div class="panel-group accordion" id="accordion1">
 									<%= render 'administration_detail_form', :f => f %>
-									<%= render 'company_detail_form', :f => f %>
-									<%= f.fields_for :courses do |course_form| %> 
-										<%= render 'course_detail_form', :f => course_form %>
-									<% end %>
+									<%= render 'company_detail_form', :f => f %> 
+									<%= render 'course_detail_form', :course_form => f %>
+								</div>
+							</div>
+							<div class="seperator5"></div>
+							<div class="row">
+								<div class="col-sm-12">
+									<a href="#"><i class="fa fa-plus"></i></a>
+									<%= f.link_to_add "(Add another courses)", :courses, :data => { :target => "#accordion1" } %>
 								</div>
 							</div>
 							<!-- ACCORDION END -->

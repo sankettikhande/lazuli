@@ -13,6 +13,7 @@ class Course < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :user_channel_subscriptions
   has_many :channel_course_permissions
+  auto_build :channel_course_permissions
 
   include Cacheable
   
@@ -25,7 +26,7 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :channel_courses, :allow_destroy => true
   #SCOPES
   after_save :set_channel_permission
-
+  
   #INSTANCE METHODS
   def set_channel_permission
     self.channel_course_permissions.each do |permission|
