@@ -311,7 +311,6 @@ var FormComponents = function () {
             tags: ["red", "green", "blue", "yellow", "pink"]
         });
 
-
         function movieFormatResult(movie) {
             var markup = "<table class='movie-result'><tr>";
             if (movie.posters !== undefined && movie.posters.thumbnail !== undefined) {

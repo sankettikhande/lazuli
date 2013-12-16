@@ -1,6 +1,7 @@
 $('body').on('focus',".date-picker", function(){
     $(this).datepicker();
-  });
+});
+
   $(document).ready(function(){
 
     $('.channels_id').change(function(){
@@ -31,3 +32,5 @@ $('body').on('focus',".date-picker", function(){
         }
 
   })
+
+$('input[type="checkbox"]').uniform();
