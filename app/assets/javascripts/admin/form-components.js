@@ -448,15 +448,15 @@ var FormComponents = function () {
         $("#mask_decimal").inputmask('decimal', {
             rightAlignNumerics: false
         }); //disables the right alignment of the decimal input
-        $("#mask_currency").inputmask('€‚¬ 999.999.999,99', {
+        $("#mask_currency").inputmask('€ 999.999.999,99', {
             numericInput: true
-        }); //123456  =>  €‚¬ ___.__1.234,56
+        }); //123456  =>  € ___.__1.234,56
 
-        $("#mask_currency2").inputmask('€‚¬ 999,999,999.99', {
+        $("#mask_currency2").inputmask('€ 999,999,999.99', {
             numericInput: true,
             rightAlignNumerics: false,
             greedy: false
-        }); //123456  =>  €‚¬ ___.__1.234,56
+        }); //123456  =>  € ___.__1.234,56
         $("#mask_ssn").inputmask("999-99-9999", {
             placeholder: " ",
             clearMaskOnLostFocus: true
