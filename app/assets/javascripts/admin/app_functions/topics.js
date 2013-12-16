@@ -1,8 +1,12 @@
 $(document).ready(function(){
 		getChannelNames();
-	$('.course_id').live('change',function(){
-		getChannelNames();
-	})})
+		$('.course_id').live('change',function(){
+			getChannelNames();
+		})
+		$('.add_nested_fields').live('click',function(){
+			videoAccordionForm();
+		})
+	})
   function getChannelNames(){
 		var course = $(".course_id :selected").val();
 		if(course == undefined || course == ""){
@@ -18,4 +22,11 @@ $(document).ready(function(){
 			    }
 			})
 		}
+  }
+
+  function videoAccordionForm(){
+  	App.initUniform();
+		$(".video_tag_list").select2({
+        tags: []
+    });
   }
