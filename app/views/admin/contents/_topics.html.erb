@@ -22,7 +22,7 @@
 					<% @topics.each do |topic|%>
 					<tr>
 				      <td><%= topic.title %></td>
-				      <td><%= topic.course.name %></td>
+				      <td><%= topic.course.name if topic.course %></td>
 				      <td><%= channel_name_for_topic(topic.channel_id)  %></td>
 				      <td>http://vimeo.com/url<span></span></td>
 				      <td>
