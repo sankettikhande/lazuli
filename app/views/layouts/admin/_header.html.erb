@@ -9,14 +9,14 @@
     </div>
     <div class="navbar-collapse collapse top-menu">
       <ul class="nav navbar-nav">
-        <li class="<%=  set_selected("users") %>"><a href="/admin/users">Manage Users</a></li>
-        <li class="<%=  set_selected("contents") %>"><a href="/admin/contents">Manage Content</a></li>
+        <li class="<%=  set_selected("users") %>"><a href="/admin/users" data-no-turbolink="true">Manage Users</a></li>
+        <li class="<%=  set_selected("contents") %>"><a href="/admin/contents" data-no-turbolink="true">Manage Content</a></li>
         <li class="<%=  set_selected("channels") %>"><a href="/admin/channels">Manage Channels</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown user">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-      <span class="username">Jane Doe</span>
+      <span class="username"><%= current_user.name %></span>
       <i class="fa fa-angle-down"></i>
       </a>
       <ul class="dropdown-menu">

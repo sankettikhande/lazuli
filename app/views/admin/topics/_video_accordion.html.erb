@@ -115,6 +115,7 @@
 								</div> 
 							</div>
 						</div>
+						<div class="seperator5"></div>
 					</div>
 				</div>
 				<script>
@@ -129,9 +130,10 @@
 		<% end %>
 	</div>
 </div> <!-- ACCORDION END -->
+<div class="seperator5"></div>
 <div class="row">
 	<div class="col-sm-12">
-		<%= f.link_to_add "(Add another video)", :videos, :class => "add_nested_fields" %>
-		<!-- <a href="#"><i class="fa fa-plus"></i> (Add another video)</a> -->
+		<a href="#"><i class="fa fa-plus"></i></a>
+		<%= f.link_to_add "(Add another video)", :videos, :data => { :target => "#accordion1" } %>
 	</div>
 </div>

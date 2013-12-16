@@ -49,17 +49,17 @@
           </div>
           <div class="col-md-10">
           <label>
-          <input type="radio" name="user_mode" id="user_mode1" value="single-user">Add Single User
+          <input type="radio" name="user_mode" id="user_mode" value="single-user" data-redirect-url="<%= new_admin_user_path %>">Add Single User
           </label><br>
           <label>
-          <input type="radio" name="user_mode" id="user_mode2" value="multiple-user">Add Multiple Users
+          <input type="radio" name="user_mode" id="user_mode" value="multiple-user" data-redirect-url="<%= new_bulk_admin_users_path %>">Add Multiple Users
           </label>
         </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn blue" onclick="user_action();">Go</button>
+        <button type="button" class="btn blue user_action">Go</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -67,13 +67,5 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<script type="text/javascript">
-  function user_action(){
-      if ($("input[type='radio'][name='user_mode']:checked").val() == 'single-user'){
-        window.location = "<%= new_admin_user_path %>"
-      } else {
-        window.location = "<%= new_bulk_admin_users_path %>"
-      }
-  }
-</script>
 
+<%= javascript_include_tag 'admin/app_functions/users' %>
