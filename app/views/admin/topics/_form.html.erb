@@ -24,7 +24,7 @@
 						<label class="control-label" for="t-course">Course</label>
 					</div>
 					<div class="col-sm-3">
-						<%=f.collection_select :course_id , @courses, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control course_id" }%>
+						<%=f.select :course_id ,options_for_select( @courses.collect{|c| [c.name, c.id]}), {:include_blank => "Please Select"}, {:class =>"form-control course_id" }%>
 					</div>
 				</div>
 				<div class="seperator10"></div>

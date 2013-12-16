@@ -17,7 +17,7 @@ class Course < ActiveRecord::Base
   include Cacheable
   
   #VALIDATIONS
-  validates :name, :presence => true
+  validates_presence_of :name, :message => "of Course can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
 
