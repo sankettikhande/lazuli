@@ -10,8 +10,6 @@ class Channel < ActiveRecord::Base
   #ASSOCIATIONS
   has_many :channel_courses
   has_many :courses, :through => :channel_courses
-  has_many :channel_subscriptions
-  has_many :subscriptions, :through => :channel_subscriptions
   has_many :channel_course_permissions
 
   include Cacheable

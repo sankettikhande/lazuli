@@ -1,0 +1,8 @@
+<% i = 0 %>
+<%= f.fields_for :course_subscriptions do |course_subscription_form| %>
+	<div class="col-sm-3">
+		<%= course_subscription_form.check_box :subscription_id %>
+		<label class="checkbox-inline"> <%= @subscriptions[i].name  %> </label>
+	</div>
+	<% i += 1 %>
+<% end %>

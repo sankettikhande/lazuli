@@ -23,7 +23,6 @@ gem 'rolify'
 gem 'roo'
 gem 'exception_notification'
 gem 'vimeo'
-gem "auto_build"
 
 group :development do
   gem 'quiet_assets'

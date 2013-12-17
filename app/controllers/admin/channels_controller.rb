@@ -4,13 +4,18 @@ class Admin::ChannelsController < AdminController
   end
 
   def new
+    set_initialization
   	@channel = Channel.new
     course = @channel.courses.build()
+    # @subscriptions.count.times do |i|
+    #   course.course_subscriptions.build
+    # end
   end	
 
   def create
+    set_initialization
   	@channel = Channel.new(params[:channel])
-  	respond_to do |format|
+    respond_to do |format|
   		if @channel.save
   			format.html {redirect_to admin_channels_url}
   		else
@@ -20,6 +25,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def edit
+    set_initialization
     @channel = Channel.find(params[:id], :include => :courses)
     if @channel.courses.count.zero?
       @channel.courses.build()
@@ -27,6 +33,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def update
+    set_initialization
     @channel = Channel.cached_find(params[:id])
     respond_to do |format|  
       if @channel.update_attributes(params[:channel])
@@ -52,5 +59,10 @@ class Admin::ChannelsController < AdminController
         format.json{}
       end
     end
+  end
+
+  private
+  def set_initialization
+    @subscriptions = Subscription.all
   end
 end
