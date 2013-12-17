@@ -17,12 +17,11 @@ class Admin::VideosController < AdminController
 	def upload
 		@video = Video.find(params[:id])
 		respond_to do |format|
-			if @video.vimeo_id.blank?
+			if @video.clip.present?
 				@video.upload_to_vimeo
 				format.html {redirect_to admin_contents_url ,:notice =>"Video successfully uploaded"}
 			else
-				logger.info("entered")
-				format.html {redirect_to admin_contents_url, :notice => "Already uploaded to vimeo"}
+				format.html {redirect_to admin_contents_url, :notice => "Video file not added"}
 			end
 		end
 	end
