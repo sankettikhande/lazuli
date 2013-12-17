@@ -47,8 +47,8 @@ class Course < ActiveRecord::Base
 
   private 
   def create_associations()
-    self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
-    if self.new_record? && self.course_subscriptions.size.zero?
+    self.channel_course_permissions.build if self.channel_course_permissions.size.zero?
+    if self.course_subscriptions.size.zero?
       subscription_count = Subscription.count
       subscription_count.times do |i|
         self.course_subscriptions.build
