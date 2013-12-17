@@ -1,5 +1,6 @@
 $(document).ready(function(){
 		getChannelNames();
+		videoAccordionForm();
 		$('.course_id').live('change',function(){
 			getChannelNames();
 		})
