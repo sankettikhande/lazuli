@@ -24,6 +24,9 @@ gem 'roo'
 gem 'exception_notification'
 gem 'vimeo'
 gem "auto_build"
+gem 'delayed_job_active_record'
+gem "daemons"
+gem "delayed_job_web"
 
 group :development do
   gem 'quiet_assets'
