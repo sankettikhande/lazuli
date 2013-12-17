@@ -4,7 +4,6 @@ class Admin::CoursesController < AdminController
 		@course = Course.new
 		@channels = Channel.all
 		@course.channel_courses.build
-		@course.channel_course_permissions.build
 	end
 
 	def create
