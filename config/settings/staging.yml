@@ -10,3 +10,9 @@ oauth_apps:
   linkedin:
     app_key: "75daqaxxahxm83"
     app_secret: "1pYcj5AkWpcHqjEM"
+
+vimeo_app:
+  consumer_key: "1091dd60420bc8def93f6630540b0a6bef2fbf90"
+  consumer_secret: "e6436b8f8660eb12f0cce17d8febb2bac451fc20"
+  token: "8b3d4f3c87393475b2b6e59851628816"
+  secret: "ebba5f35653a733b0c142a93e00338b27ae797a1"

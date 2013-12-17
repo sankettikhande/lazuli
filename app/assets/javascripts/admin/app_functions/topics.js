@@ -16,7 +16,7 @@ $(document).ready(function(){
 			$.ajax({
 			    url: "/admin/courses/"+ course +"/get_channel_info.json",
 			    success: function(responseData) {
-						var item = responseData.data.channel
+						var item = responseData.data
 						$("#topic_channel_id").val(item.id)
 						$("#t-channel").val(item.name)
 			    }

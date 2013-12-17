@@ -10,3 +10,9 @@ oauth_apps:
   linkedin:
     app_key: ""
     app_secret: ""
+
+vimeo_app:
+  consumer_key: ""
+  consumer_secret: ""
+  token: ""
+  secret: ""

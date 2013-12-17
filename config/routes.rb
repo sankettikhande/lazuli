@@ -28,8 +28,12 @@ Lazuli::Application.routes.draw do
       end
     end
     resources :topics
-    resources :videos
+    resources :videos do
+      member do
+        get 'upload'
+      end
+    end
   end
-
+  get "/delayed_job" => DelayedJobWeb, :anchor => false
   root :to => "home#index"
 end
