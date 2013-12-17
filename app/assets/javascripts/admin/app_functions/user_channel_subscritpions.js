@@ -26,7 +26,7 @@ $('body').on('focus',".date-picker", function(){
         });
 
         function get_expiry_date(subscription_date, calculated_days){
-          var end_date = new Date(subscription_date.setDate(subscription_date.getDate() + calculated_days));
+          var end_date = new Date(subscription_date.setDate(subscription_date.getDate() + (calculated_days - 1)));
           end_date = (end_date.getDate() + "-" + (end_date.getMonth() + 1) + "-" + end_date.getFullYear());
           return end_date;
         }
