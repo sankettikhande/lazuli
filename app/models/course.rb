@@ -11,10 +11,10 @@ class Course < ActiveRecord::Base
   has_many :channel_courses
   has_many :channels, :through => :channel_courses
   has_many :topics, :dependent => :destroy
-  has_many :user_channel_subscriptions
-  has_many :channel_course_permissions
+  has_many :user_channel_subscriptions, :dependent => :destroy
+  has_many :channel_course_permissions, :dependent => :destroy
 
-  has_many :course_subscriptions
+  has_many :course_subscriptions, :dependent => :destroy
   has_many :subscriptions, :through => :course_subscriptions
 
   include Cacheable

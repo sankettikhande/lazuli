@@ -45,7 +45,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def destroy
-    channel = Channel.cached_find(params[:id])
+    channel = Channel.find(params[:id], :include => :courses)
     channel.destroy
     respond_to do |format|
       format.html { redirect_to admin_channels_url}   
