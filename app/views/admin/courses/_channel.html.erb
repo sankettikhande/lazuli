@@ -1,3 +1,5 @@
+<%= javascript_include_tag "utils.js"%>
+<%= javascript_include_tag "admin/app_functions/course.js"%>
 <div class="col-sm-1">
 	<label class="control-label">Channel</label>
 </div>
@@ -13,23 +15,3 @@
 <div class="col-sm-1 col-sm-offset-4">
 	<a href="#"><i class="fa fa-question-circle"></i></a>
 </div>
-
-<script>
-	getChannelType();
-	$('.channel_id').live('change',function(){
-		getChannelType();
-	});
-  function getChannelType(){
-	 	var channel = $(".channel_id :selected").val();
-		if(channel == undefined || channel == ""){
-			$("#channel_type").val("");
-		}else{
-			$.ajax({
-			    url: "/admin/channels/"+ channel +"/get_channel.json",
-			    success: function(responseData) {
-			      $("#channel_type").val(responseData.data.channel_type);
-			    }
-			})
-		}
-  }
- </script>
