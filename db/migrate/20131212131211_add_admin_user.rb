@@ -2,7 +2,7 @@ class AddAdminUser < ActiveRecord::Migration
   def up
     user = User.new(:name => "Lazuli Admin", :email => "admin@lazuli.com", :password => "password", :password_confirmation => "password")
     user.skip_confirmation!
-    if user.save
+    if user.save(:validate => false)
       user.add_role(:admin)
       user.add_role(:user)
     end
