@@ -20,3 +20,10 @@
 #accordion1 .fields{
 	margin-top: 5px;
 }
+
+/*column sorting css*/
+
+.column_sort_css {
+	text-decoration: none !important;
+	color: #E02222 !important;
+}
