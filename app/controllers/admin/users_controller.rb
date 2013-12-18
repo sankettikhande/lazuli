@@ -62,13 +62,11 @@ class Admin::UsersController < AdminController
   end 
 
   def course_subscription_types
-    if params[:id]
-      channel = Channel.find(params[:id])
-      @channel_courses = channel.try(:courses)
-      respond_to do |format|
-        format.js
-      end
-    end  
+    channel = Channel.find(params[:id], :include => :courses)
+    @channel_courses = channel.try(:courses)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def new_bulk
