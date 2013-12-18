@@ -63,7 +63,7 @@ class Admin::UsersController < AdminController
 
   def course_subscription_types
     if params[:id]
-      channel = Channel.find_by_id(params[:id])
+      channel = Channel.find(params[:id])
       @channel_courses = channel.try(:courses)
       respond_to do |format|
         format.js
