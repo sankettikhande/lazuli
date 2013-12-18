@@ -20,3 +20,10 @@
 #channel_accordion .fields{
 	margin-top: 5px;
 }
+
+/*column sorting css*/
+
+#column_sort_css {
+	text-decoration: none;
+	color: #E02222;
+}

@@ -1,6 +1,7 @@
 class Admin::UsersController < AdminController
+  
   def index
-    @users = User.all
+    @users = User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc"))
   end
 
   def new
