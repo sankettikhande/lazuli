@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-  	<a href = "topics/new" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New Topic
+  	<a href = "topics/new" class="btn btn-default btn-success pull-right" data-no-turbolink="true"><i class="fa fa-3x fa-plus"></i> Add New Topic
   	</a>
 	</div>
 </div>
@@ -13,7 +13,7 @@
 					<tr>
 				      <th>Topic Name<i class="fa fa-3x fa-filter pull-right"></i></th>
 				      <th>Course<i class="fa fa-3x fa-filter pull-right"></i></th>
-				      <th>Partner Name</th>
+				      <th>Channel Name</th>
 				      <th>Vimeo URL</th>
 				      <th>Action</th>
 					</tr>
@@ -26,7 +26,7 @@
 				      <td><%= channel_name_for_topic(topic.channel_id)  %></td>
 				      <td>http://vimeo.com/url<span></span></td>
 				      <td>
-								<a href="/admin/topics/<%=topic.id%>/edit" class="btn btn-trans" title="Edit"><i class="fa fa-edit"></i></a>
+								<a href="/admin/topics/<%=topic.id%>/edit" class="btn btn-trans" title="Edit" data-no-turbolink="true"><i class="fa fa-edit"></i></a>
 								<a href="/admin/topics/<%=topic.id%>" class="btn btn-trans" data-method="delete" data-confirm="Are you sure you want to delete?"><i class="fa fa-ban"></i></a>
 								<a href="#" class="btn btn-trans" title="Publish"><i class="fa fa-cloud-upload"></i></a>
 				      </td>

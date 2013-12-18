@@ -98,7 +98,7 @@
 							          <tr>
 							            <td><%= user_channel.course.try(:name) %></td>
 							            <td><%= user_channel.channel.try(:name) %></td>
-							            <td><%= user_channel.subscription.name %></td>
+							            <td><%= user_channel.subscription.try(:name) %></td>
 							            <td><%= user_channel.expiry_date %></td>
 							          </tr>
 							        <% end %>

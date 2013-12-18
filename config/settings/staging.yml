@@ -1,12 +1,18 @@
 oauth_apps: 
   facebook:
-    app_key: "555568701184796"
-    app_secret: "8be3e8bbf6ba33053c1635e3b38dbc43"
+    app_key: "640640085977079"
+    app_secret: "afd158e4460c02db1efdfa2ae8bc6978"
 
   google:
-    app_key: "855183869640-k0f0a48779u0mip395k7kth0ceco17sh"
-    app_secret: "bPUgQt2j5rBw_MkkxL2ij0I_"
+    app_key: "855183869640-539830634716-uomh51r7fe7u5lji382ncapg16dd4394"
+    app_secret: "SnLxuaVZiCo7tPStUT7_Jjzt"
 
   linkedin:
-    app_key: "75daqaxxahxm83"
-    app_secret: "1pYcj5AkWpcHqjEM"
+    app_key: "751cod11xsg7zl"
+    app_secret: "KvK3EUWP3dh3Kw5G"
+
+vimeo_app:
+  consumer_key: "1091dd60420bc8def93f6630540b0a6bef2fbf90"
+  consumer_secret: "e6436b8f8660eb12f0cce17d8febb2bac451fc20"
+  token: "8b3d4f3c87393475b2b6e59851628816"
+  secret: "ebba5f35653a733b0c142a93e00338b27ae797a1"

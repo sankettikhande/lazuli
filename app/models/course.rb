@@ -1,6 +1,6 @@
 class Course < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_course_permissions_attributes, :channel_courses_attributes
+  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_course_permissions_attributes, :channel_courses_attributes, :course_subscriptions_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                     :default_url => ":class/missing.gif", 
@@ -13,19 +13,23 @@ class Course < ActiveRecord::Base
   has_many :topics, :dependent => :destroy
   has_many :user_channel_subscriptions
   has_many :channel_course_permissions
-  auto_build :channel_course_permissions
+
+  has_many :course_subscriptions
+  has_many :subscriptions, :through => :course_subscriptions
 
   include Cacheable
   
   #VALIDATIONS
-  validates :name, :presence => true
+  validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
 
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
   accepts_nested_attributes_for :channel_courses, :allow_destroy => true
+  accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
   #SCOPES
   after_save :set_channel_permission
+  after_initialize :create_associations
   
   #INSTANCE METHODS
   def set_channel_permission
@@ -39,6 +43,17 @@ class Course < ActiveRecord::Base
 
   def channel
     channels.first
+  end
+
+  private 
+  def create_associations()
+    self.channel_course_permissions.build if self.channel_course_permissions.size.zero?
+    if self.course_subscriptions.size.zero?
+      subscription_count = Subscription.count
+      subscription_count.times do |i|
+        self.course_subscriptions.build
+      end
+    end
   end
 
   #CLASS METHODS

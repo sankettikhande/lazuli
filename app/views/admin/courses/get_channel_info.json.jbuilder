@@ -1,3 +1,4 @@
 json.set! :data do
-	json.channel @course.channel
+	json.id @course.channel.id
+	json.name @course.channel.name
 end
