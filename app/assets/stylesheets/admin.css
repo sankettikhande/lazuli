@@ -23,7 +23,7 @@
 
 /*column sorting css*/
 
-.column_sort_css {
-	text-decoration: none !important;
-	color: #E02222 !important;
+#column_sort_css {
+	text-decoration: none;
+	color: #E02222;
 }

@@ -14,7 +14,7 @@ module ApplicationHelper
 
   def sortable(column)
     direction = column == params[:sort_column] && params[:direction] == "desc" ? "asc" : "desc"
-    link_to '', {:sort_column => column, :direction => direction}, {:class => 'fa fa-3x fa-filter pull-right column_sort_css'}
+    link_to '', {:sort_column => column, :direction => direction}, {:class => 'fa fa-3x fa-filter pull-right', :id => 'column_sort_css'}
   end
 
 end
