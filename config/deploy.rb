@@ -1,5 +1,6 @@
 require 'bundler/capistrano'
 require 'rvm/capistrano'
+require "delayed/recipes" 
 
 set :application, "lazuli"
 set :scm, :git
@@ -18,6 +19,9 @@ before "deploy:setup", "db:configure"
 before "deploy:assets:precompile", "db:symlink"
 after  "deploy:update_code", "db:symlink"
 after "deploy:update_code", "deploy:migrate"
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
 
 task :qa do
   set :rails_env, "staging"
