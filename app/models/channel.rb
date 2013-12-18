@@ -8,9 +8,9 @@ class Channel < ActiveRecord::Base
                   :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   #ASSOCIATIONS
-  has_many :channel_courses
+  has_many :channel_courses, :dependent => :destroy
   has_many :courses, :through => :channel_courses
-  has_many :channel_course_permissions
+  has_many :channel_course_permissions, :dependent => :destroy
 
   include Cacheable
   
@@ -27,9 +27,12 @@ class Channel < ActiveRecord::Base
 
   #SCOPES
   after_save :set_channel_permission, :on => :create
+  before_destroy :remove_course_associations
 
 
   #INSTANCE METHODS
+
+  #CLASS METHODS
   def set_channel_permission
     self.courses.each do |course|
       course.channel_course_permissions.each do |permission|
@@ -39,7 +42,14 @@ class Channel < ActiveRecord::Base
     end
   end
 
-
-  #CLASS METHODS
+  def remove_course_associations
+    self.courses.each do |course|
+      course.channel_courses.destroy_all
+      course.user_channel_subscriptions.destroy_all
+      course.channel_course_permissions.destroy_all
+      course.course_subscriptions.destroy_all
+      course.destroy
+    end
+  end
   
 end
