@@ -61,9 +61,17 @@ class Admin::UsersController < AdminController
     end  
   end 
 
-  def course_subscription_types
+  def channel_courses
     channel = Channel.find(params[:id], :include => :courses)
     @channel_courses = channel.courses
+    respond_to do |format|
+      format.js
+    end
+  end  
+
+  def course_subscription_types
+    course = Course.find(params[:id], :include => :subscriptions)
+    @course_subscriptions = course.subscriptions
     respond_to do |format|
       format.js
     end

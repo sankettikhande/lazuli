@@ -9,6 +9,7 @@ Lazuli::Application.routes.draw do
     		get 'search_user'
                get 'new_bulk'
                post 'create_bulk'
+               get 'channel_courses'
                get 'course_subscription_types'
     	end
     	member do
