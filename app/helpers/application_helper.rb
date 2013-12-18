@@ -11,4 +11,10 @@ module ApplicationHelper
       content_tag(:div, errors_ul, :class => "small_alert error devise_errors")
     end
   end
+
+  def sortable(column)
+    direction = column == params[:sort_column] && params[:direction] == "desc" ? "asc" : "desc"
+    link_to '', {:sort_column => column, :direction => direction}, {:class => 'fa fa-3x fa-filter pull-right', :id => 'column_sort_css'}
+  end
+
 end

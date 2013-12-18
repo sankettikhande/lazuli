@@ -9,11 +9,11 @@
     <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
       <thead class="flip-content">
         <tr>
-            <th width='15%;'>Username<i class="fa fa-3x fa-filter pull-right"></i></th>
-            <th width='15%;'>Actual Name<i class="fa fa-3x fa-filter pull-right"></i></th>
-            <th width='18%;'>Email ID<i class="fa fa-3x fa-filter pull-right"></i></th>
-            <th width='15%;'>Contact Number<i class="fa fa-3x fa-filter pull-right"></i></th>
-            <th width='17%;'>Company Name<i class="fa fa-3x fa-filter pull-right"></i></th>
+            <th width='15%;'>Username<%= sortable "name" %></th>
+            <th width='15%;'>Actual Name<%= sortable "actual_name" %></th>
+            <th width='18%;'>Email ID<%= sortable "email" %></th>
+            <th width='15%;'>Contact Number<%= sortable "phone_number" %></th>
+            <th width='17%;'>Company Name<%= sortable "company_name" %></th>
             <th width='20%;'>Address</th>
             <th width='15%;'>Action</th>
         </tr>
