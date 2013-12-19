@@ -3,7 +3,7 @@ class Course < ActiveRecord::Base
   attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_course_permissions_attributes, :channel_courses_attributes, :course_subscriptions_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
-                    :default_url => ":class/missing.gif", 
+                    :default_url => ":class/:style/missing.gif", 
                     :path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
                     :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
