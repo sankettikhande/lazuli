@@ -684,7 +684,7 @@ var FormComponents = function () {
             return user.name;
         }
 
-        $("#select2_user_search_modal_6").select2({
+        $("#user_search_channel").select2({
             placeholder: "Search for a user",
             minimumInputLength: 1,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
