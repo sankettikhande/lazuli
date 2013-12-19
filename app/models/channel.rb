@@ -23,7 +23,7 @@ class Channel < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
 
-  accepts_nested_attributes_for :courses
+  accepts_nested_attributes_for :courses, :reject_if => :all_blank, :allow_destroy => true
 
   #SCOPES
   after_save :set_channel_permission, :on => :create

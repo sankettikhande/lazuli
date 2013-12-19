@@ -4,8 +4,10 @@
 		<div class="panel-heading">
 			<div class="panel-title">
 					<div class="row">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#channel_accordion" href="#collapse_<%= !f.options[:child_index].nil? ? f.options[:child_index] : index %>">
-						<div class="col-sm-12"><h5>Course Details</h5></div></a>
+						<a class="accordion-toggle col-sm-11" data-toggle="collapse" data-parent="#channel_accordion" href="#collapse_<%= !f.options[:child_index].nil? ? f.options[:child_index] : index %>">
+						<h5>Course Details</h5></a>
+						<%= f.link_to_remove raw("<button class='btn'><i class='fa fa-ban'></i></button>"), :class => "col-sm-1" %>
+						<%#= f.link_to_remove "", :class => "col-sm-1 fa fa-ban btn-grey remove_course" %>
 					</div>
 			</div>
 		</div>
