@@ -13,7 +13,7 @@
 		<label for="uname">Course Subscribed For</label>
 	</div>
 	<div class="col-md-3">
-	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
+	  <%= f.select 'course_id', options_for_select('', f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
 	</div>
 </div>
 
@@ -22,33 +22,32 @@
 		<label for="uname">Type of Subscription</label>
 	</div>
 	<div class="col-md-3 subscription_type">
-	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ "#{s.name}- #{s.calculated_days} days", s.id, {'data-calculated_days' => s.calculated_days} ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id' %>
+	  <%= f.select 'subscription_id', options_for_select('', f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id' %>
 	</div>
 </div>
-<div class="row form-group">
+<div class="row-align form-group">
 	<div class="col-md-3">
 		<label>Date of Subscription</label>
 	</div>
-	<div class="col-md-9 parent_div">
-		<div class="col-md-4">
+	<div class="col-md-3">
 		<div class="input-group date date-picker" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
 			<%= f.text_field 'subscription_date', :class => "form-control subscription_date" %>
 			<span class="input-group-btn">
 			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 			</span>
 		</div>
-
-		</div>
-  		<div class="col-md-2">
-    		<label>Date of Expiry</label>
-  		</div>
-		<div class="col-md-4">
+	</div>
+</div>		
+<div class="row form-group">
+  <div class="col-md-2">
+  	<label>Date of Expiry</label>
+  </div>
+	<div class="col-md-3">
 		<div class="input-group">
 			<%= f.text_field 'expiry_date', :class => "form-control expiry_date", :readonly => true %>
 			<span class="input-group-btn">
 			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 			</span>
-		</div>
 		</div>
 	</div>
 </div>
@@ -57,16 +56,14 @@
 	<div class="col-md-3">
 		<label>User Permissions</label>
 	</div>
-	<div class="col-md-9">
-		<div class="col-md-2">
-			<%= f.check_box 'permission_watch' %>Watch
-		</div>	
-		<div class="col-md-2">
-			<%= f.check_box 'permission_share' %>Share
-		</div>	
-		<div class="col-md-2">						
-			<%= f.check_box 'permission_create' %>Create
-		</div>
+	<div class="col-md-1">
+		<%= f.check_box 'permission_watch', :checked => "checked" %>Watch
+	</div>	
+	<div class="col-md-1">
+		<%= f.check_box 'permission_share' %>Share
+	</div>	
+	<div class="col-md-1">
+		<%= f.check_box 'permission_create' %>Create
 	</div>
 </div>
 
