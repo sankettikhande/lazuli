@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   attr_accessible :user_channel_subscriptions_attributes
   has_many :user_channel_subscriptions, :dependent => :destroy
   has_many :subscriptions, :through => :user_channel_subscriptions
-  validates_presence_of :name, :actual_name
+  validates_presence_of :actual_name
+  validates_presence_of :name, :message => "^User name can't be blank"
  
   include Cacheable
 
