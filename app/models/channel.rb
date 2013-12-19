@@ -27,7 +27,7 @@ class Channel < ActiveRecord::Base
 
   #SCOPES
   after_save :set_channel_permission, :on => :create
-  before_destroy :remove_course_associations
+  after_destroy :remove_course_associations
 
 
   #INSTANCE METHODS
@@ -44,10 +44,6 @@ class Channel < ActiveRecord::Base
 
   def remove_course_associations
     self.courses.each do |course|
-      course.channel_courses.destroy_all
-      course.user_channel_subscriptions.destroy_all
-      course.channel_course_permissions.destroy_all
-      course.course_subscriptions.destroy_all
       course.destroy
     end
   end
