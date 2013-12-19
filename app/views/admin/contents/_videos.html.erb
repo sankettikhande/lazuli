@@ -25,10 +25,10 @@
 				      <td><%= channel_name_for_topic(video.presence.try(:topic).presence.try(:channel_id)) %></td>
 				      <td>http://vimeo.com/url</td>
 				      <td>
-				      	<a href="/admin/videos/<%= video.id %>/edit" class="btn btn-trans" title="Edit"><i class="fa fa-edit"></i></a>
-								<a href="/admin/videos/<%= video.id %>" class="btn btn-trans" data-method="delete" data-confirm="Are you sure you want to delete?"><i class="fa fa-ban"></i></a>
+				      	<a href="/admin/videos/<%= video.id %>/edit" class="btn btn-trans" rel="tooltip" title="Edit Vedio"><i class="fa fa-edit"></i></a>
+								<a href="/admin/videos/<%= video.id %>" class="btn btn-trans" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete Vedio"><i class="fa fa-ban"></i></a>
 								<%if video.vimeo_id.blank? %>
-									<a href="/admin/videos/<%= video.id %>/upload" class="btn btn-trans" title="Publish">
+									<a href="/admin/videos/<%= video.id %>/upload" class="btn btn-trans" rel="tooltip" title="Publish Vedio">
 									<i class="fa fa-cloud-upload"></i></a>
 								<% end %>
 				      </td>

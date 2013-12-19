@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-  	<a href= "courses/new" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New Course</a>
+  	<a href= "courses/new" class="btn btn-default btn-success pull-right" rel="tooltip" title="Add New Course"><i class="fa fa-3x fa-plus"></i> Add New Course</a>
 	</div>
 </div>
 <section class="container">
@@ -24,7 +24,7 @@
 			      <td><%= course.channels.first.name if !course.channels.blank? %></td>
 			      <td>img path</td>
 			      <td>426</td>
-			      <td><a href="/admin/courses/<%=course.id%>/edit"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/courses/<%=course.id%>" data-method="delete" data-confirm="Are you sure you want to delete?"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
+			      <td><a href="/admin/courses/<%=course.id%>/edit" rel="tooltip" title="Edit Course"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/courses/<%=course.id%>" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete Course"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
 				</tr>
 				<% end %>
 			</tbody>
