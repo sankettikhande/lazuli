@@ -8,7 +8,7 @@
 					<div class="panel-title">
 							<div class="row">
 								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>">
-								<div class="col-sm-8"><h5>Navigation between Workbooks</h5></div></a>
+								<div class="col-sm-8"><h5> Video </h5></div></a>
 								<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
 								<div class="col-sm-1">
 									<%= video_form.number_field :sequence_number, :class => "form-control", :id =>"seqNum1" %>
@@ -16,7 +16,7 @@
 								</div>
 								<div class="col-sm-1 nopadding">
 									<div class="btn-group">
-										<button type="button" class="btn btn-grey"><%= video_form.link_to_remove "", :class => "fa fa-ban", :id => "video_form_remove_link" %></button>
+										<button type="button" class="btn btn-grey" rel="tooltip" title="Remove" ><%= video_form.link_to_remove "", :class => "fa fa-ban", :id => "video_form_remove_link" %></button>
 										<div class="btn-group">
 											<button type="button" class="btn btn-grey">
 											<i class="fa fa-chevron-down"></i>

@@ -32,3 +32,6 @@
 //= require jquery_nested_form
 //= require ./admin/form-components.js
 //= require ./admin/bootstrap-fileupload.js
+
+$(".tooltip").tooltip()
+$("a[rel=tooltip]").tooltip()
