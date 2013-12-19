@@ -1,6 +1,6 @@
 <div class="row">
  <div class="col-md-12 nopadding">
-          <a href="#add-user" data-toggle="modal" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New User</a>
+          <a href="#add-user" data-toggle="modal" class="btn btn-default btn-success pull-right" rel="tooltip" title="Add New User"><i class="fa fa-3x fa-plus"></i> Add New User</a>
  </div>
 </div>
 <div class="row">
@@ -27,7 +27,7 @@
             <td><%= user.phone_number %></td>
             <td><%= user.company_name %></td>
             <td><%= user.address %></td>
-            <td><a href="/admin/users/<%= user.id %>/edit"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/users/<%= user.id %>" data-method="delete" data-confirm="Are you sure you want to delete?"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
+            <td><a href="/admin/users/<%= user.id %>/edit" rel="tooltip" title="Edit User"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/users/<%= user.id %>" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete User"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
           </tr>
         <% end %>
       </tbody>
