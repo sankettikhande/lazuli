@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
                           )
   end
 
-  def self.header_attribute(header)
+  def self.header_attributes(header)
     hash = {"User Name" => "name", "Actual Name" => "actual_name", "Password" => "password","Email" => "email", "Phone Number" => "phone_number", "Address" => "address"}
     header.collect {|h| hash[h]}
   end
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     file =  user[:file]
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
-    header = header_attribute(header)
+    header = header_attributes(header)
     user_array = []
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
