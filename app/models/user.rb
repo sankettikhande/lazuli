@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
 
-
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
     return User.where("(provider = '#{oauth_raw_data.provider}' AND uid = '#{oauth_raw_data.uid}') OR email='#{oauth_user_data.email}'").first || User.create!(name:oauth_user_data.name,
                             actual_name:oauth_user_data.name,
@@ -28,11 +27,17 @@ class User < ActiveRecord::Base
                           )
   end
 
+  def self.header_attributes(header)
+    hash = {"User Name" => "name", "Actual Name" => "actual_name", "Password" => "password","Email" => "email", "Phone Number" => "phone_number", "Address" => "address"}
+    header.collect {|h| hash[h]}
+  end
+
   def self.import_users(user)
     user_channel = user[:user_channel_subscriptions_attributes]
     file =  user[:file]
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
+    header = header_attributes(header)
     user_array = []
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
