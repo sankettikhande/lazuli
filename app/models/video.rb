@@ -17,18 +17,18 @@ class Video < ActiveRecord::Base
   validates :title, :description, :presence => true
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
-  validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'filesize must be less than 500 MegaBytes'
+  validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
 
   def upload_to_vimeo
-    self.vimeo_id = VimeoLib.upload.upload(self.clip.path)["ticket"]["video_id"]
-    v = VimeoLib.video
-    v.set_description(self.vimeo_id,self.description)
-    v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
-    v.set_title(self.vimeo_id, self.title)
-    self.vimeo_data = v.get_info(self.vimeo_id)
-    self.vimeo_url = "http://vimeo.com/#{self.vimeo_id}"
-    self.save!
-    VimeoLib.album.add_video(self.topic.vimeo_album_id,self.vimeo_id) if !self.topic.vimeo_album_id.blank?
+    topic = self.topic
+    assign_vedio = []
+    topic.videos.each do |video|
+      if !video.vimeo_id
+        vedio_data = upload(video)
+        assign_vedio << vedio_data.vimeo_id
+      end
+    end
+    create_album(topic, assign_vedio) if assign_vedio.any?
   end
   handle_asynchronously :upload_to_vimeo
 
@@ -38,6 +38,28 @@ class Video < ActiveRecord::Base
 
   def remove_video_from_album
     VimeoLib.album.remove_video(self.topic.vimeo_album_id,self.vimeo_id)
+  end
+
+  def create_album(topic, assign_vedio)
+    if topic.vimeo_album_id.blank?
+      VimeoLib.album.create(topic.title, assign_vedio.first, {:description => topic.description, :videos => assign_vedio.join(",") })
+    else
+      assign_vedio.each do |vimeo_id|
+        VimeoLib.album.add_video(topic.vimeo_album_id, vimeo_id)
+      end
+    end
+  end
+
+  def upload(video)
+    video.vimeo_id = VimeoLib.upload.upload(video.clip.path)["ticket"]["video_id"]
+    v = VimeoLib.video
+    v.set_description(video.vimeo_id,video.description)
+    v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
+    v.set_title(video.vimeo_id, video.title)
+    video.vimeo_data = v.get_info(video.vimeo_id)
+    video.vimeo_url = "http://vimeo.com/#{self.vimeo_id}"
+    video.save!
+    return video
   end
 end
 
