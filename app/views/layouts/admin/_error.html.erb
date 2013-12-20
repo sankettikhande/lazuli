@@ -1,6 +1,6 @@
-<% if @channel.errors.any? %>
+<% if object.errors.any? %>
   <ul style='color: red;padding-left:15px;'>
-    <% @channel.errors.full_messages.each do |msg| %>
+    <% object.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
   </ul>

@@ -11,6 +11,7 @@
 			<thead class="flip-content">
 				<tr>
 			      <th>Course<i class="fa fa-3x fa-filter pull-right"></i></th>
+			      <th>Trainer Name</th>
 			      <th>Channel Name</th>
 			      <th>&nbsp;</th>
 			      <th>Number of Users</th>
@@ -19,13 +20,14 @@
 			</thead>
 			<tbody>
 				<% @courses.each do |course| %>
-				<tr>
-				  <td><%= course.name %></td>
+					<tr>
+				  	<td><%= course.name %></td>
+				  	<td><%= course.trainer_name %></td>
 			      <td><%= course.channels.first.name if !course.channels.blank? %></td>
-			      <td>img path</td>
+			      <td> <%= image_tag(course.image(:thumb)) %></td>
 			      <td>426</td>
 			      <td><a href="/admin/courses/<%=course.id%>/edit" rel="tooltip" title="Edit Course"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/courses/<%=course.id%>" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete Course"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
-				</tr>
+					</tr>
 				<% end %>
 			</tbody>
 		</table>

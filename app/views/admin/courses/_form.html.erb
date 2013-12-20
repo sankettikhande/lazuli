@@ -1,5 +1,5 @@
 <%= nested_form_for [:admin , @course] do |f| %>
-<%= errors_for @course unless @course.errors.blank? %> 
+<%= render '/layouts/admin/error', :object => @course %>
 <div class="form-group">
 	<div class="row">
 		<div class="col-sm-12">

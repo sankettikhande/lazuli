@@ -3,7 +3,7 @@ class Channel < ActiveRecord::Base
   # attr_accessible :courses_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
-                  :default_url => ":class/missing.gif", 
+                  :default_url => ":class/:style/missing.gif", 
                   :path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
                   :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
@@ -18,8 +18,9 @@ class Channel < ActiveRecord::Base
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
 
   #VALIDATIONS
-  validates :name, :company_name, :company_number, :presence => true
-  validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :presence => true
+  validates :name, :company_name, :company_number, :email, :presence => true
+  validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
+  validates :admin_user_id, :presence => {:message => "actual name can't be blank."}
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
 
