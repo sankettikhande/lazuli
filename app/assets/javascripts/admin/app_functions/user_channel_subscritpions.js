@@ -18,7 +18,7 @@ $('body').on('focus',".date-picker", function(){
            startDate: new Date(),
            autoclose: true
          }).on('changeDate',function(ev){
-         var date_id = $(this).closest(".parent_div").find(".expiry_date").attr('id');
+         var date_id = $(this).closest(".form-group").next().find(".expiry_date").attr('id');
          var subscription_id = $(this).closest(".form-group").prev().find(".subscriptions_id").attr('id');
          var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
          var expiry_date = get_expiry_date(ev.date, calculated_days)
