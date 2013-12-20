@@ -57,13 +57,13 @@
 		<label>User Permissions</label>
 	</div>
 	<div class="col-md-1">
-		<%= f.check_box 'permission_watch', :checked => "checked" %>Watch
+		<%= f.check_box 'permission_watch', :checked => "checked" %><label>Watch</label>
 	</div>	
 	<div class="col-md-1">
-		<%= f.check_box 'permission_share' %>Share
+		<%= f.check_box 'permission_share' %><label>Share</label>
 	</div>	
-	<div class="col-md-1">
-		<%= f.check_box 'permission_create' %>Create
+	<div class="col-md-2">
+		<%= f.check_box 'permission_create' %><label>Create</label>
 	</div>
 </div>
 
