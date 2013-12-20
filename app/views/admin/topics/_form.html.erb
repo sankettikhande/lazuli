@@ -1,7 +1,7 @@
 <%= javascript_include_tag "utils.js"%>
 <%= javascript_include_tag "admin/app_functions/topics.js"%>
 <%= nested_form_for [:admin , @topic] do |f| %>
-<%= render '/layouts/admin/error', :object => @topic %>
+<%= errors_for @topic unless @topic.errors.blank? %>
 	<div class="form-group">
 		<div class="panel panel-default">
 			<div class="panel-body seperator5">
