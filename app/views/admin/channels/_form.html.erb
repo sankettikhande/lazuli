@@ -1,6 +1,6 @@
 <%= javascript_include_tag "admin/app_functions/channel.js"%>
 <%= nested_form_for [:admin, @channel], :html => { :multipart => true } do |f| %>
-	<%= render '/layouts/admin/error', :object => @channel %>
+	<%= errors_for @channel unless @channel.errors.blank? %>
 	<section class="container">
 		<div class="form-group">
 			<div class="panel panel-default">
