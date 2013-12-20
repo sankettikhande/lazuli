@@ -9,6 +9,7 @@ class Admin::TopicsController < AdminController
 	def create
 		@topic = Topic.new(params[:topic])
 		if @topic.save
+			upload_video(@topic)
 			redirect_to "#{admin_contents_url}#topics"
 		else
 			@courses = Course.all
@@ -25,6 +26,7 @@ class Admin::TopicsController < AdminController
 		@topic = Topic.find_by_id(params[:id])
 		respond_to do |format|
 			if @topic.update_attributes(params[:topic])
+				upload_video(@topic)
 				format.html {redirect_to "#{admin_contents_url}#topics"}
 			else
 				@courses = Course.all
@@ -38,6 +40,14 @@ class Admin::TopicsController < AdminController
 		@topic.destroy
 		respond_to do |format|
 			format.html {redirect_to "#{admin_contents_url}#topics"}
+		end
+	end
+
+	private
+
+	def upload_video(topic)
+		topic.videos.each do |video|
+			video.upload_to_vimeo
 		end
 	end
 end

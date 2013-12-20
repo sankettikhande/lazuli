@@ -26,6 +26,7 @@ class Video < ActiveRecord::Base
     v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
     v.set_title(self.vimeo_id, self.title)
     self.vimeo_data = v.get_info(self.vimeo_id)
+    self.vimeo_url = "http://vimeo.com/#{self.vimeo_id}"
     self.save!
     VimeoLib.album.add_video(self.topic.vimeo_album_id,self.vimeo_id) if !self.topic.vimeo_album_id.blank?
   end

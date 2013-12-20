@@ -16,3 +16,4 @@ vimeo_app:
   consumer_secret: "e6436b8f8660eb12f0cce17d8febb2bac451fc20"
   token: "8b3d4f3c87393475b2b6e59851628816"
   secret: "ebba5f35653a733b0c142a93e00338b27ae797a1"
+  album_id: "2656837"

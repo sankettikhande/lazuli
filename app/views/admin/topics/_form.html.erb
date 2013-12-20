@@ -20,6 +20,7 @@
 					</div>
 					<div class="col-sm-3">
 						<%= f.text_field 'title', :class => "form-control"%>
+						<%= f.hidden_field 'vimeo_album_id', :value => Settings.vimeo_app.album_id %>
 					</div>
 					<div class="col-sm-1 col-sm-offset-2">
 						<label class="control-label" for="t-course">Course</label>
