@@ -1,13 +1,8 @@
-<div class="col-sm-2">
+<div class="col-sm-2" style='width:15.2%'>
 	<label class="control-label">Permissions</label>
 </div>
 <div class="col-sm-4">
-	<div class="checkbox-list">
-		<%= f.check_box :permission_watch %>
-		<label class="checkbox-inline"> Watch </label>
-		<%= f.check_box :permission_create %>
-		<label class="checkbox-inline"> Create</label>
-		<%= f.check_box :permission_share %>
-		<label class="checkbox-inline"> Share </label>
-	</div>
+	<div class="col-sm-4"><label><%= f.check_box :permission_watch, :checked => 'checked' %> Watch </label></div>
+	<div class="col-sm-4"><label><%= f.check_box :permission_create %> Create </label></div>
+	<div class="col-sm-4"><label><%= f.check_box :permission_share %> Share </label ></div>
 </div>
