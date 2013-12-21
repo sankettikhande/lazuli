@@ -1,0 +1,148 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+<!--          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".header-menu">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> -->
+          <a class="navbar-brand nospace" href="index.html"><img src="/assets/frontend/lazuli-logo.png" alt="Lazuli" class="img-responsive center-block"></a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right hidden-xs header-menu">
+          <ul class="nav navbar-nav">
+            <% if user_signed_in? %>
+              <li>
+                <%= link_to "Admin Panel", admin_url, :data => {"no-turbolink" => true} if current_user.is_admin? %>
+              </li>
+              <li>
+                <%= link_to 'Sign Out', destroy_user_session_path(), :method => :delete %></p>
+              </li>
+
+            <% else %>
+            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-sign-in"></i> Login</a>
+              <div class="dropdown-menu hold-on-click login-box">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="seperator15"></div>
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <ul class="social-id">
+                          <li>
+                            <button type="button" class="btn btn-primary facebook btn-block">Signin with Facebook</button></li>
+                          <li>
+                            <button type="button" class="btn btn-danger googleplus btn-block">Signin with Google+</button>
+                          </li>
+                          <li>
+                            <button type="button" class="btn btn-primary linkedin btn-block">Signin with Linkedin</button>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-sm-7">
+                        <form method="post" action="#" class="form-group ">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="hidden-xs" for="u-email-id">Username or Email address</label>
+                              <input type="email" class="form-control" id="u-email-id" placeholder="Enter Username or Email Address">
+                          </div>
+                        </div>
+                        <div class="seperator10"></div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                              <label class="hidden-xs" for="u-pswd">Password</label>
+                              <input type="password" class="form-control" id="u-pswd" placeholder="Password">
+                          </div>
+                        </div>
+                        <div class="seperator5"></div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                                          <label class="checkbox-inline"><input type="checkbox" id="checkbox1" value="remember"> Remember me</label>
+                          </div>
+                          <div class="col-sm-6">
+                            <label class="checkbox-inline"><input type="checkbox" id="checkbox2" value="logged"> Keep me logged in</label>
+                          </div>
+                        </div>
+                        <div class="seperator10"></div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success btn-block">Login</button>
+                          </div>
+                        </div>
+                        <div class="seperator10"></div>
+                        <div class="row">
+                          <div class="col-sm-12 text-right">
+                            <a href="#">Can't Login ?</a>
+                          </div>
+                        </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"><i class="fa fa-pencil-square-o"></i> Signup</a>
+              <div class="dropdown-menu hold-on-click signup-box">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="seperator15"></div>
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <ul class="social-id">
+                          <li>
+                            <button type="button" class="btn btn-primary facebook btn-block">Signup with Facebook</button></li>
+                          <li>
+                            <button type="button" class="btn btn-danger googleplus btn-block">Signup with Google+</button>
+                          </li>
+                          <li>
+                            <button type="button" class="btn btn-primary linkedin btn-block">Signup with Linkedin</button>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="col-sm-7">
+                        <form method="post" action="#" class="form-group ">
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="hidden-xs" for="u-name">Full Name</label>
+                              <input type="text" class="form-control" id="u-name" placeholder="Enter your Full Name">
+                          </div>
+                        </div>
+                        <div class="seperator10"></div>
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <label class="hidden-xs" for="u-email">Email Address</label>
+                              <input type="email" class="form-control" id="u-email" placeholder="Enter valid Email Address">
+                          </div>
+                        </div>
+                        <div class="seperator10"></div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                              <label class="hidden-xs" for="u-pswd">Password</label>
+                              <input type="password" class="form-control" id="u-pswd" placeholder="Strong Password">
+                          </div>
+                        </div>
+                        <div class="seperator10"></div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                              <label class="hidden-xs" for="u-confpswd">Confirm Password</label>
+                              <input type="password" class="form-control" id="u-confpswd" placeholder="Confirm Password">
+                          </div>
+                        </div>
+                        <div class="seperator10"></div>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success btn-block">Signup</button>
+                          </div>
+                        </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
