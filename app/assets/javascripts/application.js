@@ -14,4 +14,6 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require ./admin/jquery-ui-1.10.3.custom.min.js
 //= require_tree .
+
