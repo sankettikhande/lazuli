@@ -1,6 +1,8 @@
 class Course < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_course_permissions_attributes, :channel_courses_attributes, :course_subscriptions_attributes
+  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, 
+                  :channel_course_permissions_attributes, :channel_courses_attributes, 
+                  :course_subscriptions_attributes, :subscription_ids
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                     :default_url => ":class/:style/missing.gif", 
@@ -48,12 +50,6 @@ class Course < ActiveRecord::Base
   private 
   def create_associations()
     self.channel_course_permissions.build if self.channel_course_permissions.size.zero?
-    if self.course_subscriptions.size.zero?
-      subscription_count = Subscription.count
-      subscription_count.times do |i|
-        self.course_subscriptions.build
-      end
-    end
   end
 
   #CLASS METHODS
