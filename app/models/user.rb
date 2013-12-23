@@ -13,10 +13,21 @@ class User < ActiveRecord::Base
   has_many :subscriptions, :through => :user_channel_subscriptions
   validates_presence_of :actual_name
   validates_presence_of :name, :message => "^User name can't be blank"
- 
+  
   include Cacheable
 
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
+
+  after_create :add_user_role
+
+  def confirm_status
+    self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
+  end
+
+  
+  def add_user_role
+    add_role(:user) if roles.blank?
+  end
 
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
     return User.where("(provider = '#{oauth_raw_data.provider}' AND uid = '#{oauth_raw_data.uid}') OR email='#{oauth_user_data.email}'").first || User.create!(name:oauth_user_data.name,
@@ -69,10 +80,6 @@ class User < ActiveRecord::Base
       errors.push("Invalid file type: #{bulksheet.original_filename}. File format should be '.xls' or '.xlsx'.") if !(file_extension == ".xls" || file_extension == ".xlsx")
     end
     errors
-  end
-
-  def confirm_status
-    self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
   end
 
 end
