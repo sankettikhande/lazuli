@@ -20,11 +20,11 @@ class Admin::CoursesController < AdminController
 
 	def edit
 		@channels = Channel.all
-		@course = Course.find_by_id(params[:id])
+		@course = Course.cached_find(params[:id])
 	end
 
 	def update
-		@course = Course.find_by_id(params[:id])
+		@course = Course.cached_find(params[:id])
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
 				format.html {redirect_to "#{admin_contents_url}#courses"}
@@ -36,7 +36,7 @@ class Admin::CoursesController < AdminController
 	end
 
 	def destroy
-		@course = Course.find_by_id(params[:id])
+		@course = Course.cached_find(params[:id])
 		@course.destroy
 		respond_to do |format|
 			format.html {redirect_to "#{admin_contents_url}#courses"}
@@ -44,7 +44,7 @@ class Admin::CoursesController < AdminController
 	end
 
 	def get_channel_info
-		@course = Course.find_by_id(params[:id], :include => :channels)
+		@course = Course.find(params[:id], :include => :channels)
 		respond_to do |format|
 			format.json{}
 		end
