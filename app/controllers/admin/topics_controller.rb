@@ -19,11 +19,11 @@ class Admin::TopicsController < AdminController
 
 	def edit
 		@courses = Course.all
-		@topic = Topic.find_by_id(params[:id])
+		@topic = Topic.cached_find(params[:id])
 	end
 
 	def update
-		@topic = Topic.find_by_id(params[:id])
+		@topic = Topic.cached_find(params[:id])
 		respond_to do |format|
 			if @topic.update_attributes(params[:topic])
 				@topic.videos.first.upload_to_vimeo
@@ -36,7 +36,7 @@ class Admin::TopicsController < AdminController
 	end
 
 	def destroy
-		@topic = Topic.find_by_id(params[:id])
+		@topic = Topic.cached_find(params[:id])
 		@topic.destroy
 		respond_to do |format|
 			format.html {redirect_to "#{admin_contents_url}#topics"}

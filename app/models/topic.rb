@@ -4,6 +4,8 @@ class Topic < ActiveRecord::Base
   has_many :videos, :dependent => :destroy
   accepts_nested_attributes_for :videos, :allow_destroy => true
 
+  include Cacheable
+
   validates :course_id, :presence => true
   validates_presence_of :title ,:message => "^Topic can't be blank"
 end

@@ -23,12 +23,12 @@ class Admin::UsersController < AdminController
   end	
 
   def edit
-    @user = User.find_by_id(params[:id])
+    @user = User.cached_find(params[:id])
     @user_channel = @user.user_channel_subscriptions
   end 
 
   def update
-    @user = User.find_by_id(params[:id])
+    @user = User.cached_find(params[:id])
     params[:user].delete('password') if params[:user][:password].blank?
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -41,7 +41,7 @@ class Admin::UsersController < AdminController
   end   
 
   def destroy
-    user = User.find_by_id(params[:id])
+    user = User.cached_find(params[:id])
     user.destroy
     respond_to do |format|
       format.html { redirect_to admin_users_url}   
@@ -56,7 +56,7 @@ class Admin::UsersController < AdminController
   end
 
   def get_user
-    @user = User.find_by_id(params[:id])
+    @user = User.cached_find(params[:id])
     respond_to do |format|
       format.json {}   
     end  
