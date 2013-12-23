@@ -28,7 +28,7 @@ class Admin::CoursesController < AdminController
 
 	def update
 		set_initialization
-		@course = Course.find(params[:id])
+		@course = Course.cached_find(params[:id])
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
 				format.html {redirect_to "#{admin_contents_url}#courses"}

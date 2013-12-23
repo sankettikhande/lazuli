@@ -16,4 +16,3 @@ vimeo_app:
   consumer_secret: ""
   token: ""
   secret: ""
-  album_id: ""
