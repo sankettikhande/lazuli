@@ -25,6 +25,7 @@ class Course < ActiveRecord::Base
   validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
+  validate :course_name
 
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
   accepts_nested_attributes_for :channel_courses, :allow_destroy => true
@@ -45,6 +46,13 @@ class Course < ActiveRecord::Base
 
   def channel
     channels.first
+  end
+
+  def course_name
+    c_courses = channel_courses.first.channel.courses.to_a
+    c_courses.delete(self)
+    channel_course_names = c_courses.map(&:name)
+    errors.add(:base, "Course name must be uniq") if channel_course_names.include? self.name
   end
 
   private 
