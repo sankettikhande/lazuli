@@ -71,4 +71,8 @@ class User < ActiveRecord::Base
     errors
   end
 
+  def confirm_status
+    self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
+  end
+
 end
