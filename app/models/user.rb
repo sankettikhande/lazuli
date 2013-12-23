@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
   end
 
+  
+  def add_user_role
+    add_role(:user) if roles.blank?
+  end
+
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
     return User.where("(provider = '#{oauth_raw_data.provider}' AND uid = '#{oauth_raw_data.uid}') OR email='#{oauth_user_data.email}'").first || User.create!(name:oauth_user_data.name,
                             actual_name:oauth_user_data.name,
@@ -75,10 +80,6 @@ class User < ActiveRecord::Base
       errors.push("Invalid file type: #{bulksheet.original_filename}. File format should be '.xls' or '.xlsx'.") if !(file_extension == ".xls" || file_extension == ".xlsx")
     end
     errors
-  end
-
-  def add_user_role
-    add_role(:user) if roles.blank?
   end
 
 end
