@@ -18,7 +18,7 @@ module ApplicationHelper
   end
 
   def lazuli_button_to(title, href, options={})
-    classes = "btn btn-primary btn-block #{options[:class]}"
+    classes = "btn btn-block #{options[:class]}"
     content_tag(:button, :type => "button", :class => classes ) do
       title
     end
