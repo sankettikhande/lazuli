@@ -1,6 +1,7 @@
 include VimeoLib
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
+  serialize :vimeo_data
   attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url
   belongs_to :topic
   acts_as_taggable
@@ -59,11 +60,15 @@ class Video < ActiveRecord::Base
     v.set_description(video.vimeo_id,video.description)
     v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
     v.set_title(video.vimeo_id, video.title)
-    video_data = Hashie::Mash.new(v.get_info(video.vimeo_id))
-    video.vimeo_url = video_data.video.first.urls.url.first._content if video_data
-    video.vimeo_data = video_data.to_json
+    vimeo_data = v.get_info(video.vimeo_id)
+    video.vimeo_data = vimeo_data
+    video.vimeo_url = hashie_get_info(vimeo_data).video.first.urls.url.first._content if vimeo_data
     video.save!
     return video
+  end
+
+  def hashie_get_info(vimeo_data)
+    Hashie::Mash.new(vimeo_data)
   end
 end
 
