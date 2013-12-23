@@ -1,0 +1,13 @@
+<div class="col-sm-2">
+	<label class="control-label"> Available Subscription: </label>
+</div>
+<div class="col-sm-10">
+	<div class="checkbox-list">
+		<% @subscriptions.each_with_index do |subscription, subs_index|%>
+			<div class="col-sm-5">
+				<%= check_box_tag "course[subscription_ids][]", subscription.id, f.object.subscription_ids.include?(subscription.id) %><%= subscription.name %>				
+			</div>
+		<% end %>
+	</div>
+</div>
+<div class="seperator10"></div>
