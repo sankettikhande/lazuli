@@ -1,12 +1,14 @@
 class Admin::CoursesController < AdminController
 
 	def new
+		set_initialization
 		@course = Course.new
 		@channels = Channel.all
 		@course.channel_courses.build
 	end
 
 	def create
+		set_initialization
 		@course = Course.new(params[:course])
 		respond_to do |format|
 			if @course.save
@@ -19,11 +21,13 @@ class Admin::CoursesController < AdminController
 	end
 
 	def edit
+		set_initialization
 		@channels = Channel.all
 		@course = Course.cached_find(params[:id])
 	end
 
 	def update
+		set_initialization
 		@course = Course.cached_find(params[:id])
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
@@ -49,5 +53,10 @@ class Admin::CoursesController < AdminController
 			format.json{}
 		end
 	end
+
+	private
+  def set_initialization
+    @subscriptions = Subscription.all
+  end
 
 end

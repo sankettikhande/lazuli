@@ -1,7 +1,7 @@
 include VimeoLib
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data
+  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url
   belongs_to :topic
   acts_as_taggable
 
@@ -18,6 +18,7 @@ class Video < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
+  validates_uniqueness_of :title, :scope => :topic_id
 
   def upload_to_vimeo
     topic = self.topic
@@ -42,7 +43,9 @@ class Video < ActiveRecord::Base
 
   def create_album(topic, assign_vedio)
     if topic.vimeo_album_id.blank?
-      VimeoLib.album.create(topic.title, assign_vedio.first, {:description => topic.description, :videos => assign_vedio.join(",") })
+      album = VimeoLib.album.create(topic.title, assign_vedio.first, {:description => topic.description, :videos => assign_vedio.join(",") })
+      topic.vimeo_album_id = album['album'].first['id']
+      topic.save
     else
       assign_vedio.each do |vimeo_id|
         VimeoLib.album.add_video(topic.vimeo_album_id, vimeo_id)
@@ -56,8 +59,9 @@ class Video < ActiveRecord::Base
     v.set_description(video.vimeo_id,video.description)
     v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
     v.set_title(video.vimeo_id, video.title)
-    video.vimeo_data = v.get_info(video.vimeo_id)
-    video.vimeo_url = "http://vimeo.com/#{self.vimeo_id}"
+    video_data = v.get_info(video.vimeo_id)
+    video.vimeo_url = video_data["video"].first['urls']['url'].first['_content'] if video_data
+    video.vimeo_data = video_data.to_json
     video.save!
     return video
   end

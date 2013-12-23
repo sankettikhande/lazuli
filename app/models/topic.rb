@@ -8,6 +8,7 @@ class Topic < ActiveRecord::Base
 
   validates :course_id, :presence => true
   validates_presence_of :title ,:message => "^Topic can't be blank"
+  validates_uniqueness_of :title, :scope => [:course_id, :channel_id]
 end
 
 def add_to_vimeo_album
