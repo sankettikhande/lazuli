@@ -59,8 +59,8 @@ class Video < ActiveRecord::Base
     v.set_description(video.vimeo_id,video.description)
     v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
     v.set_title(video.vimeo_id, video.title)
-    video_data = v.get_info(video.vimeo_id)
-    video.vimeo_url = video_data["video"].first['urls']['url'].first['_content'] if video_data
+    video_data = Hashie::Mash.new(v.get_info(video.vimeo_id))
+    video.vimeo_url = video_data.video.first.urls.url.first._content if video_data
     video.vimeo_data = video_data.to_json
     video.save!
     return video
