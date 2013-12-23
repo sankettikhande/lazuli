@@ -17,4 +17,11 @@ module ApplicationHelper
     link_to '', {:sort_column => column, :direction => direction}, {:class => 'fa fa-3x fa-filter pull-right', :id => 'column_sort_css'}
   end
 
+  def lazuli_button_to(title, href, options={})
+    classes = "btn btn-primary btn-block #{options[:class]}"
+    content_tag(:button, :type => "button", :class => classes ) do
+      title
+    end
+  end
+
 end
