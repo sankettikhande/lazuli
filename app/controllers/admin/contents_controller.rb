@@ -1,7 +1,7 @@
 class Admin::ContentsController < AdminController
 	def index
-		@videos = Video.all
-		@courses = Course.all
-		@topics = Topic.all
+		@videos = Video.order((params[:sort_column] || "title") + " " + (params[:direction] || "asc")).page(params[:page]).per(5)
+		@courses = Course.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page]).per(5)
+		@topics = Topic.order((params[:sort_column] || "title") + " " + (params[:direction] || "asc")).page(params[:page]).per(5)
 	end
 end
