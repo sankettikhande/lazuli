@@ -219,7 +219,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html, :js]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -237,7 +237,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-
+  
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
   # is mountable, there are some extra configurations to be taken into account.
