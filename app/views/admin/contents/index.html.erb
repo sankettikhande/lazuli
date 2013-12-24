@@ -1,19 +1,20 @@
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#videos">Videos</a></li>
-  <li><a data-toggle="tab" href="#topics">Topics</a></li>
-  <li><a data-toggle="tab" href="#courses">Courses</a></li>
+<%= javascript_include_tag "admin/app_functions/content.js"%>
+<ul class="nav nav-tabs" id="content_tabs">
+  <li class="active"><a data-toggle="tab" href="#videos" id="videos_tab">Videos</a></li>
+  <li><a data-toggle="tab" href="#topics" id="topics_tab">Topics</a></li>
+  <li><a data-toggle="tab" href="#courses" id="courses_tab">Courses</a></li>
 </ul>
 <div class="tab-content">
 	<% if flash[:notice] %>
     <div id="notice"><%= flash[:notice] %></div>
 	<% end %>
 	<div class="tab-pane fade active in" id="videos">
-		<%= render 'videos' %>
+		<%#= render 'videos' %>
 	</div>
 	<div class="tab-pane fade" id="topics">
-    <%= render 'topics' %>
+		<%#= render 'topics' %>
 	</div>
 	<div class="tab-pane fade" id="courses">
-    <%= render 'courses' %>
+		<%#= render 'courses' %>
 	</div>
 </div>
