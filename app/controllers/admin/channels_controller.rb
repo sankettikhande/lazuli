@@ -1,6 +1,6 @@
 class Admin::ChannelsController < AdminController
   def index
-    @channels = Channel.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page]).per(10)
+    @channels = Channel.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page])
   end
 
   def new
