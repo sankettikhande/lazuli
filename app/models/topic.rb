@@ -9,6 +9,14 @@ class Topic < ActiveRecord::Base
   validates :course_id, :presence => true
   validates_presence_of :title ,:message => "^Topic can't be blank"
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id]
+  validate :check_uniqueness_of_title
+
+   def check_uniqueness_of_title
+    video_titles = videos.map(&:title)
+    if(video_titles.length != video_titles.uniq.length)
+      errors.add(:base, 'Video title must be unique')
+    end 
+  end
 end
 
 def add_to_vimeo_album
