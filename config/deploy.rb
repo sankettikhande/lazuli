@@ -1,11 +1,13 @@
 require 'bundler/capistrano'
 require 'rvm/capistrano'
 require "delayed/recipes"
+require 'thinking_sphinx/capistrano'
 
 load "config/recipes/requirements"
 load "config/recipes/db"
 load "config/recipes/rvm"
 load "config/recipes/passenger"
+load "config/recipes/sphinx"
 
 set :application, "lazuli"
 set :scm, :git
@@ -17,8 +19,6 @@ set :keep_releases, 3
 
 set :precompile_only_if_changed, true
 set :rvm_type, :user
-
-set :app_requirements, ['mysql', 'sphinx']
 
 default_run_options[:pty] = true 
 
