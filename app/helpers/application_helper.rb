@@ -1,5 +1,17 @@
 module ApplicationHelper
-	def errors_for resource
+	def resource_name
+    :user
+  end
+ 
+  def resource
+    @resource ||= User.new
+  end
+ 
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+  
+  def errors_for resource
     error_message_tag resource.errors.full_messages
   end
 
@@ -19,7 +31,7 @@ module ApplicationHelper
 
   def lazuli_button_to(title, href, options={})
     classes = "btn btn-block #{options[:class]}"
-    content_tag(:button, :type => "button", :class => classes ) do
+    content_tag(:button, :type => "button", :data =>{:href => href}, :class => classes ) do
       title
     end
   end
