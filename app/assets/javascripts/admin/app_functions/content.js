@@ -17,14 +17,25 @@ $(document).ready(function(){
 	    url: "/admin/contents/get_courses"
 	  });
 	}
-	$("#topics_tab").click(function(){
-		load_topics();
-	});
-	$("#courses_tab").click(function(){
-		load_courses();
-	});
-	$("#videos_tab").click(function(){
-		load_videos();
-	});
-	load_videos();
+
+	function load_content(divid){
+		if(divid == "topics"){
+			load_topics();
+    }else if (divid == "courses"){
+    	load_courses();
+    }else{
+    	load_videos();
+    }
+	}
+
+	$('.nav-tabs').bind('click', function (e) {
+    var now_tab = e.target // activated tab
+    // get the div's id
+    var divid = $(now_tab).attr('href').substr(1);
+    load_content(divid)
+  });
+
+	url = window.location.href
+	url_split = url.split("#")
+	load_content(url_split[1]);
 });
