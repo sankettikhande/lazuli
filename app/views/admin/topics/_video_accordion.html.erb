@@ -2,8 +2,8 @@
 <div class="portlet-body">
 	<div class="panel-group accordion" id="accordion1">
 		<% index = 0 %>
-		<%= f.fields_for :videos do |video_form| %> 
-			<div class="panel panel-default">
+		<%= f.fields_for :videos, :wrapper => false do |video_form| %> 
+			<div class="panel panel-default fields">
 				<div class="panel-heading">
 					<div class="panel-title">
 							<div class="row">
