@@ -1,6 +1,7 @@
 class Admin::ChannelsController < AdminController
   def index
-    @channels = Channel.cached_all
+    User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc"))
+    @channels = Channel.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page]).per(10)
   end
 
   def new
