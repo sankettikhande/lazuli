@@ -1,0 +1,41 @@
+<div class="modal fade" id="video-modal" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			</div>
+			<div class="modal-body">
+				<a href="<%= f.object.videos.first.clip.url %>" style="display:block;width:537px;height:250px;" id="player"> </a>
+				<label id="bookmark"></label>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn blue">Add Bookmark</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+	
+<script>
+	flowplayer("player", "/assets/swf/flowplayer-3.2.18.swf", {
+    // a clip object
+    clip: {
+        // a clip event is defined inside clip object
+        onStart: function() {
+            // alert("clip started");
+        }
+    },
+ 
+    // player events are defined directly to "root" (not inside a clip)
+    onBeforePause: function(event) {
+    	// console.log(flowplayer("player").getTime());
+    	$("#bookmark").append("</br> Pause: " + flowplayer("player").getTime())
+    },
+    onSeek: function(event){
+    	$("#bookmark").append("</br> Seek: " + flowplayer("player").getTime())
+    }
+
+	});
+</script>
