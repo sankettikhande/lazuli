@@ -6,19 +6,26 @@
 			</div>
 			<div class="modal-body">
 				<a href="<%= f.object.videos.first.clip.url %>" style="display:block;width:537px;height:250px;" id="player"> </a>
-				<label id="bookmark"></label>
+				<br/>
+				<%= render 'bookmark_form', :f => f %>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn blue">Add Bookmark</button>
+				<button type="button" class="btn blue" onclick="$('#bookmark_form').submit();">Add Bookmark</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-	
+
 <script>
+
+	function add_bookmark(value){
+		var text = "<tr><td><input type='text' size='30' name='bookmark[]time' id='time' value='" + value +"' class='form-control'></td><td><input type='text' size='30' name='bookmark[]description' id='description' class='form-control'></td><td><a onclick='$(this).parent().parent().hide();javascript:void(0)' class='link'>Remove</a><td></tr>"
+		$("#bookmark table").append(text);
+	}
+
 	flowplayer("player", "/assets/swf/flowplayer-3.2.18.swf", {
     // a clip object
     clip: {
@@ -31,10 +38,10 @@
     // player events are defined directly to "root" (not inside a clip)
     onBeforePause: function(event) {
     	// console.log(flowplayer("player").getTime());
-    	$("#bookmark").append("</br> Pause: " + flowplayer("player").getTime())
+    	add_bookmark(flowplayer("player").getTime());
     },
     onSeek: function(event){
-    	$("#bookmark").append("</br> Seek: " + flowplayer("player").getTime())
+    	add_bookmark(flowplayer("player").getTime());
     }
 
 	});

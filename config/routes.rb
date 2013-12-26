@@ -34,7 +34,11 @@ Lazuli::Application.routes.draw do
         get 'get_channel_info'
       end
     end
-    resources :topics
+    resources :topics do
+      collection do
+        post 'bookmark'
+      end
+    end
     resources :videos do
       member do
         get 'upload'
