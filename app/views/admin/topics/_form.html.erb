@@ -2,6 +2,9 @@
 <%= javascript_include_tag "admin/app_functions/topics.js"%>
 <%= nested_form_for [:admin , @topic] do |f| %>
 <%= errors_for @topic unless @topic.errors.blank? %>
+	<% if flash[:notice] -%>
+	  <p class='notice'><%=h flash[:notice] %></p>
+	<% end -%>
 	<div class="form-group">
 		<div class="panel panel-default">
 			<div class="panel-body seperator5">
@@ -77,10 +80,12 @@
 				</div>
 				<div class="seperator5"></div>
 				<div class="row">
-					<div class="col-sm-12">
-						<button type="submit" class="btn green" value="Save">Save</button>
-					</div>
-				</div>
+  				<div class="col-md-12">
+  					<button type="submit" class="btn blue" value="Publish" name="SavePub">Save and Publish</button>
+  					<button type="submit" class="btn green" value="Save" name="Save">Save</button>
+  					<button type="submit" class="btn purple" value="Publish" name="Publish">Publish</button>
+  				</div>
+  			</div>
 			</div>
 		</div>
 	</div>
