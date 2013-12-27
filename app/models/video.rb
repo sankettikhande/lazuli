@@ -58,7 +58,7 @@ class Video < ActiveRecord::Base
   def upload(video)
     video.vimeo_id = VimeoLib.upload.upload(video.clip.path)["ticket"]["video_id"]
     v = VimeoLib.video
-    v.set_description(video.vimeo_id,video.description)
+    v.set_description(video.vimeo_id,video.description_text)
     v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
     v.set_title(video.vimeo_id, video.title)
     vimeo_data = v.get_info(video.vimeo_id)
@@ -70,6 +70,15 @@ class Video < ActiveRecord::Base
 
   def hashie_get_info(vimeo_data)
     Hashie::Mash.new(vimeo_data)
+  end
+
+  def description_text
+    text = []
+    desc = self.bookmark ? JSON.parse(self.bookmark) : {}
+    desc.each do |desc_text|
+      text << "#{desc_text['description']} #{desc_text['time']}"
+    end
+    "#{self.description} #{text.join(', ')}"
   end
 end
 

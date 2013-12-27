@@ -22,26 +22,51 @@
 						<%= f.text_field 'title', :class => "form-control"%>
 					</div>
 					<div class="col-sm-1 col-sm-offset-2">
-						<label class="control-label" for="t-course">Course</label>
+						<label class="control-label" for="t-course">Channel</label>
 					</div>
 					<div class="col-sm-3">
-						<%=f.select :course_id ,options_for_select( @courses.collect{|c| [c.name, c.id]}, @topic.course_id), {:include_blank => "Please Select"}, {:class =>"form-control course_id" }%>
+						<%= f.select 'channel_id', options_for_select(Channel.all.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
 					</div>
 				</div>
 				<div class="seperator10"></div>
 				<div class="row">
-					<div class="col-sm-1">
-						<label for="t-descr" class="control-label">Description</label>
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-sm-2">
+								<label for="t-descr" class="control-label">Description</label>
+							</div>
+							<div class="col-sm-6">
+								<%= f.text_area :description, :rows => 4, :class => "form-control" %>
+							</div>
+						</div>
 					</div>
-					<div class="col-sm-3">
-						<%= f.text_area :description, :rows => 4, :class => "form-control" %>
-					</div>
-					<div class="col-sm-1 col-sm-offset-2">
-						<label class="control-label" for="t-channel">Channel</label>
-					</div>
-					<div class="col-sm-3">
-						<input type="text" class="form-control" name="t-channel" id="t-channel" disabled = true>
-						<%=f.hidden_field 'channel_id',{:class => "form-control"}%>
+					<div class="col-sm-6">
+						<div class="row">
+							<div class="col-sm-2">
+								<label class="control-label" for="t-channel">Channel</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" name="t-channel" id="t-channel" disabled = true>
+								<%=f.hidden_field 'channel_id',{:class => "form-control"}%>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-2">
+								<%= f.label :is_bookmark_video, "Bookmark video", :class => "control-label" %>
+							</div>
+							<div class="col-sm-10">
+								<div class="controls">
+									<label class="radio">
+										<%= f.radio_button :is_bookmark_video, true, :class => "checkbox"  %>
+											Yes
+									</label>
+									<label class="radio">
+										<%= f.radio_button :is_bookmark_video, false, :class => "checkbox"  %>
+											No
+									</label>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="seperator10"></div>
@@ -59,5 +84,6 @@
 			</div>
 		</div>
 	</div>
-
 <% end %>
+
+<%= render 'bookmark', :topic => @topic %>

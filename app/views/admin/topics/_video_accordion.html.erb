@@ -127,7 +127,24 @@
 </div> <!-- ACCORDION END -->
 <div class="row">
 	<div class="col-sm-12">
-		<a href="#"><i class="fa fa-plus"></i></a>
-		<%= f.link_to_add "(Add another video)", :videos, :data => { :target => "#accordion1" } %>
+			<div id="video_link">
+				<a href="#"><i class="fa fa-plus"></i></a>
+				<%= f.link_to_add "(Add another video)", :videos, :data => { :target => "#accordion1" } %>
+			</div>
+			<div id="bookmark_link">
+				<a href="#video-modal" data-toggle="modal">
+					<i class="fa fa-3x fa-plus"></i>
+					(Add a bookmark)
+				</a>
+			</div>
 	</div>
 </div>
+
+
+<script>
+	if ("<%= f.object.is_bookmark_video %>" == "true"){
+		$("#video_link").hide();
+	}else{
+		$("#bookmark_link").hide();
+	}
+</script>

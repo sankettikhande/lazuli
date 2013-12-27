@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminController
   
   def index
-    @users = User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc"))
+    @users = User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page])
   end
 
   def new
