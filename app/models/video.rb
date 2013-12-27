@@ -58,7 +58,7 @@ class Video < ActiveRecord::Base
   def upload(video)
     video.vimeo_id = VimeoLib.upload.upload(video.clip.path)["ticket"]["video_id"]
     v = VimeoLib.video
-    v.set_description(video.vimeo_id,video.description)
+    v.set_description(video.vimeo_id,video.description_text)
     v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
     v.set_title(video.vimeo_id, video.title)
     vimeo_data = v.get_info(video.vimeo_id)
@@ -74,13 +74,13 @@ class Video < ActiveRecord::Base
 
   def description_text
     text = ""
-    desc = JSON.parse(self.description)
+    desc = self.bookmark ? JSON.parse(self.bookmark) : {}
     desc.each do |desc_text|
       text << ", " if !text.blank?
       text << desc_text['description'] + " "
       text << desc_text['time']
     end
-    text
+    self.description.to_s + text
   end
 end
 
