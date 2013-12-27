@@ -1,4 +1,4 @@
-<div id="bookmark" style="max-height:100px;overflow:auto;">
+<div id="bookmark" style="max-height:300px;overflow:auto;width:100%;">
 	<%= form_tag('/admin/topics/bookmark', :remote => true, :id => "bookmark_form") do %>
 		<table>
 			<tr>
@@ -11,26 +11,26 @@
 			<% if video.bookmark.nil? %>
 				<tr>
 			  	<td>
-			  		<input type="text" name="bookmark[]time" class="form-control" value="0.00">
+			  		<input type="text" name="bookmark[]time" class="form-control time" value="0.00">
 			  	</td>
 			  	<td>
-			  		<input type="text" name="bookmark[]description" class="form-control">
+			  		<input type="text" name="bookmark[]description" class="form-control description">
 			  	</td>
 			  	<td>
-			  		<a onclick="$(this).parent().parent().remove();javascript:void(0)" class="link">Remove</a>
+			  		<a href="#" class="btn btn-trans" rel="tooltip" title="Delete" onclick="$(this).parent().parent().remove();javascript:void(0)"><i class="fa fa-ban"></i></a>
 			  	</td>
 			  </tr>
 			<% else %>
 				<% JSON.parse(video.bookmark).each do |bookmark| %>
 					<tr>
 				  	<td>
-				  		<input type="text" name="bookmark[]time" class="form-control" value="<%= bookmark['time'] %>">
+				  		<input type="text" name="bookmark[]time" class="form-control time" value="<%= bookmark['time'] %>">
 				  	</td>
 				  	<td>
-				  		<input type="text" name="bookmark[]description" class="form-control" value="<%= bookmark['description'] %>">
+				  		<input type="text" name="bookmark[]description" class="form-control description" value="<%= bookmark['description'] %>">
 				  	</td>
 				  	<td>
-				  		<a onclick="$(this).parent().parent().remove();javascript:void(0)" class="link">Remove</a>
+				  		<a href="#" class="btn btn-trans" rel="tooltip" title="Delete" onclick="$(this).parent().parent().remove();javascript:void(0)"><i class="fa fa-ban"></i></a>
 				  	</td>
 				  </tr>
 				<% end %>

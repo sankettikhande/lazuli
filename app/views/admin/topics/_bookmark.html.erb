@@ -5,9 +5,14 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 			</div>
 			<div class="modal-body">
-				<a href="<%= topic.videos.first.clip.url %>" style="display:block;width:537px;height:250px;" id="player"> </a>
-				<br/>
-				<%= render 'bookmark_form', :topic => topic %>
+				<div class="row">
+					<div class="col-sm-7">
+						<a href="<%= topic.videos.first.clip.url %>" style="display:block;width:420px;height:260px;" id="player"> </a>
+					</div>
+					<div class="col-sm-5">
+						<%= render 'bookmark_form', :topic => topic %>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn default" data-dismiss="modal">Close</button>
