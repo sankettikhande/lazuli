@@ -36,3 +36,18 @@
 .pagination{
 	float: right;
 }
+
+.modal-dialog {
+  left: 50%;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  right: auto;
+  width: 800px;
+}
+
+#bookmark input.time{
+	width: 80px;
+}
+#bookmark input.description{
+	width: 140px;
+}
