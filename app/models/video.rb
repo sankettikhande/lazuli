@@ -71,6 +71,17 @@ class Video < ActiveRecord::Base
   def hashie_get_info(vimeo_data)
     Hashie::Mash.new(vimeo_data)
   end
+
+  def description_text
+    text = ""
+    desc = JSON.parse(self.description)
+    desc.each do |desc_text|
+      text << ", " if !text.blank?
+      text << desc_text['description'] + " "
+      text << desc_text['time']
+    end
+    text
+  end
 end
 
 

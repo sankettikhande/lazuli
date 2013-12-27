@@ -5,13 +5,13 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 			</div>
 			<div class="modal-body">
-				<a href="<%= f.object.videos.first.clip.url %>" style="display:block;width:537px;height:250px;" id="player"> </a>
+				<a href="<%= topic.videos.first.clip.url %>" style="display:block;width:537px;height:250px;" id="player"> </a>
 				<br/>
-				<%= render 'bookmark_form', :f => f %>
+				<%= render 'bookmark_form', :topic => topic %>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn blue" onclick="$('#bookmark_form').submit();">Add Bookmark</button>
+				<button type="button" class="btn blue" id="bookmark_button">Add Bookmark</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -22,7 +22,7 @@
 <script>
 
 	function add_bookmark(value){
-		var text = "<tr><td><input type='text' size='30' name='bookmark[]time' id='time' value='" + value +"' class='form-control'></td><td><input type='text' size='30' name='bookmark[]description' id='description' class='form-control'></td><td><a onclick='$(this).parent().parent().hide();javascript:void(0)' class='link'>Remove</a><td></tr>"
+		var text = "<tr><td><input type='text' size='30' name='bookmark[]time' id='time' value='" + value +"' class='form-control'></td><td><input type='text' size='30' name='bookmark[]description' id='description' class='form-control'></td><td><a onclick='$(this).parent().parent().remove();javascript:void(0)' class='link'>Remove</a><td></tr>"
 		$("#bookmark table").append(text);
 	}
 
@@ -43,6 +43,11 @@
     onSeek: function(event){
     	add_bookmark(flowplayer("player").getTime());
     }
+
+	});
+
+	$("#bookmark_button").click(function(){
+	  $("#bookmark_form").submit();
 
 	});
 </script>

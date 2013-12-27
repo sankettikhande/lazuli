@@ -37,9 +37,16 @@ class Admin::TopicsController < AdminController
 
 	def destroy
 		@topic = Topic.cached_find(params[:id])
+		# @topic.delete_album_and_videos
 		@topic.destroy
 		respond_to do |format|
 			format.html {redirect_to "#{admin_contents_url}#topics"}
 		end
+	end
+
+	def bookmark
+		@video = Video.find_by_id(params[:id])
+		@video.bookmark = params["bookmark"].to_json
+		@video.save
 	end
 end
