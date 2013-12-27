@@ -17,3 +17,16 @@ function videoAccordionForm(){
       tags: []
   });
 }
+
+$("#uniform-topic_is_bookmark_video_true :checked").live('change',function(){
+		var number = $(".fields").length
+		if(number != 1){
+			$(".fields").slice(1-number).remove();
+		}
+		$("#video_link").hide();
+		$("#bookmark_link").show();
+	})
+$("#uniform-topic_is_bookmark_video_false :checked").live('change',function(){
+		$("#video_link").show();
+		$("#bookmark_link").hide();
+	})
