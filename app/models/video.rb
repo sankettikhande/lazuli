@@ -73,14 +73,12 @@ class Video < ActiveRecord::Base
   end
 
   def description_text
-    text = ""
+    text = []
     desc = self.bookmark ? JSON.parse(self.bookmark) : {}
     desc.each do |desc_text|
-      text << ", " if !text.blank?
-      text << desc_text['description'] + " "
-      text << desc_text['time']
+      text << "#{desc_text['description']} #{desc_text['time']}"
     end
-    self.description.to_s + text
+    "#{self.description} #{text.join(', ')}"
   end
 end
 
