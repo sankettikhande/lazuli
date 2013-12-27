@@ -6,7 +6,7 @@ class Topic < ActiveRecord::Base
 
   include Cacheable
 
-  validates :course_id, :presence => true
+  validates :course_id, :channel_id, :presence => true
   validates_presence_of :title ,:message => "^Topic can't be blank"
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id]
   validate :check_uniqueness_of_title
