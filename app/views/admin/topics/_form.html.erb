@@ -1,7 +1,7 @@
 <%= javascript_include_tag "utils.js"%>
 <%= javascript_include_tag "admin/app_functions/topics.js"%>
 <%= nested_form_for [:admin , @topic] do |f| %>
-	<%= errors_for @topic unless @topic.errors.blank? %>
+<%= errors_for @topic unless @topic.errors.blank? %>
 	<div class="form-group">
 		<div class="panel panel-default">
 			<div class="panel-body seperator5">
@@ -22,10 +22,10 @@
 						<%= f.text_field 'title', :class => "form-control"%>
 					</div>
 					<div class="col-sm-1 col-sm-offset-2">
-						<label class="control-label" for="t-course">Course</label>
+						<label class="control-label" for="t-course">Channel</label>
 					</div>
 					<div class="col-sm-3">
-						<%=f.select :course_id ,options_for_select( @courses.collect{|c| [c.name, c.id]}, @topic.course_id), {:include_blank => "Please Select"}, {:class =>"form-control course_id" }%>
+						<%= f.select 'channel_id', options_for_select(Channel.all.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
 					</div>
 				</div>
 				<div class="seperator10"></div>

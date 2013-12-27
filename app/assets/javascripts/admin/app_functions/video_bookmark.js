@@ -3,7 +3,7 @@ function add_bookmark(value){
     $("#bookmark table").append(text);
 }
 
-flowplayer("player", "/assets/swf/flowplayer-3.2.18.swf", {
+flowplayer("player", "/assets/flowplayer-3.2.18.swf", {
     // a clip object
     clip: {
         // a clip event is defined inside clip object

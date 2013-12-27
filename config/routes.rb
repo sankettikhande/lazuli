@@ -19,6 +19,7 @@ Lazuli::Application.routes.draw do
     resources :channels do
       member do
         get 'get_channel'
+        get 'channel_courses'
       end
     end
 

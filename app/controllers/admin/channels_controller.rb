@@ -61,6 +61,12 @@ class Admin::ChannelsController < AdminController
     end
   end
 
+  def channel_courses
+    channel = Channel.find(params[:id])
+    @channel_courses = channel.courses
+
+  end
+
   private
   def set_initialization
     @subscriptions = Subscription.all
