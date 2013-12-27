@@ -51,3 +51,9 @@
 #bookmark input.description{
 	width: 140px;
 }
+
+#bookmark{
+	max-height:300px;
+	overflow:auto;
+	width:100%;
+}
