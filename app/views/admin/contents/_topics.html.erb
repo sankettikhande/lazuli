@@ -24,7 +24,7 @@
 				      <td><%= topic.title %></td>
 				      <td><%= topic.presence.try(:course).presence.try(:name) %></td>
 				      <td><%= channel_name_for_topic(topic.channel_id)  %></td>
-				      <td>http://vimeo.com/url<span></span></td>
+				      <td><%= "https://vimeo.com/album/#{topic.presence.try(:vimeo_album_id)}" %></td>
 				      <td>
 								<a href="/admin/topics/<%=topic.id%>/edit" class="btn btn-trans" data-no-turbolink="true" rel="tooltip" title="Edit Topic"><i class="fa fa-edit"></i></a>
 								<a href="/admin/topics/<%=topic.id%>" class="btn btn-trans" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete Topic"><i class="fa fa-ban"></i></a>

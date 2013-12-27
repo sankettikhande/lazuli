@@ -1,0 +1,22 @@
+<div class="modal fade" id="video-modal" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+			</div>
+			<div class="modal-body">
+				<a href="<%= topic.videos.first.clip.url %>" style="display:block;width:537px;height:250px;" id="player"> </a>
+				<br/>
+				<%= render 'bookmark_form', :topic => topic %>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn blue" id="bookmark_button">Add Bookmark</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+
+<%= javascript_include_tag "admin/app_functions/video_bookmark.js"%>
