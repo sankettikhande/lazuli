@@ -49,7 +49,8 @@ class Course < ActiveRecord::Base
   end
 
   def course_name
-    c_courses = channel_courses.first.channel.courses.to_a
+    c_courses = channel_courses.first.channel.courses.to_a rescue []
+    return if c_courses.blank?
     c_courses.delete(self)
     channel_course_names = c_courses.map(&:name)
     errors.add(:base, "Course name must be uniq") if channel_course_names.include? self.name
