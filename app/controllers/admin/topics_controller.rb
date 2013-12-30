@@ -8,12 +8,13 @@ class Admin::TopicsController < AdminController
 
 	def create
 		@topic = Topic.new(params[:topic])
-		if @topic.save
-			@topic.videos.first.upload_to_vimeo
-			redirect_to "#{admin_contents_url}#topics"
-		else
-			@courses = Course.all
-			render "new"
+		if params[:SavePub]
+			save_topic("Publish")
+		elsif params[:Publish]
+			publish_topic(@topic)
+			redirect_to :back, notice: "You have been Publish this Topic."
+		elsif params[:Save]
+			save_topic
 		end
 	end
 
@@ -24,14 +25,13 @@ class Admin::TopicsController < AdminController
 
 	def update
 		@topic = Topic.cached_find(params[:id])
-		respond_to do |format|
-			if @topic.update_attributes(params[:topic])
-				@topic.videos.first.upload_to_vimeo
-				format.html {redirect_to "#{admin_contents_url}#topics"}
-			else
-				@courses = Course.all
-				format.html {render "edit"}
-			end
+		if params[:SavePub]
+			update_topic(params[:topic], "Publish")
+		elsif params[:Publish]
+			publish_topic(@topic)
+			redirect_to :back, notice: "You have been Publish this Topic."
+		elsif params[:Save]
+			update_topic(params[:topic])
 		end
 	end
 
@@ -48,5 +48,33 @@ class Admin::TopicsController < AdminController
 		@video = Video.find_by_id(params[:id])
 		@video.bookmark = params["bookmark"].to_json
 		@video.save
+	end
+
+	protected
+	def update_topic(topic, publish=nil)
+		respond_to do |format|
+			if @topic.update_attributes(topic)
+				publish_topic(@topic) if !publish.nil?
+				format.html {redirect_to "#{admin_contents_url}#topics"}
+			else
+				@courses = Course.all
+				format.html { render "edit" }
+			end
+		end
+	end
+
+	def save_topic(publish=nil)
+		if @topic.save
+			publish_topic(@topic) if !publish.nil?
+			redirect_to "#{admin_contents_url}#topics"
+		else
+			@courses = Course.all
+			render "new"
+		end
+	end
+
+	def publish_topic(topic)
+		topic.update_attribute(:status, "Publish")
+		topic.videos.first.upload_to_vimeo
 	end
 end

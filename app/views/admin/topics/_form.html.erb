@@ -2,6 +2,9 @@
 <%= javascript_include_tag "admin/app_functions/topics.js"%>
 <%= nested_form_for [:admin , @topic] do |f| %>
 <%= errors_for @topic unless @topic.errors.blank? %>
+	<% if flash[:notice] -%>
+	  <p class='notice'><%=h flash[:notice] %></p>
+	<% end -%>
 	<div class="form-group">
 		<div class="panel panel-default">
 			<div class="panel-body seperator5">
@@ -25,7 +28,7 @@
 						<label class="control-label" for="t-course">Channel</label>
 					</div>
 					<div class="col-sm-3">
-						<%= f.select 'channel_id', options_for_select(Channel.all.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
+						<%= f.select :channel_id, options_for_select(Channel.all.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
 					</div>
 				</div>
 				<div class="seperator10"></div>
@@ -43,11 +46,10 @@
 					<div class="col-sm-6">
 						<div class="row">
 							<div class="col-sm-2">
-								<label class="control-label" for="t-channel">Channel</label>
+								<label class="control-label" for="t-channel">Cources</label>
 							</div>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" name="t-channel" id="t-channel" disabled = true>
-								<%=f.hidden_field 'channel_id',{:class => "form-control"}%>
+								<%= f.select 'course_id', options_for_select('', f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
 							</div>
 						</div>
 						<div class="row">
@@ -77,10 +79,12 @@
 				</div>
 				<div class="seperator5"></div>
 				<div class="row">
-					<div class="col-sm-12">
-						<button type="submit" class="btn green" value="Save">Save</button>
-					</div>
-				</div>
+  				<div class="col-md-12">
+  					<button type="submit" class="btn blue" value="Publish" name="SavePub">Save and Publish</button>
+  					<button type="submit" class="btn green" value="Save" name="Save">Save</button>
+  					<button type="submit" class="btn purple" value="Publish" name="Publish">Publish</button>
+  				</div>
+  			</div>
 			</div>
 		</div>
 	</div>
