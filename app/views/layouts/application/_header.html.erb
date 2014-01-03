@@ -55,10 +55,10 @@
       <div class="navbar-collapse collapse navbar-right hidden-xs header-menu">
         <ul class="nav navbar-nav">
           <li>
-            <% if !request.referer.to_s.include?("sign_in") %>
-              <%= link_to raw("<i class='fa fa-pencil-square-o'></i> Signup"), new_registration_path(resource_name)  %>
+            <% if request.fullpath.include?("sign_in") %>
+              <%= link_to raw("<i class='fa fa-pencil-square-o'></i> Signup"), new_registration_path(resource_name), :data => {"no-turbolink" => true}  %>
             <% else %>
-              <%= link_to raw("<i class='fa fa-sign-in'></i> Sign in"), new_session_path(resource_name) %>
+              <%= link_to raw("<i class='fa fa-sign-in'></i> Sign in"), new_session_path(resource_name), :data => {"no-turbolink" => true} %>
             <% end %>
           </li>
         </ul>
