@@ -82,18 +82,18 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="social-login">
-                <button type="button" class="btn btn-social btn-block btn-facebook"><i class="fa fa-facebook"></i>Using Facebook</button>
-              </div>
-              </div>
-              <div class="col-sm-4">
-                <div class="social-login">
-                <button type="button" class="btn btn-social btn-block btn-google-plus"><i class="fa fa-google-plus"></i>Using Google</button>
-              </div>
+                  <%= link_to raw("<i class='fa fa-facebook'></i> Facebook"), user_omniauth_authorize_path(:facebook), :class => "btn btn-social btn-block btn-facebook" %>
+                </div>
               </div>
               <div class="col-sm-4">
                 <div class="social-login">
-                <button type="button" class="btn btn-social btn-block btn-linkedin"><i class="fa fa-linkedin"></i>Using Linkedin</button>
+                  <%= link_to raw("<i class='fa fa-google-plus'></i> Google"),user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-social btn-block btn-google-plus' %>
+                </div>
               </div>
+              <div class="col-sm-4">
+                <div class="social-login">
+                  <%= link_to raw("<i class='fa fa-linkedin'></i> Linkedin"),user_omniauth_authorize_path(:linkedin), :class => 'btn btn-social btn-block btn-linkedin' %>
+                </div>
               </div>
             </div>
 
