@@ -150,7 +150,7 @@ hr.grey {border-color:#666 !important;}
 .navbar {border-bottom: 0}
 .navbar-nav li {font-size: 1.1em;text-transform: uppercase;}
 .navbar-nav li a{color:#fff !important;}
-.navbar-nav li a:hover {color: #ccc` !important}
+.navbar-nav li a:hover {color: #ccc !important;}
 .navbar-default .navbar-nav > .a {filter:progid:DXImageTransform.Microsoft.gradient(enabled = 'false';) }
 .carousel-control {filter:alpha(enabled='false');}
 .carousel-control.left, .carousel-control.right {filter: progid:DXImageTransform.Microsoft.gradient(enabled = 'false');}
