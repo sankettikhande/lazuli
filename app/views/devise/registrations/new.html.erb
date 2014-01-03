@@ -1,67 +1,106 @@
-<div class="row">
-  <div class="col-sm-5">
-    <ul class="social-id">
-      <li>
-        <%= lazuli_button_to("Signin with Facebook",  user_omniauth_authorize_path(:facebook), :class => "btn-primary facebook") %>
-      </li>
-      <li>
-        <%= lazuli_button_to("Signin with Google+", user_omniauth_authorize_path(:google_oauth2), :class => 'btn-danger googleplus') %>
-      </li>
-      <li>
-        <%= lazuli_button_to("Signin with Linkedin", user_omniauth_authorize_path(:linkedin), :class => "btn-primary linkedin")%>
-      </li>
-    </ul>
+<div class="row"> <!-- Row 1 -->
+  <div class="col-sm-6 pull-right">
+    <div class="content-right"> 
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="user-signup-form">
+            <div class="row">
+              <div class="col-xs-12">
+                <h5>Fill up the below form below to gain access to Lazuli.</h5>
+              </div>
+            </div>
+            <div class="row">
+              <%= form_for(resource, :as => resource_name, :remote => true, :url => registration_path(resource_name)) do |f| %>
+                <div><%= flash[:alert]  ||= flash[:notice] %></div>
+                <div id='message'></div>
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12">
+                      <label for="user-actual-name" class="control-label">Full Name</label>
+                        <%= f.text_field :actual_name, :autofocus => true, :class => 'form-control', :placeholder => 'Enter your full name', :id=>"user-actual-name" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="user-display-name" class="control-label">Display Name</label>
+                        <%= f.text_field :name, :class => 'form-control', :placeholder => 'Create a display name',:id => "user-display-name" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-6">
+                        <label for="user-company-name" class="control-label">Company Name</label>
+                        <%= f.text_field :company_name, :class => 'form-control', :placeholder => 'Enter your Company Name', :id => "user-company-name" %>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <label for="user-contact-no" class="control-label">Contact Number</label>
+                        <%= f.text_field :phone_number, :class => 'form-control', :placeholder => 'Phone Number', :id => "user-company-name" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="user-email-add" class="control-label">Email Address</label>
+                        <%= f.email_field :email, :class => 'form-control', :placeholder => 'Enter valid Email Address', :id => "user-email-add" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12 col-sm-6">
+                        <label for="user-new-pswd" class="control-label">Password</label>
+                        <%= f.password_field :password, :class => 'form-control', :placeholder => 'Strong Password', :id => "user-new-pswd" %>
+                      </div>
+                      <div class="col-xs-12 col-sm-6">
+                        <label for="user-cnfrm-pswd" class="control-label">Confirm Password</label>
+                        <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Confirm Password', :id => "user-cnfrm-pswd" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="user-address" class="control-label">Address</label>
+                        <%= f.text_area :address, :class => 'form-control', :placeholder => 'Enter your address', :id => "user-address", :rows => 2 %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-5">
+                      <button type="submit" class="btn btn-success btn-block">Sign Up</button>  
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            <hr class="grey">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="social-login">
+                <button type="button" class="btn btn-social btn-block btn-facebook"><i class="fa fa-facebook"></i>Using Facebook</button>
+              </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="social-login">
+                <button type="button" class="btn btn-social btn-block btn-google-plus"><i class="fa fa-google-plus"></i>Using Google</button>
+              </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="social-login">
+                <button type="button" class="btn btn-social btn-block btn-linkedin"><i class="fa fa-linkedin"></i>Using Linkedin</button>
+              </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div> <!-- Content right ends -->
   </div>
-  <div class="col-sm-7">
-    <%= form_for(resource, :as => resource_name, :remote => true, :url => registration_path(resource_name)) do |f| %>
-      <div id='message'></div>
-      <div class="row">
-        <div class="col-sm-12">
-          <label class="hidden-xs" for="u-name">Actual Name</label>
-          <%= f.text_field :actual_name, :autofocus => true, :class => 'form-control', :placeholder => 'Enter your Actual Name' %>
-        </div>
-      </div>
-      <div class="seperator10"></div>
-      <div class="row">
-        <div class="col-sm-12">
-          <label class="hidden-xs" for="u-name">Username</label>
-          <%= f.text_field :name, :class => 'form-control', :placeholder => 'Enter your Username' %>
-        </div>
-      </div>
-      <div class="seperator10"></div>
-      <div class="row">
-        <div class="col-sm-12">
-          <label class="hidden-xs" for="u-name">Company Name</label>
-          <%= f.text_field :company_name, :class => 'form-control', :placeholder => 'Enter your Company Name' %>
-        </div>
-      </div>
-      <div class="seperator10"></div>
-        <div class="row">
-          <div class="col-sm-12">
-            <label class="hidden-xs" for="u-email">Email Address</label>
-            <%= f.email_field :email, :class => 'form-control', :placeholder => 'Enter valid Email Address' %>
-        </div>
-      </div>
-      <div class="seperator10"></div>
-      <div class="row">
-        <div class="col-sm-12">
-            <label class="hidden-xs" for="u-pswd">Password</label>
-            <%= f.password_field :password, :class => 'form-control', :placeholder => 'Strong Password' %>
-        </div>
-      </div>
-      <div class="seperator10"></div>
-      <div class="row">
-        <div class="col-sm-12">
-            <label class="hidden-xs" for="u-confpswd">Confirm Password</label>
-            <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Confirm Password' %>
-        </div>
-      </div>
-      <div class="seperator10"></div>
-      <div class="row">
-        <div class="col-sm-12">
-          <button type="submit" class="btn btn-success btn-block">Signup</button>
-        </div>
-      </div>
-    <% end %> 
-  </div>
+  <%= render 'layouts/application/video_list'%>
 </div>
