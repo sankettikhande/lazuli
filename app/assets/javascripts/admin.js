@@ -33,6 +33,8 @@
 //= require ./admin/form-components.js
 //= require ./admin/bootstrap-fileupload.js
 //= require ./admin/flowplayer-3.2.13.min.js
+//= require ./admin/jquery.validationEngine.js
+//= require ./admin/jquery.validationEngine-en.js
 
 $(".tooltip").tooltip()
 $("a[rel=tooltip]").tooltip()
