@@ -10,7 +10,7 @@
         <tr>
             <th>Channel Name<%= sortable "name" %></th>
             <th>Channel Type<%= sortable "channel_type" %></th>
-            <th>Courses available</th>
+            <th>Number of Courses available</th>
             <th>Types of Subscriptions available</th>
             <th>Number of Users</th>
             <th>Action</th>
@@ -21,7 +21,7 @@
           <tr>
             <td><%= channel.name %></td>
             <td><%= channel.channel_type %></td>
-            <td>Excel</td>
+            <td><%= channel.courses.count %></td>
             <td></td>
             <td>59</td>
             <td><a href="/admin/channels/<%= channel.id %>/edit" data-no-turbolink="true" rel="tooltip" title="Edit Channel"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/channels/<%= channel.id %>" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete Channel"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
