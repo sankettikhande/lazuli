@@ -1,7 +1,7 @@
 class Admin::TopicsController < AdminController
 
 	def new
-		@courses = Course.all
+		@channel_courses = Course.all
 		@topic = Topic.new
 		@topic.videos.build()
 	end
@@ -19,8 +19,9 @@ class Admin::TopicsController < AdminController
 	end
 
 	def edit
-		@courses = Course.all
 		@topic = Topic.cached_find(params[:id])
+		channel = Channel.find(@topic.channel_id)
+		@channel_courses = channel.courses
 	end
 
 	def update
