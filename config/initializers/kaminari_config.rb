@@ -8,7 +8,7 @@ Kaminari.configure do |config|
   # config.page_method_name = :page
   # config.param_name = :page
 
-  config.default_per_page = 20
+  config.default_per_page = 10
   config.window = 2
   config.left = 1
   config.right = 1
