@@ -12,10 +12,11 @@ class Admin::TopicsController < AdminController
 			save_topic("Publish")
 		elsif params[:Publish]
 			publish_topic(@topic)
-			redirect_to :back, notice: "You have been Publish this Topic."
+			#redirect_to :back, notice: "You have been Publish this Topic."
 		elsif params[:Save]
 			save_topic
 		end
+
 	end
 
 	def edit
@@ -56,7 +57,11 @@ class Admin::TopicsController < AdminController
 		respond_to do |format|
 			if @topic.update_attributes(topic)
 				publish_topic(@topic) if !publish.nil?
-				format.html {redirect_to "#{admin_contents_url}#topics"}
+				if @topic.is_bookmark_video
+					redirect_to edit_admin_topic_url(@topic)
+				else
+					redirect_to "#{admin_contents_url}#topics"
+				end
 			else
 				@courses = Course.all
 				format.html { render "edit" }
@@ -67,7 +72,11 @@ class Admin::TopicsController < AdminController
 	def save_topic(publish=nil)
 		if @topic.save
 			publish_topic(@topic) if !publish.nil?
-			redirect_to "#{admin_contents_url}#topics"
+			if @topic.is_bookmark_video
+				redirect_to edit_admin_topic_url(@topic)
+			else
+				redirect_to "#{admin_contents_url}#topics"
+			end
 		else
 			@courses = Course.all
 			channel = Channel.find_by_id(@topic.channel_id)
