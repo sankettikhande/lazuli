@@ -22,7 +22,8 @@ $('body').on('focus',".date-picker", function(){
          var subscription_id = $(this).closest(".form-group").prev().find(".subscriptions_id").attr('id');
          var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
          var expiry_date = get_expiry_date(ev.date, calculated_days)
-         $("#"+date_id).val(expiry_date);
+         if (calculated_days.to_s != 'undefined')
+          $("#"+date_id).val(expiry_date);
         });
 
         function get_expiry_date(subscription_date, calculated_days){
@@ -38,6 +39,25 @@ $('body').on('focus',".date-picker", function(){
               url: "/admin/users/course_subscription_types.js",
               data: {id: val, subscription_id: subscription_id}
             });
+    })
+
+    $('.subscriptions_id').on('change', function(){
+      var subscription_date_id = $(this).closest(".form-group").next().find(".subscription_date").attr('id')
+      var subscription_id = $(this).attr('id')
+      var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
+      var date_id = $(this).closest(".form-group").next().next().find(".expiry_date").attr('id');
+      var subscription_date_select = $('#'+subscription_date_id).val();
+      var event_date = jQuery.datepicker.parseDate("dd-mm-yy", subscription_date_select)
+      console.log($(this).val())
+      if(subscription_date_select != ""){
+        if ($(this).val() != ""){
+        var expiry_date = get_expiry_date(event_date, calculated_days)
+        $("#"+date_id).val(expiry_date);
+        }
+        else{
+           $("#"+date_id).val("")
+        }
+      }
     })
 
   })
