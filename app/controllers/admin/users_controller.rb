@@ -24,6 +24,7 @@ class Admin::UsersController < AdminController
 
   def edit
     @user = User.cached_find(params[:id])
+    set_instance
     @user_channel = @user.user_channel_subscriptions
   end 
 

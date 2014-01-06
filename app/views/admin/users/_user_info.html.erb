@@ -1,0 +1,63 @@
+<div class="row-align form-group">
+	<div class="col-md-2">
+		<label for="uname">Actual Name<%= required_field %></label>
+	</div>
+	<div class="col-md-4">
+	  <%= f.text_field 'actual_name', :class => 'form-control' %>
+	</div>
+</div>
+	<div class="row form-group">
+	<div class="col-md-2">
+		<label for="uname">User Name<%= required_field %></label>
+	</div>
+	<div class="col-md-4">
+	  <%= f.text_field 'name', :class => 'form-control' %>
+	</div>
+</div>
+<div class="row-align form-group">
+	<div class="col-md-2">
+		<label for="emailID">Email ID<%= required_field %></label>
+	</div>
+	<div class="col-md-4">
+		<%= f.text_field 'email', :class => 'form-control' %>
+	</div>
+</div>
+<div class="row form-group">
+	<div class="col-md-2">
+		<label for="emailID">Phone Number</label>
+	</div>
+	<div class="col-md-4">
+		<%= f.text_field 'phone_number', :class => 'form-control' %>
+	</div>
+</div>
+
+<div class="row col-md-13">
+	<div class="col-md-6">	
+    <div class="row form-group">
+    	<div class="col-md-4">
+    		<label for="emailID">Company Name</label>
+    	</div>
+    	<div class="col-md-8">
+  			<%= f.text_field 'company_name', :class => 'form-control' %>
+    	</div>
+    </div>
+    <div class="row form-group">
+    	<div class="col-md-4">
+    		<label for="emailID">Password<%= required_field %></label>
+    	</div>
+    	<div class="col-md-8">
+  			<%= f.password_field 'password', :class => 'form-control' %>
+    	</div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row form-group">
+    	<div class="col-md-4">
+    		<label for="emailID">Business/Personal Address:</label>
+    	</div>
+    	<div class="col-md-8">
+  			<%= f.text_area 'address', :class => 'form-control', :size => '10x3' %>
+    	</div>
+    </div>
+  </div>
+</div>
