@@ -48,7 +48,6 @@ $('body').on('focus',".date-picker", function(){
       var date_id = $(this).closest(".form-group").next().next().find(".expiry_date").attr('id');
       var subscription_date_select = $('#'+subscription_date_id).val();
       var event_date = jQuery.datepicker.parseDate("dd-mm-yy", subscription_date_select)
-      console.log($(this).val())
       if(subscription_date_select != ""){
         if ($(this).val() != ""){
         var expiry_date = get_expiry_date(event_date, calculated_days)
