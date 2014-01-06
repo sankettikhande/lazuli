@@ -36,4 +36,9 @@ module ApplicationHelper
     end
   end
 
+  def required_field
+    content_tag(:span, :class => "required_span") do
+      "*"
+    end
+  end
 end
