@@ -28,7 +28,7 @@
 						<label class="control-label" for="t-course">Channel</label>
 					</div>
 					<div class="col-sm-3">
-						<%= f.select :channel_id, options_for_select(Channel.all.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
+						<%= f.select 'channel_id',options_for_select(Channel.all.collect{|c| [ c.name, c.id]}, f.object.channel_id),{:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
 					</div>
 				</div>
 				<div class="seperator10"></div>
@@ -49,7 +49,7 @@
 								<label class="control-label" for="t-channel">Cources</label>
 							</div>
 							<div class="col-sm-6">
-								<%= f.select 'course_id', options_for_select('', f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
+								<%= f.select 'course_id', options_for_select(@channel_courses.collect{|i| [i.name, i.id]}, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
 							</div>
 						</div>
 						<div class="row">
