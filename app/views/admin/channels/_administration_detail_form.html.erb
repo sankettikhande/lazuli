@@ -12,7 +12,7 @@
 			<div class="row">
 
 				<div class="col-sm-2">
-					<label for="cont-no" class="control-label">Actual Name</label>
+					<label for="cont-no" class="control-label">Actual Name<%= required_field %></label>
 				</div>
 				<div class="col-sm-4">
 					<div class="control-group">
@@ -32,14 +32,14 @@
 			<div class="seperator10"></div>
 			<div class="row">
 				<div class="col-sm-2">
-					<label for="u-email" class="control-label">Email</label>
+					<label for="u-email" class="control-label">Email<%= required_field %></label>
 				</div>
 				<div class="col-sm-4">
 					<%= f.text_field :email, :class => "form-control", :placeholder => "@example.com" %>
 					<!-- <input type="email" class="form-control" id="u-email" name="u-email" placeholder="@example.com"> -->
 				</div>
 				<div class="col-sm-2">
-					<label for="u-name" class="control-label">Username</label>
+					<label for="u-name" class="control-label">Username<%= required_field %></label>
 				</div>
 				<div class="col-sm-4">
 					<%= f.text_field :user_name, :class => "form-control" %>

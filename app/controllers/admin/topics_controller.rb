@@ -70,6 +70,8 @@ class Admin::TopicsController < AdminController
 			redirect_to "#{admin_contents_url}#topics"
 		else
 			@courses = Course.all
+			channel = Channel.find_by_id(@topic.channel_id)
+			@channel_courses = channel.try(:courses) || []
 			render "new"
 		end
 	end
