@@ -20,7 +20,7 @@
 			<tbody>
 				<% @courses.each do |course| %>
 					<tr>
-				  	<td><%= course.name %></td>
+				  	<td><%= link_to course.name, edit_admin_course_url(course) %></td>
 				  	<td><%= course.trainer_name %></td>
 			      <td><%= course.channels.first.name if !course.channels.blank? %></td>
 			      <td>426</td>
