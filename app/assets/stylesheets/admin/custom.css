@@ -54,3 +54,8 @@ section {margin-bottom: 1em}
 .btn-trans {background: none;color:#000;}
 .btn-trans:hover {color:#f00;}
 /*********************************/
+
+span.required_span{
+  margin-left: 2px;
+  color: #FF4800;
+}
