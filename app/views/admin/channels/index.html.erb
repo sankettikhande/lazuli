@@ -19,7 +19,7 @@
       <tbody>
         <% @channels.each do |channel| %>
           <tr>
-            <td><%= channel.name %></td>
+            <td><%= link_to channel.name, edit_admin_channel_url(channel) %></td>
             <td><%= channel.channel_type %></td>
             <td><%= channel.courses.count %></td>
             <td></td>

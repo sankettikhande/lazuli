@@ -56,6 +56,10 @@ class Course < ActiveRecord::Base
     errors.add(:base, "Course name must be uniq") if channel_course_names.include? self.name
   end
 
+  def name_for_form
+    name.blank? ? "Course Details" : name
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.channel_course_permissions.size.zero?
