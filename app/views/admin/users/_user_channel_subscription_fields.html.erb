@@ -13,7 +13,7 @@
 		<label for="uname">Course Subscribed For<%= required_field %></label>
 	</div>
 	<div class="col-md-3">
-	  <%= f.select 'course_id', options_for_select('', f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
+	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
 	</div>
 </div>
 
@@ -22,7 +22,7 @@
 		<label for="uname">Type of Subscription<%= required_field %></label>
 	</div>
 	<div class="col-md-3 subscription_type">
-	  <%= f.select 'subscription_id', options_for_select('', f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id' %>
+	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ s.name, s.id ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id' %>
 	</div>
 </div>
 <div class="row-align form-group">
