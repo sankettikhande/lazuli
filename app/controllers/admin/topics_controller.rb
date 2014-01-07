@@ -90,6 +90,6 @@ class Admin::TopicsController < AdminController
 
 	def publish_topic(topic)
 		topic.update_attribute(:status, "Publish")
-		topic.videos.first.upload_to_vimeo
+		topic.upload_to_vimeo
 	end
 end

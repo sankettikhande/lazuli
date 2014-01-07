@@ -26,16 +26,6 @@ class Video < ActiveRecord::Base
     VimeoLib.album.add_video(video.topic.vimeo_album_id, video_data.vimeo_id)
   end
 
-  def upload_to_vimeo
-    topic = self.topic
-    assign_video = []
-    topic.videos.where(:vimeo_id => nil).each do |video|      
-      video_data = upload(video)
-      assign_video << video_data.vimeo_id
-    end
-    create_album(topic, assign_video) if assign_video.any?
-  end
-  handle_asynchronously :upload_to_vimeo
   handle_asynchronously :upload_single_video
 
   def delete_vimeo_video
@@ -46,30 +36,18 @@ class Video < ActiveRecord::Base
     VimeoLib.album.remove_video(self.topic.vimeo_album_id,self.vimeo_id)
   end
 
-  def create_album(topic, assign_video)
-    if topic.vimeo_album_id.blank?
-      album = VimeoLib.album.create(topic.title, assign_video.first, {:description => topic.description, :videos => assign_video.join(",") })
-      topic.vimeo_album_id = album['album'].first['id']
-      topic.save
-    else
-      assign_video.each do |vimeo_id|
-        VimeoLib.album.add_video(topic.vimeo_album_id, vimeo_id)
-      end
-    end
-  end
-
-  def upload(video)
-    video.vimeo_id = VimeoLib.upload.upload(video.clip.path)["ticket"]["video_id"]
+  def upload
+    self.vimeo_id = VimeoLib.upload.upload(self.clip.path)["ticket"]["video_id"]
     v = VimeoLib.video
-    set_vimeo_description(video.vimeo_id, video.description_text)
-    v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
-    v.set_title(video.vimeo_id, video.title)
-    vimeo_data = v.get_info(video.vimeo_id)
-    video.status = "Publish"
-    video.vimeo_data = vimeo_data
-    video.vimeo_url = hashie_get_info(vimeo_data).video.first.urls.url.first._content if vimeo_data
-    video.save!
-    return video
+    set_vimeo_description(self.vimeo_id, self.description_text)
+    v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
+    v.set_title(self.vimeo_id, self.title)
+    vimeo_data = v.get_info(self.vimeo_id)
+    self.status = "Publish"
+    self.vimeo_data = vimeo_data
+    self.vimeo_url = hashie_get_info(vimeo_data).video.first.urls.url.first._content if vimeo_data
+    self.save!
+    return self
   end
 
   def hashie_get_info(vimeo_data)
