@@ -25,6 +25,10 @@ class Topic < ActiveRecord::Base
   #   VimeoLib.album.delete(self.vimeo_album_id)
   # end
   # handle_asynchronously :delete_album_and_videos
+
+  def is_publish?
+    self.status == "Publish"
+  end
 end
 
 def add_to_vimeo_album

@@ -33,6 +33,7 @@ class Admin::TopicsController < AdminController
 			publish_topic(@topic)
 			redirect_to :back, notice: "You have been Publish this Topic."
 		elsif params[:Save]
+			@topic.update_attribute(:status, "SemiPublished")
 			update_topic(params[:topic])
 		end
 	end
