@@ -22,7 +22,7 @@
 		<label for="uname">Type of Subscription<%= required_field %></label>
 	</div>
 	<div class="col-md-3 subscription_type">
-	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ s.name, s.id ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id' %>
+	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ "#{s.name}- #{s.calculated_days} days", s.id ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id' %>
 	</div>
 </div>
 <div class="row-align form-group">
