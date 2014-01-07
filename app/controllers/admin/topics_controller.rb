@@ -52,15 +52,16 @@ class Admin::TopicsController < AdminController
 		@video.save
 	end
 
-	protected
+  protected
+
 	def update_topic(topic, publish=nil)
 		respond_to do |format|
 			if @topic.update_attributes(topic)
 				publish_topic(@topic) if !publish.nil?
 				if @topic.is_bookmark_video
-					redirect_to edit_admin_topic_url(@topic)
+					format.html{redirect_to edit_admin_topic_url(@topic)}
 				else
-					redirect_to "#{admin_contents_url}#topics"
+					format.html{redirect_to "#{admin_contents_url}#topics"}
 				end
 			else
 				@courses = Course.all

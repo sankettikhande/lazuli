@@ -24,13 +24,17 @@ namespace :sphinx do
   end
 
   task :symlink_ts_yml, :roles => :app do
-    run "ln -nfs #{shared_path}/config/thinking_sphinx.yml #{latest_release}/config/thinking_sphinx.yml"
+    run "ln -nfs #{shared_path}/config/thinking_sphinx.yml #{current_path}/config/thinking_sphinx.yml"
   end
 
+  task :configure_and_index, :roles => :app do
+    put "Configure and create index"
+  end
 end
 
 
-before "thinking_sphinx:index", "sphinx:symlink_config"
-after  "thinking_sphinx:configure", "sphinx:symlink_config"
+before "sphinx:configure_and_index", "sphinx:symlink_ts_yml"
+before "sphinx:symlink_ts_yml", "thinking_sphinx:configure"
+after "sphinx:symlink_ts_yml", "thinking_sphinx:index"
 
 

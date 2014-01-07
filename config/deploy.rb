@@ -8,6 +8,7 @@ load "config/recipes/db"
 load "config/recipes/rvm"
 load "config/recipes/passenger"
 load "config/recipes/sphinx"
+## To configure and index sphinx runc cap <env> sphinx:configure_and_index
 
 set :application, "lazuli"
 set :scm, :git
