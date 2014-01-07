@@ -1,3 +1,5 @@
+<%= javascript_include_tag "admin/jquery.dataTables.js", "admin/DT_bootstrap.js" %>
+
 <div class="row">
  <div class="col-md-12 nopadding">
           <a href="#add-user" data-toggle="modal" class="btn btn-default btn-success pull-right" rel="tooltip" title="Add New User"><i class="fa fa-3x fa-plus"></i> Add New User</a>
@@ -6,32 +8,21 @@
 <div class="row">
   <div class="seperator5"></div>
   <div class="portlet-body flip-scroll">
-    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
+    <table class="table table-bordered table-striped table-condensed flip-content table-hover datatable" id="users">
       <thead class="flip-content">
         <tr>
-            <th width='15%;'>Username<%= sortable "name" %></th>
-            <th width='15%;'>Actual Name<%= sortable "actual_name" %></th>
-            <th width='18%;'>Email ID<%= sortable "email" %></th>
-            <th width='15%;'>Contact Number<%= sortable "phone_number" %></th>
-            <th width='15%;'>Company Name<%= sortable "company_name" %></th>
+            <th width='15%;'>Username</th>
+            <th width='15%;'>Actual Name</th>
+            <th width='18%;'>Email ID</th>
+            <th width='15%;'>Contact Number</th>
+            <th width='15%;'>Company Name</th>
             <th width='17%;'>Address</th>
             <th width='10%;'>Status</th>
             <th width='10%;'>Action</th>
         </tr>
       </thead>
       <tbody>
-        <% @users.each do |user| %>      
-          <tr>
-            <td><%= user.name %></td>
-            <td><%= user.actual_name %></td>
-            <td><%= user.email %></td>
-            <td><%= user.phone_number %></td>
-            <td><%= user.company_name %></td>
-            <td><%= user.address %></td>
-            <td><%= user.confirm_status %></td>
-            <td><a href="/admin/users/<%= user.id %>/edit" rel="tooltip" title="Edit User" data-no-turbolink="true"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/users/<%= user.id %>" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete User"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
-          </tr>
-        <% end %>
+        
       </tbody>
     </table>
   </div>
@@ -72,3 +63,22 @@
 
 <%= paginate @users, :window => 2 %>
 <%= javascript_include_tag 'admin/app_functions/users' %>
+
+<script>
+  $('#users').dataTable({
+    "bProcessing": true,
+    "bServerSide": true,
+    "iDisplayLength": 15,
+    "bLengthChange": false,
+    "sAjaxSource": "/admin/users/search.json",
+    "aoColumns": [
+            { "mData": "name" },
+            { "mData": "actual_name" },
+            { "mData": "email" },
+            { "mData": "phone_number" },
+            { "mData": "company_name" },
+            { "mData": "address" },
+            { "mData": "confirm_status" },
+            { "mData": "actions" }
+        ] });
+</script>

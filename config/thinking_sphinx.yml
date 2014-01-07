@@ -1,0 +1,21 @@
+development:
+     mem_limit: 256M
+     morphology: stem_en
+     enable_star: true
+     min_infix_len: 0
+     min_prefix_len: 1
+
+staging:
+     mem_limit: 256M
+     morphology: stem_en
+     enable_star: true
+     min_infix_len: 0
+     min_prefix_len: 1
+
+production:
+     mem_limit: 256M
+     morphology: stem_en
+     enable_star: true
+     min_infix_len: 0
+     min_prefix_len: 1
+     
