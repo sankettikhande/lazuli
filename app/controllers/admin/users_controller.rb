@@ -1,5 +1,5 @@
 class Admin::UsersController < AdminController
-  before_filter :set_instance
+  before_filter :set_instance, :only => [:new, :create, :edit, :update, :new_bulk, :create_bulk]
   
   def index
     @users = User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page])
@@ -59,22 +59,6 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       format.json {}   
     end  
-  end 
-
-  def channel_courses
-    channel = Channel.find(params[:id], :include => :courses)
-    @channel_courses = channel.courses
-    respond_to do |format|
-      format.js
-    end
-  end  
-
-  def course_subscription_types
-    course = Course.find(params[:id], :include => :subscriptions)
-    @course_subscriptions = course.subscriptions
-    respond_to do |format|
-      format.js
-    end
   end
 
   def new_bulk

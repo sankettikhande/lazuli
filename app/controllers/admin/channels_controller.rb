@@ -62,7 +62,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def channel_courses
-    channel = Channel.find(params[:id])
+    channel = Channel.find(params[:id], :include => :courses)
     @channel_courses = channel.courses
 
   end

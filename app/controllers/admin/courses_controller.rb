@@ -1,6 +1,6 @@
 class Admin::CoursesController < AdminController
 
-	before_filter :set_initialization, :except => [:get_channel_info, :destroy]
+	before_filter :set_initialization, :except => [:get_channel_info, :destroy, :course_subscription_types]
 
 	def new
 		@course = Course.new
@@ -49,6 +49,14 @@ class Admin::CoursesController < AdminController
 		@course = Course.find(params[:id], :include => :channels)
 		respond_to do |format|
 			format.json{}
+		end
+	end
+
+	def course_subscription_types
+		course = Course.find(params[:id], :include => :subscriptions)
+		@course_subscriptions = course.subscriptions
+		respond_to do |format|
+			format.js
 		end
 	end
 
