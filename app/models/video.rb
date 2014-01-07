@@ -25,11 +25,9 @@ class Video < ActiveRecord::Base
   def upload_to_vimeo
     topic = self.topic
     assign_video = []
-    topic.videos.each do |video|
-      if !video.vimeo_id
-        vedio_data = upload(video)
-        assign_video << vedio_data.vimeo_id
-      end
+    topic.videos.where(:vimeo_id => nil).each do |video|      
+      vedio_data = upload(video)
+      assign_video << vedio_data.vimeo_id
     end
     create_album(topic, assign_video) if assign_video.any?
   end
@@ -76,7 +74,7 @@ class Video < ActiveRecord::Base
     text = []
     desc = self.bookmark ? JSON.parse(self.bookmark) : {}
     desc.each do |desc_text|
-      text << "#{desc_text['description']} #{set_time(desc_text['time'])}"
+      text << "#{desc_text['description']} #{desc_text['time']}"
     end
     "#{self.description} #{text.join(', ')}"
   end
@@ -84,10 +82,6 @@ class Video < ActiveRecord::Base
   def set_vimeo_description(vimeo_id, description_text)
     object = VimeoLib.video
     object.set_description(vimeo_id, description_text)
-  end
-
-  def set_time(time)
-    sprintf("%.2f", (time.to_f / 100)).gsub(".", ":")
   end
 end
 

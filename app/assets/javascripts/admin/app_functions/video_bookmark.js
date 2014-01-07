@@ -1,4 +1,5 @@
 function add_bookmark(value){
+    value = parseFloat(value / 100).toFixed(2).toString().replace(".",":");
     var text = "<tr><td><input type='text' name='bookmark[]time' value='" + value +"' class='form-control time'></td><td><input type='text' name='bookmark[]description' class='form-control description'></td><td><a href='#' class='btn btn-trans' rel='tooltip' title='Delete' onclick='$(this).parent().parent().remove();javascript:void(0)'><i class='fa fa-ban'></i></a><td></tr>"
     $("#bookmark table").append(text);
 }
