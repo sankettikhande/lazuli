@@ -26,7 +26,7 @@ class Topic < ActiveRecord::Base
   # end
   # handle_asynchronously :delete_album_and_videos
 
-  def is_publish?
+  def published?
     self.status == "Publish"
   end
 end

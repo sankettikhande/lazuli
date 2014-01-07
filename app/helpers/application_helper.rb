@@ -43,8 +43,6 @@ module ApplicationHelper
   end
 
   def raw_field(classes)
-    content_tag(:i, :class => classes) do
-      ""
-    end
+    content_tag(:i, '', class: classes)
   end
 end
