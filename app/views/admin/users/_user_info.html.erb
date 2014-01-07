@@ -3,7 +3,7 @@
 		<label for="uname">Actual Name<%= required_field %></label>
 	</div>
 	<div class="col-md-4">
-	  <%= f.text_field 'actual_name', :class => 'form-control' %>
+	  <%= f.text_field 'actual_name', :class => 'form-control validate[required]' %>
 	</div>
 </div>
 	<div class="row form-group">
@@ -11,7 +11,7 @@
 		<label for="uname">User Name<%= required_field %></label>
 	</div>
 	<div class="col-md-4">
-	  <%= f.text_field 'name', :class => 'form-control' %>
+	  <%= f.text_field 'name', :class => 'form-control validate[required]' %>
 	</div>
 </div>
 <div class="row-align form-group">
@@ -19,15 +19,15 @@
 		<label for="emailID">Email ID<%= required_field %></label>
 	</div>
 	<div class="col-md-4">
-		<%= f.text_field 'email', :class => 'form-control' %>
+		<%= f.text_field 'email', :class => 'form-control validate[required, custom[email]]' %>
 	</div>
 </div>
 <div class="row form-group">
 	<div class="col-md-2">
-		<label for="emailID">Phone Number</label>
+		<label>Phone Number</label>
 	</div>
 	<div class="col-md-4">
-		<%= f.text_field 'phone_number', :class => 'form-control' %>
+		<%= f.text_field 'phone_number', :class => 'form-control validate[custom[phone]]' %>
 	</div>
 </div>
 
@@ -35,7 +35,7 @@
 	<div class="col-md-6">	
     <div class="row form-group">
     	<div class="col-md-4">
-    		<label for="emailID">Company Name</label>
+    		<label>Company Name</label>
     	</div>
     	<div class="col-md-8">
   			<%= f.text_field 'company_name', :class => 'form-control' %>
@@ -46,7 +46,7 @@
     		<label for="emailID">Password<%= required_field %></label>
     	</div>
     	<div class="col-md-8">
-  			<%= f.password_field 'password', :class => 'form-control' %>
+  			<%= f.password_field 'password', :class => 'form-control validate[required, minSize[8]]' %>
     	</div>
     </div>
   </div>

@@ -5,7 +5,7 @@
 		<label for="channelsS2">Channels Subscribed To<%= required_field %></label>
 	</div>
 	<div class="col-md-3">
-	  <%= f.select 'channel_id', options_for_select(@channels.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
+	  <%= f.select 'channel_id', options_for_select(@channels.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id validate[required]' %>
 	</div>
 </div>
 	<div class="row form-group">
@@ -13,7 +13,7 @@
 		<label for="uname">Course Subscribed For<%= required_field %></label>
 	</div>
 	<div class="col-md-3">
-	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
+	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id validate[required]' %>
 	</div>
 </div>
 
@@ -22,7 +22,7 @@
 		<label for="uname">Type of Subscription<%= required_field %></label>
 	</div>
 	<div class="col-md-3 subscription_type">
-	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ "#{s.name}- #{s.calculated_days} days", s.id, {'data-calculated_days' => s.calculated_days} ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id' %>
+	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ "#{s.name}- #{s.calculated_days} days", s.id, {'data-calculated_days' => s.calculated_days} ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id validate[required]' %>
 	</div>
 </div>
 <div class="row-align form-group">
@@ -31,7 +31,7 @@
 	</div>
 	<div class="col-md-3">
 		<div class="input-group date date-picker" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
-			<%= f.text_field 'subscription_date', :class => "form-control subscription_date" %>
+			<%= f.text_field 'subscription_date', :class => "form-control subscription_date validate[required]" %>
 			<span class="input-group-btn">
 			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 			</span>

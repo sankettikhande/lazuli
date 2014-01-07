@@ -1,0 +1,5 @@
+<% if @user.errors.blank? %>
+	window.location.href = "<%= admin_users_path %>"
+<% else %>
+	$('#error_messages').css('color','red').html('<%= error_message_tag(@user.errors.full_messages) %>')	
+<% end %>
