@@ -50,6 +50,7 @@ class Admin::TopicsController < AdminController
 		@video = Video.find_by_id(params[:id])
 		@video.bookmark = params["bookmark"].to_json
 		@video.save
+		@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
 	end
 
   protected

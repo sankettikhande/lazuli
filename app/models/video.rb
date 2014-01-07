@@ -24,14 +24,14 @@ class Video < ActiveRecord::Base
 
   def upload_to_vimeo
     topic = self.topic
-    assign_vedio = []
+    assign_video = []
     topic.videos.each do |video|
       if !video.vimeo_id
         vedio_data = upload(video)
-        assign_vedio << vedio_data.vimeo_id
+        assign_video << vedio_data.vimeo_id
       end
     end
-    create_album(topic, assign_vedio) if assign_vedio.any?
+    create_album(topic, assign_video) if assign_video.any?
   end
   handle_asynchronously :upload_to_vimeo
 
@@ -43,13 +43,13 @@ class Video < ActiveRecord::Base
     VimeoLib.album.remove_video(self.topic.vimeo_album_id,self.vimeo_id)
   end
 
-  def create_album(topic, assign_vedio)
+  def create_album(topic, assign_video)
     if topic.vimeo_album_id.blank?
-      album = VimeoLib.album.create(topic.title, assign_vedio.first, {:description => topic.description, :videos => assign_vedio.join(",") })
+      album = VimeoLib.album.create(topic.title, assign_video.first, {:description => topic.description, :videos => assign_video.join(",") })
       topic.vimeo_album_id = album['album'].first['id']
       topic.save
     else
-      assign_vedio.each do |vimeo_id|
+      assign_video.each do |vimeo_id|
         VimeoLib.album.add_video(topic.vimeo_album_id, vimeo_id)
       end
     end
@@ -58,7 +58,7 @@ class Video < ActiveRecord::Base
   def upload(video)
     video.vimeo_id = VimeoLib.upload.upload(video.clip.path)["ticket"]["video_id"]
     v = VimeoLib.video
-    v.set_description(video.vimeo_id,video.description_text)
+    set_vimeo_description(video.vimeo_id, video.description_text)
     v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
     v.set_title(video.vimeo_id, video.title)
     vimeo_data = v.get_info(video.vimeo_id)
@@ -76,9 +76,18 @@ class Video < ActiveRecord::Base
     text = []
     desc = self.bookmark ? JSON.parse(self.bookmark) : {}
     desc.each do |desc_text|
-      text << "#{desc_text['description']} #{desc_text['time']}"
+      text << "#{desc_text['description']} #{set_time(desc_text['time'])}"
     end
     "#{self.description} #{text.join(', ')}"
+  end
+
+  def set_vimeo_description(vimeo_id, description_text)
+    object = VimeoLib.video
+    object.set_description(vimeo_id, description_text)
+  end
+
+  def set_time(time)
+    sprintf("%.2f", (time.to_f / 100)).gsub(".", ":")
   end
 end
 
