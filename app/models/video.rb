@@ -21,6 +21,10 @@ class Video < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
 
+  def upload_single_video
+    video_data = upload(self)
+    VimeoLib.album.add_video(video.topic.vimeo_album_id, video_data.vimeo_id)
+  end
 
   def upload_to_vimeo
     topic = self.topic
@@ -32,6 +36,7 @@ class Video < ActiveRecord::Base
     create_album(topic, assign_video) if assign_video.any?
   end
   handle_asynchronously :upload_to_vimeo
+  handle_asynchronously :upload_single_video
 
   def delete_vimeo_video
     VimeoLib.video.delete(self.vimeo_id)
@@ -60,6 +65,7 @@ class Video < ActiveRecord::Base
     v.add_tags(video.vimeo_id,video.tag_list.join(",")) if !video.tag_list.blank?
     v.set_title(video.vimeo_id, video.title)
     vimeo_data = v.get_info(video.vimeo_id)
+    video.status = "Publish"
     video.vimeo_data = vimeo_data
     video.vimeo_url = hashie_get_info(vimeo_data).video.first.urls.url.first._content if vimeo_data
     video.save!
@@ -82,6 +88,10 @@ class Video < ActiveRecord::Base
   def set_vimeo_description(vimeo_id, description_text)
     object = VimeoLib.video
     object.set_description(vimeo_id, description_text)
+  end
+
+  def is_video_publish?
+    self.status == "Publish"
   end
 end
 
