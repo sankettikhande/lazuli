@@ -1,5 +1,5 @@
 module Admin::TopicsHelper
-	def set_title_for_video(title)
+	def video_title(title)
 		title.present? ? title : "Add Video"
 	end
 end
