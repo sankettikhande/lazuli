@@ -26,8 +26,8 @@ class Video < ActiveRecord::Base
     topic = self.topic
     assign_video = []
     topic.videos.where(:vimeo_id => nil).each do |video|      
-      vedio_data = upload(video)
-      assign_video << vedio_data.vimeo_id
+      video_data = upload(video)
+      assign_video << video_data.vimeo_id
     end
     create_album(topic, assign_video) if assign_video.any?
   end
