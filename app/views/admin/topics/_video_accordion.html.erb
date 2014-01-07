@@ -8,7 +8,7 @@
 					<div class="panel-title">
 							<div class="row">
 								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>">
-								<div class="col-sm-8"><h5>Add Video </h5></div></a>
+								<div class="col-sm-8"><h5><%= set_video_accordance(video_form.object.title) %></h5></div></a>
 								<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
 								<div class="col-sm-1">
 									<%= video_form.number_field :sequence_number, :class => "form-control", :id =>"seqNum1" %>
