@@ -11,7 +11,7 @@
 		<div class="panel-body form-group">
 			<div class="row">
 				<div class="col-sm-2">
-					<label for="comp-name" class="control-label">Company Name</label>
+					<label for="comp-name" class="control-label">Company Name<%= required_field %></label>
 				</div>
 				<div class="col-sm-4">
 					<%= f.text_field :company_name, :class => "form-control" %>
@@ -65,7 +65,7 @@
 			<div class="seperator10"></div>
 			<div class="row">
 				<div class="col-sm-2">
-					<label for="ab-id" class="control-label">Australian Business/ Company Number</label>
+					<label for="ab-id" class="control-label">Australian Business/ Company Number<%= required_field %></label>
 				</div>
 				<div class="col-sm-4">
 					<%= f.text_field :company_number, :class => "form-control" %>

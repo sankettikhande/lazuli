@@ -7,12 +7,12 @@
 				<div class="panel-body seperator5">
 					<div class="seperator5"></div>
 					<div class="row">
-						<div class="col-sm-2"><label class="control-label">Channel Type</label></div>
+						<div class="col-sm-2"><label class="control-label">Channel Type<%= required_field %></label></div>
 						<div class="col-sm-2">
 							<%= f.select :channel_type, options_for_select([["Public","public"], ["Private","private"]], @channel.channel_type), {}, { :class => 'form-control' } %>
 						</div>
 						<div class="col-sm-2">
-							<label for="channel-name" class="control-label">Channel Name</label>
+							<label for="channel-name" class="control-label">Channel Name<%= required_field %></label>
 						</div>
 						<div class="col-sm-2">
 							<%= f.text_field :name, :class => "form-control" %>
@@ -36,7 +36,7 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<a href="#"><i class="fa fa-plus"></i></a>
-									<%= f.link_to_add "(Add another courses)", :courses, :data => { :target => "#channel_accordion" } %>
+									<%= f.link_to_add "(Add another course)", :courses, :data => { :target => "#channel_accordion" } %>
 								</div>
 							</div>
 							<!-- ACCORDION END -->

@@ -21,7 +21,7 @@
 				<tbody>
 					<% @topics.each do |topic|%>
 					<tr>
-				      <td><%= topic.title %></td>
+				      <td><%= link_to topic.title, edit_admin_topic_url(topic) %></td>
 				      <td><%= topic.presence.try(:course).presence.try(:name) %></td>
 				      <td><%= channel_name_for_topic(topic.channel_id)  %></td>
 				      <td><%= "https://vimeo.com/album/#{topic.presence.try(:vimeo_album_id)}" %></td>

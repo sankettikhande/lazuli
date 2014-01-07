@@ -1,4 +1,5 @@
 class Admin::UsersController < AdminController
+  before_filter :set_instance
   
   def index
     @users = User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page])
@@ -6,7 +7,6 @@ class Admin::UsersController < AdminController
 
   def new
     @user = User.new
-    set_instance
     @user.user_channel_subscriptions.build
   end	
 
@@ -16,7 +16,6 @@ class Admin::UsersController < AdminController
       if @user.save
         format.html {redirect_to admin_users_url}
       else
-        set_instance
         format.html { render :action => "new" }
       end
     end
@@ -80,7 +79,6 @@ class Admin::UsersController < AdminController
 
   def new_bulk
     @user =User.new
-    set_instance
     @user_error = ''
     @user.user_channel_subscriptions.build
   end 
@@ -111,7 +109,6 @@ private
     user_params.delete("file")
     @user = User.new(user_params)
     @bulk_user_errors = options[:errors] || [] 
-    set_instance
   end
   
   def set_instance

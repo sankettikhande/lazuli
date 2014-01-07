@@ -10,7 +10,7 @@
 			<div class="panel-body seperator5">
 				<div class="row">
 					<div class="col-sm-11">
-						<h4 class="heading">Topic</h4>
+						<h4 class="heading">Add Topic</h4>
 					</div>
 					<div class="col-sm-1 text-right">
 						<a href="#"><i class="fa fa-2x fa-question-circle"></i></a>
@@ -19,16 +19,16 @@
 				<div class="seperator20"></div>
 				<div class="row">
 					<div class="col-sm-1">
-						<label for="t-topic" class="control-label">Topic</label>
+						<label for="t-topic" class="control-label">Topic<%= required_field %></label>
 					</div>
 					<div class="col-sm-3">
 						<%= f.text_field 'title', :class => "form-control"%>
 					</div>
 					<div class="col-sm-1 col-sm-offset-2">
-						<label class="control-label" for="t-course">Channel</label>
+						<label class="control-label" for="t-course">Channel<%= required_field %></label>
 					</div>
 					<div class="col-sm-3">
-						<%= f.select :channel_id, options_for_select(Channel.all.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
+						<%= f.select 'channel_id',options_for_select(Channel.all.collect{|c| [ c.name, c.id]}, f.object.channel_id),{:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
 					</div>
 				</div>
 				<div class="seperator10"></div>
@@ -46,10 +46,10 @@
 					<div class="col-sm-6">
 						<div class="row">
 							<div class="col-sm-2">
-								<label class="control-label" for="t-channel">Cources</label>
+								<label class="control-label" for="t-channel">Courses<%= required_field %></label>
 							</div>
 							<div class="col-sm-6">
-								<%= f.select 'course_id', options_for_select('', f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
+								<%= f.select 'course_id', options_for_select(@channel_courses.collect{|i| [i.name, i.id]}, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
 							</div>
 						</div>
 						<div class="row">

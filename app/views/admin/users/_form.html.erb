@@ -10,77 +10,7 @@
 					    <% end %>
 					  </ul>
 					<% end %>
-						<div class="row-align form-group">
-				    	<div class="col-md-2">
-				    		<label for="uname">Actual Name:</label>
-				    	</div>
-				    	<div class="col-md-4">
-			    		  <%= f.text_field 'actual_name', :class => 'form-control' %>
-				    	</div>
-				    </div>
-					 	<div class="row form-group">
-				    	<div class="col-md-2">
-				    		<label for="uname">User Name:</label>
-				    	</div>
-				    	<div class="col-md-4">
-			    		  <%= f.text_field 'name', :class => 'form-control' %>
-				    	</div>
-				    </div>
-				    <div class="row-align form-group">
-				    	<div class="col-md-2">
-				    		<label for="emailID">Email ID:</label>
-				    	</div>
-				    	<div class="col-md-4">
-			    			<%= f.text_field 'email', :class => 'form-control' %>
-				    	</div>
-				    </div>
-				    <div class="row form-group">
-				    	<div class="col-md-2">
-				    		<label for="emailID">Phone Number:</label>
-				    	</div>
-				    	<div class="col-md-4">
-			    			<%= f.text_field 'phone_number', :class => 'form-control' %>
-				    	</div>
-				    </div>
-
-				    <div class="row col-md-13">
-				    	<div class="col-md-6">	
-						    <div class="row form-group">
-						    	<div class="col-md-4">
-						    		<label for="emailID">Company Name:</label>
-						    	</div>
-						    	<div class="col-md-8">
-					    			<%= f.text_field 'company_name', :class => 'form-control' %>
-						    	</div>
-						    </div>
-						    <div class="row form-group">
-						    	<div class="col-md-4">
-						    		<label for="emailID">Password:</label>
-						    	</div>
-						    	<div class="col-md-8">
-					    			<%= f.password_field 'password', :class => 'form-control' %>
-						    	</div>
-						    </div>
-					    </div>
-					    <div class="col-md-6">
-						    <div class="row form-group">
-						    	<div class="col-md-4">
-						    		<label for="emailID">Business/Personal Address:</label>
-						    	</div>
-						    	<div class="col-md-8">
-					    			<%= f.text_area 'address', :class => 'form-control', :size => '10x3' %>
-						    	</div>
-						    </div>
-					    </div>
-					  </div>  
-				   <!--  <div class="row">
-				    	<div class="col-md-3">
-				    		<label for="emailID">Confirm Password </label>
-				    	</div>
-				    	<div class="col-md-9">
-			    			<%#= f.password_field 'password_confirmation', :class => 'form-control' %>
-				    	</div>
-				    </div> -->
+					<%= render 'user_info', :f => f %>
 				  	<div id="user_channels">
 				  	<%= f.fields_for :user_channel_subscriptions do |uc_form| %>
 				  		<%= render 'user_channel_subscription_fields', :f => uc_form %>

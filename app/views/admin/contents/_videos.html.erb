@@ -18,7 +18,7 @@
 				<tbody>
 					<% @videos.each do |video|%>
 					<tr>
-					  <td><%= video.title %></td>
+					  <td><%= link_to video.title, edit_admin_video_url(video) %></td>
 				      <td><%= video.presence.try(:topic).presence.try(:title) %></td>
 				      <td><%= video.presence.try(:topic).presence.try(:course).presence.try(:name) %></td>
 				      <td><%= video.presence.try(:tag_list) %></td>
