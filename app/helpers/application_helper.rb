@@ -41,4 +41,8 @@ module ApplicationHelper
       "*"
     end
   end
+
+  def raw_field(classes)
+    content_tag(:i, '', class: classes)
+  end
 end

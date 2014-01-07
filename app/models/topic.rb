@@ -25,6 +25,32 @@ class Topic < ActiveRecord::Base
   #   VimeoLib.album.delete(self.vimeo_album_id)
   # end
   # handle_asynchronously :delete_album_and_videos
+
+  def published?
+    self.status == "Publish"
+  end
+
+  def upload_to_vimeo
+    assign_video = []
+    self.videos.where(:vimeo_id => nil).each do |video|      
+      video_data = video.upload
+      assign_video << video_data.vimeo_id
+    end
+    create_album(assign_video) if assign_video.any?
+  end
+  handle_asynchronously :upload_to_vimeo
+
+  def create_album(assign_video)
+    if self.vimeo_album_id.blank?
+      album = VimeoLib.album.create(self.title, assign_video.first, {:description => self.description, :videos => assign_video.join(",") })
+      self.vimeo_album_id = album['album'].first['id']
+      self.save
+    else
+      assign_video.each do |vimeo_id|
+        VimeoLib.album.add_video(self.vimeo_album_id, vimeo_id)
+      end
+    end
+  end
 end
 
 def add_to_vimeo_album

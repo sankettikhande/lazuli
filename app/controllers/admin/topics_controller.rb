@@ -31,8 +31,9 @@ class Admin::TopicsController < AdminController
 			update_topic(params[:topic], "Publish")
 		elsif params[:Publish]
 			publish_topic(@topic)
-			redirect_to :back, notice: "You have been Publish this Topic."
+			redirect_to :back, notice: "You have been Publish this Topic. It will take some time to reflect changes"
 		elsif params[:Save]
+			@topic.update_attribute(:status, "PartialPublished")
 			update_topic(params[:topic])
 		end
 	end
@@ -89,6 +90,6 @@ class Admin::TopicsController < AdminController
 
 	def publish_topic(topic)
 		topic.update_attribute(:status, "Publish")
-		topic.videos.first.upload_to_vimeo
+		topic.upload_to_vimeo
 	end
 end

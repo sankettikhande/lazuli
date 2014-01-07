@@ -18,8 +18,8 @@ class Admin::VideosController < AdminController
 		@video = Video.find(params[:id])
 		respond_to do |format|
 			if @video.clip.present?
-				@video.upload_to_vimeo
-				format.html {redirect_to admin_contents_url ,:notice =>"Video successfully uploaded"}
+				@video.upload_single_video
+				format.html {redirect_to admin_contents_url ,:notice =>"Video successfully uploaded. It will take some time to reflect changes"}
 			else
 				format.html {redirect_to admin_contents_url, :notice => "Video file not added"}
 			end
