@@ -1,1 +1,5 @@
-$('.courses_id').html("<%= escape_javascript(render 'channel_courses') %>");
+<% if params[:course_id].blank? %>
+	$('.courses_id').html("<%= escape_javascript(render 'channel_courses') %>");
+<% else %>
+	$('#<%= params[:course_id] %>').html("<%= escape_javascript(render 'channel_courses') %>");
+<% end %>

@@ -8,7 +8,7 @@ $('body').on('focus',".date-picker", function(){
       var course_id = $(this).closest(".form-group").next().find(".courses_id").attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
-              url: "/admin/users/channel_courses.js",
+              url: "/admin/channels/"+val+"/channel_courses.js",
               data: {id: val, course_id: course_id}
             });
      });
@@ -22,7 +22,7 @@ $('body').on('focus',".date-picker", function(){
          var subscription_id = $(this).closest(".form-group").prev().find(".subscriptions_id").attr('id');
          var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
          var expiry_date = get_expiry_date(ev.date, calculated_days)
-         if (calculated_days.to_s != 'undefined')
+         if (calculated_days != undefined)
           $("#"+date_id).val(expiry_date);
         });
 
@@ -36,7 +36,7 @@ $('body').on('focus',".date-picker", function(){
       var subscription_id = $(this).closest(".form-group").next().find(".subscriptions_id").attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
-              url: "/admin/users/course_subscription_types.js",
+              url: "/admin/courses/"+val+"/course_subscription_types.js",
               data: {id: val, subscription_id: subscription_id}
             });
     })
