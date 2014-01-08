@@ -22,6 +22,9 @@ Lazuli::Application.routes.draw do
         get 'get_channel'
         get 'channel_courses'
       end
+      collection do
+        get 'search'
+      end
     end
 
     resources	:contents do
