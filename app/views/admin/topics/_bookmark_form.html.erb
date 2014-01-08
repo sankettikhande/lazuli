@@ -8,7 +8,7 @@
 			</tr>
 			<% video = topic.videos.first %>
 			<%= hidden_field_tag 'id', video.id %>
-			<% if video.bookmark.nil? %>
+			<% if video.bookmark.nil? || video.bookmark.blank?%>
 				<tr>
 			  	<td>
 			  		<input type="text" name="bookmark[]time" class="form-control time" value="0:00">
