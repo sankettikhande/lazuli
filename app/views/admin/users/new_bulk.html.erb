@@ -2,12 +2,8 @@
   	<div class="panel panel-default">
   		<div class="panel-body">
   			<div class="form-group">
-  				<%= nested_form_for @user, :url => create_bulk_admin_users_path, multipart: true do |f| %>
-  					<div id='error' style="color:red;">
-							<div style="padding-left:15px;">
-								<%= error_message_tag(@bulk_user_errors) unless @bulk_user_errors.blank?%>
-							</div>
-  					</div>
+  				<%= nested_form_for @user, :url => create_bulk_admin_users_path, :remote => true, :html => {:id => 'multiple_user_form'} do |f| %>
+  					<div id='error_messages'></div>
   	  			<div class="row">
 	  				<div class="col-md-12">
 						  <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -67,3 +63,6 @@
 			margin-right: -15px;
 		}
 	</style>
+
+<%= javascript_include_tag 'admin/jquery.form.js' %>
+<%= javascript_include_tag 'admin/app_functions/users' %>

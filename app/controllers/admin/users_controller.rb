@@ -18,9 +18,9 @@ class Admin::UsersController < AdminController
   	@user = User.new(params[:user])
   	respond_to do |format|
       if @user.save
-        format.html {redirect_to admin_users_url}
+        format.js
       else
-        format.html { render :action => "new" }
+        format.js
       end
     end
   end	
@@ -35,10 +35,10 @@ class Admin::UsersController < AdminController
     params[:user].delete('password') if params[:user][:password].blank?
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to admin_users_url}
+        format.js
       else
         @user_channel = @user.user_channel_subscriptions
-        format.html{ render :action => "edit"}       
+        format.js
       end
     end
   end   
@@ -78,15 +78,15 @@ class Admin::UsersController < AdminController
       respond_to do |format|
         if @users.map(&:valid?).all?
           @users.each(&:save!)
-          format.html {redirect_to admin_users_url}
+          format.js
         else
           build_user_and_association(:errors => @users.map(&:errors).map(&:full_messages).flatten)
-          format.html { render :action => "new_bulk" }
+          format.js
         end
       end    
     else
       build_user_and_association(:errors => @bulk_user_errors)
-      render :action => "new_bulk"
+      render :format => [:js]
     end  
   end
 
@@ -101,8 +101,8 @@ private
   
   def set_instance
     @channels = Channel.all
-    @subscriptions = Subscription.all
-    @courses = Course.all
+    @subscriptions = []
+    @courses = []
   end
 
 end

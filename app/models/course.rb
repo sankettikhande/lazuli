@@ -61,6 +61,10 @@ class Course < ActiveRecord::Base
     name.blank? ? "Course Details" : name
   end
 
+  def users_for_course
+    user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.channel_course_permissions.size.zero?

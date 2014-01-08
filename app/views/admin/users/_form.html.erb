@@ -2,14 +2,8 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<%= nested_form_for [:admin, @user] do |f| %>
-					<% if @user.errors.any? %>
-					  <ul style='color: red;padding-left:15px;'>
-					    <% @user.errors.full_messages.each do |msg| %>
-					      <li><%= msg %></li>
-					    <% end %>
-					  </ul>
-					<% end %>
+					<%= nested_form_for [:admin, @user], :html => {:id => 'user_form', :remote => true} do |f| %>
+					<div id='error_messages'></div>
 					<%= render 'user_info', :f => f %>
 				  	<div id="user_channels">
 				  	<%= f.fields_for :user_channel_subscriptions do |uc_form| %>
@@ -42,3 +36,4 @@
 			margin-right: -15px;
 		}
 	</style>
+<%= javascript_include_tag 'admin/app_functions/users' %>

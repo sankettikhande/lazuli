@@ -11,6 +11,7 @@ class Channel < ActiveRecord::Base
   has_many :channel_courses, :dependent => :destroy
   has_many :courses, :through => :channel_courses
   has_many :channel_course_permissions, :dependent => :destroy
+  has_many :user_channel_subscriptions, :dependent => :destroy
 
   include Cacheable
   
@@ -48,5 +49,8 @@ class Channel < ActiveRecord::Base
       course.destroy
     end
   end
-  
+
+  def users_for_channel
+    user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
+  end
 end
