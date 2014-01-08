@@ -535,7 +535,7 @@ disabled look for disabled choices in the results dropdown
 
     font-size: 1px;
     outline: none;
-    background: url('/assets/select2.png') right top no-repeat;
+    background: url('select2.png') right top no-repeat;
 }
 
 .select2-container-multi .select2-search-choice-close {
