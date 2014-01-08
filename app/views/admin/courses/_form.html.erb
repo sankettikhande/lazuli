@@ -1,4 +1,4 @@
-<%= nested_form_for [:admin , @course] do |f| %>
+<%= nested_form_for [:admin , @course], :html => {:class => 'formClass'} do |f| %>
 <%= errors_for @course unless @course.errors.blank? %>
 <div class="form-group">
 	<div class="row">
@@ -26,7 +26,7 @@
     	  				<label for="crs-name" class="control-label">Course Name<%= required_field %></label>
     	  			</div>
     	  			<div class="col-sm-4">
-    	  				<%=f.text_field 'name', :class => "form-control"%>
+    	  				<%=f.text_field 'name', :class => "form-control validate[required]" %>
     	  			</div>
     	  			<div class="col-sm-2">
     	  				<label for="name-trainer" class="control-label">Name of Trainer</label>
@@ -89,4 +89,4 @@
 	<% end %>
 </div>
 
-
+<%= javascript_include_tag "admin/app_functions/jquery_validation.js"%>

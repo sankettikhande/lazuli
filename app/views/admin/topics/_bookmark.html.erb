@@ -5,9 +5,10 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 			</div>
 			<div class="modal-body">
+				<div id="bookmark_alert"></div>
 				<div class="row">
 					<div class="col-sm-7">
-						<a href="<%= topic.videos.first.clip.url %>" style="display:block;width:420px;height:260px;" id="player"> </a>
+						<a href="<%= topic.videos.first.clip.url %>" style="display:block; width:420px; height:260px;" id="player"> </a>
 					</div>
 					<div class="col-sm-5">
 						<%= render 'bookmark_form', :topic => topic %>
@@ -24,4 +25,4 @@
 	<!-- /.modal-dialog -->
 </div>
 
-<%= javascript_include_tag "admin/app_functions/video_bookmark.js"%>
+<%= javascript_include_tag "admin/app_functions/video_bookmark.js" %>

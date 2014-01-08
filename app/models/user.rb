@@ -82,4 +82,11 @@ class User < ActiveRecord::Base
     errors
   end
 
+  def self.sphinx_search options
+    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
+    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
+    User.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
+  end
+
 end

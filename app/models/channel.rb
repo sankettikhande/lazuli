@@ -33,6 +33,9 @@ class Channel < ActiveRecord::Base
 
 
   #INSTANCE METHODS
+  def subscription_types
+    Subscription.all.map(&:name).join(", ")
+  end
 
   #CLASS METHODS
   def set_channel_permission
@@ -52,5 +55,12 @@ class Channel < ActiveRecord::Base
 
   def users_for_channel
     user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
+  end
+
+  def self.sphinx_search options
+    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
+    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
+    Channel.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
   end
 end

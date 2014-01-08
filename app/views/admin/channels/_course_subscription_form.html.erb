@@ -5,7 +5,7 @@
 	<div class="checkbox-list">
 		<% @subscriptions.each_with_index do |subscription, subs_index|%>
 			<div class="col-sm-5">
-				<%= check_box_tag "channel[courses_attributes][#{index}][subscription_ids][]", subscription.id, f.object.subscription_ids.include?(subscription.id) %>
+				<%= check_box_tag "channel[courses_attributes][#{index}][subscription_ids][]", subscription.id, f.object.subscription_ids.include?(subscription.id) , :class => 'validate[required]' %>
 				<label> <%= subscription.name %><label>
 			</div>
 		<% end %>

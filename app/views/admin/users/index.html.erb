@@ -60,8 +60,6 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
-<%= paginate @users, :window => 2 %>
 <%= javascript_include_tag 'admin/app_functions/users' %>
 
 <script>
@@ -72,13 +70,13 @@
     "bLengthChange": false,
     "sAjaxSource": "/admin/users/search.json",
     "aoColumns": [
-            { "mData": "name" },
-            { "mData": "actual_name" },
-            { "mData": "email" },
-            { "mData": "phone_number" },
-            { "mData": "company_name" },
-            { "mData": "address" },
-            { "mData": "confirm_status" },
-            { "mData": "actions" }
+            { "mData": "name"},
+            { "mData": "actual_name"},
+            { "mData": "email"},
+            { "mData": "phone_number"},
+            { "mData": "company_name"},
+            { "mData": "address", "bSortable": false },
+            { "mData": "confirm_status", "bSortable": false },
+            { "mData": "actions", "bSortable": false }
         ] });
 </script>
