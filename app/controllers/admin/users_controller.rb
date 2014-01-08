@@ -6,10 +6,7 @@ class Admin::UsersController < AdminController
   end
 
   def search
-    query = params[:sSearch].blank? ? "" : "#{params[:sSearch]}*"
-    page = (params[:iDisplayStart].to_i/params[:iDisplayLength].to_i) + 1
-    @users = User.search(query).page(page).per(params[:iDisplayLength])
-    
+    @users = User.sphinx_search(params)
   end
 
   def new
@@ -81,15 +78,15 @@ class Admin::UsersController < AdminController
       respond_to do |format|
         if @users.map(&:valid?).all?
           @users.each(&:save!)
-          format.html {redirect_to admin_users_url}
+          format.js
         else
           build_user_and_association(:errors => @users.map(&:errors).map(&:full_messages).flatten)
-          format.html { render :action => "new_bulk" }
+          format.js
         end
       end    
     else
       build_user_and_association(:errors => @bulk_user_errors)
-      render :action => "new_bulk"
+      render :format => [:js]
     end  
   end
 
