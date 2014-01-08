@@ -24,3 +24,5 @@ public/assets/
 public/system
 db/sphinx
 db/schema.rb
+*.pid
+config/development.sphinx.conf

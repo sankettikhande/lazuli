@@ -6,10 +6,7 @@ class Admin::UsersController < AdminController
   end
 
   def search
-    query = params[:sSearch].blank? ? "" : "#{params[:sSearch]}*"
-    page = (params[:iDisplayStart].to_i/params[:iDisplayLength].to_i) + 1
-    @users = User.search(query).page(page).per(params[:iDisplayLength])
-    
+    @users = User.sphinx_search(params)
   end
 
   def new
