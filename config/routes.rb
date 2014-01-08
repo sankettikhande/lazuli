@@ -9,8 +9,6 @@ Lazuli::Application.routes.draw do
     		get 'search_user'
         get 'new_bulk'
         post 'create_bulk'
-        get 'channel_courses'
-        get 'course_subscription_types'
         get 'search'
     	end
     	member do
@@ -57,6 +55,7 @@ Lazuli::Application.routes.draw do
         get 'search'
       end
     end
+    resources :user_channel_subscriptions
   end
   get "/delayed_job" => DelayedJobWeb, :anchor => false
   root :to => "home#index"

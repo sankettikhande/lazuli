@@ -63,3 +63,9 @@ $('body').on('focus',".date-picker", function(){
   })
 
 $('input[type="checkbox"]').uniform();
+
+jQuery(function ($) {
+  $(document).on('nested:fieldRemoved:user_channel_subscriptions', function(event) {
+    $(event.target).remove()
+  });
+});
