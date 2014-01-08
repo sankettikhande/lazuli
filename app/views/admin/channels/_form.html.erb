@@ -1,5 +1,5 @@
 <%= javascript_include_tag "admin/app_functions/channel.js"%>
-<%= nested_form_for [:admin, @channel], :html => { :multipart => true } do |f| %>
+<%= nested_form_for [:admin, @channel], :html => { :multipart => true, :class => 'formClass' } do |f| %>
 	<%= errors_for @channel unless @channel.errors.blank? %>
 	<section class="container">
 		<div class="form-group">
@@ -9,13 +9,13 @@
 					<div class="row">
 						<div class="col-sm-2"><label class="control-label">Channel Type<%= required_field %></label></div>
 						<div class="col-sm-2">
-							<%= f.select :channel_type, options_for_select([["Public","public"], ["Private","private"]], @channel.channel_type), {}, { :class => 'form-control' } %>
+							<%= f.select :channel_type, options_for_select([["Public","public"], ["Private","private"]], @channel.channel_type), {}, { :class => 'form-control validate[required]' } %>
 						</div>
 						<div class="col-sm-2">
 							<label for="channel-name" class="control-label">Channel Name<%= required_field %></label>
 						</div>
 						<div class="col-sm-2">
-							<%= f.text_field :name, :class => "form-control" %>
+							<%= f.text_field :name, :class => "form-control validate[required]" %>
 						</div>
 						<div class="col-sm-1 col-sm-offset-3">
 							<a href="#"><i class="fa fa-question-circle fa-3x"></i></a>
@@ -53,3 +53,5 @@
 		</div>
 	</section>
 <% end %>
+
+<%= javascript_include_tag "admin/app_functions/jquery_validation.js"%>
