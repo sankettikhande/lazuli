@@ -81,15 +81,15 @@ class Admin::UsersController < AdminController
       respond_to do |format|
         if @users.map(&:valid?).all?
           @users.each(&:save!)
-          format.html {redirect_to admin_users_url}
+          format.js
         else
           build_user_and_association(:errors => @users.map(&:errors).map(&:full_messages).flatten)
-          format.html { render :action => "new_bulk" }
+          format.js
         end
       end    
     else
       build_user_and_association(:errors => @bulk_user_errors)
-      render :action => "new_bulk"
+      render :format => [:js]
     end  
   end
 
