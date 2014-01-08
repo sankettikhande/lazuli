@@ -89,7 +89,7 @@ class Admin::TopicsController < AdminController
 	end
 
 	def publish_topic(topic)
-		topic.update_attribute(:status, "Publish")
+		topic.update_attribute(:status, "InProcess")
 		topic.upload_to_vimeo
 	end
 end

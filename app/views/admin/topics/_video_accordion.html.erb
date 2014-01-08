@@ -17,7 +17,7 @@
 
 								<div class="col-sm-1 nopadding">
 									<div class="btn-group nopadding">
-										<%= video_form.link_to_remove raw("<button class='btn'><i class='fa fa-ban'></i></button>") %>
+										<%= video_form.link_to_remove button_raw_field('fa fa-ban') if index != 0 %>
 										<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
 										</a>
 									</div>
@@ -131,12 +131,14 @@
 				<a href="#"><i class="fa fa-plus"></i></a>
 				<%= f.link_to_add "(Add another video)", :videos, :data => { :target => "#accordion1" } %>
 			</div>
-			<div id="bookmark_link">
-				<a href="#video-modal" data-toggle="modal">
-					<i class="fa fa-3x fa-plus"></i>
-					(Add a bookmark)
-				</a>
-			</div>
+		  <% if !f.object.new_record? %>
+				<div id="bookmark_link">
+					<a href="#video-modal" data-toggle="modal">
+						<i class="fa fa-3x fa-plus"></i>
+						(Add a bookmark)
+					</a>
+				</div>
+			<% end %>
 	</div>
 </div>
 

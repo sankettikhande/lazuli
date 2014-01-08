@@ -71,5 +71,6 @@ class Topic < ActiveRecord::Base
         VimeoLib.album.add_video(self.vimeo_album_id, vimeo_id)
       end
     end
+    self.update_attribute(:status, "Publish")
   end
 end
