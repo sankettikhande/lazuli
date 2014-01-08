@@ -25,4 +25,8 @@ class Admin::VideosController < AdminController
 			end
 		end
 	end
+
+	def search
+		@videos = Video.sphinx_search(params)
+	end
 end

@@ -22,8 +22,8 @@ class Video < ActiveRecord::Base
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
 
   def upload_single_video
-    video_data = upload(self)
-    VimeoLib.album.add_video(video.topic.vimeo_album_id, video_data.vimeo_id)
+    video_data = upload
+    VimeoLib.album.add_video(self.topic.vimeo_album_id, video_data.vimeo_id)
   end
 
   handle_asynchronously :upload_single_video
@@ -70,6 +70,13 @@ class Video < ActiveRecord::Base
 
   def published?
     self.status == "Publish"
+  end
+
+  def self.sphinx_search options
+    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
+    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
+    Video.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
   end
 end
 
