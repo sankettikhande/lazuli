@@ -2,14 +2,8 @@
 		<div class="col-md-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<%= nested_form_for [:admin, @user] do |f| %>
-					<% if @user.errors.any? %>
-					  <ul style='color: red;padding-left:15px;'>
-					    <% @user.errors.full_messages.each do |msg| %>
-					      <li><%= msg %></li>
-					    <% end %>
-					  </ul>
-					<% end %>
+					<%= nested_form_for [:admin, @user], :html => {:id => 'user_form', :remote => true} do |f| %>
+					<div id='error_messages'></div>
 					<%= render 'user_info', :f => f %>
 				    <hr>
 					  <div><h4>List of User Courses</h4></div>
@@ -22,6 +16,7 @@
 						            <th>Channel Subscribed to</th>
 						            <th>Type of Subscription</th>
 						            <th>Subscriptions Expiring on</th>
+						            <th>Action</th>
 						        </tr>
 						      </thead>
 						      <tbody>
@@ -32,10 +27,12 @@
 							            <td><%= user_channel.channel.try(:name) %></td>
 							            <td><%= user_channel.subscription.try(:name) %></td>
 							            <td><%= user_channel.expiry_date %></td>
+							            <td><a href="#" rel="tooltip" title="Edit Permissions"><i class="fa fa-3x fa-edit"></i></a></td>
 							          </tr>
 							        <% end %>
 							      <% else %>
 							      	<tr>
+							      		<td>-</td>
 							      		<td>-</td>
 							      		<td>-</td>
 							      		<td>-</td>
@@ -71,3 +68,10 @@
 			margin-right: -15px;
 		}
 	</style>
+
+<script type="text/javascript">
+$("#user_form").validationEngine({
+	promptPosition : "bottomLeft",
+	autoPositionUpdate: true
+});
+</script>

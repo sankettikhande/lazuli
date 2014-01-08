@@ -19,11 +19,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
   <meta content="" name="author" />
   <meta name="MobileOptimized" content="320">
   <%= stylesheet_link_tag 'admin' %>
+  <%= javascript_include_tag 'admin' %>
   <link rel="shortcut icon" href="favicon.ico" />
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= javascript_include_tag 'admin' %>
   <%= render 'layouts/admin/header' %>
     <section class="container">
       <%= yield %>
