@@ -12,16 +12,24 @@
 								<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
 								<div class="col-sm-1">
 									<%= video_form.number_field :sequence_number, :class => "form-control", :id =>"seqNum1" %>
-									<!-- <input class="form-control" type="number" min="1" name="seqNum1" id="seqNum1"> -->
 								</div>
 
-								<div class="col-sm-1 nopadding">
-									<div class="btn-group nopadding">
-										<%= video_form.link_to_remove button_raw_field('fa fa-ban') if index != 0 %>
-										<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
-										</a>
+								<% if index != 0 %>
+									<div class="col-sm-1 nopadding">
+										<div class="btn-group nopadding">
+											<%= video_form.link_to_remove button_raw_field('fa fa-ban') %>
+											<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
+											</a>
+										</div>
 									</div>
-								</div>
+								<% else %>
+									<div class="col-sm-1">
+										<div class="btn-group">
+											<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
+											</a>
+										</div>
+									</div>
+								<% end %>
 
 							</div>
 					</div>
@@ -84,12 +92,15 @@
 	  					<div class="col-sm-4">
 								<div class="fileupload fileupload-new" data-provides="fileupload">
 									<span class="btn blue btn-file">
-									<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Upload File</span>
-									<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
-									<%= video_form.file_field :clip, :class => "default"%>
+										<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Upload File</span>
+										<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+										<%= video_form.file_field :clip, :class => "default" %>
 									</span>
-									<span class="fileupload-preview" style="margin-left:5px;"></span>
-									<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
+									<span class="fileupload-preview" style="margin-left:5px;">
+										<%= video_form.object.clip_file_name %>
+									</span>
+									<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;">
+									</a>
 								</div>
 	  					</div>
 						</div>
