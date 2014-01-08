@@ -23,7 +23,7 @@
 //= require ./admin/jquery.slimscroll.min.js
 //= require ./admin/jquery.uniform.min.js
 //= require ./admin/jquery-migrate-1.2.1.min.js
-//= require ./admin/table-advanced.js
+
 //= require ./admin/twitter-bootstrap-hover-dropdown.min.js
 //= require ./admin/select2.min
 //= require ./admin/index.js
@@ -35,6 +35,7 @@
 //= require ./admin/flowplayer-3.2.13.min.js
 //= require ./admin/jquery.validationEngine.js
 //= require ./admin/jquery.validationEngine-en.js
+
 
 $(".tooltip").tooltip()
 $("a[rel=tooltip]").tooltip()

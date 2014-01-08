@@ -5,6 +5,13 @@ class Admin::UsersController < AdminController
     @users = User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page])
   end
 
+  def search
+    query = params[:sSearch].blank? ? "" : "#{params[:sSearch]}*"
+    page = (params[:iDisplayStart].to_i/params[:iDisplayLength].to_i) + 1
+    @users = User.search(query).page(page).per(params[:iDisplayLength])
+    
+  end
+
   def new
     @user = User.new
     @user.user_channel_subscriptions.build
