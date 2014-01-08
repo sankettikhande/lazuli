@@ -4,7 +4,7 @@ function add_bookmark(value){
     $("#bookmark table").append(text);
 }
 
-flowplayer("player", "/assets/flowplayer-3.2.18.swf", {
+flowplayer("player", { src: "/assets/flowplayer-3.2.18.swf" , wmode:"transparent" }, {
     // a clip object
     clip: {
         // a clip event is defined inside clip object
@@ -14,7 +14,6 @@ flowplayer("player", "/assets/flowplayer-3.2.18.swf", {
             // alert("clip started");
         }
     },
-
     // player events are defined directly to "root" (not inside a clip)
     onBeforePause: function(event) {
         // console.log(flowplayer("player").getTime());
