@@ -8,7 +8,7 @@ class UserChannelSubscription < ActiveRecord::Base
   belongs_to :channel
   belongs_to :course
 
-  #validates_presence_of :channel_id, :subscription_id, :subscription_date, :expiry_date, :course_id
+  validates_presence_of :channel_id, :subscription_id, :subscription_date, :expiry_date, :course_id
   validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id]}
   after_create :update_channel_user_count
 
