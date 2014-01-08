@@ -49,6 +49,10 @@ class Course < ActiveRecord::Base
     channels.first
   end
 
+  def channel_name
+    channel.name
+  end
+
   def course_name
     c_courses = channel_courses.first.channel.courses.to_a rescue []
     return if c_courses.blank?
@@ -65,10 +69,20 @@ class Course < ActiveRecord::Base
     user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
   end
 
+  def course_channel_name
+    channel.name
+  end
+
+  def self.sphinx_search options
+    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
+    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
+    Course.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.channel_course_permissions.size.zero?
   end
 
-  #CLASS METHODS
 end
