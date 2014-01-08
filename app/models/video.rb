@@ -2,7 +2,7 @@ include VimeoLib
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
   serialize :vimeo_data
-  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url
+  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password
   belongs_to :topic
   acts_as_taggable
 
@@ -22,8 +22,10 @@ class Video < ActiveRecord::Base
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
 
   def upload_single_video
-    video_data = upload(self)
-    VimeoLib.album.add_video(video.topic.vimeo_album_id, video_data.vimeo_id)
+    video = self.upload
+    video.topic.create_album_for_single_video(video) if video.topic.vimeo_album_id.blank?
+    VimeoLib.album.add_video(video.topic.vimeo_album_id, video.vimeo_id)
+    video.topic.set_status
   end
 
   handle_asynchronously :upload_single_video
@@ -47,6 +49,7 @@ class Video < ActiveRecord::Base
     self.vimeo_data = vimeo_data
     self.vimeo_url = hashie_get_info(vimeo_data).video.first.urls.url.first._content if vimeo_data
     self.save!
+    publish_privately
     return self
   end
 
@@ -70,6 +73,11 @@ class Video < ActiveRecord::Base
 
   def published?
     self.status == "Publish"
+  end
+  def publish_privately
+    password =  ((0...4).map{ ('A'..'Z').to_a[rand(26)] } + (0...4).map{ ('a'..'z').to_a[rand(26)] } + (0...3).map{ (0..9).to_a[rand(9)] }).shuffle.join
+    VimeoLib.video.set_privacy(vimeo_id, "password", {:password => password})
+    update_attribute(:password,password)
   end
 end
 

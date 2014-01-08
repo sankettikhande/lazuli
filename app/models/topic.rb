@@ -1,5 +1,5 @@
 class Topic < ActiveRecord::Base
-  attr_accessible :title, :description, :course_id, :channel_id, :videos_attributes, :vimeo_album_id, :is_bookmark_video
+  attr_accessible :title, :description, :course_id, :channel_id, :videos_attributes, :vimeo_album_id, :is_bookmark_video, :password
   belongs_to :course
   has_many :videos, :dependent => :destroy
   accepts_nested_attributes_for :videos, :allow_destroy => true
@@ -11,12 +11,32 @@ class Topic < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id]
   validate :check_uniqueness_of_title
 
+
+  def create_album_for_single_video(video)
+    album = VimeoLib.album.create(self.title, video.vimeo_id, {:description => self.description })
+    self.vimeo_album_id = album['album'].first['id']
+    self.save
+    set_password_to_album
+  end
+
+
   def check_uniqueness_of_title
     video_titles = videos.map(&:title)
     if(video_titles.length != video_titles.uniq.length)
       errors.add(:base, 'Video title must be unique')
     end 
   end
+
+  def set_password_to_album
+    password = ((0...4).map{ ('A'..'Z').to_a[rand(26)] } + (0...4).map{ ('a'..'z').to_a[rand(26)] } + (0...3).map{ (0..9).to_a[rand(9)] }).shuffle.join
+    VimeoLib.album.set_password(self.vimeo_album_id , password)
+    self.update_attribute(:password, password)
+  end
+
+  def set_status
+    update_attribute(:status, "Publish") if self.videos.all? {|v| v.published? }
+  end
+
 
   # def delete_album_and_videos
   #   self.videos.each do |video|
@@ -45,21 +65,11 @@ class Topic < ActiveRecord::Base
       album = VimeoLib.album.create(self.title, assign_video.first, {:description => self.description, :videos => assign_video.join(",") })
       self.vimeo_album_id = album['album'].first['id']
       self.save
+      set_password_to_album
     else
       assign_video.each do |vimeo_id|
         VimeoLib.album.add_video(self.vimeo_album_id, vimeo_id)
       end
     end
   end
-end
-
-def add_to_vimeo_album
-	vimeo_ids = self.videos.map {|v| v.vimeo_id if !v.vimeo_id.blank?}
-	videos = vimeo_ids.join(",")
-	album = VimeoLib.album.create(self.title, videos.first, {:description => self.description, :videos => videos})
-	self.vimeo_album_id = album["album"].first["id"]
-end
-
-def delete_album
-	VimeoLib.album.delete(self.vimeo_album_id)
 end
