@@ -2,6 +2,10 @@ class Admin::CoursesController < AdminController
 
 	before_filter :set_initialization, :only => [:new, :edit, :create, :update]
 
+	def search
+		@courses = Course.sphinx_search params
+	end
+
 	def new
 		@course = Course.new
 		@channels = Channel.all
