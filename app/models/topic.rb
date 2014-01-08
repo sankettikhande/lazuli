@@ -1,6 +1,7 @@
 class Topic < ActiveRecord::Base
   attr_accessible :title, :description, :course_id, :channel_id, :videos_attributes, :vimeo_album_id, :is_bookmark_video, :password
   belongs_to :course
+  belongs_to :channel
   has_many :videos, :dependent => :destroy
   accepts_nested_attributes_for :videos, :allow_destroy => true
 
