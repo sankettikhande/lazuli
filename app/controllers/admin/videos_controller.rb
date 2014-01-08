@@ -19,7 +19,7 @@ class Admin::VideosController < AdminController
 		respond_to do |format|
 			if @video.clip.present?
 				@video.upload_single_video
-				format.html {redirect_to admin_contents_url ,:notice =>"Video successfully uploaded. It will take some time to reflect changes"}
+				format.html {redirect_to admin_contents_url ,:notice =>"Video is being published. It will take some time. Please check status after some time."}
 			else
 				format.html {redirect_to admin_contents_url, :notice => "Video file not added"}
 			end

@@ -31,7 +31,7 @@ class Admin::TopicsController < AdminController
 			update_topic(params[:topic], "Publish")
 		elsif params[:Publish]
 			publish_topic(@topic)
-			redirect_to :back, notice: "You have been Publish this Topic. It will take some time to reflect changes"
+			redirect_to :back, notice: "Topic is being published. It will take some time. Please check status after some time."
 		elsif params[:Save]
 			@topic.update_attribute(:status, "PartialPublished")
 			update_topic(params[:topic])
