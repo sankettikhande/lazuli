@@ -9,11 +9,9 @@ $("#user_form").validationEngine({
 
 $('input[type="checkbox"]').uniform();
 
-$(document).ready(function() { 
-	$("#multiple_user_form").validationEngine({
-		promptPosition : "bottomLeft",
-		autoPositionUpdate: true
-	});
- 
-  $('#multiple_user_form').ajaxForm(); 
+$("#multiple_user_form").validationEngine({
+	promptPosition : "bottomLeft",
+	autoPositionUpdate: true
 });
+
+$('#multiple_user_form').ajaxForm(); 
