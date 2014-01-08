@@ -1,6 +1,6 @@
 class Admin::CoursesController < AdminController
 
-	before_filter :set_initialization, :except => [:get_channel_info, :destroy, :course_subscription_types]
+	before_filter :set_initialization, :only => [:new, :edit, :create, :update]
 
 	def new
 		@course = Course.new
