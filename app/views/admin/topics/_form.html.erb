@@ -1,6 +1,6 @@
 <%= javascript_include_tag "utils.js"%>
 <%= javascript_include_tag "admin/app_functions/topics.js"%>
-<%= nested_form_for [:admin , @topic] do |f| %>
+<%= nested_form_for [:admin , @topic], :html => {:class => "formClass"} do |f| %>
 <%= errors_for @topic unless @topic.errors.blank? %>
 	<% if flash[:notice] -%>
 	  <p class='notice'><%=h flash[:notice] %></p>
@@ -22,13 +22,13 @@
 						<label for="t-topic" class="control-label">Topic<%= required_field %></label>
 					</div>
 					<div class="col-sm-3">
-						<%= f.text_field 'title', :class => "form-control"%>
+						<%= f.text_field 'title', :class => "form-control validate[required]"%>
 					</div>
 					<div class="col-sm-1 col-sm-offset-2">
 						<label class="control-label" for="t-course">Channel<%= required_field %></label>
 					</div>
 					<div class="col-sm-3">
-						<%= f.select 'channel_id',options_for_select(Channel.all.collect{|c| [ c.name, c.id]}, f.object.channel_id),{:include_blank => "Please Select"}, :class => 'form-control channels_id' %>
+						<%= f.select 'channel_id',options_for_select(Channel.all.collect{|c| [ c.name, c.id]}, f.object.channel_id),{:include_blank => "Please Select"}, :class => 'form-control channels_id validate[required]' %>
 					</div>
 				</div>
 				<div class="seperator10"></div>
@@ -49,7 +49,7 @@
 								<label class="control-label" for="t-channel">Courses<%= required_field %></label>
 							</div>
 							<div class="col-sm-6">
-								<%= f.select 'course_id', options_for_select(@channel_courses.collect{|i| [i.name, i.id]}, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id' %>
+								<%= f.select 'course_id', options_for_select(@channel_courses.collect{|i| [i.name, i.id]}, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id validate[required]' %>
 							</div>
 						</div>
 						<div class="row">
@@ -91,3 +91,4 @@
 <% end %>
 
 <%= render 'bookmark', :topic => @topic %>
+<%= javascript_include_tag "admin/app_functions/jquery_validation.js"%>
