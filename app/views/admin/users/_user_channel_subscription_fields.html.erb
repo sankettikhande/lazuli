@@ -44,7 +44,7 @@
   </div>
 	<div class="col-md-3">
 		<div class="input-group">
-			<%= f.text_field 'expiry_date', :class => "form-control expiry_date", :readonly => true %>
+			<%= f.text_field 'expiry_date', :class => "form-control expiry_date validate[required]", :readonly => true %>
 			<span class="input-group-btn">
 			<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 			</span>
@@ -52,7 +52,7 @@
 	</div>
 </div>
 
-<div class="row form-group">
+<div class="row-align form-group">
 	<div class="col-md-3">
 		<label>User Permissions<%= required_field %></label>
 	</div>
@@ -67,9 +67,10 @@
 	</div>
 </div>
 
-<!-- <div class="row form-group">
-  <div class="col-md-3"></div>
-  <div class="col-md-9">
-   	<%#= f.link_to_remove "Remove this Course", :class => "fa fa-3x" %>
+<div class="row form-group">
+  <div class="col-md-3" style='width: 19%;'></div>
+  <div class="col-md-2">
+  	<a href="#"><i class='fa fa-3x fa-minus'></i><a/>
+   	<%= f.link_to_remove "Remove this Course" %>
   </div>
-</div> -->
+</div>
