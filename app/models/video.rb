@@ -74,10 +74,18 @@ class Video < ActiveRecord::Base
   def published?
     self.status == "Publish"
   end
+
   def publish_privately
     password =  ((0...4).map{ ('A'..'Z').to_a[rand(26)] } + (0...4).map{ ('a'..'z').to_a[rand(26)] } + (0...3).map{ (0..9).to_a[rand(9)] }).shuffle.join
     VimeoLib.video.set_privacy(vimeo_id, "password", {:password => password})
     update_attribute(:password,password)
+  end
+
+  def self.sphinx_search options
+    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
+    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
+    Video.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
   end
 end
 

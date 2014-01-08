@@ -46,11 +46,15 @@ Lazuli::Application.routes.draw do
     resources :topics do
       collection do
         post 'bookmark'
+        get 'search'
       end
     end
     resources :videos do
       member do
         get 'upload'
+      end
+      collection do
+        get 'search'
       end
     end
   end
