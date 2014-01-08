@@ -10,7 +10,11 @@ class Admin::ChannelsController < AdminController
     # @subscriptions.count.times do |i|
     #   course.course_subscriptions.build
     # end
-  end	
+  end
+
+  def search
+    @channels = Channel.sphinx_search(params)
+  end
 
   def create
     set_initialization

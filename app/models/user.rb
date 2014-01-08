@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
-    @users = User.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
+    User.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
   end
 
 end

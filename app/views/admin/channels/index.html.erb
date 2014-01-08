@@ -1,3 +1,4 @@
+<%= javascript_include_tag "admin/jquery.dataTables.js", "admin/DT_bootstrap.js" %>
 <div class="row">
   <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new channel
   </button></a>
@@ -5,30 +6,37 @@
 <div class="row">
   <div class="seperator5"></div>
   <div class="portlet-body flip-scroll">
-    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
+    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="channels">
       <thead class="flip-content">
         <tr>
-            <th>Channel Name<%= sortable "name" %></th>
-            <th>Channel Type<%= sortable "channel_type" %></th>
-            <th>#Courses</th>
-            <th>Types of Subscriptions available</th>
-            <th>Number of Users</th>
+            <th>Channel Name</th>
+            <th>Courses Count</th>
+            <th>Users Count</th>
+            <th>Channel Type</th>
+            <th>Subscription Types</th>
             <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <% @channels.each do |channel| %>
-          <tr>
-            <td><%= link_to channel.name, edit_admin_channel_url(channel) %></td>
-            <td><%= channel.channel_type %></td>
-            <td><%= channel.courses.count %></td>
-            <td></td>
-            <td><%= channel.users_for_channel %></td>
-            <td><a href="/admin/channels/<%= channel.id %>/edit" data-no-turbolink="true" rel="tooltip" title="Edit Channel"><i class="fa fa-3x fa-edit"></i></a><a href="/admin/channels/<%= channel.id %>" data-method="delete" data-confirm="Are you sure you want to delete?" rel="tooltip" title="Delete Channel"><i class="fa fa-3x fa-ban pull-right"></i></a></td>
-          </tr>
-        <% end %>
+        
       </tbody>
     </table>
   </div>
 </div>
-<%= paginate @channels, :window => 2 %>
+
+<script>
+  $('#channels').dataTable({
+    "bProcessing": true,
+    "bServerSide": true,
+    "iDisplayLength": 15,
+    "bLengthChange": false,
+    "sAjaxSource": "/admin/channels/search.json",
+    "aoColumns": [
+            { "mData": "name"},
+            { "mData": "course_count"},
+            { "mData": "user_count"},
+            { "mData": "channel_type", "bSortable": false},
+            { "mData": "subscription_types", "bSortable": false},
+            { "mData": "actions", "bSortable": false }
+        ] });
+</script>
