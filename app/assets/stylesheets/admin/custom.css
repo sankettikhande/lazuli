@@ -1,23 +1,48 @@
-
+body {padding-top:70px !important}
 .handcursor{cursor:pointer;}
 .top-menu li a{text-transform:uppercase;}
 
-footer a{text-transform:uppercase;color:#fff;padding:0;}
-footer li {display:inline}
-footer li a{float:left;}
-footer .navbar {margin-bottom:0}
-.panel {margin-top:0.6em}
-.table th {color:#e02222;}
+footer {border-top: 1px solid #000;}
+footer li {display:inline;}
+footer li a{float:left;font-size: 1em !important;text-transform:uppercase;color:#fff;}
 
-.seperator5 {min-height:0.5em}
-.seperator10 {min-height:1em}
-.seperator15 {min-height:1.5em}
-.seperator20 {min-height: 2em}
-.seperator30 {min-height:3em}
+.panel {margin-top:0.6em}
+.table th {color:#e02222;background-color: #ccc !important;}
+
+
+.seperator5 {min-height:5px}
+.seperator10 {min-height:10px}
+.seperator15 {min-height:15px}
+.seperator20 {min-height:20px;}
+.seperator30 {min-height:30px;}
 .nopadding {padding:0;}
 .nomargin {margin:0}
 .nospace {margin:0;padding:0}
 
+.fa-2x {font-size: 200% !important}
+
+/*********  Transparent background buttons   **/
+.btn-trans {background: none;color:#000;}
+.btn-trans:hover {color:#f00;}
+
+
+/**************** Overwriting Table ****************/
+
+.width150 {width: 150px}
+
+
+
+/******** Add new course *******************/
+
+.add-new-course h4 {padding: 8px 15px;font-weight: bold !important;font-size: 1.16em !important}
+
+/*********** Add new course ends **********/
+
+/************* Global pages *************/
+h4.heading {font-weight: bold !important;text-decoration: underline;}
+
+/************* Global Pages css ends ***/
+.img-responsive {margin: 0 auto;}
 /************** MULTIPLE FILE UPLOAD *****************/
 .upload-list {margin-bottom:0}
 .upload-list td:nth-child(2){text-align:right;width:15%;}
@@ -37,22 +62,29 @@ ul.coll-head {list-style-type: none;}
 ul.coll-head li:nth-child(4) {width: 4%;float: right;}
 .portlet > .portlet-title > .caption {line-height: 1.5em;}
 section {margin-bottom: 1em}
+
+footer .navbar {margin-bottom: 0}
+footer .navbar-brand {padding-top: 10px;padding-bottom: 0}
 /**************  MEDIA QUERIES ******************/
 @media only screen and (max-width:47.938em) {
 	footer li {display:inline-block}	
 	footer li a{float:left}
+
+
 	}
 	
 @media only screen and (min-width:48em) {
 	footer li {display:inline-block}	
 	footer li a{float:left}
-	}
-/******** Add new course *******************/
-.add-new-course h4 {padding: 5px 15px;font-weight: bold !important;font-size: 1.1em !important}
-/*********** Add new course ends **********/
- /*********  Transparent background buttons   **/
-.btn-trans {background: none;color:#000;}
-.btn-trans:hover {color:#f00;}
+
+footer .navbar-nav li:first-child a {padding-left: 0}
+
+footer {position: fixed;left:0;right: 0;bottom: 0}
+
+body {padding-bottom: 50px;}
+}	
+
+
 /*********************************/
 
 span.required_span{
