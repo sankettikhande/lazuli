@@ -55,6 +55,7 @@ Lazuli::Application.routes.draw do
         get 'search'
       end
     end
+    resources :user_channel_subscriptions
   end
   get "/delayed_job" => DelayedJobWeb, :anchor => false
   root :to => "home#index"
