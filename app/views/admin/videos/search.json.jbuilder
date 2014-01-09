@@ -4,7 +4,7 @@ json.aaData @videos do |video|
   json.course_name video.topic.course.name
   json.tags video.tag_list
   json.channel_name video.topic.channel.name
-  json.vimeo_url video.vimeo_url
+  json.vimeo_url link_to(video.vimeo_url, video.vimeo_url)
   json.actions video_actions(video)
 end
 json.sEcho params[:sEcho].to_i
