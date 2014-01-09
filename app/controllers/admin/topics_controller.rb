@@ -54,6 +54,10 @@ class Admin::TopicsController < AdminController
 		@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
 	end
 
+	def search
+		@topics = Topic.sphinx_search(params)
+	end
+
   protected
 
 	def update_topic(topic, publish=nil)
