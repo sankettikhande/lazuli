@@ -1,10 +1,12 @@
-body {padding-top:70px !important}
+body {padding-top:70px !important;padding-bottom: 70px !important;}
 .handcursor{cursor:pointer;}
 .top-menu li a{text-transform:uppercase;}
 
 footer {border-top: 1px solid #000;}
 footer li {display:inline;}
 footer li a{float:left;font-size: 1em !important;text-transform:uppercase;color:#fff;}
+footer .navbar {margin-bottom: 0}
+footer .navbar-brand {padding-top: 10px;padding-bottom: 0}
 
 .panel {margin-top:0.6em}
 .table th {color:#e02222;background-color: #ccc !important;}
@@ -63,8 +65,7 @@ ul.coll-head li:nth-child(4) {width: 4%;float: right;}
 .portlet > .portlet-title > .caption {line-height: 1.5em;}
 section {margin-bottom: 1em}
 
-footer .navbar {margin-bottom: 0}
-footer .navbar-brand {padding-top: 10px;padding-bottom: 0}
+
 /**************  MEDIA QUERIES ******************/
 @media only screen and (max-width:47.938em) {
 	footer li {display:inline-block}	
