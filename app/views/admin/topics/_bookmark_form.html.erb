@@ -1,40 +1,50 @@
-<div id="bookmark">
-	<%= form_tag('/admin/topics/bookmark', :remote => true, :id => "bookmark_form") do %>
-		<table>
-			<tr>
-				<th>Time</th>
-				<th> Bookmark </th>
-				<th></th>
-			</tr>
-			<% video = topic.videos.first %>
-			<%= hidden_field_tag 'id', video.id %>
-			<% if video.bookmark.nil? || video.bookmark.blank?%>
-				<tr>
-			  	<td>
-			  		<input type="text" name="bookmark[]time" class="form-control time" value="0:00">
-			  	</td>
-			  	<td>
-			  		<input type="text" name="bookmark[]description" class="form-control description">
-			  	</td>
-			  	<td>
-			  		<a href="#" class="btn btn-trans" rel="tooltip" title="Delete" onclick="$(this).parent().parent().remove();javascript:void(0)"><i class="fa fa-ban"></i></a>
-			  	</td>
-			  </tr>
-			<% else %>
-				<% JSON.parse(video.bookmark).each do |bookmark| %>
-					<tr>
-				  	<td>
-				  		<input type="text" name="bookmark[]time" class="form-control time" value="<%= bookmark['time'] %>">
-				  	</td>
-				  	<td>
-				  		<input type="text" name="bookmark[]description" class="form-control description" value="<%= bookmark['description'] %>">
-				  	</td>
-				  	<td>
-				  		<a href="#" class="btn btn-trans" rel="tooltip" title="Delete" onclick="$(this).parent().parent().remove();javascript:void(0)"><i class="fa fa-ban"></i></a>
-				  	</td>
-				  </tr>
-				<% end %>
-			<% end %>
-		</table>
+<%= form_tag('/admin/topics/bookmark', :remote => true, :id => "bookmark_form") do  %>
+	<div class="row">
+	  <div class="col-xs-2">
+	   <label class="control-label" for="bkmrk-time">Time</label>
+	  </div>
+	  <div class="col-xs-2">
+	   <label class="control-label">Status</label>
+	  </div>
+	  <div class="col-xs-5">
+	   <label class="control-label" for="bkmrk-descr">Description</label>
+	  </div>
+	</div>
+	<% video = topic.videos.first %>
+	<%= hidden_field_tag 'id', video.id %>
+	<% if video.bookmark.nil? || video.bookmark.blank?%>
+		<div class="row">
+		  <div class="col-xs-2">
+		   <input type="text" name="bookmark[]time" class="form-control" value="00:00">
+		  </div>
+		  <div class="col-xs-2">
+		   <input type="text" name="bookmark[]title" class="form-control" placeholder="Please enter bookmark title">
+		  </div>
+		  <div class="col-xs-6">
+		   <textarea name="bookmark[]description" class="form-control" placeholder="Describe this bookmark" rows="1"></textarea>
+		  </div>
+		  <div class="col-xs-1">
+		   <button type="button" class="btn btn-trans" title="Remove" onclick="$(this).parent().parent().remove();javascript:void(0);"><i class="fa fa-minus-circle"></i></button>
+		  </div>
+		</div>
+		<div class="seperator5"></div>
+	<% else %>
+		<% JSON.parse(video.bookmark).each do |bookmark| %>
+			<div class="row">
+			  <div class="col-xs-2">
+			   <input type="text" name="bookmark[]time" class="form-control" value="<%= bookmark['time'] %>">
+			  </div>
+			  <div class="col-xs-2">
+			   <input type="text" name="bookmark[]title" class="form-control" value="<%= bookmark['title'] %>">
+			  </div>
+			  <div class="col-xs-6">
+			   <textarea name="bookmark[]description" class="form-control" rows="1"><%= bookmark['description'] %></textarea>
+			  </div>
+			  <div class="col-xs-1">
+			   <button type="button" class="btn btn-trans" title="Remove" onclick="$(this).parent().parent().remove();javascript:void(0);"><i class="fa fa-minus-circle"></i></button>
+			  </div>
+			</div>
+			<div class="seperator5"></div>
+		<% end %>
 	<% end %>
-</div>
+<% end %>

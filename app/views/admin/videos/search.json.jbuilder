@@ -1,5 +1,5 @@
 json.aaData @videos do |video|
-  json.title video.title
+  json.title link_to(video.title, edit_admin_topic_url(video.topic))
   json.topic_name video.topic.title
   json.course_name video.topic.course.name
   json.tags video.tag_list

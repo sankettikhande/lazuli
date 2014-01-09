@@ -82,4 +82,8 @@ class Topic < ActiveRecord::Base
     sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
     Topic.search(query, :order => sort_options, :sql => {:include => [:course, :channel]}).page(page).per(options[:iDisplayLength])
   end
+
+  def vimeo_album_url 
+    "https://vimeo.com/album/#{self.vimeo_album_id}"
+  end
 end

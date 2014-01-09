@@ -45,15 +45,13 @@
   width: 800px;
 }
 
-#bookmark input.time{
-	width: 80px;
-}
-#bookmark input.description{
-	width: 140px;
+#bookmark_form{
+	max-height: 180px;
+	overflow-x: hidden;
+	overflow-y:auto;
+	width: auto;
 }
 
-#bookmark{
-	max-height:300px;
-	overflow:auto;
-	width:100%;
+#bookmark_form textarea.form-control {
+    height: 34px;
 }
