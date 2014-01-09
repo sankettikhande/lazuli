@@ -44,10 +44,8 @@ class Video < ActiveRecord::Base
     set_vimeo_description(self.vimeo_id, self.description_text)
     v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
     v.set_title(self.vimeo_id, self.title)
-    vimeo_data = v.get_info(self.vimeo_id)
     self.status = "Publish"
-    self.vimeo_data = vimeo_data
-    self.vimeo_url = hashie_get_info(vimeo_data).video.first.urls.url.first._content if vimeo_data
+    self.vimeo_url = vimeo_video_url
     self.save!
     publish_privately
     return self
@@ -86,6 +84,10 @@ class Video < ActiveRecord::Base
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
     Video.search(query, :order => sort_options, :sql => {:include => [:topic, :tags]}).page(page).per(options[:iDisplayLength])
+  end
+
+  def vimeo_video_url
+    !self.vimeo_id.nil? ? "http://vimeo.com/#{self.vimeo_id}" : nil 
   end
 end
 
