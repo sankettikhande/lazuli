@@ -75,4 +75,11 @@ class Topic < ActiveRecord::Base
     end
     self.update_attribute(:status, "Publish")
   end
+
+  def self.sphinx_search options
+    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
+    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
+    Topic.search(query, :order => sort_options, :sql => {:include => [:course, :channel]}).page(page).per(options[:iDisplayLength])
+  end
 end
