@@ -8,13 +8,11 @@
 				<div id="bookmark_alert"></div>
 				<div class="row">
 					<div class="col-sm-7">
-						<a href="<%= topic.presence.try(:videos).presence.try(:first).presence.try(:clip).try(:url) %>" style="display:block; width:420px; height:260px;" id="player"> </a>
-					</div>
-					<div class="col-sm-5">
-						<%= render 'bookmark_form', :topic => topic %>
+						<a href="<%= topic.videos.try(:first).try(:clip).try(:url) %>" style="display:block; width:520px; height:300px;" id="player"> </a>
 					</div>
 				</div>
-			</div>
+				<%= render 'bookmark_form', :topic => topic %>
+ 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn default" data-dismiss="modal">Close</button>
 				<button type="button" class="btn blue" id="bookmark_button">Add Bookmark</button>
