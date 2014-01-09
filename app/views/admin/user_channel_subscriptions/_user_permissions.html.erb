@@ -8,19 +8,19 @@
       <%=form_for [:admin, @user_subscription], :remote => true do |f| %>
 	      <div class="modal-body form-group">
 	        <div class="row form-group">
-						<div class="col-md-3">
-							<label>User Permissions<%= required_field %></label>
-						</div>
-						<div class="col-md-2">
-							<%= f.check_box 'permission_watch' %><label>Watch</label>
-						</div>	
-						<div class="col-md-2">
-							<%= f.check_box 'permission_share' %><label>Share</label>
-						</div>	
-						<div class="col-md-2">
-							<%= f.check_box 'permission_create' %><label>Create</label>
-						</div>
-					</div>
+	        	<div class="col-md-3">
+	        		<label>User Permissions<%= required_field %></label>
+	        	</div>
+	        	<div class="col-md-2">
+	        		<%= f.check_box 'permission_watch' %><label>Watch</label>
+	        	</div>
+	        	<div class="col-md-2">
+	        		<%= f.check_box 'permission_share' %><label>Share</label>
+	        	</div>
+	        	<div class="col-md-2">
+	        		<%= f.check_box 'permission_create' %><label>Create</label>
+	        	</div>
+	        </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
