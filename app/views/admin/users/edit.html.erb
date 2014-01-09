@@ -27,7 +27,7 @@
 							            <td><%= user_channel.channel.try(:name) %></td>
 							            <td><%= user_channel.subscription.try(:name) %></td>
 							            <td><%= user_channel.expiry_date %></td>
-							            <td><a href="#" rel="tooltip" title="Edit Permissions"><i class="fa fa-3x fa-edit"></i></a></td>
+							            <td><a href=" /admin/user_channel_subscriptions/<%= user_channel.id %>/edit" data-remote='true' rel="tooltip" title="Edit Permissions"><i class="fa fa-3x fa-edit"></i></a></td>
 							          </tr>
 							        <% end %>
 							      <% else %>
@@ -62,6 +62,8 @@
 		</div>
 	</div>
 
+	<div id='modal_box'></div>
+
 	<style type="text/css">
 		.row-align {
 			margin-left: -15px;
@@ -70,3 +72,6 @@
 	</style>
 
 <%= javascript_include_tag 'admin/app_functions/users' %>
+<script type="text/javascript">
+	$("#user_password").removeClass('validate[required, minSize[8]]')
+</script>
