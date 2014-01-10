@@ -3,6 +3,7 @@ class Video < ActiveRecord::Base
   # attr_accessible :title, :body
   serialize :vimeo_data
   attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password
+  attr_accessor :bookmarks_from_params
   belongs_to :topic
   acts_as_taggable
 
@@ -89,6 +90,11 @@ class Video < ActiveRecord::Base
 
   def vimeo_video_url
     !self.vimeo_id.nil? ? "http://vimeo.com/#{self.vimeo_id}" : nil 
+  end
+
+  def validate_bookmark
+    bookmarks = JSON.parse(self.bookmarks_from_params)
+    !bookmarks.any? { |bookmark| bookmark['title'].nil? || bookmark['title'].blank? }
   end
 end
 
