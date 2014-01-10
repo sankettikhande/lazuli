@@ -27,6 +27,7 @@ class Admin::TopicsController < AdminController
 
 	def update
 		@topic = Topic.cached_find(params[:id])
+		@channel_courses = @topic.channel.courses
 		if params[:SavePub]
 			update_topic(params[:topic], "Publish")
 		elsif params[:Publish]
@@ -64,10 +65,11 @@ class Admin::TopicsController < AdminController
 		respond_to do |format|
 			if @topic.update_attributes(topic)
 				publish_topic(@topic) if !publish.nil?
+				notice = publish.nil? ? "Topic is being Saved." : "Topic is being published. It will take some time. Please check status after some time."
 				if @topic.is_bookmark_video
-					format.html{redirect_to edit_admin_topic_url(@topic)}
+					format.html{redirect_to edit_admin_topic_url(@topic), notice: notice}
 				else
-					format.html{redirect_to "#{admin_contents_url}#topics"}
+					format.html{redirect_to "#{admin_contents_url}#topics", notice: notice}
 				end
 			else
 				@courses = Course.all
@@ -79,10 +81,11 @@ class Admin::TopicsController < AdminController
 	def save_topic(publish=nil)
 		if @topic.save
 			publish_topic(@topic) if !publish.nil?
+			notice = publish.nil? ? "Topic is being Saved." : "Topic is being published. It will take some time. Please check status after some time."
 			if @topic.is_bookmark_video
-				redirect_to edit_admin_topic_url(@topic)
+				redirect_to edit_admin_topic_url(@topic), notice: notice
 			else
-				redirect_to "#{admin_contents_url}#topics"
+				redirect_to "#{admin_contents_url}#topics", notice: notice
 			end
 		else
 			@courses = Course.all
