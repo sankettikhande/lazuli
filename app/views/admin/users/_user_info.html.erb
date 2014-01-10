@@ -17,10 +17,10 @@
 </div>
 <div class="row-align form-group">
 	<div class="col-md-3">
-		<label for="emailID">Email ID<%= required_field %></label>
+		<label>Company Name</label>
 	</div>
 	<div class="col-md-3">
-		<%= f.text_field 'email', :class => 'form-control validate[required, custom[email]]' %>
+		<%= f.text_field 'company_name', :class => 'form-control' %>
 	</div>
 </div>
 <div class="row form-group">
@@ -36,10 +36,10 @@
 	<div class="col-md-6">	
     <div class="row form-group">
     	<div class="col-md-6">
-    		<label>Company Name</label>
+        <label for="emailID">Email ID<%= required_field %></label>
     	</div>
     	<div class="col-md-6">
-  			<%= f.text_field 'company_name', :class => 'form-control' %>
+        <%= f.text_field 'email', :class => 'form-control validate[required, custom[email]]' %>
     	</div>
     </div>
     <div class="row form-group">
