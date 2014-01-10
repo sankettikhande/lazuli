@@ -18,6 +18,7 @@ class Admin::VideosController < AdminController
 		@video = Video.find(params[:id])
 		respond_to do |format|
 			if @video.clip.present?
+				@video.update_attribute(:status, "InProcess")
 				@video.upload_single_video
 				format.html {redirect_to admin_contents_url ,:notice =>"Video is being published. It will take some time. Please check status after some time."}
 			else

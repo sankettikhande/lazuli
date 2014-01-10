@@ -75,6 +75,10 @@ class Video < ActiveRecord::Base
     self.status == "Publish"
   end
 
+  def inprocess?
+    self.status == "InProcess"
+  end
+
   def publish_privately
     password =  ((0...4).map{ ('A'..'Z').to_a[rand(26)] } + (0...4).map{ ('a'..'z').to_a[rand(26)] } + (0...3).map{ (0..9).to_a[rand(9)] }).shuffle.join
     VimeoLib.video.set_privacy(vimeo_id, "password", {:password => password})

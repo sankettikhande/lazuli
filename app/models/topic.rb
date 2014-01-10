@@ -52,6 +52,10 @@ class Topic < ActiveRecord::Base
     self.status == "Publish"
   end
 
+  def inprocess?
+    self.status == "InProcess"
+  end
+
   def upload_to_vimeo
     assign_video = []
     self.videos.where(:vimeo_id => nil).each do |video|      
