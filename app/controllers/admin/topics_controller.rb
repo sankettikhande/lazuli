@@ -50,8 +50,9 @@ class Admin::TopicsController < AdminController
 
 	def bookmark
 		bookmarks = params["bookmark"].to_json
-		if validate_bookmark(bookmarks)
-			@video = Video.find_by_id(params[:id])
+		@video = Video.find_by_id(params[:id])
+		@video.bookmarks_from_params = bookmarks
+		if @video.validate_bookmark
 			@video.bookmark = bookmarks
 			@video.save
 			@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
@@ -103,10 +104,5 @@ class Admin::TopicsController < AdminController
 	def publish_topic(topic)
 		topic.update_attribute(:status, "InProcess")
 		topic.upload_to_vimeo
-	end
-
-	def validate_bookmark(bookmarks_str)
-		bookmarks = JSON.parse(bookmarks_str)
-		!bookmarks.any? { |bookmark| bookmark['title'].nil? || bookmark['title'].blank? }
 	end
 end
