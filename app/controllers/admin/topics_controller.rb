@@ -50,7 +50,7 @@ class Admin::TopicsController < AdminController
 
 	def bookmark
 		bookmarks = params["bookmark"].to_json
-		@video = Video.find_by_id(params[:id])
+		@video = Video.find(params[:id])
 		@video.bookmarks_from_params = bookmarks
 		if @video.validate_bookmark
 			@video.bookmark = bookmarks
@@ -95,7 +95,7 @@ class Admin::TopicsController < AdminController
 			end
 		else
 			@courses = Course.all
-			channel = Channel.find_by_id(@topic.channel_id)
+			channel = Channel.find(@topic.channel_id)
 			@channel_courses = channel.try(:courses) || []
 			render "new"
 		end
