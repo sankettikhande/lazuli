@@ -9,9 +9,9 @@
     </div>
     <div class="navbar-collapse collapse top-menu">
       <ul class="nav navbar-nav">
-        <li class="<%=  set_selected("users") %>"><a href="/admin/users">Manage Users</a></li>
-        <li class="<%=  set_selected(["contents", "courses", "topics"]) %>"><a href="/admin/contents">Manage Content</a></li>
-        <li class="<%=  set_selected("channels") %>"><a href="/admin/channels" >Manage Channels</a></li>
+        <li class="<%=  set_selected("users") %>"><%= link_to 'Manage Users',admin_users_path, "data-no-turbolink" => true %></li> 
+        <li class="<%=  set_selected(["contents", "courses", "topics"]) %>"><%= link_to 'Manage Content',admin_contents_path, "data-no-turbolink" => true %></li>
+        <li class="<%=  set_selected("channels") %>"><%= link_to 'Manage Channels',admin_channels_path, "data-no-turbolink" => true %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown user">

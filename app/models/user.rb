@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address, :actual_name
   attr_accessible :user_channel_subscriptions_attributes
-  has_many :user_channel_subscriptions, :dependent => :destroy
+  has_many :user_channel_subscriptions, :dependent => :destroy, :before_add => :set_nest
   has_many :subscriptions, :through => :user_channel_subscriptions
   validates_presence_of :actual_name
   validates_presence_of :name, :message => "^User name can't be blank"
-  
+  validate :subscription_params
   include Cacheable
 
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
@@ -72,7 +72,6 @@ class User < ActiveRecord::Base
 
   def self.bulksheet_errors(bulksheet)
     errors = []
-    #VALIDATIONS HERE
     if bulksheet.blank?
       errors.push("Please upload an Excel file.") 
     else
@@ -88,5 +87,14 @@ class User < ActiveRecord::Base
     sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
     User.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
   end
+
+  def set_nest(channel_subscription)
+    channel_subscription.user ||= self
+  end
+
+  def subscription_params
+    ucs_attribs = self.user_channel_subscriptions.map(&:attributes).collect{|x| x.keep_if{|k, v| ["course_id", "channel_id"].include? k}}
+    errors.add(:base, "User channel subscriptions must be unique.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
+  end  
 
 end
