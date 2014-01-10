@@ -24,13 +24,15 @@ footer .navbar-brand {padding-top: 10px;padding-bottom: 0}
 .fa-2x {font-size: 200% !important}
 
 /*********  Transparent background buttons   **/
-.btn-trans {background: none;color:#000;}
+.btn-trans {background: none;color:#000;padding-right:15px;}
+.btn-trans:last-child {padding-right:0;} 
+
 .btn-trans:hover {color:#f00;}
 
 
 /**************** Overwriting Table ****************/
 
-.width150 {width: 150px}
+.width150 {width: 75px !important}
 
 
 

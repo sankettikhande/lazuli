@@ -43,9 +43,7 @@ module ApplicationHelper
   end
 
   def raw_field(classes, title=nil)
-    content_tag(:i, '', class: classes) do 
-      title
-    end
+    content_tag(:i, '', class: classes) << " #{title}"
   end
 
   def button_raw_field(classes)
