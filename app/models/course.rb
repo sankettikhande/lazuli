@@ -77,12 +77,12 @@ class Course < ActiveRecord::Base
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
-    Course.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
+    Course.search(query, :order => sort_options, :sql => {:include => :channels}).page(page).per(options[:iDisplayLength])
   end
 
   private 
   def create_associations()
-    self.channel_course_permissions.build if self.channel_course_permissions.size.zero?
+    self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
   end
 
 end

@@ -84,7 +84,7 @@ class Video < ActiveRecord::Base
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
-    Video.search(query, :order => sort_options, :sql => {:include => [:topic, :tags]}).page(page).per(options[:iDisplayLength])
+    Video.search(query, :order => sort_options, :sql => {:include => [{:topic => [:channel, :course]}, :tags]}).page(page).per(options[:iDisplayLength])
   end
 
   def vimeo_video_url
