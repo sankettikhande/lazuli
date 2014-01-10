@@ -21,6 +21,10 @@
 	margin-top: 5px;
 }
 
+#accordion1 .panel{
+    margin-top: 5px;
+}
+
 /*column sorting css*/
 
 #column_sort_css {
