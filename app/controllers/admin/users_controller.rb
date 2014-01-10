@@ -14,8 +14,9 @@ class Admin::UsersController < AdminController
   end	
 
   def create
-  	@user = User.new(params[:user])
-  	respond_to do |format|
+    @user = User.new(params[:user])
+    @user.created_by = 'admin'
+    respond_to do |format|
       if @user.save
         format.js
       else

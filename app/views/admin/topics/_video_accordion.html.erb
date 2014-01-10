@@ -2,7 +2,12 @@
 <div class="portlet-body">
 	<div class="panel-group accordion" id="accordion1">
 		<% index = 0 %>
-		<%= f.fields_for :videos, :wrapper => false do |video_form| %> 
+		<% if request.fullpath.to_s.include?('edit') %>
+			<% topic_video = @topic.videos.order(:sequence_number) %>
+		<% else %>
+			<% topic_video = @topic.videos.build %>
+		<% end %>
+		<%= f.fields_for :videos, topic_video, :wrapper => false do |video_form| %>
 			<div class="panel panel-default fields">
 				<div class="panel-heading">
 					<div class="panel-title">
@@ -155,24 +160,10 @@
 
 
 <script>
-	if ("<%= f.object.is_bookmark_video %>" == "true"){
+	if ("<%#= f.object.is_bookmark_video %>" == "true"){
 		$("#video_link").hide();
 	}else{
 		$("#bookmark_link").hide();
 	}
-
-	jQuery(function ($) {
-		$("#seqNum1").val(1)
-		$(document).on('nested:fieldAdded:videos', function(event) {
-			$("#accordion1").find(".fields").each(function(index){
-				$(this).find("#seqNum1").val(index + 1)
-			})
-	  });
-	  $(document).on('nested:fieldRemoved:videos', function(event) {
-	    $(event.target).remove()
-	    $("#accordion1").find(".fields").each(function(index){
-				$(this).find("#seqNum1").val(index + 1)
-			})
-	  });
-	});
 </script>
+<%= javascript_include_tag "admin/app_functions/video_accordion.js"%>

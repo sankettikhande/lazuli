@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address, :actual_name
+  attr_accessor :created_by
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address, :actual_name, :created_by
   attr_accessible :user_channel_subscriptions_attributes
   has_many :user_channel_subscriptions, :dependent => :destroy, :before_add => :set_nest
   has_many :subscriptions, :through => :user_channel_subscriptions
@@ -19,6 +20,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
 
   after_create :add_user_role
+  after_create :confim_user_by_admin
 
   def confirm_status
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
@@ -54,6 +56,7 @@ class User < ActiveRecord::Base
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       user = User.new((row.to_hash.slice(*accessible_attributes)).merge(:company_name => user[:company_name]))
+      user.created_by = 'admin'
       user_channel.each do |key, val|
         user.user_channel_subscriptions.build(val)
       end
@@ -97,4 +100,8 @@ class User < ActiveRecord::Base
     errors.add(:base, "User channel subscriptions must be unique.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
   end  
 
+
+  def confim_user_by_admin
+    self.confirm! if self.created_by
+  end
 end
