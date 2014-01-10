@@ -13,6 +13,8 @@
  *= require_self
  */
 
+.btn-trans.disabled,.btn-trans[disabled] {color: #888;cursor:context-menu;}
+
  #video_form_remove_link {
  	color: black;
  }
