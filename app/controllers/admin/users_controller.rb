@@ -2,7 +2,6 @@ class Admin::UsersController < AdminController
   before_filter :set_instance, :only => [:new, :create, :edit, :update, :new_bulk, :create_bulk]
   
   def index
-    @users = User.order((params[:sort_column] || "name") + " " + (params[:direction] || "asc")).page(params[:page])
   end
 
   def search

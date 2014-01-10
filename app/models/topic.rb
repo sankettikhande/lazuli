@@ -59,6 +59,7 @@ class Topic < ActiveRecord::Base
       assign_video << video_data.vimeo_id
     end
     create_album(assign_video) if assign_video.any?
+    self.update_attribute(:status, "Publish")
   end
   handle_asynchronously :upload_to_vimeo
 
@@ -73,7 +74,6 @@ class Topic < ActiveRecord::Base
         VimeoLib.album.add_video(self.vimeo_album_id, vimeo_id)
       end
     end
-    self.update_attribute(:status, "Publish")
   end
 
   def self.sphinx_search options
