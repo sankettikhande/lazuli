@@ -112,20 +112,20 @@
 							<div class="col-sm-4">
 								<%= video_form.text_field :vimeo_url, :class => "form-control"%>
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-2" style="width:15%;">
 								<label class="control-label">Available for</label>
 							</div>
 							<div class="col-sm-4">
-								<div class="checkbox-list">
-									<%= video_form.check_box :demo, :class => "form-control" %>
-									<label class="checkbox-inline">
+								<div class="col-sm-4">
+									<label><%= video_form.check_box :demo, :class => "form-control" %>
 									  Demo 
 									</label>
-									<%= video_form.check_box :trial, :class => "form-control" %>
-									<label class="checkbox-inline">
+								</div>
+								<div class="col-sm-4">
+									<label><%= video_form.check_box :trial, :class => "form-control" %>
 									  Trial
 									</label>
-								</div> 
+								</div>	 
 							</div>
 						</div>
 						<div class="seperator5"></div>
