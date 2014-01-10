@@ -9,7 +9,7 @@ class UserChannelSubscription < ActiveRecord::Base
   belongs_to :course
 
   validates_presence_of :channel_id, :subscription_id, :subscription_date, :expiry_date, :course_id
-  validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id]}
+  validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id], :message => "^User channel subscriptions has already been taken"}
   after_create :update_channel_user_count
   after_create :update_course_user_count
 
