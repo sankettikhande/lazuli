@@ -1,1 +1,5 @@
-$("#bookmark_alert").text("Bookmark have been Submitted.");
+<% if @error %>
+	$("#bookmark_alert").text("<%= @error %>");
+<% else %>
+	$("#bookmark_alert").text("Bookmark have been Submitted.");
+<% end %>

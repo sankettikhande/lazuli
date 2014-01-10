@@ -49,10 +49,15 @@ class Admin::TopicsController < AdminController
 	end
 
 	def bookmark
-		@video = Video.find_by_id(params[:id])
-		@video.bookmark = params["bookmark"].to_json
-		@video.save
-		@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
+		bookmarks = params["bookmark"].to_json
+		if validate_bookmark(bookmarks)
+			@video = Video.find_by_id(params[:id])
+			@video.bookmark = bookmarks
+			@video.save
+			@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
+		else
+			@error = "Title not found for bookmarks"
+		end
 	end
 
 	def search
@@ -98,5 +103,10 @@ class Admin::TopicsController < AdminController
 	def publish_topic(topic)
 		topic.update_attribute(:status, "InProcess")
 		topic.upload_to_vimeo
+	end
+
+	def validate_bookmark(bookmarks_str)
+		bookmarks = JSON.parse(bookmarks_str)
+		!bookmarks.any? { |bookmark| bookmark['title'].nil? || bookmark['title'].blank? }
 	end
 end
