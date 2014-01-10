@@ -8,6 +8,13 @@ module Admin::TopicsHelper
 	end
 
 	def topic_actions(topic)
-		"<a href='/admin/topics/#{topic.id}/edit' class='btn-trans' data-no-turbolink='true' rel='tooltip' title='Edit Topic'><i class='fa fa-edit'></i></a><a href='/admin/topics/#{topic.id}' class='btn-trans' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a><a href='/admin/topics/#{topic.id}?Publish=Publish' class='btn-trans' data-method='put' rel='tooltip nofollow' title='Publish Topic'><i class='fa fa-cloud-upload'></i></a>".html_safe
+		action_str = "<a href='/admin/topics/#{topic.id}/edit' class='btn-trans' data-no-turbolink='true' rel='tooltip' title='Edit Topic'><i class='fa fa-edit'></i></a>"
+		action_str << "<a href='/admin/topics/#{topic.id}' class='btn-trans' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>"
+		action_str << link_to(raw_field('fa fa-cloud-upload'), "#{admin_topic_path(topic)}?Publish=Publish", :method => :put, :class => "btn-trans", :rel=>"tooltip", :title=>"Publish Topic" ) if !topic.published?
+		action_str.html_safe
+	end
+
+	def topic_album_url(topic)
+		link_to(topic.vimeo_album_url, topic.vimeo_album_url).html_safe if !topic.vimeo_album_id.nil?
 	end
 end
