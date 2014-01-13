@@ -1,4 +1,5 @@
-<%= form_tag('/admin/topics/bookmark', :remote => true, :id => "bookmark_form") do  %>
+<% video = topic.videos.first %>
+<%= form_tag(bookmark_admin_bookmark_path(video), :remote => true, :id => "bookmark_form") do  %>
 	<div class="row">
 	  <div class="col-xs-2">
 	   <label class="control-label" for="bkmrk-time">Time</label>
@@ -10,18 +11,16 @@
 	   <label class="control-label" for="bkmrk-descr">Description</label>
 	  </div>
 	</div>
-	<% video = topic.videos.first %>
-	<%= hidden_field_tag 'id', video.id %>
-	<% if video.bookmark.nil? || video.bookmark.blank?%>
+	<% if video.bookmarks.blank?%>
 		<div class="row">
 		  <div class="col-xs-2">
-		   <input type="text" name="bookmark[]time" class="form-control" value="00:00">
+		  	<%= text_field_tag "bookmark[]time", nil , :class => "form-control", :value => "00:00" %>
 		  </div>
 		  <div class="col-xs-2">
-		   <input type="text" name="bookmark[]title" class="form-control" placeholder="Please enter bookmark title">
+		  	<%= text_field_tag "bookmark[]title", nil,:class => "form-control", :placeholder => "Please enter bookmark title" %>
 		  </div>
 		  <div class="col-xs-6">
-		   <textarea name="bookmark[]description" class="form-control" placeholder="Describe this bookmark" rows="1"></textarea>
+		  	<%= text_field_tag "bookmark[]description", nil, :class => "form-control", :placeholder => "Describe this bookmark", :row => 1 %>
 		  </div>
 		  <div class="col-xs-1">
 		   <button type="button" class="btn btn-trans" title="Remove" onclick="$(this).parent().parent().remove();javascript:void(0);"><i class="fa fa-minus-circle"></i></button>
@@ -29,16 +28,16 @@
 		</div>
 		<div class="seperator5"></div>
 	<% else %>
-		<% JSON.parse(video.bookmark).each do |bookmark| %>
+		<% video.bookmarks.each do |bookmark| %>
 			<div class="row">
 			  <div class="col-xs-2">
-			   <input type="text" name="bookmark[]time" class="form-control" value="<%= bookmark['time'] %>">
+			  	<%= text_field_tag "bookmark[]time", nil , :class => "form-control", :value => bookmark.time %>
 			  </div>
 			  <div class="col-xs-2">
-			   <input type="text" name="bookmark[]title" class="form-control" value="<%= bookmark['title'] %>">
+			  	<%= text_field_tag "bookmark[]title", nil , :class => "form-control", :value => bookmark.title %>
 			  </div>
 			  <div class="col-xs-6">
-			   <textarea name="bookmark[]description" class="form-control" rows="1"><%= bookmark['description'] %></textarea>
+			  	<%= text_area_tag "bookmark[]description", bookmark.description , :class => "form-control", :rows => 1 %>
 			  </div>
 			  <div class="col-xs-1">
 			   <button type="button" class="btn btn-trans" title="Remove" onclick="$(this).parent().parent().remove();javascript:void(0);"><i class="fa fa-minus-circle"></i></button>
