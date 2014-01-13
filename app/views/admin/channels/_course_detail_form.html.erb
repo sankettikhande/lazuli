@@ -15,10 +15,10 @@
 			<div class="panel-body form-group">
 				<div class="row">
 					<div class="col-sm-2">
-						<label for="course-name" class="control-label">Course Name</label>
+						<label for="course-name" class="control-label">Course Name<%= required_field %></label>
 					</div>
 					<div class="col-sm-4">
-						<%= f.text_field :name, :class => "form-control" %>
+						<%= f.text_field :name, :class => "form-control validate[required]" %>
 					</div>
 					<div class="col-sm-2">
 						<label for="trainer-name" class="control-label">Name of Trainer</label>

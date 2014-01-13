@@ -11,3 +11,9 @@ function videoAccordionForm(){
       tags: []
   });
 }
+
+$('#user_search_channel').change(function(){
+	if($(this).val() != ''){
+  	$('#s2id_user_search_channel').removeClass('validate[required]');
+  	}
+});
