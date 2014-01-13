@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
 
   after_create :add_user_role
-  after_create :confim_user_by_admin
 
   def confirm_status
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
@@ -45,7 +44,7 @@ class User < ActiveRecord::Base
     header.collect {|h| hash[h]}
   end
 
-  def self.import_users(user)
+  def self.import_users(user, admin_user_id)
     user_channel = user[:user_channel_subscriptions_attributes]
     file =  user[:file]
     spreadsheet = open_spreadsheet(file)
@@ -55,7 +54,7 @@ class User < ActiveRecord::Base
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       user = User.new((row.to_hash.slice(*accessible_attributes)).merge(:company_name => user[:company_name]))
-      user.created_by = 'admin'
+      user.created_by = admin_user_id
       user_channel.each do |key, val|
         user.user_channel_subscriptions.build(val)
       end
@@ -96,11 +95,11 @@ class User < ActiveRecord::Base
 
   def subscription_params
     ucs_attribs = self.user_channel_subscriptions.map(&:attributes).collect{|x| x.keep_if{|k, v| ["course_id", "channel_id"].include? k}}
-    errors.add(:base, "User Course subscription must be unique for a channel.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
+    errors.add(:base, "User course subscription must be unique for a channel.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
   end  
 
-
-  def confim_user_by_admin
-    self.confirm! if self.created_by == "admin"
+  def skip_confirmation!
+    self.confirmed_at = Time.now.utc
   end
+
 end

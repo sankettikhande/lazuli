@@ -2,12 +2,7 @@
 <div class="portlet-body">
 	<div class="panel-group accordion" id="accordion1">
 		<% index = 0 %>
-		<% if request.fullpath.to_s.include?('edit') %>
-			<% topic_video = @topic.videos.order(:sequence_number) %>
-		<% else %>
-			<% topic_video = @topic.videos.build %>
-		<% end %>
-		<%= f.fields_for :videos, topic_video, :wrapper => false do |video_form| %>
+		<%= f.fields_for :videos, @topic_videos, :wrapper => false do |video_form| %>
 			<div class="panel panel-default fields">
 				<div class="panel-heading">
 					<div class="panel-title">
@@ -16,7 +11,7 @@
 								<div class="col-sm-8"><h5><%= video_title(video_form.object.title) %></h5></div></a>
 								<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
 								<div class="col-sm-1">
-									<%= video_form.number_field :sequence_number, :class => "form-control", :id =>"seqNum1" %>
+									<%= video_form.number_field :sequence_number, :class => "form-control seqNum" %>
 								</div>
 
 								<% if index != 0 %>
