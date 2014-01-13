@@ -97,7 +97,7 @@ class Video < ActiveRecord::Base
     !self.vimeo_id.nil? ? "http://vimeo.com/#{self.vimeo_id}" : nil 
   end
 
-  def validate_bookmark
+  def process_bookmark
     bookmarks = []
     self.bookmarks_from_params.each do |bookmark|
       if bookmark['id']
@@ -110,7 +110,11 @@ class Video < ActiveRecord::Base
       end
       bookmarks << bookmark_obj
     end
-    (bookmarks.any? { |bookmark| bookmark.title.nil? || bookmark.title.blank? }) ? false : bookmarks
+    bookmarks
+  end
+
+  def validate_bookmark bookmarks
+    bookmarks.all? { |bookmark| bookmark.valid? }
   end
 end
 

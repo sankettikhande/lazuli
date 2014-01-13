@@ -1,6 +1,5 @@
 class CreateBookmarks < ActiveRecord::Migration
   def change
-    remove_column :videos, :bookmark if column_exists? :videos, :bookmark
     create_table :bookmarks do |t|
       t.integer :video_id
       t.string :time
