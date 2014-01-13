@@ -25,5 +25,7 @@ flowplayer("player", { src: "/assets/flowplayer-3.2.18.swf" , wmode:"transparent
 });
 
 $("#bookmark_button").click(function(){
+    var btn = $(this)
+    btn.button('loading')
     $("#bookmark_form").submit();
 });

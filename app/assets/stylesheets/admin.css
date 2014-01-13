@@ -15,6 +15,8 @@
 
 .btn-trans.disabled,.btn-trans[disabled] {color: #888;cursor:context-menu;}
 
+.btn-trans.inprocess,.btn-trans[inprocess] {color: #5CB85C;cursor:context-menu;}
+
  #video_form_remove_link {
  	color: black;
  }
