@@ -18,7 +18,6 @@
 					<div class="control-group">
 						<%= f.hidden_field :admin_user_id, :class => 'select2 validate[required]', :id => "user_search_channel", :style => "width:100%;height:100%;" %>
 					</div>
-					<!-- <input type="hidden" id="select2_user_search_modal_6" class="form-control select2"> -->
 				</div>
 
 				<div class="col-sm-2">
@@ -26,7 +25,6 @@
 				</div>
 				<div class="col-sm-4">
 					<%= f.text_field :contact_number, :class => "form-control validate[custom[phone]]" %>
-					<!-- <input type="tel" class="form-control" id="cont-no" name="cont-no"> -->
 				</div>
 			</div>
 			<div class="seperator10"></div>
@@ -36,7 +34,6 @@
 				</div>
 				<div class="col-sm-4">
 					<%= f.text_field :email, :class => "form-control validate[required, custom[email]]", :placeholder => "@example.com" %>
-					<!-- <input type="email" class="form-control" id="u-email" name="u-email" placeholder="@example.com"> -->
 				</div>
 				<div class="col-sm-2">
 					<label for="u-name" class="control-label">Username<%= required_field %></label>
