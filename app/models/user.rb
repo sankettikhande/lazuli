@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
 
   after_create :add_user_role
+  after_save :set_channel_admin_role
 
   def confirm_status
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
@@ -100,6 +101,15 @@ class User < ActiveRecord::Base
 
   def skip_confirmation!
     self.confirmed_at = Time.now.utc
+  end
+
+  def set_channel_admin_role
+    ucs_attribs = self.user_channel_subscriptions.map(&:attributes).collect{|x| x.keep_if{|k, v| ["permission_create"].include? k}}
+    if ucs_attribs.include?({"permission_create"=>true})
+      self.add_role(:channel_admin) if !self.has_role?(:channel_admin)
+    else
+      self.remove_role(:channel_admin)
+    end
   end
 
 end
