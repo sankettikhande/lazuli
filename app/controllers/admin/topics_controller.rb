@@ -49,19 +49,6 @@ class Admin::TopicsController < AdminController
 		end
 	end
 
-	def bookmark
-		bookmarks = params["bookmark"].to_json
-		@video = Video.find(params[:id])
-		@video.bookmarks_from_params = bookmarks
-		if @video.validate_bookmark
-			@video.bookmark = bookmarks
-			@video.save
-			@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
-		else
-			@error = "Title not found for bookmarks"
-		end
-	end
-
 	def search
 		@topics = Topic.sphinx_search(params)
 	end
