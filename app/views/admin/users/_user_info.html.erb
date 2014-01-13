@@ -39,7 +39,7 @@
         <label for="emailID">Email ID<%= required_field %></label>
     	</div>
     	<div class="col-md-6">
-        <%= f.text_field 'email', :class => 'form-control validate[required, custom[email]]' %>
+        <%= f.text_field 'email', :class => 'form-control validate[required, custom[email]]', :autocomplete => :off %>
     	</div>
     </div>
     <div class="row form-group">

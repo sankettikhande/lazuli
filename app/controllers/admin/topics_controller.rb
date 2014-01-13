@@ -3,7 +3,7 @@ class Admin::TopicsController < AdminController
 	def new
 		@channel_courses = Course.all
 		@topic = Topic.new
-		@topic.videos.build()
+		@topic_videos = @topic.videos.build()
 	end
 
 	def create
@@ -21,6 +21,7 @@ class Admin::TopicsController < AdminController
 
 	def edit
 		@topic = Topic.cached_find(params[:id])
+		@topic_videos = @topic.videos.order(:sequence_number)
 		channel = Channel.find(@topic.channel_id)
 		@channel_courses = channel.courses
 	end

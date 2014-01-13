@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address, :actual_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address, :actual_name, :created_by
   attr_accessible :user_channel_subscriptions_attributes
   has_many :user_channel_subscriptions, :dependent => :destroy, :before_add => :set_nest
   has_many :subscriptions, :through => :user_channel_subscriptions
@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     header.collect {|h| hash[h]}
   end
 
-  def self.import_users(user)
+  def self.import_users(user, admin_user_id)
     user_channel = user[:user_channel_subscriptions_attributes]
     file =  user[:file]
     spreadsheet = open_spreadsheet(file)
@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
     (2..spreadsheet.last_row).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       user = User.new((row.to_hash.slice(*accessible_attributes)).merge(:company_name => user[:company_name]))
+      user.created_by = admin_user_id
       user_channel.each do |key, val|
         user.user_channel_subscriptions.build(val)
       end
@@ -94,7 +95,11 @@ class User < ActiveRecord::Base
 
   def subscription_params
     ucs_attribs = self.user_channel_subscriptions.map(&:attributes).collect{|x| x.keep_if{|k, v| ["course_id", "channel_id"].include? k}}
-    errors.add(:base, "User channel subscriptions must be unique.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
+    errors.add(:base, "User course subscription must be unique for a channel.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
   end  
+
+  def skip_confirmation!
+    self.confirmed_at = Time.now.utc
+  end
 
 end

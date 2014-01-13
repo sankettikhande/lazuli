@@ -27,7 +27,7 @@
 							            <td><%= user_channel.channel.try(:name) %></td>
 							            <td><%= user_channel.subscription.try(:name) %></td>
 							            <td><%= user_channel.expiry_date %></td>
-							            <td><a href=" /admin/user_channel_subscriptions/<%= user_channel.id %>/edit" data-remote='true' rel="tooltip" title="Edit Permissions"><i class="fa fa-3x fa-edit"></i></a></td>
+							            <td><%= link_to raw_field('fa btn-trans fa-edit'),  edit_admin_user_channel_subscription_path(user_channel.id), :remote => true, :rel=>"tooltip", :title=>"Edit Permissions" %></td>
 							          </tr>
 							        <% end %>
 							      <% else %>
