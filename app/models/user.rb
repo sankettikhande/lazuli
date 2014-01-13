@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessor :created_by
   attr_accessible :email, :password, :password_confirmation, :remember_me, :provider, :uid , :name, :phone_number, :company_name, :address, :actual_name, :created_by
   attr_accessible :user_channel_subscriptions_attributes
   has_many :user_channel_subscriptions, :dependent => :destroy, :before_add => :set_nest
@@ -97,11 +96,11 @@ class User < ActiveRecord::Base
 
   def subscription_params
     ucs_attribs = self.user_channel_subscriptions.map(&:attributes).collect{|x| x.keep_if{|k, v| ["course_id", "channel_id"].include? k}}
-    errors.add(:base, "User channel subscriptions must be unique.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
+    errors.add(:base, "User Course subscription must be unique for a channel.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
   end  
 
 
   def confim_user_by_admin
-    self.confirm! if self.created_by
+    self.confirm! if self.created_by == "admin"
   end
 end
