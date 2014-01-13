@@ -15,7 +15,8 @@ class Admin::UsersController < AdminController
 
   def create
     @user = User.new(params[:user])
-    @user.created_by = 'admin'
+    @user.created_by = current_user.id
+    @user.skip_confirmation!
     respond_to do |format|
       if @user.save
         format.js
@@ -73,10 +74,12 @@ class Admin::UsersController < AdminController
 
   def create_bulk
     @bulk_user_errors = User.bulksheet_errors(params[:user][:file])
-    if @bulk_user_errors.blank? 
-      @users = User.import_users(params[:user])
+    if @bulk_user_errors.blank?
+      created_by = current_user.id 
+      @users = User.import_users(params[:user], created_by)
       respond_to do |format|
         if @users.map(&:valid?).all?
+          @users.each(&:skip_confirmation!)
           @users.each(&:save!)
           format.js
         else
