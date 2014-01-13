@@ -5,7 +5,7 @@ class Admin::BookmarksController < AdminController
 		bookmarks = @video.process_bookmark
 		if bookmarks && @video.validate_bookmark(bookmarks) 
 			@video.bookmarks = bookmarks
-			@video.save
+			# @video.save
 			@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
 		else
 			@error = bookmarks.map{ |bookmark| bookmark.errors.full_messages }.flatten.join(',').html_safe
