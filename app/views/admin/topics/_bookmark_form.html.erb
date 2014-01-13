@@ -12,7 +12,7 @@
 	</div>
 	<% video = topic.videos.first %>
 	<%= hidden_field_tag 'id', video.id %>
-	<% if video.bookmark.nil? || video.bookmark.blank?%>
+	<% if video.bookmarks.nil? || video.bookmarks.blank?%>
 		<div class="row">
 		  <div class="col-xs-2">
 		   <input type="text" name="bookmark[]time" class="form-control" value="00:00">
@@ -29,16 +29,17 @@
 		</div>
 		<div class="seperator5"></div>
 	<% else %>
-		<% JSON.parse(video.bookmark).each do |bookmark| %>
+		<% video.bookmarks.each do |bookmark| %>
 			<div class="row">
 			  <div class="col-xs-2">
-			   <input type="text" name="bookmark[]time" class="form-control" value="<%= bookmark['time'] %>">
+			  <input type="hidden" name='bookmark[]id' class="form-control" value="<%= bookmark.id %>">
+			   <input type="text" name="bookmark[]time" class="form-control" value="<%= bookmark.time %>">
 			  </div>
 			  <div class="col-xs-2">
-			   <input type="text" name="bookmark[]title" class="form-control" value="<%= bookmark['title'] %>">
+			   <input type="text" name="bookmark[]title" class="form-control" value="<%= bookmark.title %>">
 			  </div>
 			  <div class="col-xs-6">
-			   <textarea name="bookmark[]description" class="form-control" rows="1"><%= bookmark['description'] %></textarea>
+			   <textarea name="bookmark[]description" class="form-control" rows="1"><%= bookmark.description %></textarea>
 			  </div>
 			  <div class="col-xs-1">
 			   <button type="button" class="btn btn-trans" title="Remove" onclick="$(this).parent().parent().remove();javascript:void(0);"><i class="fa fa-minus-circle"></i></button>

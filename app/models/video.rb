@@ -4,6 +4,7 @@ class Video < ActiveRecord::Base
   serialize :vimeo_data
   attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password
   attr_accessor :bookmarks_from_params
+  has_many :bookmarks, :dependent => :destroy
   belongs_to :topic
   acts_as_taggable
 
@@ -22,6 +23,7 @@ class Video < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
   validates_presence_of :clip
+  accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
   def upload_single_video
     video = self.upload
@@ -59,9 +61,8 @@ class Video < ActiveRecord::Base
 
   def description_text
     text = []
-    desc = self.bookmark ? JSON.parse(self.bookmark) : {}
-    desc.each do |desc_text|
-      text << "#{desc_text['title']} #{desc_text['time']}"
+    self.bookmarks.each do |desc_text|
+      text << "#{desc_text.title} #{desc_text.time}"
     end
     "#{self.description} #{text.join(', ')}"
   end
@@ -97,8 +98,19 @@ class Video < ActiveRecord::Base
   end
 
   def validate_bookmark
-    bookmarks = JSON.parse(self.bookmarks_from_params)
-    !bookmarks.any? { |bookmark| bookmark['title'].nil? || bookmark['title'].blank? }
+    bookmarks = []
+    self.bookmarks_from_params.each do |bookmark|
+      if bookmark['id']
+        bookmark_obj = Bookmark.find(bookmark['id'])
+        bookmark_obj.time = bookmark['time']
+        bookmark_obj.title = bookmark['title']
+        bookmark_obj.description = bookmark['description']
+      else
+        bookmark_obj = Bookmark.new(bookmark)
+      end
+      bookmarks << bookmark_obj
+    end
+    (bookmarks.any? { |bookmark| bookmark.title.nil? || bookmark.title.blank? }) ? false : bookmarks
   end
 end
 

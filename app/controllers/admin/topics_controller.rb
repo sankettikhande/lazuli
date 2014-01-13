@@ -49,11 +49,11 @@ class Admin::TopicsController < AdminController
 	end
 
 	def bookmark
-		bookmarks = params["bookmark"].to_json
 		@video = Video.find(params[:id])
-		@video.bookmarks_from_params = bookmarks
-		if @video.validate_bookmark
-			@video.bookmark = bookmarks
+		@video.bookmarks_from_params = params["bookmark"]
+		bookmarks = @video.validate_bookmark
+		if bookmarks
+			@video.bookmarks = bookmarks
 			@video.save
 			@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
 		else
