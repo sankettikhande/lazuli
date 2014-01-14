@@ -5,7 +5,7 @@
 	   <label class="control-label" for="bkmrk-time">Time</label>
 	  </div>
 	  <div class="col-xs-2">
-	   <label class="control-label">Title</label>
+	   <label class="control-label">Title<%= required_field %></label>
 	  </div>
 	  <div class="col-xs-5">
 	   <label class="control-label" for="bkmrk-descr">Description</label>
@@ -17,7 +17,7 @@
 		  	<%= text_field_tag "bookmark[]time", nil , :class => "form-control", :value => "00:00" %>
 		  </div>
 		  <div class="col-xs-2">
-		  	<%= text_field_tag "bookmark[]title", nil,:class => "form-control", :placeholder => "Please enter bookmark title" %>
+		  	<%= text_field_tag "bookmark[]title", nil,:class => "form-control validate[required]", :placeholder => "Please enter bookmark title" %>
 		  </div>
 		  <div class="col-xs-6">
 		  	<%= text_field_tag "bookmark[]description", nil, :class => "form-control", :placeholder => "Describe this bookmark", :row => 1 %>
