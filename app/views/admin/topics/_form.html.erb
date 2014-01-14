@@ -18,13 +18,13 @@
 				</div>
 				<div class="seperator20"></div>
 				<div class="row">
-					<div class="col-sm-1">
+					<div class="col-sm-2">
 						<label for="t-topic" class="control-label">Topic<%= required_field %></label>
 					</div>
 					<div class="col-sm-3">
 						<%= f.text_field 'title', :class => "form-control validate[required]"%>
 					</div>
-					<div class="col-sm-1 col-sm-offset-2">
+					<div class="col-sm-2 col-sm-offset-1">
 						<label class="control-label" for="t-course">Channel<%= required_field %></label>
 					</div>
 					<div class="col-sm-3">
@@ -35,7 +35,7 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="row">
-							<div class="col-sm-2">
+							<div class="col-sm-4">
 								<label for="t-descr" class="control-label">Description</label>
 							</div>
 							<div class="col-sm-6">
@@ -45,7 +45,7 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="row">
-							<div class="col-sm-2">
+							<div class="col-sm-4">
 								<label class="control-label" for="t-channel">Courses<%= required_field %></label>
 							</div>
 							<div class="col-sm-6">
@@ -53,17 +53,17 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-2">
-								<%= f.label :is_bookmark_video, "Type", :class => "control-label" %>
+							<div class="col-sm-3" style='width:30%'>
+								<%= f.label :is_bookmark_video, "Type of video", :class => "control-label" %>
 							</div>
-							<div class="col-sm-10">
-								<div style="padding-top:10px;">
-									<label class="radio-inline" style="padding-left:0px;">
-										<%= f.radio_button :is_bookmark_video, true, :class => "checkbox", :disabled => !f.object.new_record?   %>
-											Single Bookmark
+							<div class="col-sm-5">
+								<div>
+									<label class="radio">
+										<%= f.radio_button :is_bookmark_video, true, :class => "checkbox", :disabled => !f.object.new_record? %>
+											Single Bookmark Video
 									</label>
-									<label class="radio-inline">
-										<%= f.radio_button :is_bookmark_video, false, :class => "checkbox", :disabled => !f.object.new_record?   %>
+									<label class="radio">
+										<%= f.radio_button :is_bookmark_video, false, :class => "checkbox", :disabled => !f.object.new_record? %>
 											Multiple Videos
 									</label>
 								</div>

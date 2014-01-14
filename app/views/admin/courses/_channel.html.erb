@@ -7,7 +7,7 @@
 	<%= f.collection_select :channel_id , @channels, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control channel_id validate[required]" } %>
 </div>
 <div class="col-sm-2">
-	<label class="control-label">Channel Type<%= required_field %></label>
+	<label class="control-label">Channel Type</label>
 </div>
 <div class="col-sm-2">
 	<%= text_field_tag 'channel_type', nil ,:class => "form-control validate[required]", :disabled => true%>

@@ -40,11 +40,11 @@
 							<div class="col-sm-2">
 								<label class="control-label">Title of Video<%= required_field %></label>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<%= video_form.text_field :title, :class => "form-control validate[required]"%>
 								<!-- <input class="form-control" type="text" name="VideoTitle1" id="VideoTitle1"> -->
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-2 col-sm-offset-1">
 								<label class="control-label">Thumbnail</label>
 							</div>
 							<div class="col-sm-4">
@@ -68,10 +68,10 @@
 							<div class="col-sm-2">
 								<label class="control-label">Description<%= required_field %></label>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<%= video_form.text_area :description, :rows => 4, :class => "form-control validate[required]"%>
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-2 col-sm-offset-1">
 								<label class="control-label">Video Summary</label>
 							</div>
 							<div class="col-sm-4">
@@ -83,10 +83,10 @@
 							<div class="col-sm-2">
 								<label class="control-label" for="tags_1">Tags</label>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<%= video_form.hidden_field :tag_list, :class => "select2 video_tag_list", :placeholder => "Type the value and Enter" %>
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-2 col-sm-offset-1">
 	  						<label for="video-upload" class="control-label">Video</label>
 	  					</div>
 	  					<div class="col-sm-4">
@@ -109,10 +109,10 @@
 							<div class="col-sm-2">
 								<label class="control-label" for="vimeo-url1">Video URL</label>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-3">
 								<%= video_form.text_field :vimeo_url, :class => "form-control"%>
 							</div>
-							<div class="col-sm-2" style="width:15%;">
+							<div class="col-sm-2  col-sm-offset-1" style="width:15%;">
 								<label class="control-label">Available for</label>
 							</div>
 							<div class="col-sm-4">
