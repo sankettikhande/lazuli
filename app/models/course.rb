@@ -58,7 +58,7 @@ class Course < ActiveRecord::Base
     return if c_courses.blank?
     c_courses.delete(self)
     channel_course_names = c_courses.map(&:name)
-    errors.add(:base, "Course name must be uniq") if channel_course_names.include? self.name
+    errors.add(:base, "Course name must be unique.") if channel_course_names.include? self.name
   end
 
   def name_for_form
