@@ -2,7 +2,7 @@
 <hr>	
 <div class="row-align form-group">
 	<div class="col-md-3">
-		<label for="channelsS2">Channels Subscribed To<%= required_field %></label>
+		<label for="channelsS2">Channel Subscribed To<%= required_field %></label>
 	</div>
 	<div class="col-md-3">
 	  <%= f.select 'channel_id', options_for_select(@channels.collect {|c| [ c.name, c.id ] }, f.object.channel_id), {:include_blank => "Please Select"}, :class => 'form-control channels_id validate[required]' %>

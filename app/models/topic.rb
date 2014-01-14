@@ -25,7 +25,7 @@ class Topic < ActiveRecord::Base
   def check_uniqueness_of_title
     video_titles = videos.map(&:title)
     if(video_titles.length != video_titles.uniq.length)
-      errors.add(:base, 'Video title must be unique')
+      errors.add(:base, 'Video title must be unique.')
     end 
   end
 

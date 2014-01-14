@@ -4110,3 +4110,7 @@ Responsive Flip Scroll Tables
   .flip-scroll th:last-child,
   .flip-scroll td:last-child { border-bottom: 1px solid #ddd; }
 }
+
+/*css for width align */
+.width15 {width: 15%;}
+.width30 {width: 30%;}
