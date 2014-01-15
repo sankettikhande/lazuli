@@ -17,3 +17,17 @@ $('#user_search_channel').change(function(){
   	$('#s2id_user_search_channel').removeClass('validate[required]');
   	}
 });
+
+// for edit channel
+$('document').ready(function(){
+	if ($('#user_search_channel').val() != ''){
+		$.each($(".select2"), function (i, n) {
+			$(n).next().show().fadeTo(0, 0).height("0px").css("left", "auto");
+			$(n).prepend($(n).next());
+			$(n).delay(500).queue(function () {
+				$(this).removeClass("validate[required]");
+				$(this).dequeue();
+			});
+		});
+	}
+})
