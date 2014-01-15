@@ -50,7 +50,7 @@ class Admin::TopicsController < AdminController
 	end
 
 	def search
-		@topics = Topic.sphinx_search(params)
+		@topics = Topic.sphinx_search(params, current_user)
 	end
 
   protected

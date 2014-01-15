@@ -1,5 +1,5 @@
 module Admin::ChannelsHelper
   def channel_actions channel
-    "<a class='btn-trans' href='/admin/channels/#{channel.id}/edit' rel='tooltip' title='Edit Channel' data-no-turbolink='true'><i class='fa fa-edit'></i></a><a class='btn-trans' href='/admin/channels/#{channel.id}' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Channel'><i class='fa fa-ban'></i></a>".html_safe
+    link_to(link_raw_field('fa fa-edit'), edit_admin_channel_path(channel), :rel=>'tooltip', :title => 'Edit Channel', :class=>'btn-trans', :data =>{'no-turbolink'=>'true'}) << link_to(link_raw_field('fa fa-ban'), admin_channel_path(channel), :rel=>'tooltip', :title => 'Delete Channel', :class=>'btn-trans', :data =>{'no-turbolink'=>'true', :method => 'delete', :confirm => 'Are you sure you want to delete?'})
   end
 end
