@@ -19,12 +19,13 @@ $(document).ready(function(){
 	}
 
 	function load_content(divid){
-		if(divid == "topics"){
+    if(divid == "topics"){
 			load_topics();
-    }else if (divid == "courses"){
-    	load_courses();
-    }else{
+    }else if (divid == "videos"){
     	load_videos();
+    }else{
+      
+    	load_courses();
     }
 	}
 
