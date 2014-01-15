@@ -57,10 +57,14 @@ class Channel < ActiveRecord::Base
     user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
   end
 
-  def self.sphinx_search options
+  def self.sphinx_search options, current_user
+    sphinx_options, sort_options, search_options = {}, {}, {}
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
-    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
-    Channel.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
+    sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
+    
+    search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids})
+    sphinx_options.merge!(sort_options).merge!(search_options)
+    Channel.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 end
