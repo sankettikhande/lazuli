@@ -144,10 +144,12 @@
 			</div>
 		  <% if !f.object.new_record? %>
 				<div id="bookmark_link">
-					<a href="#video-modal" data-toggle="modal">
+					<%= link_to raw_field("fa fa-3x fa-plus", "(Add a bookmark)"), "#{bookmark_video_admin_bookmark_path(f.object.videos.first)}#video-modal", :remote => true, "data-toggle" => "modal" %>
+					<!-- bookmark_video_admin_topic -->
+					 <!-- <a href="#video-modal" data-toggle="modal"> 
 						<i class="fa fa-3x fa-plus"></i>
 						(Add a bookmark)
-					</a>
+					</a> -->
 				</div>
 			<% end %>
 	</div>
