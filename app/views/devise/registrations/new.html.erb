@@ -60,11 +60,10 @@
     </div>
     <div class="modal-footer">
 	<ul class="social-login-btns text-center">
-		<li><button type="button" title="Login Via Facebook" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></button>
-		</li>
-		<li><button type="button" title="Login Via Google" class="btn btn-social-icon btn-google-plus"><i class="fa fa-google-plus"></i></button></li>
-		<li><button type="button" title="Login Via Linkedin" class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></button></li>
-		</ul>									       
+		<li><%= link_to raw("<i class='fa fa-facebook'></i>"), user_omniauth_authorize_path(:facebook), :class => "btn btn-social-icon btn-facebook", :title => "Login Via Facebook" %></li>
+               <li><%= link_to raw("<i class='fa fa-google-plus'></i>"), user_omniauth_authorize_path(:google_oauth2), :class => "btn btn-social-icon btn-google-plus", :title => "Login Via Google" %></li>
+               <li><%= link_to raw("<i class='fa fa-linkedin'></i>"), user_omniauth_authorize_path(:linkedin), :class => "btn btn-social-icon btn-linkedin", :title => "Login Via Linkedin" %></li>
+           </ul>
     </div>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
