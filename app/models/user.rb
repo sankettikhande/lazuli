@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, :through => :user_channel_subscriptions
   has_many :administrated_channels, :class_name => Channel, :foreign_key => :admin_user_id
 
-  validates_presence_of :actual_name
+  validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
   validate :subscription_params
   include Cacheable
