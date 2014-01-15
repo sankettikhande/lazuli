@@ -1,16 +1,15 @@
 class Admin::BookmarksController < AdminController
-	def bookmark
+	def create_bulk
 		@video = Video.find(params[:id])
-		@video.bookmarks_from_params = params["bookmark"]
-		bookmarks = @video.process_bookmark
-		if bookmarks && @video.validate_bookmark(bookmarks) 
-			@video.bookmarks = bookmarks
-			@video.set_vimeo_description(@video.vimeo_id, @video.description_text) if @video.vimeo_id
-		else
-			@error = bookmarks.map{ |bookmark| bookmark.errors.full_messages }.flatten.join(',').html_safe
-		end
+		@video.update_attributes(params[:video])
+		@video.bookmarks.build if @video.bookmarks.blank?
 		respond_to do |format|
       format.js
     end
+	end
+
+	def bookmark_video
+		@video = Video.find(params[:id])
+		@video.bookmarks.build if @video.bookmarks.blank?
 	end
 end

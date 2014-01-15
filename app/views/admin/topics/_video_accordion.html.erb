@@ -142,14 +142,9 @@
 				<a href="#"><i class="fa fa-plus"></i></a>
 				<%= f.link_to_add "(Add another video)", :videos, :data => { :target => "#accordion1" } %>
 			</div>
-		  <% if !f.object.new_record? %>
-				<div id="bookmark_link">
-					<a href="#video-modal" data-toggle="modal">
-						<i class="fa fa-3x fa-plus"></i>
-						(Add a bookmark)
-					</a>
-				</div>
-			<% end %>
+		  <div id="bookmark_link">
+				<%= link_to raw_field("fa fa-3x fa-plus", "(Add a bookmark)"), "#{bookmark_video_admin_bookmark_path(f.object.videos.first)}#video-modal", :remote => true, "data-toggle" => "modal"  if !f.object.new_record? && !f.object.videos.blank? %>
+			</div>
 	</div>
 </div>
 

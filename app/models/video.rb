@@ -2,7 +2,7 @@ include VimeoLib
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
   serialize :vimeo_data
-  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password
+  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes
   attr_accessor :bookmarks_from_params
   has_many :bookmarks, :dependent => :destroy
   belongs_to :topic

@@ -1,5 +1,5 @@
-<% if @error %>
-	$("#bookmark_alert").css('color','#FF0000').text("<%= @error %>");
+<% if @video.errors %>
+	$("#bookmark_alert").css('color','#FF0000').text("<%= @video.errors.full_messages.join(',').html_safe  %>");
 <% else %>
 	$("#bookmark_form_content").html("<%= j(render 'admin/topics/bookmark_form')%>");
 	$("#bookmark_alert").text("Bookmark have been Submitted.");

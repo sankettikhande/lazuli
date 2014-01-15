@@ -43,7 +43,6 @@ Lazuli::Application.routes.draw do
     end
     resources :topics do
       collection do
-        post 'bookmark'
         get 'search'
       end
     end
@@ -57,7 +56,8 @@ Lazuli::Application.routes.draw do
     end
     resources :bookmarks do 
       member do
-        post 'bookmark'
+        post 'create_bulk'
+        get 'bookmark_video'
       end
     end
     resources :user_channel_subscriptions

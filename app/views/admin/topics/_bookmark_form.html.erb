@@ -1,5 +1,10 @@
-<% video = @topic_videos.first %>
-<%= form_tag(bookmark_admin_bookmark_path(video), :remote => true, :id => "bookmark_form") do  %>
+<div id="bookmark_alert"></div>
+<div class="row">
+	<div class="col-sm-7">
+		<a href="<%= @video.try(:clip).try(:url) %>" style="display:block; width:520px; height:300px;" id="player"> </a>
+	</div>
+</div>  
+<%= nested_form_for(@video, :url => create_bulk_admin_bookmark_path(@video), :method => :post, :remote => true, :html => {:id => "bookmark_form"}) do |f| %>
 	<div class="row">
 	  <div class="col-xs-2">
 	   <label class="control-label" for="bkmrk-time">Time</label>
@@ -11,39 +16,22 @@
 	   <label class="control-label" for="bkmrk-descr">Description</label>
 	  </div>
 	</div>
-	<% if video.bookmarks.blank?%>
-		<div class="row">
+	<%= f.fields_for :bookmarks, :wrapper => false do |bookmark| %>
+		<div class="row fields">
 		  <div class="col-xs-2">
-		  	<%= text_field_tag "bookmark[]time", nil , :class => "form-control", :value => "00:00" %>
+		  	<%= bookmark.text_field :time, :class => "form-control", :placeholder=>"Time", :value => "00:00" %>
 		  </div>
 		  <div class="col-xs-2">
-		  	<%= text_field_tag "bookmark[]title", nil,:class => "form-control validate[required]", :placeholder => "Please enter bookmark title" %>
+		  	<%= bookmark.text_field :title, :class => "form-control", :placeholder=>"Title"%>
 		  </div>
 		  <div class="col-xs-6">
-		  	<%= text_field_tag "bookmark[]description", nil, :class => "form-control", :placeholder => "Describe this bookmark", :row => 1 %>
+		  	<%= bookmark.text_area :description, :class => "form-control", :rows => 1, :placeholder=>"Describe this bookmark" %>
 		  </div>
 		  <div class="col-xs-1">
-		   <button type="button" class="btn btn-trans" title="Remove" onclick="$(this).parent().parent().remove();javascript:void(0);"><i class="fa fa-minus-circle"></i></button>
+		  	<%= bookmark.link_to_remove button_raw_field("fa fa-minus-circle", "btn btn-trans"), :rel =>'tooltip', :title => 'Remove bookmark' %>
 		  </div>
 		</div>
 		<div class="seperator5"></div>
-	<% else %>
-		<% video.bookmarks.each do |bookmark| %>
-			<div class="row">
-			  <div class="col-xs-2">
-			  	<%= text_field_tag "bookmark[]time", nil , :class => "form-control", :value => bookmark.time %>
-			  </div>
-			  <div class="col-xs-2">
-			  	<%= text_field_tag "bookmark[]title", nil , :class => "form-control", :value => bookmark.title %>
-			  </div>
-			  <div class="col-xs-6">
-			  	<%= text_area_tag "bookmark[]description", bookmark.description , :class => "form-control", :rows => 1 %>
-			  </div>
-			  <div class="col-xs-1">
-			   <button type="button" class="btn btn-trans" title="Remove" onclick="$(this).parent().parent().remove();javascript:void(0);"><i class="fa fa-minus-circle"></i></button>
-			  </div>
-			</div>
-			<div class="seperator5"></div>
-		<% end %>
 	<% end %>
 <% end %>
+<%= javascript_include_tag "admin/app_functions/video_bookmark.js" %>
