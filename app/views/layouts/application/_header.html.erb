@@ -39,7 +39,11 @@
             <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></button>
             <ul class="dropdown-menu pull-right">
               <li>
-                <a href="#">My Account</a>
+                <% if current_user.is_channel_admin? || current_user.is_admin? %>
+                  <%= link_to 'My Account', '/admin', "data-no-turbolink" => 'true' %>
+                <% else %>
+                  <%= link_to 'My Account', '#', "data-no-turbolink" => 'true' %>
+                <% end %>
               </li>
               <li>
                 <%= link_to raw("<i class='fa fa-key'></i> Log Out"), destroy_user_session_path, :method => :delete %>
@@ -54,18 +58,14 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
-        <%= link_to raw("<img src='/assets/frontend/lazuli-logo.png' alt='Lazuli' class='img-responsive center-block'>"), root_url %>
+        <%= link_to raw("<img src='/assets/frontend/lazuli-logo.png' alt='Lazuli' class='img-responsive center-block'>"), root_url, :class=> "navbar-brand nospace" %>
       </div>
-      <div class="navbar-collapse collapse navbar-right hidden-xs header-menu">
+      <div class="navbar-collapse collapse navbar-right" id="header-menu">
         <ul class="nav navbar-nav">
-          <li>
-            <% if request.fullpath.include?("sign_in") %>
-              <%= link_to raw("<i class='fa fa-pencil-square-o'></i> Signup"), new_registration_path(resource_name), :data => {"no-turbolink" => true}  %>
-            <% else %>
-              <%= link_to raw("<i class='fa fa-sign-in'></i> Sign in"), new_session_path(resource_name), :data => {"no-turbolink" => true} %>
-            <% end %>
+          <li><%= link_to raw("<i class='fa fa-sign-in'></i> Login"), '#', :data => {"target" => "#login-modal", 'toggle' => "modal"}  %></li>
+          <li><%= link_to raw("<i class='fa fa-pencil-square-o'></i> Signup"), '#', :data => {"target" => "#signup-modal", 'toggle' => "modal"}  %>
           </li>
-        </ul>
+      </ul>
       </div>
     </div>
   </div>
