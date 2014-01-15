@@ -16,8 +16,8 @@
 	   <label class="control-label" for="bkmrk-descr">Description</label>
 	  </div>
 	</div>
-	<%= f.fields_for :bookmarks, :wrapper => false do |bookmark| %> 
-		<div class="row">
+	<%= f.fields_for :bookmarks, :wrapper => false do |bookmark| %>
+		<div class="row fields">
 		  <div class="col-xs-2">
 		  	<%= bookmark.text_field :time, :class => "form-control", :placeholder=>"Time", :value => "00:00" %>
 		  </div>
@@ -34,5 +34,4 @@
 		<div class="seperator5"></div>
 	<% end %>
 <% end %>
-<%= javascript_include_tag "jquery_nested_form.js" %>
 <%= javascript_include_tag "admin/app_functions/video_bookmark.js" %>
