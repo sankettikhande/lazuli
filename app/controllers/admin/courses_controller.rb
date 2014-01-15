@@ -3,7 +3,7 @@ class Admin::CoursesController < AdminController
 	before_filter :set_initialization, :only => [:new, :edit, :create, :update]
 
 	def search
-		@courses = Course.sphinx_search params
+		@courses = Course.sphinx_search(params, current_user)
 	end
 
 	def new

@@ -40,6 +40,18 @@ class User < ActiveRecord::Base
     UserChannelSubscription.where(:channel_id => administrated_channel_ids).select("DISTINCT user_id").map(&:user_id)
   end
 
+  def administrated_channel_course_ids
+    ChannelCourse.where(:channel_id => administrated_channel_ids).select("DISTINCT course_id").map(&:course_id)
+  end
+
+  def administrated_channel_topic_ids
+    Topic.where(:channel_id => administrated_channel_ids).select(:id).map(&:id)
+  end
+
+  def administrated_channel_video_ids
+    Video.where(:Topic_id => administrated_channel_topic_ids).select(:id).map(&:id)
+  end
+
   def administrator_channel_subscribers
     User.find(administrated_channel_subscriber_ids)
   end
