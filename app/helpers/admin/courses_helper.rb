@@ -1,5 +1,5 @@
 module Admin::CoursesHelper
   def course_actions course
-    "<a class='btn-trans' href='/admin/courses/#{course.id}/edit' rel='tooltip' title='Edit Course' data-no-turbolink='true'><i class='fa fa-edit'></i></a><a class='btn-trans' href='/admin/courses/#{course.id}' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Course'><i class='fa fa-ban'></i></a>".html_safe
+    link_to(link_raw_field('fa fa-edit'), edit_admin_course_path(course), :rel=>'tooltip', :title => 'Edit Course', :class=>'btn-trans', :data =>{'no-turbolink'=>'true'}) << link_to(link_raw_field('fa fa-ban'), admin_course_path(course), :rel=>'tooltip', :title => 'Delete Course', :class=>'btn-trans', :data =>{'no-turbolink'=>'true', :method => 'delete', :confirm => 'Are you sure you want to delete?'})
   end
 end
