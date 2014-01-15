@@ -1,4 +1,4 @@
-<% if @video.errors %>
+<% if !@video.errors.blank? %>
 	$("#bookmark_alert").css('color','#FF0000').text("<%= @video.errors.full_messages.join(',').html_safe  %>");
 <% else %>
 	$("#bookmark_form_content").html("<%= j(render 'admin/topics/bookmark_form')%>");
