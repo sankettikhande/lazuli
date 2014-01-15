@@ -115,7 +115,7 @@ class User < ActiveRecord::Base
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_column_direction = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
     sort_options.merge!(:order => sort_column_direction)
-    search_options.merge!(:with => {"user_id" => current_user.administrated_channel_subscriber_ids})
+    search_options.merge!(:with => {"user_id" => current_user.administrated_channel_subscriber_ids}) unless current_user.is_admin?
     sphinx_options.merge!(search_options)
     sphinx_options.merge!(sort_options)
     User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
