@@ -133,6 +133,12 @@
 				</div>
 			</div>
 			<% index += 1 %>
+			<% if !f.object.new_record? && !f.object.videos.blank? %>
+				<%= video_form.fields_for :bookmarks, :wrapper => false do |bookmark_form| %>
+					<%= render 'bookmark_accordion', :f => bookmark_form, :index => index %>
+					<% index += 1 %>
+				<% end %>
+			<% end %>
 		<% end %>
 	</div>
 </div> <!-- ACCORDION END -->
