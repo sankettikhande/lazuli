@@ -94,3 +94,15 @@ span.required_span{
   margin-left: 2px;
   color: #FF4800;
 }
+
+
+/*DATATABLE SEARCH BOX*/
+.dataTables_filter input[type='text']{
+  height: 25px;
+  margin-left: 5px;
+}
+
+.dataTables_filter label{
+  line-height: 25px !important;
+  
+}
