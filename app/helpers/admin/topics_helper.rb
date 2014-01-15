@@ -27,4 +27,12 @@ module Admin::TopicsHelper
       link_to(raw_field('fa fa-cloud-upload'), "#{admin_topic_path(topic)}?Publish=Publish", :method => :put, :class => "btn-trans", :rel=>"tooltip", :title=>"Publish Topic" )
     end     
   end
+
+  def edit_topic_link topic
+    link_to "<i class='fa fa-edit'></i>".html_safe, edit_admin_topic_url(topic), :class => 'btn-trans pull-right',  "data-no-turbolink" => 'true',  :rel => 'tooltip', :title => 'Edit Topic'
+  end
+
+  def topic_name_with_edit_link topic
+    "<p class='pull-left width90'>#{topic.title}</p>" + edit_topic_link(topic)
+  end
 end
