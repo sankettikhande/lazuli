@@ -7,7 +7,7 @@ jQuery(function ($) {
 		})
 	});
 	$(document).on('nested:fieldRemoved:videos', function(event) {
-		$(event.target).remove()
+		$(event.target).find("[class*='validate[']").remove()
 		$("#accordion1").find(".fields").each(function(index){
 			$(this).find(".sequence_number").val(index + 1)
 		})
