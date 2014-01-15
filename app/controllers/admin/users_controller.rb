@@ -5,7 +5,7 @@ class Admin::UsersController < AdminController
   end
 
   def search
-    @users = User.sphinx_search(params)
+    @users = User.sphinx_search(params, current_user)
   end
 
   def new

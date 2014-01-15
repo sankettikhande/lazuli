@@ -5,4 +5,5 @@ ThinkingSphinx::Index.define :topic, :with => :active_record, :delta => Thinking
   indexes vimeo_album_id , :as => :vimeo_url
   indexes description
   has created_at, updated_at
+  has channel_id
 end

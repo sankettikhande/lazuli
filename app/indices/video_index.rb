@@ -7,4 +7,5 @@ ThinkingSphinx::Index.define :video, :with => :active_record, :delta => Thinking
   indexes summary
   indexes taggings.tag.name, :as => :tags
   has created_at, updated_at
+  has :id, :as => :video_id
 end

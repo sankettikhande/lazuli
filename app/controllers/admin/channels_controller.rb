@@ -12,7 +12,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def search
-    @channels = Channel.sphinx_search(params)
+    @channels = Channel.sphinx_search(params, current_user)
   end
 
   def create

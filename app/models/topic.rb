@@ -80,11 +80,16 @@ class Topic < ActiveRecord::Base
     end
   end
 
-  def self.sphinx_search options
+  def self.sphinx_search options, current_user
+    sort_options, search_options, sql_options, sphinx_options = {}, {}, {}, {}
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
-    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
-    Topic.search(query, :order => sort_options, :sql => {:include => [:course, :channel]}).page(page).per(options[:iDisplayLength])
+    sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
+
+    search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids})
+    sql_options.merge!(:sql => {:include => [:course, :channel]})
+    sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
+    Topic.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
   def vimeo_album_url 

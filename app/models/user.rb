@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   attr_accessible :user_channel_subscriptions_attributes
   has_many :user_channel_subscriptions, :dependent => :destroy, :before_add => :set_nest
   has_many :subscriptions, :through => :user_channel_subscriptions
+  has_many :administrated_channels, :class_name => Channel, :foreign_key => :admin_user_id
+
   validates_presence_of :actual_name
   validates_presence_of :name, :message => "^User name can't be blank"
   validate :subscription_params
@@ -28,6 +30,30 @@ class User < ActiveRecord::Base
   
   def add_user_role
     add_role(:user) if roles.blank?
+  end
+
+  def administrated_channel_ids
+    administrated_channels.select(:id).map(&:id)
+  end
+
+  def administrated_channel_subscriber_ids
+    UserChannelSubscription.where(:channel_id => administrated_channel_ids).select("DISTINCT user_id").map(&:user_id)
+  end
+
+  def administrated_channel_course_ids
+    ChannelCourse.where(:channel_id => administrated_channel_ids).select("DISTINCT course_id").map(&:course_id)
+  end
+
+  def administrated_channel_topic_ids
+    Topic.where(:channel_id => administrated_channel_ids).select(:id).map(&:id)
+  end
+
+  def administrated_channel_video_ids
+    Video.where(:Topic_id => administrated_channel_topic_ids).select(:id).map(&:id)
+  end
+
+  def administrator_channel_subscribers
+    User.find(administrated_channel_subscriber_ids)
   end
 
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
@@ -83,11 +109,16 @@ class User < ActiveRecord::Base
     errors
   end
 
-  def self.sphinx_search options
+  def self.sphinx_search options, current_user
+    sphinx_options, search_options, sort_options = {}, {}, {}
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
-    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
-    User.search(query, :order => sort_options).page(page).per(options[:iDisplayLength])
+    sort_column_direction = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
+    sort_options.merge!(:order => sort_column_direction)
+    search_options.merge!(:with => {"user_id" => current_user.administrated_channel_subscriber_ids})
+    sphinx_options.merge!(search_options)
+    sphinx_options.merge!(sort_options)
+    User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
   def set_nest(channel_subscription)

@@ -73,11 +73,16 @@ class Course < ActiveRecord::Base
     channel.name
   end
 
-  def self.sphinx_search options
+  def self.sphinx_search options, current_user
+    sort_options, search_options, sql_options, sphinx_options = {}, {}, {}, {}
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
-    sort_options = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
-    Course.search(query, :order => sort_options, :sql => {:include => :channels}).page(page).per(options[:iDisplayLength])
+    sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
+
+    search_options.merge!(:with => {"course_id" => current_user.administrated_channel_course_ids})
+    sql_options.merge!(:sql => {:include => :channels})
+    sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
+    Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
   private 
