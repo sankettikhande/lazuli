@@ -106,3 +106,7 @@ span.required_span{
   line-height: 25px !important;
   
 }
+
+.width90{
+  width: 90%;
+}
