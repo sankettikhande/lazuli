@@ -21,12 +21,31 @@ namespace :sphinx do
   task :configure_and_index, :roles => :app do
     put "Configure and create index"
   end
+
+  task :configure_if_needed, :roles => :app do
+    puts "Checking config file"
+    unless File.exists?("#{shared_path}/config/#{rails_env.downcase}.sphinx.conf")
+      sphinx.configure_and_symlink
+      #thinking_sphinx.configure
+    end
+  end
+
+  task :configure_and_symlink, :roles => :app do 
+    thinking_sphinx.configure
+    run "mv #{current_path}/config/#{rails_env.downcase}.sphinx.conf #{shared_path}/config/#{rails_env.downcase}.sphinx.conf"
+  end
+
+  task :symlink_sphinx_config, :roles => :app do
+    run "ln -nfs #{shared_path}/config/#{rails_env.downcase}.sphinx.conf #{current_path}/config/#{rails_env.downcase}.sphinx.conf"
+  end
 end
 
 
 before "sphinx:configure_and_index", "sphinx:symlink_ts_yml"
 before "sphinx:symlink_ts_yml", "thinking_sphinx:configure"
+before "sphinx:symlink_sphinx_config", "sphinx:configure_if_needed"
 after "sphinx:symlink_ts_yml", "thinking_sphinx:index"
+before "thinking_sphinx:index", "sphinx:symlink_sphinx_config"
 after "sphinx:setup_ts_yml", "sphinx:symlink_ts_yml"
 
 
