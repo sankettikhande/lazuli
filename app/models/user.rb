@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def self.import_users(user, admin_user_id)
-    user_channel = user[:user_channel_subscriptions_attributes]
+    user_channel = user[:user_channel_subscriptions_attributes] || {}
     file =  user[:file]
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
