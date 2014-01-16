@@ -29,10 +29,10 @@
 					<%= f.text_field :time, :class => "form-control", :disabled => true%>
 				</div>
 				<div class="col-sm-2 col-sm-offset-1">
-					<label class="control-label"> Title <%= required_field %></label>
+					<label class="control-label"> Ending At </label>
 				</div>
 				<div class="col-sm-4">
-					<%= f.text_field :title, :class => "form-control validate[required]"%>
+					<%= f.text_field :ending_at, :class => "form-control", :disabled => true, :placeholder=>"Till End"%>
 				</div>
 			</div>
 			<div class="seperator5"></div>

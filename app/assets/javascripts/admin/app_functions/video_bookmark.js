@@ -31,6 +31,10 @@ jQuery(function ($) {
         btn.button('loading')
         $("#bookmark_form").submit();
     });
+
+    $("#bookmark_model_close").unbind().click(function(){
+        window.location.reload();
+    });
 });
 
 

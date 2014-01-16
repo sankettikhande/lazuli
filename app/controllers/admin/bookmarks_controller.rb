@@ -3,6 +3,7 @@ class Admin::BookmarksController < AdminController
 		@video = Video.find(params[:id])
 		@video.update_attributes(params[:video])
 		@video.bookmarks.build if @video.bookmarks.blank?
+		@bookmark_videos = @video.bookmarks.order("bookmark_sec") if !@video.bookmarks.blank?
 		respond_to do |format|
       format.js
     end
@@ -10,15 +11,10 @@ class Admin::BookmarksController < AdminController
 
 	def bookmark_video
 		@video = Video.find(params[:id])
-		@video.bookmarks.build if @video.bookmarks.blank?
-	end
-
-	def sort_bookmarks(params)
-		bookmarks_attributes = ActiveSupport::HashWithIndifferentAccess.new
-		bookmarks_arr = params[:video][:bookmarks_attributes].map{ |x,y| y }.sort {|a,b| a['time']<=>b['time']}
-		bookmarks_arr.each_with_index do |bookmark, index|
-			params[:video][:bookmarks_attributes][index.to_s] = bookmark
+		if @video.bookmarks.blank?
+			@bookmark_videos = @video.bookmarks.build 
+		else
+			@bookmark_videos = @video.bookmarks.order("bookmark_sec")
 		end
-		ActiveSupport::HashWithIndifferentAccess.new(params)
 	end
 end

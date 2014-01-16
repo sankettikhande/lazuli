@@ -24,11 +24,13 @@ class Admin::TopicsController < AdminController
 		@topic_videos = @topic.videos.order(:sequence_number)
 		channel = Channel.find(@topic.channel_id)
 		@channel_courses = channel.courses
+		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 	end
 
 	def update
 		@topic = Topic.cached_find(params[:id])
 		@channel_courses = @topic.channel.courses
+		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 		if params[:SavePub]
 			update_topic(params[:topic], "Publish")
 		elsif params[:Publish]
