@@ -2,6 +2,7 @@ include VimeoLib
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
   serialize :vimeo_data
+  serialize :thumbnail_data
   attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes, :thumbnail_data
   attr_accessor :bookmarks_from_params
   has_many :bookmarks, :dependent => :destroy
@@ -22,8 +23,10 @@ class Video < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
-  validates_presence_of :clip, :message => '^Please upload the video file for the videos.'
+  validates_presence_of :clip
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
+
+  after_save :update_bookmarks
 
   def upload_single_video
     video = self.upload
@@ -67,7 +70,7 @@ class Video < ActiveRecord::Base
   end
 
   def get_best_thumbnail
-    thumbnail_data.thumbnail[2]._content
+    thumbnail_data.thumbnail[2]._content unless thumbnail_data.blank?
   end
 
   def description_text
@@ -131,6 +134,10 @@ class Video < ActiveRecord::Base
 
   def validate_bookmark bookmarks
     bookmarks.all? { |bookmark| bookmark.valid? }
+  end
+
+  def update_bookmarks
+    Bookmark.update_ending_at(self) if self.topic.is_bookmark_video
   end
 end
 

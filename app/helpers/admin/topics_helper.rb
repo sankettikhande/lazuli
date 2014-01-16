@@ -8,8 +8,8 @@ module Admin::TopicsHelper
 	end
 
 	def topic_actions(topic)
-		action_str = "<a href='/admin/topics/#{topic.id}/edit' class='btn-trans' data-no-turbolink='true' rel='tooltip' title='Edit Topic'><i class='fa fa-edit'></i></a>"
-		action_str << "<a href='/admin/topics/#{topic.id}' class='btn-trans' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>"
+		action_str = topic_edit_action(topic)
+		action_str << topic_delete_action(topic)
 		action_str << publish_topic_action(topic)
 		action_str.html_safe
 	end
@@ -34,5 +34,13 @@ module Admin::TopicsHelper
 
   def topic_name_with_edit_link topic
     "<p class='pull-left width90'>#{topic.title}</p>" + edit_topic_link(topic)
+  end
+
+  def topic_edit_action(topic)
+  	topic.inprocess? ? "<a href='#' class='btn-trans disabled' data-no-turbolink='true' rel='tooltip' title='Edit Topic'><i class='fa fa-edit'></i></a>" : "<a href='/admin/topics/#{topic.id}/edit' class='btn-trans' data-no-turbolink='true' rel='tooltip' title='Edit Topic'><i class='fa fa-edit'></i></a>"
+  end
+
+  def topic_delete_action(topic)
+  	topic.inprocess? ? "<a href='#' class='btn-trans disabled' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>" : "<a href='/admin/topics/#{topic.id}' class='btn-trans' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>"
   end
 end

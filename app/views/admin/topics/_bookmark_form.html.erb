@@ -5,6 +5,7 @@
 	</div>
 </div>  
 <%= nested_form_for(@video, :url => create_bulk_admin_bookmark_path(@video), :method => :post, :remote => true, :html => {:id => "bookmark_form"}) do |f| %>
+	<div class="seperator5"></div>
 	<div class="row">
 	  <div class="col-xs-2">
 	   <label class="control-label" for="bkmrk-time">Time</label>
@@ -16,10 +17,10 @@
 	   <label class="control-label" for="bkmrk-descr">Description</label>
 	  </div>
 	</div>
-	<%= f.fields_for :bookmarks, :wrapper => false do |bookmark| %>
+	<%= f.fields_for :bookmarks, @bookmark_videos, :wrapper => false do |bookmark| %>
 		<div class="row fields">
 		  <div class="col-xs-2">
-		  	<%= bookmark.text_field :time, :class => "form-control", :placeholder=>"Time", :value => "00:00" %>
+		  	<%= bookmark.text_field :time, :class => "form-control", :placeholder=>"Time" %>
 		  </div>
 		  <div class="col-xs-2">
 		  	<%= bookmark.text_field :title, :class => "form-control", :placeholder=>"Title"%>
