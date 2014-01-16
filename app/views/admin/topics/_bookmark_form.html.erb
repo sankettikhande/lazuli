@@ -20,7 +20,8 @@
 	<%= f.fields_for :bookmarks, @bookmark_videos, :wrapper => false do |bookmark| %>
 		<div class="row fields">
 		  <div class="col-xs-2">
-		  	<%= bookmark.text_field :time, :class => "form-control", :placeholder=>"Time" %>
+		  	<%= bookmark.hidden_field :time %>
+		  	<%= bookmark.text_field :time, :class => "form-control", :placeholder=>"Time", :disabled => true %>
 		  </div>
 		  <div class="col-xs-2">
 		  	<%= bookmark.text_field :title, :class => "form-control", :placeholder=>"Title"%>
