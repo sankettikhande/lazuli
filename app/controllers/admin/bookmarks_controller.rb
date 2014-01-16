@@ -2,8 +2,12 @@ class Admin::BookmarksController < AdminController
 	def create_bulk
 		@video = Video.find(params[:id])
 		@video.update_attributes(params[:video])
-		@video.bookmarks.build if @video.bookmarks.blank?
-		@bookmark_videos = @video.bookmarks.order("bookmark_sec") if !@video.bookmarks.blank?
+		if @video.bookmarks.blank?
+			@bookmark_videos = @video.bookmarks.build
+			@bookmark_videos.time = "00:00:00"
+		else
+			@bookmark_videos = @video.bookmarks.order("bookmark_sec")
+		end
 		respond_to do |format|
       format.js
     end
@@ -12,7 +16,8 @@ class Admin::BookmarksController < AdminController
 	def bookmark_video
 		@video = Video.find(params[:id])
 		if @video.bookmarks.blank?
-			@bookmark_videos = @video.bookmarks.build 
+			@bookmark_videos = @video.bookmarks.build
+			@bookmark_videos.time = "00:00:00"
 		else
 			@bookmark_videos = @video.bookmarks.order("bookmark_sec")
 		end
