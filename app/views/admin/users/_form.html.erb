@@ -10,18 +10,15 @@
 				  		<%= render 'user_channel_subscription_fields', :f => uc_form %>
 				  	<% end %>	
 				  	</div>
-				    <div class="row form-group">
-				    	<div class="col-md-3"></div>
-				    	<div class="col-md-9">
-				    		<a href="#"><i class='fa fa-3x fa-plus'></i><a/>
-				    		<%= f.link_to_add "Add another course", :user_channel_subscriptions, :data => { :target => "#user_channels" }%>
-				    	</div>
-				    </div>
+				    
 				    <div class="seperator5"></div>
 				    <div class="row form-group">
 				    	<div class="col-md-3"></div>
-				    	<div class="col-md-9">
+				    	<div class="col-md-1">
 				    		<%= f.submit 'Save', :class => 'btn green' %>
+				    	</div>
+				    	<div class="col-md-1">
+				    		<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add another course" ), :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'btn green' %>
 				    	</div>
 				    </div>
 			    <% end %> 

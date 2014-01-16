@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
         <h4 class="modal-title">Edit Course Subscription </h4>
       </div>
-      <%=form_for [:admin, @user_subscription], :remote => true do |f| %>
+      <%=form_for [:admin, @user_subscription], :remote => true, :html => {:id => 'user_course_form'} do |f| %>
       	<div class="modal-body form-group">
 	      <div class="row form-group">
 					<div class="col-md-3">

@@ -5,6 +5,9 @@
 </div>
 
 <div class="row">
+  <% if flash[:notice] %>
+    <div id="notice"><%= flash[:notice] %></div>
+  <% end %>
   <div class="seperator5"></div>
   <div class="portlet-body flip-scroll">
     <table class="table table-bordered table-striped table-condensed flip-content table-hover datatable" id="users">
