@@ -52,5 +52,42 @@ module ApplicationHelper
 
   def link_raw_field(classes)
     content_tag(:i, '', class: classes)
-  end   
+  end
+
+  def add_breadcrumb(options = {})
+    default_options = {:separator => ">>"}
+    options = default_options.merge(options)
+    url = request.fullpath.split("?").first
+    crumbs = []
+    if ["index"].include? params[:action]
+      crumbs << params[:controller].split("/")
+      crumbs = crumbs[0]
+    elsif ["show", "edit", "new" ].include? params[:action]
+      crumbs += url.split("/")
+    end
+    crumbs = crumbs.delete_if(&:blank?)
+    crumbs_urls = []
+    if crumbs.present?
+      crumbs.each do |i|
+        crumbs_urls << "#{crumbs_urls.last}/#{i}"
+      end
+    end
+    build_breadcrumbs(crumbs, crumbs_urls, options)
+  end
+
+  def build_breadcrumbs(crumbs, crumbs_urls, options = {})
+    breadcrumb_array = []
+    content_tag :div, :id => "breadcrumbs" do
+      crumbs.uniq.each_with_index do |c, i|
+        if((crumbs.last == c)|| (c =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/))
+          breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb'>#{c.to_s.titleize}</span>"
+        elsif(["topics", "videos", "courses"].include?(c))
+          breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb #{c}'><a>#{c.to_s.titleize}</a></span>"
+        else
+          breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb '><a href='#{crumbs_urls[i]}'>#{c.to_s.titleize}</a></span>"
+        end
+      end
+    end
+    breadcrumb_array.join(options[:separator]).html_safe
+  end
 end
