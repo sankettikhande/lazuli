@@ -116,14 +116,14 @@
 								<label class="control-label">Available for</label>
 							</div>
 							<div class="col-sm-4">
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<label><%= video_form.check_box :demo, :class => "form-control" %>
-									  Demo 
+									  Demonstration 
 									</label>
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-0">
 									<label><%= video_form.check_box :trial, :class => "form-control" %>
-									  Trial
+									  Trial Subscription
 									</label>
 								</div>	 
 							</div>
@@ -133,6 +133,12 @@
 				</div>
 			</div>
 			<% index += 1 %>
+			<% if !f.object.new_record? && !f.object.videos.blank? %>
+				<%= video_form.fields_for :bookmarks, @bookmark_videos, :wrapper => false do |bookmark_form| %>
+					<%= render 'bookmark_accordion', :f => bookmark_form, :index => index %>
+					<% index += 1 %>
+				<% end %>
+			<% end %>
 		<% end %>
 	</div>
 </div> <!-- ACCORDION END -->
