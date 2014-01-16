@@ -105,6 +105,8 @@ class Video < ActiveRecord::Base
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
+    search_options.merge!(:conditions =>{ "course_id" => options[:course_id]}) if !options[:course_id].blank?
+    search_options.merge!(:conditions =>{ "topic_id" => options[:topic_id]}) if !options[:topic_id].blank?
 
     search_options.merge!(:with =>{ "video_id" => current_user.administrated_channel_video_ids}) unless current_user.is_admin?
     sql_options.merge!(:sql => {:include => [{:topic => [:channel, :course]}, :tags]})

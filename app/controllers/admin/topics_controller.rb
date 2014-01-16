@@ -55,6 +55,10 @@ class Admin::TopicsController < AdminController
 		@topics = Topic.sphinx_search(params, current_user)
 	end
 
+	def topic_videos
+		@topic = Topic.cached_find(params[:id])
+	end
+
   protected
 
 	def update_topic(topic, publish=nil)

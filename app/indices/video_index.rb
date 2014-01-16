@@ -6,6 +6,8 @@ ThinkingSphinx::Index.define :video, :with => :active_record, :delta => Thinking
   indexes description
   indexes summary
   indexes taggings.tag.name, :as => :tags
+  indexes topic.course.id, :as => :course_id
+  indexes topic.id, :as => :topic_id
   has created_at, updated_at
   has :id, :as => :video_id
 end
