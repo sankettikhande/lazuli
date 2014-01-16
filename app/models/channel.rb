@@ -21,10 +21,10 @@ class Channel < ActiveRecord::Base
   #VALIDATIONS
   validates :name, :company_name, :company_number, :email, :presence => true
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
-  validates :admin_user_id, :presence => {:message => "actual name can't be blank."}
+  validates :admin_user_id, :presence => {:message => "Full name can't be blank."}
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
-
+  validates_uniqueness_of :name, :message => "^Channel name has already been taken."
   accepts_nested_attributes_for :courses, :reject_if => :all_blank, :allow_destroy => true
 
   #SCOPES
