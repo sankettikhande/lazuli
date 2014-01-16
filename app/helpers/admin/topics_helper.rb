@@ -51,4 +51,12 @@ module Admin::TopicsHelper
   def add_video_image_title(video)
   	video.image.present? ? "Change File" : "Upload File"
   end
+
+  def thumbnail_image(video)
+    if video.thumbnail_data
+      video.get_best_thumbnail
+    else
+     "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+    end
+  end
 end
