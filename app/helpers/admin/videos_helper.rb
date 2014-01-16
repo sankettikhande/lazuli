@@ -13,7 +13,7 @@ module Admin::VideosHelper
 
   def publish_action(video)
     if video.published?
-      link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans disabled", :rel=>"tooltip", :title=>"Already Publish Video" )
+      link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans disabled", :rel=>"tooltip", :title=>"Video Already Published " )
     elsif video.inprocess?
       link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans inprocess", :rel=>"tooltip", :title=>"Video Publishing InProcess" )
     else

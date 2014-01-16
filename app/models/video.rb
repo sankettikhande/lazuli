@@ -2,7 +2,8 @@ include VimeoLib
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
   serialize :vimeo_data
-  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes
+  serialize :thumbnail_data
+  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes, :thumbnail_data
   attr_accessor :bookmarks_from_params
   has_many :bookmarks, :dependent => :destroy
   belongs_to :topic
@@ -22,13 +23,13 @@ class Video < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
-  validates_presence_of :clip, :message => '^Please upload the video file for the videos.'
+  validates_presence_of :clip
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
   after_save :update_bookmarks
 
   def upload_single_video
-    video = self.upload if self.vimeo_id.blank?
+    video = self.upload
     video.topic.create_album_for_single_video(video) if video.topic.vimeo_album_id.blank?
     VimeoLib.album.add_video(video.topic.vimeo_album_id, video.vimeo_id)
     video.topic.set_status
@@ -54,11 +55,22 @@ class Video < ActiveRecord::Base
     self.vimeo_url = vimeo_video_url
     self.save!
     publish_privately
+    get_thumbnails
     return self
   end
 
   def hashie_get_info(vimeo_data)
     Hashie::Mash.new(vimeo_data)
+  end
+
+  def get_thumbnails
+    thumbnail_data = VimeoLib.video.get_thumbnail_urls(vimeo_id)
+    thumbnails = hashie_get_info(thumbnail_data).thumbnails
+    update_attribute(:thumbnail_data, thumbnails)
+  end
+
+  def get_best_thumbnail
+    thumbnail_data.thumbnail[2]._content unless thumbnail_data.blank?
   end
 
   def description_text
