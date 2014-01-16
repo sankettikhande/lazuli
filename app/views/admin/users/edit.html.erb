@@ -10,17 +10,17 @@
 						  <div class="seperator5"></div>
 						  <div class="portlet-body flip-scroll">
 						    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
-						      <thead class="flip-content">
-						        <tr>
-						            <th>Courses Subscribed for </th>
-						            <th>Channel Subscribed to</th>
-						            <th>Type of Subscription</th>
-						            <th>Subscriptions Expiring on</th>
-						            <th>Action</th>
-						        </tr>
-						      </thead>
-						      <tbody>
-						      	<% if @user_channel.present? %>
+						    	<% if @user_channel.present? %>
+							      <thead class="flip-content">
+							        <tr>
+							            <th>Course Subscribed for </th>
+							            <th>Channel Subscribed to</th>
+							            <th>Type of Subscription</th>
+							            <th>Subscriptions Expiring on</th>
+							            <th>Action</th>
+							        </tr>
+							      </thead>
+							      <tbody>
 							        <% @user_channel.each do |user_channel| %>    
 							          <tr>
 							            <td><%= user_channel.course.try(:name) %></td>
@@ -32,17 +32,11 @@
 							            	<%= link_to link_raw_field('fa fa-ban'), admin_user_channel_subscription_path(user_channel), :rel=>'tooltip', :title => 'Delete Course Subscription', :class=>'btn-trans', :data =>{'no-turbolink'=>'true', :method => 'delete', :confirm => 'Are you sure you want to delete?'} %>
 							            </td>
 							          </tr>
-							        <% end %>
-							      <% else %>
-							      	<tr>
-							      		<td>-</td>
-							      		<td>-</td>
-							      		<td>-</td>
-							      		<td>-</td>
-							      		<td>-</td>
-							      	</tr>  
-						        <% end %>
-						      </tbody>
+							        <% end %>  
+							      </tbody>
+						      <% else %>
+						      	<div class="table_box"><label>No courses are subscribed.</label></div>
+						      <% end %>
 						    </table>
 						  </div>
 						  <div id="user_channels">

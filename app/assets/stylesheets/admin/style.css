@@ -4114,3 +4114,10 @@ Responsive Flip Scroll Tables
 /*css for width align */
 .width15 {width: 15%;}
 .width30 {width: 30%;}
+
+/* css for table box */
+.table_box {
+  border: 1px solid #DDDDDD;
+  padding: 10px;
+}
+
