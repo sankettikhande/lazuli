@@ -2,13 +2,13 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<button type="button" class="close bookmark_model_close" data-dismiss="modal" aria-hidden="true"></button>
 			</div>
 			<div class="modal-body" id="bookmark_form_content">
 				<%#= render 'bookmark_form', :topic => topic if !topic.new_record? %>
  			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn default" data-dismiss="modal" id="bookmark_model_close">Close</button>
+				<button type="button" class="btn default bookmark_model_close" data-dismiss="modal">Close</button>
 				<button type="button" data-loading-text="Loading...." class="btn blue" id="bookmark_button">Save</button>
 			</div>
 		</div>

@@ -32,7 +32,7 @@ jQuery(function ($) {
         $("#bookmark_form").submit();
     });
 
-    $("#bookmark_model_close").unbind().click(function(){
+    $(".bookmark_model_close").unbind().click(function(){
         window.location.reload();
     });
 });
