@@ -3,19 +3,22 @@ $(document).ready(function(){
 		$.ajax({
 	    type: "GET",
 	    url: "/admin/contents/get_topics"
-	  });
+	  }).success(
+	  $("#list_set_1").text("Topics"));
 	}
 	function load_videos(){
 		$.ajax({
 	    type: "GET",
 	    url: "/admin/contents/get_videos"
-	  });
+	  }).success(
+	  $("#list_set_1").text("Video"));
 	}
 	function load_courses(){
 		$.ajax({
 	    type: "GET",
 	    url: "/admin/contents/get_courses"
-	  });
+	  }).success(
+	  $("#list_set_1").text("Cources"));
 	}
 
 	function load_content(divid){
@@ -24,7 +27,6 @@ $(document).ready(function(){
     }else if (divid == "videos"){
     	load_videos();
     }else{
-      
     	load_courses();
     }
 	}
@@ -39,4 +41,12 @@ $(document).ready(function(){
 	url = window.location.href
 	url_split = url.split("#")
 	load_content(url_split[1]);
+
+	if($(".breadcrumb").text()=='Contents'){
+		$("#list_set_1").text("Video");
+	}
+
+	var selected_fields = window.location.href.split("#").pop();
+	load_content(selected_fields);
+
 });
