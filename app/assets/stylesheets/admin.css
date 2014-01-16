@@ -63,3 +63,7 @@
 #bookmark_form textarea.form-control {
     height: 34px;
 }
+
+#bookmark_form label.control-label{
+	padding-left: 20px;
+}
