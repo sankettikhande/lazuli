@@ -104,7 +104,11 @@ class User < ActiveRecord::Base
       errors.push("Please upload an Excel file.") 
     else
       file_extension = File.extname(bulksheet.original_filename)
-      errors.push("Invalid file type: #{bulksheet.original_filename}. File format should be '.xls' or '.xlsx'.") if !(file_extension == ".xls" || file_extension == ".xlsx")
+      if !(file_extension == ".xls" || file_extension == ".xlsx")
+        errors.push("Invalid file type: #{bulksheet.original_filename}. File format should be '.xls' or '.xlsx'.")
+      else
+        errors.push("Uploaded excel file is empty.") if (open_spreadsheet(bulksheet).last_row.blank? || open_spreadsheet(bulksheet).last_row < 2)
+      end
     end
     errors
   end
