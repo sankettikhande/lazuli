@@ -6,5 +6,5 @@ json.aaData @topics do |topic|
   json.actions topic_actions(topic)
 end
 json.sEcho params[:sEcho].to_i
-json.iTotalRecords  @topics.total_entries
-json.iTotalDisplayRecords @topics.total_entries
+json.iTotalRecords  @topics.blank? ? 0 : @topics.total_entries
+json.iTotalDisplayRecords @topics.blank? ? 0 : @topics.total_entries

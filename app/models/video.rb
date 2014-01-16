@@ -108,8 +108,11 @@ class Video < ActiveRecord::Base
     sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
     search_options.merge!(:conditions =>{ "course_id" => options[:course_id]}) if !options[:course_id].blank?
     search_options.merge!(:conditions =>{ "topic_id" => options[:topic_id]}) if !options[:topic_id].blank?
-
-    search_options.merge!(:with =>{ "video_id" => current_user.administrated_channel_video_ids}) unless current_user.is_admin?
+    unless current_user.is_admin?
+      accessible_video_ids = current_user.administrated_channel_video_ids
+      return [] if accessible_video_ids.blank?
+      search_options.merge!(:with =>{ "video_id" => current_user.administrated_channel_video_ids}) 
+    end
     sql_options.merge!(:sql => {:include => [{:topic => [:channel, :course]}, :tags]})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
     Video.search(query,sphinx_options ).page(page).per(options[:iDisplayLength])

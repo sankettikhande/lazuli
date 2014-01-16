@@ -85,8 +85,11 @@ class Topic < ActiveRecord::Base
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
-
-    search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids}) unless current_user.is_admin?
+    unless current_user.is_admin?
+      accessible_channel_ids = current_user.administrated_channel_ids
+      return [] if accessible_channel_ids.blank?
+      search_options.merge!(:with => {"channel_id" => accessible_channel_ids}) 
+    end
     sql_options.merge!(:sql => {:include => [:course, :channel]})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
     Topic.search(query, sphinx_options).page(page).per(options[:iDisplayLength])

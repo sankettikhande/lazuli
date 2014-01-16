@@ -4,5 +4,5 @@ json.aaData @users do |user|
   json.actions user_actions(user)
 end
 json.sEcho params[:sEcho].to_i
-json.iTotalRecords  @users.total_entries
-json.iTotalDisplayRecords @users.total_entries
+json.iTotalRecords  @users.blank? ? 0 : @users.total_entries
+json.iTotalDisplayRecords @users.blank? ? 0 : @users.total_entries

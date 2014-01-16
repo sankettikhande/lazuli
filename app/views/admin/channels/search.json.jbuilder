@@ -5,5 +5,5 @@ json.aaData @channels do |channel|
   json.actions channel_actions(channel)
 end
 json.sEcho params[:sEcho].to_i
-json.iTotalRecords  @channels.total_entries
-json.iTotalDisplayRecords @channels.total_entries
+json.iTotalRecords  @channels.blank? ? 0 : @channels.total_entries
+json.iTotalDisplayRecords @channels.blank? ? 0 : @channels.total_entries
