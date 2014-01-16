@@ -3,10 +3,57 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Edit User Permissions </h4>
+        <h4 class="modal-title">Edit Course Subscription </h4>
       </div>
       <%=form_for [:admin, @user_subscription], :remote => true do |f| %>
-	      <div class="modal-body form-group">
+      	<div class="modal-body form-group">
+	      <div class="row form-group">
+					<div class="col-md-3">
+						<label for="channelsS2">Channel Subscribed To<%= required_field %></label>
+					</div>
+					<div class="col-md-3">
+					  <%= select_tag 'channel_id', options_for_select([@channel.name]), :class => 'form-control', :disabled => true %>
+					</div>
+					<div class="col-md-3">
+						<label for="uname">Course Subscribed For<%= required_field %></label>
+					</div>
+					<div class="col-md-3">
+					  <%= select_tag 'course_id', options_for_select([@course.name]), :class => 'form-control', :disabled => true %>
+					</div>
+				</div>
+
+				<div class="row form-group">
+					<div class="col-md-3">
+						<label for="uname">Type of Subscription<%= required_field %></label>
+					</div>
+					<div class="col-md-3 subscription_type">
+					  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [s.name, s.id, {'data-calculated_days' => s.calculated_days} ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscription_id validate[required]' %>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col-md-3">
+						<label>Date of Subscription<%= required_field %></label>
+					</div>
+					<div class="col-md-3">
+						<div class="input-group date date-picker" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+							<%= f.text_field 'subscription_date', :class => "form-control subscription_date validate[required]" %>
+							<span class="input-group-btn">
+							<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+							</span>
+						</div>
+					</div>
+				  <div class="col-md-3">
+				  	<label>Date of Expiry<%= required_field %></label>
+				  </div>
+					<div class="col-md-3">
+						<div class="input-group">
+							<%= f.text_field 'expiry_date', :class => "form-control expiry_date validate[required]", :readonly => true %>
+							<span class="input-group-btn">
+							<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+							</span>
+						</div>
+					</div>
+				</div>
 	        <div class="row form-group">
 	        	<div class="col-md-3">
 	        		<label>User Permissions<%= required_field %></label>
@@ -22,6 +69,8 @@
 	        	</div>
 	        </div>
 	      </div>
+
+
 	      <div class="modal-footer">
 	        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
 	        <%= f.submit 'Save', :class=>"btn blue" %>
@@ -32,3 +81,4 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+<%= javascript_include_tag 'admin/app_functions/user_course_subscription' %>
