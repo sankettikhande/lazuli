@@ -68,6 +68,7 @@ class Video < ActiveRecord::Base
     thumbnails = hashie_get_info(thumbnail_data).thumbnails
     update_attribute(:thumbnail_data, thumbnails)
   end
+  handle_asynchronously :get_thumbnails ,:run_at => Proc.new{30.minutes.from_now}
 
   def get_best_thumbnail
     thumbnail_data.thumbnail[2]._content unless thumbnail_data.blank?
