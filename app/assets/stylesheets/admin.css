@@ -63,3 +63,12 @@
 #bookmark_form textarea.form-control {
     height: 34px;
 }
+
+#bookmark_form label.control-label{
+	padding-left: 20px;
+}
+
+
+#channel_form_header{
+	padding-left:15px;
+}
