@@ -3,6 +3,7 @@ class Admin::BookmarksController < AdminController
 		@video = Video.find(params[:id])
 		@video.update_attributes(params[:video])
 		@video.bookmarks.build if @video.bookmarks.blank?
+		@bookmark_videos = @video.bookmarks.order("bookmark_sec") if !@video.bookmarks.blank?
 		respond_to do |format|
       format.js
     end
@@ -10,6 +11,10 @@ class Admin::BookmarksController < AdminController
 
 	def bookmark_video
 		@video = Video.find(params[:id])
-		@video.bookmarks.build if @video.bookmarks.blank?
+		if @video.bookmarks.blank?
+			@bookmark_videos = @video.bookmarks.build 
+		else
+			@bookmark_videos = @video.bookmarks.order("bookmark_sec")
+		end
 	end
 end

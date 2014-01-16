@@ -25,6 +25,8 @@ class Video < ActiveRecord::Base
   validates_presence_of :clip, :message => '^Please upload the video file for the videos.'
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
+  after_save :update_bookmarks
+
   def upload_single_video
     video = self.upload if self.vimeo_id.blank?
     video.topic.create_album_for_single_video(video) if video.topic.vimeo_album_id.blank?
@@ -120,6 +122,10 @@ class Video < ActiveRecord::Base
 
   def validate_bookmark bookmarks
     bookmarks.all? { |bookmark| bookmark.valid? }
+  end
+
+  def update_bookmarks
+    Bookmark.update_ending_at(self) if self.topic.is_bookmark_video
   end
 end
 
