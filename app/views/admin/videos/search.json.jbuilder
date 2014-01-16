@@ -7,5 +7,5 @@ json.aaData @videos do |video|
   json.vimeo_url link_to(video.vimeo_url, video.vimeo_url)
 end
 json.sEcho params[:sEcho].to_i
-json.iTotalRecords  @videos.total_entries
-json.iTotalDisplayRecords @videos.total_entries
+json.iTotalRecords  @videos.blank? ? 0 : @videos.total_entries
+json.iTotalDisplayRecords @videos.blank? ? 0 : @videos.total_entries
