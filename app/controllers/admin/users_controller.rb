@@ -19,6 +19,7 @@ class Admin::UsersController < AdminController
     @user.skip_confirmation!
     respond_to do |format|
       if @user.save
+        flash[:notice] = "User has been created."
         format.js
       else
         format.js
@@ -81,6 +82,7 @@ class Admin::UsersController < AdminController
         if @users.map(&:valid?).all?
           @users.each(&:skip_confirmation!)
           @users.each(&:save!)
+          flash[:notice] = "Users have been created."
           format.js
         else
           build_user_and_association(:errors => @users.map(&:errors).map(&:full_messages).flatten)
