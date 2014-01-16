@@ -20,7 +20,7 @@ module Admin::TopicsHelper
 
 	def publish_action(topic)
     if topic.published?
-      link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans disabled", :rel=>"tooltip", :title=>"Already Published Topic")
+      link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans disabled", :rel=>"tooltip", :title=>"Topic Already Published")
     elsif topic.inprocess?
       link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans inprocess", :rel=>"tooltip", :title=>"Topic Publishing InProcess")
     else
