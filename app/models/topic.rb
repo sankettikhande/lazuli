@@ -10,7 +10,7 @@ class Topic < ActiveRecord::Base
 
   validates :course_id, :channel_id, :presence => true
   validates_presence_of :title ,:message => "^Topic can't be blank"
-  validates_uniqueness_of :title, :scope => [:course_id, :channel_id]
+  validates_uniqueness_of :title, :scope => [:course_id, :channel_id] , :message => "^Same topic name has already been taken for this course."
   validate :check_uniqueness_of_title
 
 
@@ -25,7 +25,7 @@ class Topic < ActiveRecord::Base
   def check_uniqueness_of_title
     video_titles = videos.map(&:title)
     if(video_titles.length != video_titles.uniq.length)
-      errors.add(:base, 'Video title must be unique.')
+      errors.add(:base, 'Videos title must be unique.')
     end 
   end
 

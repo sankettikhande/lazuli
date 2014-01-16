@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, :through => :user_channel_subscriptions
   has_many :administrated_channels, :class_name => Channel, :foreign_key => :admin_user_id
 
-  validates_presence_of :actual_name
+  validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
   validate :subscription_params
   include Cacheable
@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def self.import_users(user, admin_user_id)
-    user_channel = user[:user_channel_subscriptions_attributes]
+    user_channel = user[:user_channel_subscriptions_attributes] || {}
     file =  user[:file]
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)
@@ -104,7 +104,11 @@ class User < ActiveRecord::Base
       errors.push("Please upload an Excel file.") 
     else
       file_extension = File.extname(bulksheet.original_filename)
-      errors.push("Invalid file type: #{bulksheet.original_filename}. File format should be '.xls' or '.xlsx'.") if !(file_extension == ".xls" || file_extension == ".xlsx")
+      if !(file_extension == ".xls" || file_extension == ".xlsx")
+        errors.push("Invalid file type: #{bulksheet.original_filename}. File format should be '.xls' or '.xlsx'.")
+      else
+        errors.push("Uploaded excel file is empty.") if (open_spreadsheet(bulksheet).last_row.blank? || open_spreadsheet(bulksheet).last_row < 2)
+      end
     end
     errors
   end

@@ -17,6 +17,10 @@ $(document).ready(function(){
             data: {id: val, course_id: course_id}
           });
     });
+  $("#list_set_1").click(function(){
+  	var selected_fields = $("#list_set_1").text()
+  	window.location.href = '/admin/contents' + "#"+selected_fields.toLowerCase();
+  }); 
 })
 
 function videoAccordionForm(){

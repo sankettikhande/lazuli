@@ -22,7 +22,7 @@ class Video < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
-  validates_presence_of :clip
+  validates_presence_of :clip, :message => '^Please upload the video file for the videos.'
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
   def upload_single_video
