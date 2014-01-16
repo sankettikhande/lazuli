@@ -31,3 +31,8 @@ function get_expiry_date(subscription_date, calculated_days){
   end_date = (end_date.getFullYear() + "-" + (end_date.getMonth() + 1) + "-" + end_date.getDate());
   return end_date;
 }
+
+$("#user_course_form").validationEngine({
+  validateNonVisibleFields: true,
+  promptPosition : "bottomLeft"
+});

@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   end
 
   def self.header_attributes(header)
-    hash = {"User Name" => "name", "Actual Name" => "actual_name", "Password" => "password","Email" => "email", "Phone Number" => "phone_number", "Address" => "address"}
+    hash = {"User Name" => "name", "Full Name" => "actual_name", "Password" => "password","Email" => "email", "Phone Number" => "phone_number", "Address" => "address"}
     header.collect {|h| hash[h]}
   end
 
