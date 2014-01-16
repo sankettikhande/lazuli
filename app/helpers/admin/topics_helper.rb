@@ -43,4 +43,12 @@ module Admin::TopicsHelper
   def topic_delete_action(topic)
   	topic.inprocess? ? "<a href='#' class='btn-trans disabled' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>" : "<a href='/admin/topics/#{topic.id}' class='btn-trans' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>"
   end
+
+  def thumbnail_image(video)
+    if video.thumbnail_data
+      video.get_best_thumbnail
+    else
+     "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+    end
+  end
 end
