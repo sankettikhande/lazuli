@@ -27,7 +27,10 @@
 							            <td><%= user_channel.channel.try(:name) %></td>
 							            <td><%= user_channel.subscription.try(:name) %></td>
 							            <td><%= user_channel.expiry_date %></td>
-							            <td><%= link_to raw_field('fa btn-trans fa-edit'),  edit_admin_user_channel_subscription_path(user_channel.id), :remote => true, :rel=>"tooltip", :title=>"Edit Permissions" %></td>
+							            <td><%= link_to link_raw_field('fa btn-trans fa-edit'),  edit_admin_user_channel_subscription_path(user_channel.id), :remote => true, :rel=>"tooltip", :title=>"Edit Course Subscription" %>
+							            	&nbsp;&nbsp;
+							            	<%= link_to link_raw_field('fa fa-ban'), admin_user_channel_subscription_path(user_channel), :rel=>'tooltip', :title => 'Delete Course Subscription', :class=>'btn-trans', :data =>{'no-turbolink'=>'true', :method => 'delete', :confirm => 'Are you sure you want to delete?'} %>
+							            </td>
 							          </tr>
 							        <% end %>
 							      <% else %>
