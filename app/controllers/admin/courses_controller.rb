@@ -64,6 +64,10 @@ class Admin::CoursesController < AdminController
 		end
 	end
 
+	def course_videos
+		@course = Course.cached_find(params[:id])
+	end
+
 	private
   def set_initialization
     @subscriptions = Subscription.all

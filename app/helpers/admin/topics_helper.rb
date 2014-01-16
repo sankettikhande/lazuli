@@ -20,7 +20,7 @@ module Admin::TopicsHelper
 
 	def publish_topic_action(topic)
     if topic.published?
-      link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans disabled", :rel=>"tooltip", :title=>"Already Published Topic")
+      link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans disabled", :rel=>"tooltip", :title=>"Topic Already Published")
     elsif topic.inprocess?
       link_to(raw_field('fa fa-cloud-upload'), "#", :class => "btn-trans inprocess", :rel=>"tooltip", :title=>"Topic Publishing InProcess")
     else
@@ -42,6 +42,14 @@ module Admin::TopicsHelper
 
   def topic_delete_action(topic)
   	topic.inprocess? ? "<a href='#' class='btn-trans disabled' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>" : "<a href='/admin/topics/#{topic.id}' class='btn-trans' data-method='delete' data-confirm='Are you sure you want to delete?' rel='tooltip' title='Delete Topic'><i class='fa fa-ban'></i></a>"
+  end
+
+  def add_video_clip_title(video)
+  	video.clip.present? ? "Change Video" : "Add a Video"
+  end
+
+  def add_video_image_title(video)
+  	video.image.present? ? "Change File" : "Upload File"
   end
 
   def thumbnail_image(video)

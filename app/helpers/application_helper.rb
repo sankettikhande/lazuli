@@ -79,15 +79,26 @@ module ApplicationHelper
     breadcrumb_array = []
     content_tag :div, :id => "breadcrumbs" do
       crumbs.uniq.each_with_index do |c, i|
-        if((crumbs.last == c)|| (c =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/))
+        if(crumbs.last == c)
           breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb'>#{c.to_s.titleize}</span>"
+        elsif(c =~ /\A[-+]?[0-9]*\.?[0-9]+\Z/)
+          breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb'>#{set_title_for_id(crumbs[1], c)}</span>"
         elsif(["topics", "videos", "courses"].include?(c))
           breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb #{c}'><a>#{c.to_s.titleize}</a></span>"
         else
-          breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb '><a href='#{crumbs_urls[i]}'>#{c.to_s.titleize}</a></span>"
+          breadcrumb_array << "<span id='list_set_#{i}' class='breadcrumb '><a href='#{crumbs_urls[i]}' data-no-turbolink=true>#{c.to_s.titleize}</a></span>"
         end
       end
     end
     breadcrumb_array.join(options[:separator]).html_safe
+  end
+
+  def set_title_for_id(fields, id)
+    fields = fields.capitalize.singularize.constantize
+    if(fields != Topic)
+      fields.find(id).name
+    else
+      fields.find(id).title
+    end
   end
 end

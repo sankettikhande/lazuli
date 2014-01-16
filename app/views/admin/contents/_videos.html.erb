@@ -4,13 +4,12 @@
     <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="video_contents">
       <thead class="flip-content">
         <tr>
-        	<th width="20%">Video</th>
-				  <th width="15%">Topic</th>
-				  <th width="15%">Course</th>
-				  <th width="25%">Tags</th>
-				  <th width="15%">Channel</th>
-				  <th width="10%">Vimeo URL</th>
-				  
+          <th width="20%">Title of Video</th>
+          <th width="15%">Topic Name</th>
+          <th width="15%">Course Name</th>
+          <th width="25%">Tags</th>
+          <th width="15%">Channel Name</th>
+          <th width="10%">Vimeo URL</th>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +25,7 @@
     "bServerSide": true,
     "iDisplayLength": 15,
     "bLengthChange": false,
-    "sAjaxSource": "/admin/videos/search.json",
+    "sAjaxSource": "/admin/videos/search.json?course_id=<%= @course.presence.try(:id)%>&topic_id=<%= @topic.presence.try(:id)%>",
     "aoColumns": [
             { "mData": "title"},
             { "mData": "topic_name"},
