@@ -55,7 +55,7 @@
 									<div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 180px; max-height: 135px; line-height: 20px;"></div>
 									<div>
 										<span class="btn purple btn-file">
-										<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Edit</span>
+										<span class="fileupload-new"><i class="fa fa-paper-clip"></i> <%= add_video_image_title(video_form.object) %> </span>
 										<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
 										<%= video_form.file_field :image, :class => "default"%>
 										</span>
@@ -92,7 +92,7 @@
 	  					<div class="col-sm-4">
 								<div class="fileupload fileupload-new" data-provides="fileupload">
 									<span class="btn blue btn-file">
-										<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Upload File</span>
+										<span class="fileupload-new"><i class="fa fa-paper-clip"></i> <%= add_video_clip_title(video_form.object) %> </span>
 										<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
 										<%= video_form.file_field :clip, :class => "default" %>
 									</span>

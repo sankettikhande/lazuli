@@ -18,7 +18,7 @@ $(document).ready(function(){
 	    type: "GET",
 	    url: "/admin/contents/get_courses"
 	  }).success(
-	  $("#list_set_1").text("Cources"));
+	  $("#list_set_1").text("Courses"));
 	}
 
 	function load_content(divid){
