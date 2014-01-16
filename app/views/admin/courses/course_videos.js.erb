@@ -1,0 +1,7 @@
+$('#content_tabs a[href="#courses"]').parent().removeClass('active');
+$('#content_tabs a[href="#videos"]').parent().addClass('active');
+
+$("#courses").attr("class", "tab-pane fade");
+$("#videos").attr("class", "tab-pane fade active in");
+$("#list_set_1").text("Videos");
+$("#videos").html("<%= j(render 'admin/contents/videos') %>");

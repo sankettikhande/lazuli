@@ -36,12 +36,16 @@ Lazuli::Application.routes.draw do
       member do
         get 'get_channel_info'
         get 'course_subscription_types'
+        get 'course_videos'
       end
       collection do
         get 'search'
       end
     end
     resources :topics do
+      member do
+        get 'topic_videos'
+      end
       collection do
         get 'search'
       end
