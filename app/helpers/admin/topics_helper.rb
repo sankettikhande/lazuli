@@ -47,4 +47,8 @@ module Admin::TopicsHelper
   def add_video_clip_title(video)
   	video.clip.present? ? "Change Video" : "Add a Video"
   end
+
+  def add_video_image_title(video)
+  	video.image.present? ? "Change File" : "Upload File"
+  end
 end
