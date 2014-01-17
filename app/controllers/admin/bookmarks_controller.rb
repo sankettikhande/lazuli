@@ -1,7 +1,8 @@
 class Admin::BookmarksController < AdminController
 	def create_bulk
 		@video = Video.find(params[:id])
-		@video.update_attributes(params[:video])
+		@video.unique_bookmarks(params)
+		@video.update_attributes(params[:video]) if @video.errors.blank?
 		if @video.bookmarks.blank?
 			@bookmark_videos = @video.bookmarks.build
 			@bookmark_videos.time = "00:00:00"
