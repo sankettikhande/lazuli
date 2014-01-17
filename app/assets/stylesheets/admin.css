@@ -72,3 +72,7 @@
 #channel_form_header{
 	padding-left:15px;
 }
+
+#course_form_header label.control-label{
+	margin-top: 8px;
+}

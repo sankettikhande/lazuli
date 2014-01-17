@@ -1,17 +1,14 @@
 <%= javascript_include_tag "utils.js"%>
 <%= javascript_include_tag "admin/app_functions/course.js"%>
-<div class="col-sm-1">
+<div class="col-sm-2">
 	<label class="control-label">Channel<%= required_field %></label>
 </div>
-<div class="col-sm-2">
+<div class="col-sm-4">
 	<%= f.collection_select :channel_id , @channels, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control channel_id validate[required]" } %>
 </div>
 <div class="col-sm-2">
 	<label class="control-label">Channel Type<%= required_field %></label>
 </div>
-<div class="col-sm-2">
+<div class="col-sm-4">
 	<%= text_field_tag 'channel_type', nil ,:class => "form-control validate[required]", :disabled => true%>
-</div>
-<div class="col-sm-1 col-sm-offset-4">
-	<a href="#"><i class="fa fa-question-circle fa-2x"></i></a>
 </div>
