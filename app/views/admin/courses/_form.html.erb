@@ -1,15 +1,22 @@
 <%= nested_form_for [:admin , @course], :html => {:class => 'formClass'} do |f| %>
 <%= errors_for @course unless @course.errors.blank? %>
 <div class="form-group">
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="row">
-				<%= f.fields_for :channel_courses do |channel_courses_fields| %>
-					<%= render 'channel' , :f => channel_courses_fields%>
-				<% end %>
+	<section class="container">
+		<div class="row">
+			<div class="col-sm-10">
+				<div class="row" id="course_form_header">
+					<%= f.fields_for :channel_courses, :wrapper => false do |channel_courses_fields| %>
+						<%= render 'channel' , :f => channel_courses_fields%>
+					<% end %>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="col-sm-1">
+					<a href="#"><i class="fa fa-question-circle fa-2x"></i></a>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 	<div class="seperator10"></div>
 	<div class="row">
 		<div class="col-sm-10">

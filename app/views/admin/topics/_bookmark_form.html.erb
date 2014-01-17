@@ -19,6 +19,7 @@
 	</div>
 	<%= f.fields_for :bookmarks, @bookmark_videos, :wrapper => false do |bookmark| %>
 		<div class="row fields">
+			<div class="seperator5"></div>
 		  <div class="col-xs-2">
 		  	<%= bookmark.hidden_field :time %>
 		  	<%= bookmark.text_field :time, :class => "form-control", :placeholder=>"Time", :disabled => true %>
@@ -33,7 +34,6 @@
 		  	<%= bookmark.link_to_remove button_raw_field("fa fa-minus-circle", "btn btn-trans"), :rel =>'tooltip', :title => 'Remove bookmark' %>
 		  </div>
 		</div>
-		<div class="seperator5"></div>
 	<% end %>
 <% end %>
 <%= javascript_include_tag "admin/app_functions/video_bookmark.js" %>
