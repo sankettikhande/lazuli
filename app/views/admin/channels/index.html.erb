@@ -1,27 +1,29 @@
 <%= javascript_include_tag "admin/jquery.dataTables.js", "admin/DT_bootstrap.js" %>
-<div>
-  <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new channel
-  </button></a>
-</div>
-<div class="row">
-  <div class="seperator5"></div>
-  <div class="portlet-body flip-scroll">
-    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="channels">
-      <thead class="flip-content">
-        <tr>
-            <th>Channel Name</th>
-            <th>Course Count</th>
-            <th>User Count</th>
-            <th>Channel Type</th>
-            <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
+<section class="container">
+  <div>
+    <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new channel
+    </button></a>
   </div>
-</div>
+  <div class="row">
+    <div class="seperator5"></div>
+    <div class="portlet-body flip-scroll">
+      <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="channels">
+        <thead class="flip-content">
+          <tr>
+              <th width="45%">Channel Name</th>
+              <th width="15%">Course Count</th>
+              <th width="15%">User Count</th>
+              <th width="15%">Channel Type</th>
+              <th width="10%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 <script>
   $('#channels').dataTable({
@@ -32,9 +34,9 @@
     "sAjaxSource": "/admin/channels/search.json",
     "aoColumns": [
             { "mData": "name"},
-            { "mData": "course_count"},
-            { "mData": "user_count"},
-            { "mData": "channel_type", "bSortable": false},
-            { "mData": "actions", "bSortable": false }
+            { "mData": "course_count", "sClass" : "text-center"},
+            { "mData": "user_count", "sClass" : "text-center"},
+            { "mData": "channel_type", "bSortable": false, "sClass" : "text-center"},
+            { "mData": "actions", "bSortable": false, "sClass" : "text-center"}
         ] });
 </script>

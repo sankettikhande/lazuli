@@ -1,25 +1,27 @@
-<div>
-  <%= link_to raw_field("fa fa-3x fa-plus", "Add New Topic"), new_admin_topic_path, :class => "btn btn-default btn-success pull-right", :rel =>"tooltip", :title => "Add New Topic", "data-no-turbolink" => true %>
-</div>
-<div class="row">
-  <div class="seperator5"></div>
-  <div class="portlet-body flip-scroll">
-    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="topic_contents">
-      <thead class="flip-content">
-        <tr>
-          <th width="30%">Topic Name</th>
-          <th width="25%">Course Name</th>
-          <th width="25%">Channel Name</th>
-          <th width="10%">Vimeo URL</th>
-          <th width="10%">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
+<section class="container">
+  <div>
+    <%= link_to raw_field("fa fa-3x fa-plus", "Add New Topic"), new_admin_topic_path, :class => "btn btn-default btn-success pull-right", :rel =>"tooltip", :title => "Add New Topic", "data-no-turbolink" => true %>
   </div>
-</div>
+  <div class="row">
+    <div class="seperator5"></div>
+    <div class="portlet-body flip-scroll">
+      <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="topic_contents">
+        <thead class="flip-content">
+          <tr>
+            <th width="30%">Topic Name</th>
+            <th width="25%">Course Name</th>
+            <th width="25%">Channel Name</th>
+            <th width="10%">Vimeo URL</th>
+            <th width="10%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
 <script>
   $('#topic_contents').dataTable({
@@ -33,7 +35,7 @@
             { "mData": "course_name"},
             { "mData": "channel_name"},
             { "mData": "vimeo_url", "bSortable": false},
-            { "mData": "actions", "bSortable": false}
+            { "mData": "actions", "bSortable": false, "sClass" : "text-center"}
         ] });
 </script>
 
