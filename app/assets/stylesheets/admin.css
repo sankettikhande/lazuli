@@ -76,3 +76,7 @@
 #course_form_header label.control-label{
 	margin-top: 8px;
 }
+
+.dataTable th{
+  text-align: center;
+}
