@@ -144,6 +144,7 @@ class Video < ActiveRecord::Base
 
   def update_bookmarks
     Bookmark.update_ending_at(self) if self.topic.is_bookmark_video
+    self.set_vimeo_description(self.vimeo_id, self.description_text) if self.vimeo_id
   end
 end
 
