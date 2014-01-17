@@ -1,4 +1,6 @@
 <% index = 0 %>
+<div class="seperator10"></div>
+<label class="control-label padding-left-15"> <%= course_title(course_form.object) %></label>
 <%= course_form.fields_for :courses, :wrapper => false do |f| %>
 	<div class="panel panel-default fields">
 		<div class="panel-heading">
