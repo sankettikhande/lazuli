@@ -11,7 +11,7 @@ $(document).ready(function(){
 	    type: "GET",
 	    url: "/admin/contents/get_videos"
 	  }).success(
-	  $("#list_set_1").text("Video"));
+	  $("#list_set_1").text("Videos"));
 	}
 	function load_courses(){
 		$.ajax({
