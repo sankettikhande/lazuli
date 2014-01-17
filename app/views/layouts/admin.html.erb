@@ -26,6 +26,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
   <%= render 'layouts/admin/header' %>
     <section class="container">
       <div class='breadcrumb'><%= add_breadcrumb %></div>
+      <div id="flash"><%= flash_message %></div>
       <%= yield %>
     </section>
 
