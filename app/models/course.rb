@@ -34,6 +34,7 @@ class Course < ActiveRecord::Base
   #SCOPES
   after_save :set_channel_permission
   after_initialize :create_associations
+  after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   
   #INSTANCE METHODS
   def set_channel_permission
@@ -44,6 +45,12 @@ class Course < ActiveRecord::Base
       end
     end
   end
+def update_course_admin_user_ids
+  self.topics.each do |topic|
+    topic.update_attribute(:course_admin_user_id, course_admin_user_id)
+    topic.videos.map{|v| v.update_attribute(:course_admin_user_id, course_admin_user_id)}
+  end
+end
 
   def channel
     channels.first

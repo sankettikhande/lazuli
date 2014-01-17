@@ -1,4 +1,8 @@
 class Admin::ChannelsController < AdminController
+  load_and_authorize_resource
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
   def index
   end
 
@@ -18,6 +22,10 @@ class Admin::ChannelsController < AdminController
   def create
     set_initialization
   	@channel = Channel.new(params[:channel])
+    @channel.courses.each do |course|
+      course.created_by = current_user.id
+      course.channel_admin_user_id = @channel.admin_user_id
+    end
     respond_to do |format|
   		if @channel.save
   			format.html {redirect_to admin_channels_url}

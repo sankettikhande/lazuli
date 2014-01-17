@@ -1,6 +1,9 @@
 class Admin::UsersController < AdminController
   before_filter :set_instance, :only => [:new, :create, :edit, :update, :new_bulk, :create_bulk]
-  
+  load_and_authorize_resource
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
   def index
   end
 
