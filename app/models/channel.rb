@@ -64,7 +64,7 @@ class Channel < ActiveRecord::Base
     sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
     unless current_user.is_admin?
       accessible_channel_ids = current_user.administrated_channel_ids
-      return [] if accessible_channel_ids
+      return [] if accessible_channel_ids.blank?
       search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids}) 
     end
     sphinx_options.merge!(sort_options).merge!(search_options)
