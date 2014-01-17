@@ -26,7 +26,7 @@ class Admin::BookmarksController < AdminController
 
 	private
 	def unique_bookmarks
-		time_elements = params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| bookmark[:time] if bookmark["_destroy"] == "false" }
+		time_elements = params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| bookmark[:time] if bookmark["_destroy"] == "false" }.compact
 		time_elements.size == time_elements.uniq.size ? true : @video.errors.add(:base, 'Bookmarks time has already been taken')
 	end
 end
