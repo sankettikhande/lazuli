@@ -1,23 +1,25 @@
-<div class="row">
-  <div class="seperator5"></div>
-  <div class="portlet-body flip-scroll">
-    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="video_contents">
-      <thead class="flip-content">
-        <tr>
-          <th width="20%">Title of Video</th>
-          <th width="15%">Topic Name</th>
-          <th width="15%">Course Name</th>
-          <th width="20%">Tags</th>
-          <th width="15%">Channel Name</th>
-          <th width="15%">Vimeo URL</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
+<section class="container">
+  <div class="row">
+    <div class="seperator5"></div>
+    <div class="portlet-body flip-scroll">
+      <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="video_contents">
+        <thead class="flip-content">
+          <tr>
+            <th width="20%">Title of Video</th>
+            <th width="15%">Topic Name</th>
+            <th width="15%">Course Name</th>
+            <th width="20%">Tags</th>
+            <th width="15%">Channel Name</th>
+            <th width="15%">Vimeo URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</section>
 
 <script>
   $('#video_contents').dataTable({
@@ -32,7 +34,8 @@
             { "mData": "course_name"},
             { "mData": "tags", "bSortable": false},
             { "mData": "channel_name"},
-            { "mData": "vimeo_url", "bSortable": false},
-        ] });
+            { "mData": "vimeo_url", "bSortable": false, "sClass" : "text-center"},
+        ],
+    "aaSorting": [[ 1, "asc" ]] });
 </script>
 

@@ -72,3 +72,7 @@
 #channel_form_header{
 	padding-left:15px;
 }
+
+.dataTable th{
+  text-align: center;
+}
