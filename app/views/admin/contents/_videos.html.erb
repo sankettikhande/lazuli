@@ -27,6 +27,7 @@
     "bServerSide": true,
     "iDisplayLength": 15,
     "bLengthChange": false,
+    "bAutoWidth": false,
     "sAjaxSource": "/admin/videos/search.json?course_id=<%= @course.presence.try(:id)%>&topic_id=<%= @topic.presence.try(:id)%>",
     "aoColumns": [
             { "mData": "title"},

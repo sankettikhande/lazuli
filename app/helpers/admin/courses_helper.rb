@@ -4,6 +4,6 @@ module Admin::CoursesHelper
   end
 
   def course_title channel
-  	channel.courses.count.eql?(1) ? "Course" : "Courses"
+  	'course'.pluralize(channel.courses.count).titleize
   end
 end
