@@ -115,7 +115,8 @@ class Video < ActiveRecord::Base
     end
     sql_options.merge!(:sql => {:include => [{:topic => [:channel, :course]}, :tags]})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
-    Video.search(query,sphinx_options ).page(page).per(options[:iDisplayLength])
+    sphinx_options.merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
+    Video.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
   def vimeo_video_url
