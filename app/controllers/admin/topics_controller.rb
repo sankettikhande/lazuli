@@ -1,8 +1,8 @@
 class Admin::TopicsController < AdminController
 	load_and_authorize_resource
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
+	rescue_from CanCan::AccessDenied do |exception|
+	  redirect_to root_url, :alert => exception.message
+	end
 	def new
 		@channel_courses = Course.all
 		@topic = Topic.new
@@ -13,9 +13,11 @@ class Admin::TopicsController < AdminController
 		@topic = Topic.new(params[:topic]) 
 		@topic.created_by = current_user.id
 		@topic.channel_admin_user_id = @topic.channel.admin_user_id
+		@topic.course_admin_user_id = @topic.course.course_admin_user_id
 		@topic.videos.each do |video|
 			video.created_by = current_user.id
 			video.channel_admin_user_id = @topic.channel_admin_user_id
+			video.course_admin_user_id = @topic.course_admin_user_id
 		end
 		if params[:SavePub]
 			save_topic("Publish")

@@ -22,6 +22,7 @@ class Admin::ChannelsController < AdminController
   def create
     set_initialization
   	@channel = Channel.new(params[:channel])
+    User.assign_role(@channel.admin_user_id, :channel_admin)
     @channel.courses.each do |course|
       course.created_by = current_user.id
       course.channel_admin_user_id = @channel.admin_user_id

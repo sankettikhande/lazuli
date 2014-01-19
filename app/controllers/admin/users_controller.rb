@@ -22,6 +22,7 @@ class Admin::UsersController < AdminController
     @user.skip_confirmation!
     respond_to do |format|
       if @user.save
+        @user.set_course_admin_user_id
         flash[:success] = "User has been created."
         format.js
       else

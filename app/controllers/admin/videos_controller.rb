@@ -1,8 +1,8 @@
 class Admin::VideosController < AdminController
 	load_and_authorize_resource
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
+	rescue_from CanCan::AccessDenied do |exception|
+	  redirect_to root_url, :alert => exception.message
+	end
 	def edit
 		@video = Video.find(params[:id])
 		redirect_to "/admin/topics/#{@video.topic_id}/edit"

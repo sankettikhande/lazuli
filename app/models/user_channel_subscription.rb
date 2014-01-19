@@ -12,6 +12,7 @@ class UserChannelSubscription < ActiveRecord::Base
   validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id], :message => "^User has already subscribed to this course."}
   after_create :update_channel_user_count
   after_create :update_course_user_count
+  after_save :update_course_admin, :if => :create_permission_disabled?
 
   def update_channel_user_count
     channel.update_attribute(:user_count, UserChannelSubscription.where(:channel_id => 9).count(:course_id, :distinct => true))
@@ -20,5 +21,15 @@ class UserChannelSubscription < ActiveRecord::Base
   def update_course_user_count
     course.update_attribute(:user_count, UserChannelSubscription.where(:channel_id => 9).count(:course_id, :distinct => true))
   end
+
+  def create_permission_disabled?
+    permission_create_changed? && permission_create == false
+  end
+
+  def update_course_admin
+    course.update_attribute(:course_admin_user_id, nil)
+  end
+
+
 
 end
