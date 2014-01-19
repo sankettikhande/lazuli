@@ -147,6 +147,23 @@ class Video < ActiveRecord::Base
     Bookmark.update_ending_at(self) if self.topic.is_bookmark_video
     self.set_vimeo_description(self.vimeo_id, self.description_text) if self.vimeo_id
   end
+
+  def unique_bookmarks(params)
+    time_elements = params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| bookmark[:time] if bookmark["_destroy"] == "false" }.compact
+    destroy_elements = params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| bookmark[:time] if bookmark["_destroy"] == "1" }.compact
+    time_elements.size == time_elements.uniq.size ? true : self.errors.add(:base, 'Bookmarks time has already been taken')
+    validate_uniqueness_bookmarks(params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| [bookmark[:id], bookmark[:time]] if bookmark["_destroy"] == "false" }.compact, destroy_elements)
+  end
+
+  def validate_uniqueness_bookmarks(time_elements, destroy_elements)
+    time_elements.each do |id, time|
+      if destroy_elements.any?
+        unless destroy_elements.include?(time)
+          self.errors.add(:base, 'Bookmarks time has already been taken') if id.nil? && !Bookmark.where(:video_id => self.id, :time => time).count.zero?
+        end
+      else
+        self.errors.add(:base, 'Bookmarks time has already been taken') if id.nil? && !Bookmark.where(:video_id => self.id, :time => time).count.zero?
+      end
+    end
+  end
 end
-
-
