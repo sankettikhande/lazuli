@@ -25,8 +25,9 @@ class Ability
         can :manage, Course, :course_admin_user_id => user.id
         can :manage, Topic, :course_admin_user_id => user.id
         can :manage, Video, :course_admin_user_id => user.id
-        can :search, User
-        cannot :create, Course
+        can :manage, User, :created_by => user.id
+        cannot :create, [Course,User,Channel]
+        can :create, [Topic, Video]
     else
         can :search, :all
     end
