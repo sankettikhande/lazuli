@@ -58,8 +58,6 @@ class Course < ActiveRecord::Base
     topics.each do |t|
       t.delta = true
       t.save
-      # updates videos indices for this topic
-      t.update_videos_sphinx_delta
     end
   end
 
