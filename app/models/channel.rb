@@ -48,6 +48,7 @@ class Channel < ActiveRecord::Base
     end
   end
   def update_channel_admin_user_ids
+    User.assign_role(admin_user_id, :channel_admin)
     self.courses.each do |course|
       course.update_attribute(:channel_admin_user_id, admin_user_id)
       course.topics.each do |topic| 

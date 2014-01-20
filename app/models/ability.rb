@@ -8,18 +8,25 @@ class Ability
     if user.is_admin?
         can :manage, :all
     elsif user.is_channel_admin?
-        can :manage, Course, :channel_admin_user_id => user.id
+        can :manage, Course do |course| 
+            course.channel_admin_user_id == user.id || course.course_admin_user_id == user.id
+        end
         can :manage, Channel, :admin_user_id => user.id
-        can :manage, Topic, :channel_admin_user_id => user.id
+        can :manage, Topic do |topic| 
+            topic.channel_admin_user_id == user.id || topic.course_admin_user_id == user.id
+        end
         can :manage, User, :created_by => user.id
-        can :manage, Video, :channel_admin_user_id => user.id
+        can :manage, Video do |video| 
+            video.channel_admin_user_id == user.id || video.course_admin_user_id == user.id
+        end
         can :create, [Topic,Video,Course,User]
         cannot :create, Channel
-    # elsif user.is_course_admin?
-    #     can :manage, Course, :course_admin_user_id => user.id
-    #     can :manage, Topic, :course_admin_user_id => user.id
-    #     can :manage, Video, :course_admin_user_id => user.id
-    #     cannot :manage, User
+    elsif user.is_course_admin?
+        can :manage, Course, :course_admin_user_id => user.id
+        can :manage, Topic, :course_admin_user_id => user.id
+        can :manage, Video, :course_admin_user_id => user.id
+        can :search, User
+        cannot :create, Course
     else
         can :search, :all
     end

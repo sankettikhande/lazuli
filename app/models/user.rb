@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :user_channel_subscriptions, :dependent => :destroy, :before_add => :set_nest
   has_many :subscriptions, :through => :user_channel_subscriptions
   has_many :administrated_channels, :class_name => Channel, :foreign_key => :admin_user_id
-
+  has_many :administrated_courses, :class_name => Course, :foreign_key => :course_admin_user_id
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
   validate :subscription_params
@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_channel_subscriptions, :reject_if => :all_blank, :allow_destroy => true
 
   after_create :add_user_role
-  after_save :set_channel_admin_role
+  after_save :set_course_admin_role, :set_course_admin_user_id
 
   def confirm_status
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
@@ -142,13 +142,22 @@ class User < ActiveRecord::Base
     self.confirmed_at = Time.now.utc
   end
 
-  def set_channel_admin_role
+  def set_course_admin_role
     ucs_attribs = self.user_channel_subscriptions.map(&:attributes).collect{|x| x.keep_if{|k, v| ["permission_create"].include? k}}
     if ucs_attribs.include?({"permission_create"=>true})
-      self.add_role(:channel_admin) if !self.has_role?(:channel_admin)
+      self.add_role(:course_admin) if !self.has_role?(:course_admin)
     else
-      self.remove_role(:channel_admin)
+      self.remove_role(:course_admin)
     end
   end
 
+  def self.assign_role(user_id,role)
+    user = User.find(user_id)
+    user.add_role(role) if !user.has_role? role
+  end
+
+  def set_course_admin_user_id
+    course_ids = self.user_channel_subscriptions.where(:permission_create => true).map(&:course_id)
+    Course.set_course_admin_user_ids(course_ids, id)
+  end
 end

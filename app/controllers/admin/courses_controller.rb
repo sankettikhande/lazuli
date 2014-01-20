@@ -2,9 +2,9 @@ class Admin::CoursesController < AdminController
 
 	before_filter :set_initialization, :only => [:new, :edit, :create, :update]
 	load_and_authorize_resource
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
+	rescue_from CanCan::AccessDenied do |exception|
+	  redirect_to root_url, :alert => exception.message
+	end
 	def search
 		@courses = Course.sphinx_search(params, current_user)
 	end
@@ -21,7 +21,7 @@ class Admin::CoursesController < AdminController
 		respond_to do |format|
 			if @course.save
 				@course.update_attribute(:channel_admin_user_id,@course.channel.admin_user_id)
-				format.html {redirect_to "#{admin_contents_url}#courses"}
+				format.html {redirect_to "#{admin_contents_url}#courses" }
 				flash[:notice] = "Course has successfully created"
 			else
 				@channels = Channel.all

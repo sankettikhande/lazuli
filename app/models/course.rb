@@ -95,6 +95,10 @@ end
     Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
+  def self.set_course_admin_user_ids(course_ids,user_id)
+    Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id)  } 
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
