@@ -4122,3 +4122,6 @@ Responsive Flip Scroll Tables
   padding: 10px;
 }
 
+.edit_user th{
+  text-align: center;
+}

@@ -13,6 +13,15 @@ class Topic < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id] , :message => "^Same topic name has already been taken for this course."
   validate :check_uniqueness_of_title
 
+  after_save :update_videos_sphinx_delta
+
+  def update_videos_sphinx_delta
+    videos.each do |v|
+      v.delta = true
+      v.save
+    end
+  end
+
 
   def create_album_for_single_video(video)
     album = VimeoLib.album.create(self.title, video.vimeo_id, {:description => self.description })
