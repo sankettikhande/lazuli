@@ -27,7 +27,6 @@ class Admin::TopicsController < AdminController
 		elsif params[:Save]
 			save_topic
 		end
-	# authorize! :create, @topic ,(@topic.course_id)
 	end
 
 	def edit
