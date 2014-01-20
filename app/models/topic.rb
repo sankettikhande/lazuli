@@ -101,6 +101,7 @@ class Topic < ActiveRecord::Base
     end
     sql_options.merge!(:sql => {:include => [:course, :channel]})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
+    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     Topic.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
