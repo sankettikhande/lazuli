@@ -59,7 +59,7 @@ class Admin::UsersController < AdminController
   end
 
   def search_user
-    @users = User.search(name = "*#{params[:q]}*").per(20)
+    @users = User.search(name = "*#{params[:q]}*")
     respond_to do |format|
       format.json {}   
     end  
