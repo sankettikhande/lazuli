@@ -19,13 +19,12 @@ class Video < ActiveRecord::Base
                     :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   validates :title, :description, :presence => true
-  validates_uniqueness_of :title, :scope => :topic_id
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
   validates_presence_of :clip
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
-
+  
   after_save :update_bookmarks
 
   def upload_single_video
