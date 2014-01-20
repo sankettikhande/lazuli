@@ -62,21 +62,27 @@
 <%= javascript_include_tag 'admin/app_functions/users' %>
 
 <script>
-  $('#users').dataTable({
-    "bProcessing": true,
-    "bServerSide": true,
-    "iDisplayLength": 15,
-    "bLengthChange": false,
-    "bAutoWidth": false,
-    "sAjaxSource": "/admin/users/search.json",
-    "aoColumns": [
-            { "mData": "name"},
-            { "mData": "actual_name"},
-            { "mData": "email"},
-            { "mData": "phone_number"},
-            { "mData": "company_name"},
-            { "mData": "address", "bSortable": false },
-            { "mData": "confirm_status", "bSortable": false },
-            { "mData": "actions", "bSortable": false, "sClass" : "text-center"}
-        ] });
+  $(document).ready(function(){
+    var userDatatable = $('#users').dataTable({
+      "bProcessing": true,
+      "bServerSide": true,
+      "iDisplayLength": 15,
+      "bLengthChange": false,
+      "bAutoWidth": false,
+      "sAjaxSource": "/admin/users/search.json",
+      "aoColumns": [
+              { "mData": "name"},
+              { "mData": "actual_name"},
+              { "mData": "email"},
+              { "mData": "phone_number"},
+              { "mData": "company_name"},
+              { "mData": "address", "bSortable": false },
+              { "mData": "confirm_status", "bSortable": false },
+              { "mData": "actions", "bSortable": false, "sClass" : "text-center"}],
+        "aaSorting": [[ 1, "asc" ]] });
+
+    $("#users_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="name">User Name</option><option value="actual_name">Full Name</option><option value="email">Email</option><option value="phone_number">Contact Number</option><option value="company_name">Company Name</option>')
+
+    $('select#column_names').change( function() { userDatatable.fnFilter( $(this).val(), 1 ); } );
+  })
 </script>

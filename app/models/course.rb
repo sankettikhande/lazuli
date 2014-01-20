@@ -32,7 +32,7 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :channel_courses, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
   #SCOPES
-  after_save :set_channel_permission
+  after_save :set_channel_permission, :update_topics_sphinx_delta, :update_videos_sphinx_delta
   after_initialize :create_associations
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   
@@ -45,12 +45,31 @@ class Course < ActiveRecord::Base
       end
     end
   end
-def update_course_admin_user_ids
-  self.topics.each do |topic|
-    topic.update_attribute(:course_admin_user_id, course_admin_user_id)
-    topic.videos.map{|v| v.update_attribute(:course_admin_user_id, course_admin_user_id)}
+
+  def update_course_admin_user_ids
+    self.topics.each do |topic|
+      topic.update_attribute(:course_admin_user_id, course_admin_user_id)
+      topic.videos.map{|v| v.update_attribute(:course_admin_user_id, course_admin_user_id)}
+    end
   end
-end
+
+  # updates topics indices
+  def update_topics_sphinx_delta
+    topics.each do |t|
+      t.delta = true
+      t.save
+    end
+  end
+
+  # updates videos indices
+  def update_videos_sphinx_delta
+    topics.each do |t|
+      t.videos.each do | v |
+        v.delta = true
+        v.save
+      end
+    end
+  end
 
   def channel
     channels.first
@@ -92,6 +111,7 @@ end
     end
     sql_options.merge!(:sql => {:include => :channels})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
+    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
