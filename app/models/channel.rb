@@ -30,6 +30,7 @@ class Channel < ActiveRecord::Base
   #SCOPES
   after_save :set_channel_permission, :on => :create
   after_destroy :remove_course_associations
+  after_update :update_channel_admin_user_ids, :if => :admin_user_id_changed?
 
 
   #INSTANCE METHODS
@@ -43,6 +44,16 @@ class Channel < ActiveRecord::Base
       course.channel_course_permissions.each do |permission|
         permission.channel_id = self.id
         permission.save
+      end
+    end
+  end
+  def update_channel_admin_user_ids
+    User.assign_role(admin_user_id, :channel_admin)
+    self.courses.each do |course|
+      course.update_attribute(:channel_admin_user_id, admin_user_id)
+      course.topics.each do |topic| 
+        topic.update_attribute(:channel_admin_user_id, admin_user_id)
+        topic.videos.map {|video| video.update_attribute(:channel_admin_user_id,admin_user_id)}
       end
     end
   end
