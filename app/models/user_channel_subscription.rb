@@ -29,7 +29,4 @@ class UserChannelSubscription < ActiveRecord::Base
   def update_course_admin
     course.update_attribute(:course_admin_user_id, nil)
   end
-
-
-
 end
