@@ -34,19 +34,16 @@
 								</div>
 							</div>
 							<div class="seperator5"></div>
-							<div class="row">
-								<div class="col-sm-12">
-									<a href="#"><i class="fa fa-plus"></i></a>
-									<%= f.link_to_add "(Add a Course)", :courses, :data => { :target => "#channel_accordion" } %>
-								</div>
-							</div>
 							<!-- ACCORDION END -->
 						</div>
 					</div>
 					<div class="seperator5"></div>
 					<div class="row">
-						<div class="col-sm-12">
+						<div class="col-sm-1">
 							<button type="submit" class="btn green" value="Save">Save</button>
+						</div>
+						<div class="col-md-0">
+							<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add a Course" ), :courses, :data => { :target => "#channel_accordion" }, :class => 'btn green' %>
 						</div>
 					</div>
 				</div>

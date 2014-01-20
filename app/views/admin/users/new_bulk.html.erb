@@ -45,7 +45,7 @@
 				    	<div class="col-md-1">
 				    		<%= f.submit 'Save', :class => 'btn green' %>
 				    	</div>
-				    	<div class="col-md-1">
+				    	<div class="col-md-0">
 				    		<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add a Course" ), :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'btn green' %>
 				    	</div>
 				    </div>
@@ -63,3 +63,7 @@
 
 <%= javascript_include_tag 'admin/jquery.form.js' %>
 <%= javascript_include_tag 'admin/app_functions/users' %>
+
+<script type="text/javascript">
+	$('#multiple_user_form').ajaxForm();
+</script>
