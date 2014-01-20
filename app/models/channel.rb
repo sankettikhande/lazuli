@@ -65,7 +65,7 @@ class Channel < ActiveRecord::Base
     courses.each do | c |
       c.delta = true
       c.save
-      # updates topics indices for this course and calls methods to update indices of dependent videos
+      # updates topics indices for this course and calls methods to update indices of dependent topics & videos
       c.update_topics_sphinx_delta
     end
   end
