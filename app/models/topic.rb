@@ -119,7 +119,7 @@ class Topic < ActiveRecord::Base
     validate_sequence_videos(sequence_numbers) if errors.blank?
   end
 
-  def validate_sequence_videos(sequence_numbers)
+  def validate_sequence_videos sequence_numbers
     sequence_numbers = sequence_numbers.map { |seq| seq.to_i }
     errors.add(:base, "Video Sequence not valid.") if sequence_numbers.count != sequence_numbers.sort.last 
   end
