@@ -29,7 +29,7 @@ class Admin::ChannelsController < AdminController
     respond_to do |format|
   		if @channel.save
   			format.html {redirect_to admin_channels_url}
-        flash[:notice] = "Channel has successfully created"
+        flash[:notice] = "Channel has been successfully created"
   		else
   			format.html { render :action => "new" }
   		end	
@@ -50,7 +50,7 @@ class Admin::ChannelsController < AdminController
     respond_to do |format|  
       if @channel.update_attributes(params[:channel])
         format.html {redirect_to admin_channels_url}
-        flash[:notice] = "Channel has successfully update"
+        flash[:notice] = "Channel has been successfully update"
       else
         format.html { render :action => "edit" }
       end 
