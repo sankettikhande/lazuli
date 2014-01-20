@@ -17,8 +17,8 @@
 				    	<div class="col-md-1">
 				    		<%= f.submit 'Save', :class => 'btn green' %>
 				    	</div>
-				    	<div class="col-md-1">
-				    		<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add Another Course" ), :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'btn green' %>
+				    	<div class="col-md-0">
+				    		<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add a Course" ), :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'btn green' %>
 				    	</div>
 				    </div>
 			    <% end %> 

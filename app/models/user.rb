@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
   end
 
-  
+  def is_any_admin?
+    is_admin? || is_channel_admin? || is_course_admin?
+  end
+
+
   def add_user_role
     add_role(:user) if roles.blank?
   end
@@ -134,6 +138,7 @@ class User < ActiveRecord::Base
     end
     sphinx_options.merge!(search_options)
     sphinx_options.merge!(sort_options)
+    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
