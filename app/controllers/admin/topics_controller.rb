@@ -74,7 +74,7 @@ class Admin::TopicsController < AdminController
 		respond_to do |format|
 			if @topic.update_attributes(topic)
 				publish_topic(@topic) if !publish.nil?
-				notice = publish.nil? ? "Topic Saved." : "Topic is being published. It will take some time. Please check status after some time."
+				notice = publish.nil? ? "Topic has successfully Update." : "Topic is being published. It will take some time. Please check status after some time."
 				if @topic.is_bookmark_video
 					format.html{redirect_to edit_admin_topic_url(@topic), notice: notice}
 				else
@@ -90,7 +90,7 @@ class Admin::TopicsController < AdminController
 	def save_topic(publish=nil)
 		if @topic.save
 			publish_topic(@topic) if !publish.nil?
-			notice = publish.nil? ? "Topic Saved." : "Topic is being published. It will take some time. Please check status after some time."
+			notice = publish.nil? ? "Topic has successfully Save." : "Topic is being published. It will take some time. Please check status after some time."
 			if @topic.is_bookmark_video
 				redirect_to edit_admin_topic_url(@topic), notice: notice
 			else

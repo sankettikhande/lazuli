@@ -41,6 +41,7 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.js
+        flash[:success] = "User has been successfully updated."
       else
         @user_channel = @user.user_channel_subscriptions
         format.js

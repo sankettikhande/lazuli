@@ -20,8 +20,9 @@ class Admin::CoursesController < AdminController
 		@course.created_by = current_user.id
 		respond_to do |format|
 			if @course.save
-				@course.update_attribute(:admin_user_id,@course.channel.admin_user_id)
+				@course.update_attribute(:channel_admin_user_id,@course.channel.admin_user_id)
 				format.html {redirect_to "#{admin_contents_url}#courses"}
+				flash[:notice] = "Course has successfully created"
 			else
 				@channels = Channel.all
 				format.html {render "new"}
@@ -39,6 +40,7 @@ class Admin::CoursesController < AdminController
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
 				format.html {redirect_to "#{admin_contents_url}#courses"}
+				flash[:notice] = "Course has successfully updated"
 			else
 				@channels = Channel.all
 				format.html {render "edit"}
