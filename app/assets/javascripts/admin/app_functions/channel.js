@@ -31,3 +31,7 @@ $('document').ready(function(){
 		});
 	}
 })
+
+$(document).on('nested:fieldRemoved:courses', function(event) {
+	$(event.target).find("[class*='validate[']").remove()
+});
