@@ -19,35 +19,31 @@
             </ul>
         </div>
         <div class="col-xs-6 col-sm-4 nopadding-left">
-            <form class="navbar-form" role="search">
-              <div class="input-group">
-                <div class="input-group-btn">
-                  <button class="btn btn-default"><i class="fa fa-search"></i></button>
-                </div>
-                <input type="search" class="form-control" placeholder="What do you want to learn?">
+          <form class="navbar-form" role="search">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <button class="btn btn-default"><i class="fa fa-search"></i></button>
               </div>
-            </form>
+              <input type="search" class="form-control" placeholder="What do you want to learn?">
+            </div>
+          </form>
         </div>
         <div class="col-xs-1 col-sm-4 hidden-xs">
             <div class="lazuli-logo">
               <a href="#" class="navbar-brand"><img class="img-responsive" src="/assets/frontend/Lazuli-text.png" alt="Lazuli Logo"></a>
             </div>
         </div>
-        <div class="col-xs-2 col-sm-2 dropdown text-right">
+        <div class="col-xs-2 col-sm-2 dropdown text-right nopadding-left">
           <div class="btn-group margin-top-8 text-left">
-            <button type="button" class="btn btn-dark dropdown-toggle hidden-xs" data-toggle="dropdown"><%= current_user.name %></button>
-            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></button>
+            <button type="button" class="btn btn-dark dropdown-toggle hidden-xs" data-toggle="dropdown" data-href="<%= current_user.is_any_admin? ? admin_path : '#' %>">  
+              <%= current_user.name %>
+            </button>
+            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-user"></i>
+            </button>
             <ul class="dropdown-menu pull-right">
-              <li>
-                <% if current_user.is_admin? || current_user.is_channel_admin? || current_user.is_course_admin? %>
-                  <%= link_to 'My Account', '/admin', "data-no-turbolink" => 'true' %>
-                <% else %>
-                  <%= link_to 'My Account', '#', "data-no-turbolink" => 'true' %>
-                <% end %>
-              </li>
-              <li>
-                <%= link_to raw("<i class='fa fa-key'></i> Log Out"), destroy_user_session_path, :method => :delete %>
-              </li>
+              <li><a href="#">My Account</a></li>
+              <li><a href="#">Logout</a></li>
             </ul>
           </div>
         </div>
@@ -56,15 +52,18 @@
   </div> <!-- navbar ends -->
 <% else %>
   <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-header">
-        <%= link_to raw("<img src='/assets/frontend/lazuli-logo.png' alt='Lazuli' class='img-responsive center-block'>"), root_url, :class=> "navbar-brand nospace" %>
-      </div>
-      <div class="navbar-collapse collapse navbar-right" id="header-menu">
-        <ul class="nav navbar-nav">
-          <li><%= link_to raw("<i class='fa fa-sign-in'></i> Login"), '#', :data => {"target" => "#login-modal", 'toggle' => "modal"}  %></li>
-          <li><%= link_to raw("<i class='fa fa-pencil-square-o'></i> Signup"), '#', :data => {"target" => "#signup-modal", 'toggle' => "modal"}  %>
-          </li>
+    <div class="navbar-header">
+      <%= link_to raw("<img src='/assets/frontend/lazuli-logo.png' alt='Lazuli' class='img-responsive center-block'>"), root_url, :class=> "navbar-brand nospace" %>
+    </div>
+    <div class="navbar-collapse collapse navbar-right" id="header-menu">
+      <ul class="nav navbar-nav login-options">
+        <li>
+          <%= link_to raw("<i class='fa fa-sign-in'></i> Login"), '#', :data => {"target" => "#login-modal", 'toggle' => "modal"}  %>
+        </li>
+        <li>
+          <%= link_to raw("<i class='fa fa-pencil-square-o'></i> Signup"), '#', :data => {"target" => "#signup-modal", 'toggle' => "modal"}  %>
+        </li>
       </ul>
-      </div>
+    </div>
   </div>
 <% end %>

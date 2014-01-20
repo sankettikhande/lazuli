@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
   end
 
-  
+  def is_any_admin?
+    is_admin? || is_channel_admin? || is_course_admin?
+  end
+
+
   def add_user_role
     add_role(:user) if roles.blank?
   end
