@@ -29,6 +29,7 @@ class Channel < ActiveRecord::Base
 
   #SCOPES
   after_save :set_channel_permission, :on => :create
+  after_save :update_topics_sphinix_deltas
   after_destroy :remove_course_associations
   after_update :update_channel_admin_user_ids, :if => :admin_user_id_changed?
   after_create :user_assign_role
@@ -47,6 +48,7 @@ class Channel < ActiveRecord::Base
       end
     end
   end
+
   def update_channel_admin_user_ids
     User.assign_role(admin_user_id, :channel_admin)
     self.courses.each do |course|
@@ -55,6 +57,14 @@ class Channel < ActiveRecord::Base
         topic.update_attribute(:channel_admin_user_id, admin_user_id)
         topic.videos.map {|video| video.update_attribute(:channel_admin_user_id,admin_user_id)}
       end
+    end
+  end
+
+  # updates topics indices
+  def update_topics_sphinix_deltas
+    courses.each do | c |
+      c.delta = true
+      c.save
     end
   end
 
