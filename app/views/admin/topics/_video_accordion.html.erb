@@ -7,7 +7,7 @@
 				<div class="panel-heading">
 					<div class="panel-title">
 							<div class="row">
-								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : video_form.object.id %>">
 								<div class="col-sm-8"><h5><%= video_title(video_form.object.title) %></h5></div></a>
 								<div class="col-sm-2 text-right"><h5>Sequence Number</h5></div>
 								<div class="col-sm-1">
@@ -18,14 +18,14 @@
 									<div class="col-sm-1 nopadding">
 										<div class="btn-group nopadding">
 											<%= video_form.link_to_remove button_raw_field('fa fa-ban') %>
-											<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
+											<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : video_form.object.id %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
 											</a>
 										</div>
 									</div>
 								<% else %>
 									<div class="col-sm-1">
 										<div class="btn-group">
-											<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
+											<a class="accordion-toggle  btn-grey" data-toggle="collapse" data-parent="#accordion1" href="#collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : video_form.object.id %>"><button class="btn" id="extend_button"><i class="fa fa-chevron-down"></i></button>
 											</a>
 										</div>
 									</div>
@@ -34,7 +34,7 @@
 							</div>
 					</div>
 				</div>
-				<div id="collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : index %>" class="panel-collapse collapse">
+				<div id="collapse_<%= !video_form.options[:child_index].nil? ? video_form.options[:child_index] : video_form.object.id %>" class="panel-collapse collapse">
 					<div class="panel-body form-group">
 						<div class="row">
 							<div class="col-sm-2">
@@ -146,10 +146,10 @@
 	<div class="col-sm-12">
 			<div id="video_link">
 				<a href="#"><i class="fa fa-plus"></i></a>
-				<%= f.link_to_add "(Add another video)", :videos, :data => { :target => "#accordion1" } %>
+				<%= f.link_to_add "(Add a video)", :videos, :data => { :target => "#accordion1" } %>
 			</div>
 		  <div id="bookmark_link">
-				<%= link_to raw_field("fa fa-3x fa-plus", "(Add a bookmark)"), "#{bookmark_video_admin_bookmark_path(f.object.videos.first)}#video-modal", :remote => true, "data-toggle" => "modal"  if !f.object.new_record? && !f.object.videos.blank? %>
+				<%= link_to raw_field("fa fa-3x fa-plus", "(Add a bookmark)"), "#{bookmark_video_admin_bookmark_path(f.object.videos.first)}#video-modal", :remote => true, "data-toggle" => "modal"  if !f.object.new_record? && !f.object.videos.blank? && f.object.is_bookmark_video %>
 			</div>
 	</div>
 </div>

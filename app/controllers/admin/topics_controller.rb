@@ -39,6 +39,7 @@ class Admin::TopicsController < AdminController
 
 	def update
 		@topic = Topic.cached_find(params[:id])
+		@topic.validate_uniq_videos params
 		@channel_courses = @topic.channel.courses
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 		if params[:SavePub]
@@ -47,7 +48,7 @@ class Admin::TopicsController < AdminController
 			publish_topic(@topic)
 			redirect_to :back, notice: "Topic is being published. It will take some time. Please check status after some time."
 		elsif params[:Save]
-			@topic.update_attribute(:status, "PartialPublished")
+			@topic.update_attribute(:status, "PartialPublished") if @topic.errors.blank?
 			update_topic(params[:topic])
 		end
 	end
@@ -73,7 +74,7 @@ class Admin::TopicsController < AdminController
 
 	def update_topic(topic, publish=nil)
 		respond_to do |format|
-			if @topic.update_attributes(topic)
+			if @topic.errors.blank? && @topic.update_attributes(topic)
 				publish_topic(@topic) if !publish.nil?
 				notice = publish.nil? ? "Topic has successfully Update." : "Topic is being published. It will take some time. Please check status after some time."
 				if @topic.is_bookmark_video
