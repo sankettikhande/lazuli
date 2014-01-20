@@ -79,6 +79,7 @@ class Channel < ActiveRecord::Base
       search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids}) 
     end
     sphinx_options.merge!(sort_options).merge!(search_options)
+    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     Channel.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 end

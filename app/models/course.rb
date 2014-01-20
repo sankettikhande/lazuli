@@ -32,7 +32,7 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :channel_courses, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
   #SCOPES
-  after_save :set_channel_permission, :update_topics_sphinx_delta, :update_videos_sphinx_delta
+  after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   
@@ -53,21 +53,13 @@ class Course < ActiveRecord::Base
     end
   end
 
-  # updates topics indices
+  # updates topics indices and invoke method to update video indices
   def update_topics_sphinx_delta
     topics.each do |t|
       t.delta = true
       t.save
-    end
-  end
-
-  # updates videos indices
-  def update_videos_sphinx_delta
-    topics.each do |t|
-      t.videos.each do | v |
-        v.delta = true
-        v.save
-      end
+      # updates videos indices for this topic
+      t.update_videos_sphinx_delta
     end
   end
 
