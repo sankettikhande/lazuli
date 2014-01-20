@@ -22,7 +22,7 @@ class Admin::CoursesController < AdminController
 			if @course.save
 				@course.update_attribute(:channel_admin_user_id,@course.channel.admin_user_id)
 				format.html {redirect_to "#{admin_contents_url}#courses" }
-				flash[:notice] = "Course has successfully created"
+				flash[:notice] = "Course has been successfully created"
 			else
 				@channels = Channel.all
 				format.html {render "new"}
@@ -40,7 +40,7 @@ class Admin::CoursesController < AdminController
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
 				format.html {redirect_to "#{admin_contents_url}#courses"}
-				flash[:notice] = "Course has successfully updated"
+				flash[:notice] = "Course has been successfully updated"
 			else
 				@channels = Channel.all
 				format.html {render "edit"}

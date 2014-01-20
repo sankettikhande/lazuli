@@ -31,7 +31,7 @@ class Channel < ActiveRecord::Base
   after_save :set_channel_permission, :on => :create
   after_destroy :remove_course_associations
   after_update :update_channel_admin_user_ids, :if => :admin_user_id_changed?
-
+  after_create :user_assign_role
 
   #INSTANCE METHODS
   def subscription_types
@@ -56,6 +56,10 @@ class Channel < ActiveRecord::Base
         topic.videos.map {|video| video.update_attribute(:channel_admin_user_id,admin_user_id)}
       end
     end
+  end
+
+  def user_assign_role
+    User.assign_role(self.admin_user_id, :channel_admin)
   end
 
   def remove_course_associations
