@@ -116,9 +116,10 @@ class Topic < ActiveRecord::Base
     titles = validatable_video_attribs.map{|k, v| v["titles"]}.compact
     errors.add(:base, "Video sequence numbers must be uniq.") if sequence_numbers != sequence_numbers.uniq
     errors.add(:base, "Video titles must be uniq.") if titles != titles.uniq
-    validate_sequence_videos(sequence_numbers) if errors.blank?
+    #validate_sequence_videos(sequence_numbers) if errors.blank?
   end
 
+  # Not Using as of now
   def validate_sequence_videos sequence_numbers
     sequence_numbers = sequence_numbers.map { |seq| seq.to_i }
     errors.add(:base, "Video Sequence not valid.") if sequence_numbers.count != sequence_numbers.sort.last 
