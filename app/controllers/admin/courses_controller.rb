@@ -16,7 +16,8 @@ class Admin::CoursesController < AdminController
 		@course = Course.new(params[:course])
 		respond_to do |format|
 			if @course.save
-				format.html {redirect_to "#{admin_contents_url}#courses"}
+				format.html {redirect_to "#{admin_contents_url}#courses" }
+				flash[:notice] = "Course has successfully created"
 			else
 				@channels = Channel.all
 				format.html {render "new"}
@@ -34,6 +35,7 @@ class Admin::CoursesController < AdminController
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
 				format.html {redirect_to "#{admin_contents_url}#courses"}
+				flash[:notice] = "Course has successfully updated"
 			else
 				@channels = Channel.all
 				format.html {render "edit"}
