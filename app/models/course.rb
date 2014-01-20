@@ -34,6 +34,7 @@ class Course < ActiveRecord::Base
   #SCOPES
   after_save :set_channel_permission
   after_initialize :create_associations
+  after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   
   #INSTANCE METHODS
   def set_channel_permission
@@ -44,6 +45,12 @@ class Course < ActiveRecord::Base
       end
     end
   end
+def update_course_admin_user_ids
+  self.topics.each do |topic|
+    topic.update_attribute(:course_admin_user_id, course_admin_user_id)
+    topic.videos.map{|v| v.update_attribute(:course_admin_user_id, course_admin_user_id)}
+  end
+end
 
   def channel
     channels.first
@@ -86,6 +93,10 @@ class Course < ActiveRecord::Base
     sql_options.merge!(:sql => {:include => :channels})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
     Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+  end
+
+  def self.set_course_admin_user_ids(course_ids,user_id)
+    Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id)  } 
   end
 
   private 
