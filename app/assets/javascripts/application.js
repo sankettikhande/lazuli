@@ -22,7 +22,7 @@
 //= require ./application/offcanvas.js
 //= require ./application/respond.min.js
 //= require_tree ./application/.
-//= require ./flash-message.js
+//= require ./common.js
 
 $( function() {
     $("button[data-href]").click( function() {
