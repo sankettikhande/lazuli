@@ -126,6 +126,8 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 #lazuli-top-menu .navbar-nav .dropdown-menu li a:hover {color: #fff !important}
 #lazuli-top-menu .navbar-form {border:0;}
 
+#lazuli-top-menu .navbar-form .btn {font-size: 14px;}  /** navbar input fix */
+
 .login-options li a {text-transform: capitalize;}
 
 /************* +Multilevel Ends ****************************/
