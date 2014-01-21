@@ -13,6 +13,15 @@ class Topic < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id] , :message => "^Same topic name has already been taken for this course."
   validate :check_uniqueness_of_title
 
+  after_save :update_videos_sphinx_delta
+
+  def update_videos_sphinx_delta
+    videos.each do |v|
+      v.delta = true
+      v.save
+    end
+  end
+
 
   def create_album_for_single_video(video)
     album = VimeoLib.album.create(self.title, video.vimeo_id, {:description => self.description })
@@ -92,10 +101,28 @@ class Topic < ActiveRecord::Base
     end
     sql_options.merge!(:sql => {:include => [:course, :channel]})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
+    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     Topic.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 
   def vimeo_album_url 
     "https://vimeo.com/album/#{self.vimeo_album_id}"
+  end
+
+  def validate_uniq_videos options
+    qued_for_destroy, validatable_video_attribs = {}, {}
+    options[:topic][:videos_attributes].map{|key, value| qued_for_destroy.merge!(key => value) if value["_destroy"] == "1"}
+    options[:topic][:videos_attributes].map{|key, value| validatable_video_attribs.merge!(key => value) if value["_destroy"] != "1"}
+    sequence_numbers = validatable_video_attribs.map{|k, v| v["sequence_number"]}.compact
+    titles = validatable_video_attribs.map{|k, v| v["titles"]}.compact
+    errors.add(:base, "Video sequence numbers must be unique.") if sequence_numbers != sequence_numbers.uniq
+    errors.add(:base, "Video titles must be unique.") if titles != titles.uniq
+    #validate_sequence_videos(sequence_numbers) if errors.blank?
+  end
+
+  # Not Using as of now
+  def validate_sequence_videos sequence_numbers
+    sequence_numbers = sequence_numbers.map { |seq| seq.to_i }
+    errors.add(:base, "Video Sequence not valid.") if sequence_numbers.count != sequence_numbers.sort.last 
   end
 end

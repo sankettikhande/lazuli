@@ -83,4 +83,7 @@
 
 .padding-left-15{
 	padding-left:15px;	
-} 
+}
+.dataTables_filter .filter_column_names{
+  margin-left: 10px;
+}

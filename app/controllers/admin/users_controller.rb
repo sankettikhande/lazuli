@@ -1,6 +1,9 @@
 class Admin::UsersController < AdminController
   before_filter :set_instance, :only => [:new, :create, :edit, :update, :new_bulk, :create_bulk]
-  
+  load_and_authorize_resource
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
   def index
   end
 
@@ -19,6 +22,7 @@ class Admin::UsersController < AdminController
     @user.skip_confirmation!
     respond_to do |format|
       if @user.save
+        @user.set_course_admin_user_id
         flash[:success] = "User has been created."
         format.js
       else
@@ -38,6 +42,7 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.js
+        flash[:success] = "User has been successfully updated."
       else
         @user_channel = @user.user_channel_subscriptions
         format.js
@@ -54,7 +59,7 @@ class Admin::UsersController < AdminController
   end
 
   def search_user
-    @users = User.where("name like ?", "%#{params[:name]}%").limit(20)
+    @users = User.search(name = "*#{params[:q]}*")
     respond_to do |format|
       format.json {}   
     end  

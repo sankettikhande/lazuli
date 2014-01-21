@@ -11,7 +11,7 @@
 						  <div class="portlet-body flip-scroll">
 						    <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="sample_1">
 						    	<% if @user_channel.present? %>
-							      <thead class="flip-content">
+							      <thead class="flip-content edit_user">
 							        <tr>
 							            <th>Course Subscribed for </th>
 							            <th>Channel Subscribed to</th>
@@ -44,13 +44,13 @@
 						  		<%= render 'user_channel_subscription_fields', :f => uc_form if uc_form.object.new_record? %>
 						  	<% end %>
 						  </div>
-					    <div class="row form-group">
-					    	<div class="col-md-3">
-					    		<a href="#"><i class='fa fa-3x fa-plus'></i><a/>
-					    		<%= f.link_to_add "Add another course", :user_channel_subscriptions, :data => { :target => "#user_channels" }%>
-					    	</div>
-					    	<div class="col-md-9">
+						  <div class="row form-group">
+					    	<div class="col-md-3"></div>
+					    	<div class="col-md-1">
 					    		<%= f.submit 'Save', :class => 'btn green' %>
+					    	</div>
+					    	<div class="col-md-0">
+					    		<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add a Course" ), :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'btn green' %>
 					    	</div>
 					    </div>
 			    <% end %> 

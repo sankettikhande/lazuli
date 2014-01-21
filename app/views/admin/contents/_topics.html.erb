@@ -1,8 +1,8 @@
 <section class="container">
-  <div>
-    <%= link_to raw_field("fa fa-3x fa-plus", "Add New Topic"), new_admin_topic_path, :class => "btn btn-default btn-success pull-right", :rel =>"tooltip", :title => "Add New Topic", "data-no-turbolink" => true %>
-  </div>
   <div class="row">
+    <div class="col-md-12 nopadding">
+      <%= link_to raw_field("fa fa-3x fa-plus", "Add New Topic"), new_admin_topic_path, :class => "btn btn-default btn-success pull-right", :rel =>"tooltip", :title => "Add New Topic", "data-no-turbolink" => true %>
+    </div>
     <div class="seperator5"></div>
     <div class="portlet-body flip-scroll">
       <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="topic_contents">
@@ -24,18 +24,24 @@
 </section>
 
 <script>
-  $('#topic_contents').dataTable({
-    "bProcessing": true,
-    "bServerSide": true,
-    "iDisplayLength": 15,
-    "bLengthChange": false,
-    "sAjaxSource": "/admin/topics/search.json",
-    "aoColumns": [
+  $(document).ready(function(){
+    var topicDatatable = $('#topic_contents').dataTable({
+      "bProcessing": true,
+      "bServerSide": true,
+      "iDisplayLength": 15,
+      "bLengthChange": false,
+      "bAutoWidth": false,
+      "sAjaxSource": "/admin/topics/search.json",
+      "aoColumns": [
             { "mData": "title"},
             { "mData": "course_name"},
             { "mData": "channel_name"},
             { "mData": "vimeo_url", "bSortable": false},
-            { "mData": "actions", "bSortable": false, "sClass" : "text-center"}
-        ] });
-</script>
+            { "mData": "actions", "bSortable": false, "sClass" : "text-center"}],
+        "aaSorting": [[ 1, "asc" ]] });
 
+    $("#topic_contents_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="title">Title</option><option value="course_name">Course Name</option><option value="channel_name">Channel Name</option>')
+
+    $('select#column_names').change( function() { topicDatatable.fnFilter( $(this).val(), 1 ); } );
+  })
+</script>

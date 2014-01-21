@@ -13,5 +13,3 @@ $("#multiple_user_form").validationEngine({
 	promptPosition : "bottomLeft",
 	autoPositionUpdate: true
 });
-
-$('#multiple_user_form').ajaxForm(); 

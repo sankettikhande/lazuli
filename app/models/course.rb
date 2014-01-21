@@ -32,9 +32,10 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :channel_courses, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
   #SCOPES
-  after_save :set_channel_permission
+  after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
-  
+  after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
+  # after_destroy :update_course_count
   #INSTANCE METHODS
   def set_channel_permission
     self.channel_course_permissions.each do |permission|
@@ -45,12 +46,27 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def update_course_admin_user_ids
+    self.topics.each do |topic|
+      topic.update_attribute(:course_admin_user_id, course_admin_user_id)
+      topic.videos.map{|v| v.update_attribute(:course_admin_user_id, course_admin_user_id)}
+    end
+  end
+
+  # updates topics indices and invoke method to update video indices
+  def update_topics_sphinx_delta
+    topics.each do |t|
+      t.delta = true
+      t.save
+    end
+  end
+
   def channel
     channels.first
   end
 
   def channel_name
-    channel.name
+    channel.name if channel
   end
 
   def course_name
@@ -73,6 +89,10 @@ class Course < ActiveRecord::Base
     channel.name
   end
 
+  # def update_course_count
+  #   channel.update_attribute(:course_count, channel.course_count - 1)
+  # end
+
   def self.sphinx_search options, current_user
     sort_options, search_options, sql_options, sphinx_options = {}, {}, {}, {}
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
@@ -85,7 +105,12 @@ class Course < ActiveRecord::Base
     end
     sql_options.merge!(:sql => {:include => :channels})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
+    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+  end
+
+  def self.set_course_admin_user_ids(course_ids,user_id)
+    Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id)  } 
   end
 
   private 

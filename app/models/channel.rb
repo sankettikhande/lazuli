@@ -29,8 +29,10 @@ class Channel < ActiveRecord::Base
 
   #SCOPES
   after_save :set_channel_permission, :on => :create
+  after_save :update_topics_sphinix_deltas
   after_destroy :remove_course_associations
-
+  after_update :update_channel_admin_user_ids, :if => :admin_user_id_changed?
+  after_create :user_assign_role
 
   #INSTANCE METHODS
   def subscription_types
@@ -45,6 +47,29 @@ class Channel < ActiveRecord::Base
         permission.save
       end
     end
+  end
+
+  def update_channel_admin_user_ids
+    User.assign_role(admin_user_id, :channel_admin)
+    self.courses.each do |course|
+      course.update_attribute(:channel_admin_user_id, admin_user_id)
+      course.topics.each do |topic| 
+        topic.update_attribute(:channel_admin_user_id, admin_user_id)
+        topic.videos.map {|video| video.update_attribute(:channel_admin_user_id,admin_user_id)}
+      end
+    end
+  end
+
+  # updates topics indices
+  def update_topics_sphinix_deltas
+    courses.each do | c |
+      c.delta = true
+      c.save
+    end
+  end
+
+  def user_assign_role
+    User.assign_role(self.admin_user_id, :channel_admin)
   end
 
   def remove_course_associations
@@ -68,6 +93,7 @@ class Channel < ActiveRecord::Base
       search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids}) 
     end
     sphinx_options.merge!(sort_options).merge!(search_options)
+    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     Channel.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
 end

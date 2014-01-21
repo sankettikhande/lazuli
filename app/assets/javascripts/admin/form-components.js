@@ -686,14 +686,14 @@ var FormComponents = function () {
 
         $("#user_search_channel").select2({
             placeholder: "Search for a user",
-            minimumInputLength: 1,
+            minimumInputLength: 3,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: "/admin/users/search_user.json",
                 // dataType: 'jsonp',
                 data: function (term, page) {
                     return {
                         q: term, // search term
-                        page_limit: 10,
+                        // page_limit: 100,
                         apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
                     };
                 },

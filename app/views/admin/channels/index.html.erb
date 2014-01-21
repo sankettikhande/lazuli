@@ -1,10 +1,12 @@
 <%= javascript_include_tag "admin/jquery.dataTables.js", "admin/DT_bootstrap.js" %>
 <section class="container">
-  <div>
-    <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add new channel
-    </button></a>
-  </div>
   <div class="row">
+    <div class="col-md-12 nopadding">
+      <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel">
+        <button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i>   Add New Channel
+        </button>
+      </a>
+    </div>
     <div class="seperator5"></div>
     <div class="portlet-body flip-scroll">
       <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="channels">
@@ -26,17 +28,24 @@
 </section>
 
 <script>
-  $('#channels').dataTable({
-    "bProcessing": true,
-    "bServerSide": true,
-    "iDisplayLength": 15,
-    "bLengthChange": false,
-    "sAjaxSource": "/admin/channels/search.json",
-    "aoColumns": [
-            { "mData": "name"},
-            { "mData": "course_count", "sClass" : "text-center"},
-            { "mData": "user_count", "sClass" : "text-center"},
-            { "mData": "channel_type", "bSortable": false, "sClass" : "text-center"},
-            { "mData": "actions", "bSortable": false, "sClass" : "text-center"}
-        ] });
+  $(document).ready(function(){
+    var channelDatatable = $('#channels').dataTable({
+      "bProcessing": true,
+      "bServerSide": true,
+      "iDisplayLength": 15,
+      "bLengthChange": false,
+      "bAutoWidth": false,
+      "sAjaxSource": "/admin/channels/search.json",
+      "aoColumns": [
+              { "mData": "name"},
+              { "mData": "course_count", "sClass" : "text-center"},
+              { "mData": "user_count", "sClass" : "text-center"},
+              { "mData": "channel_type", "bSortable": false, "sClass" : "text-center"},
+              { "mData": "actions", "bSortable": false, "sClass" : "text-center"}],
+      "aaSorting": [[ 1, "asc" ]] });
+
+    $("#channels_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="name">Chanel Name</option>')
+
+    $('select#column_names').change( function() { channelDatatable.fnFilter( $(this).val(), 1 ); } );
+  })
 </script>

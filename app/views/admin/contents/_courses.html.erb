@@ -1,8 +1,8 @@
-<div class="col-md-12">
-	<a href= "courses/new" class="btn btn-default btn-success pull-right" rel="tooltip" title="Add New Course"><i class="fa fa-3x fa-plus"></i> Add New Course</a>
-</div>
 <section class="container">
 	<div class="row">
+		<div class="col-md-12 nopadding">
+			<a href= "courses/new" class="btn btn-default btn-success pull-right" rel="tooltip" title="Add New Course"><i class="fa fa-3x fa-plus"></i> Add New Course</a>
+		</div>
 		<div class="seperator5"></div>
 		<div class="portlet-body flip-scroll">
 		<table class="table table-bordered table-striped table-condensed flip-content table-hover" id="courses_list">
@@ -24,17 +24,24 @@
 </section>
 
 <script>
-  $('#courses_list').dataTable({
-    "bProcessing": true,
-    "bServerSide": true,
-    "iDisplayLength": 15,
-    "bLengthChange": false,
-    "sAjaxSource": "/admin/courses/search.json",
-    "aoColumns": [
-            { "mData": "name"},
-            { "mData": "trainer_name"},
-            { "mData": "channel_name"},
-            { "mData": "user_count", "sClass" : "text-center"},
-            { "mData": "actions", "bSortable": false, "sClass" : "text-center" }
-        ] });
+  $(document).ready(function(){
+	  var courseDatatable = $('#courses_list').dataTable({
+	    "bProcessing": true,
+	    "bServerSide": true,
+	    "iDisplayLength": 15,
+	    "bLengthChange": false,
+	    "bAutoWidth": false,
+	    "sAjaxSource": "/admin/courses/search.json",
+	    "aoColumns": [
+	            { "mData": "name"},
+	            { "mData": "trainer_name"},
+	            { "mData": "channel_name"},
+	            { "mData": "user_count", "sClass" : "text-center"},
+	            { "mData": "actions", "bSortable": false, "sClass" : "text-center" }],
+	      "aaSorting": [[ 1, "asc" ]] });
+
+	  $("#courses_list_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="name">Course Name</option><option value="trainer_name">Trainer Name</option><option value="channel_name">Channel Name</option>')
+
+	  $('select#column_names').change( function() { courseDatatable.fnFilter( $(this).val(), 1 ); } );
+  })
 </script>

@@ -1,5 +1,8 @@
 class Admin::TopicsController < AdminController
-
+	load_and_authorize_resource
+	rescue_from CanCan::AccessDenied do |exception|
+	  redirect_to root_url, :alert => exception.message
+	end
 	def new
 		@channel_courses = Course.all
 		@topic = Topic.new
@@ -7,7 +10,15 @@ class Admin::TopicsController < AdminController
 	end
 
 	def create
-		@topic = Topic.new(params[:topic])
+		@topic = Topic.new(params[:topic]) 
+		@topic.created_by = current_user.id
+		@topic.channel_admin_user_id = @topic.channel.admin_user_id
+		@topic.course_admin_user_id = @topic.course.course_admin_user_id
+		@topic.videos.each do |video|
+			video.created_by = current_user.id
+			video.channel_admin_user_id = @topic.channel_admin_user_id
+			video.course_admin_user_id = @topic.course_admin_user_id
+		end
 		if params[:SavePub]
 			save_topic("Publish")
 		elsif params[:Publish]
@@ -16,7 +27,6 @@ class Admin::TopicsController < AdminController
 		elsif params[:Save]
 			save_topic
 		end
-
 	end
 
 	def edit
@@ -29,6 +39,7 @@ class Admin::TopicsController < AdminController
 
 	def update
 		@topic = Topic.cached_find(params[:id])
+		@topic.validate_uniq_videos params
 		@channel_courses = @topic.channel.courses
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 		if params[:SavePub]
@@ -37,7 +48,7 @@ class Admin::TopicsController < AdminController
 			publish_topic(@topic)
 			redirect_to :back, notice: "Topic is being published. It will take some time. Please check status after some time."
 		elsif params[:Save]
-			@topic.update_attribute(:status, "PartialPublished")
+			@topic.update_attribute(:status, "PartialPublished") if @topic.errors.blank?
 			update_topic(params[:topic])
 		end
 	end
@@ -63,9 +74,9 @@ class Admin::TopicsController < AdminController
 
 	def update_topic(topic, publish=nil)
 		respond_to do |format|
-			if @topic.update_attributes(topic)
+			if @topic.errors.blank? && @topic.update_attributes(topic)
 				publish_topic(@topic) if !publish.nil?
-				notice = publish.nil? ? "Topic Saved." : "Topic is being published. It will take some time. Please check status after some time."
+				notice = publish.nil? ? "Topic has been successfully Updated." : "Topic is being published. It will take some time. Please check status after some time."
 				if @topic.is_bookmark_video
 					format.html{redirect_to edit_admin_topic_url(@topic), notice: notice}
 				else
@@ -81,7 +92,7 @@ class Admin::TopicsController < AdminController
 	def save_topic(publish=nil)
 		if @topic.save
 			publish_topic(@topic) if !publish.nil?
-			notice = publish.nil? ? "Topic Saved." : "Topic is being published. It will take some time. Please check status after some time."
+			notice = publish.nil? ? "Topic has been successfully Saved." : "Topic is being published. It will take some time. Please check status after some time."
 			if @topic.is_bookmark_video
 				redirect_to edit_admin_topic_url(@topic), notice: notice
 			else

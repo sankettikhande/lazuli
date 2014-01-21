@@ -15,5 +15,18 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require ./admin/jquery-ui-1.10.3.custom.min.js
-//= require_tree .
+//= require ./application/bootstrap.min.js
+//= require ./application/excanvas.min.js
+//= require ./application/html5shiv.js
+//= require ./application/jquery.slimscroll.min.js
+//= require ./application/offcanvas.js
+//= require ./application/respond.min.js
+//= require_tree ./application/.
+
+
+$( function() {
+    $("button[data-href]").click( function() {
+        location.href = $(this).attr("data-href");
+    });
+});
 
