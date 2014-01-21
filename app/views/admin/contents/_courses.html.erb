@@ -24,24 +24,16 @@
 </section>
 
 <script>
-  $(document).ready(function(){
-	  var courseDatatable = $('#courses_list').dataTable({
-	    "bProcessing": true,
-	    "bServerSide": true,
-	    "iDisplayLength": 15,
-	    "bLengthChange": false,
-	    "bAutoWidth": false,
-	    "sAjaxSource": "/admin/courses/search.json",
-	    "aoColumns": [
-	            { "mData": "name"},
-	            { "mData": "trainer_name"},
-	            { "mData": "channel_name"},
-	            { "mData": "user_count", "sClass" : "text-center"},
-	            { "mData": "actions", "bSortable": false, "sClass" : "text-center" }],
-	      "aaSorting": [[ 1, "asc" ]] });
-
-	  $("#courses_list_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="name">Course Name</option><option value="trainer_name">Trainer Name</option><option value="channel_name">Channel Name</option>')
-
-	  $('select#column_names').change( function() { courseDatatable.fnFilter( $(this).val(), 1 ); } );
-  })
+	$(document).ready(function(){
+		var tableId = '#courses_list';
+		var url = "/admin/courses/search.json";
+		var aoColumns = [{ "mData": "name"},
+		{ "mData": "trainer_name"},
+		{ "mData": "channel_name"},
+		{ "mData": "user_count", "sClass" : "text-center"},
+		{ "mData": "actions", "bSortable": false, "sClass" : "text-center" }];
+		var optionNames = ["Course Name", "Trainer Name", "Channel Name"];
+		var optionValues = ["name", "trainer_name", "channel_name"];
+		loadContents(tableId, url, aoColumns, optionNames, optionValues);
+	})
 </script>
