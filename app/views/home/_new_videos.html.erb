@@ -1,0 +1,14 @@
+<div class="carousel-inner">
+  <% @videos.in_groups(3, false).each_with_index do |videos, index| %>
+    <ul class="<%= is_active_videos(index) %> item video-thumbs">
+      <% videos.each do |video|%>
+        <li class="vimeo-thumb">
+          <a href="#">
+            <img class="img-responsive img-thumbnail" src="/assets/frontend/photos/img1.jpg" alt="Image">
+            <p>Learn Excel</p>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
