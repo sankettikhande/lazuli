@@ -51,6 +51,7 @@ class Admin::CoursesController < AdminController
 	def destroy
 		@course = Course.cached_find(params[:id])
 		@course.destroy
+		Channel.reset_counters @course.channel.id, :courses
 		respond_to do |format|
 			format.html {redirect_to "#{admin_contents_url}#courses"}
 		end
