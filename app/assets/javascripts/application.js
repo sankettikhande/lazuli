@@ -22,23 +22,10 @@
 //= require ./application/offcanvas.js
 //= require ./application/respond.min.js
 //= require_tree ./application/.
-
+//= require ./flash-message.js
 
 $( function() {
     $("button[data-href]").click( function() {
         location.href = $(this).attr("data-href");
     });
 });
-
-$(function() {
-  var flashCallback,
-    _this = this;
-  flashCallback = function() {
-    return $(".note").fadeOut();
-  };
-  $(".note").bind('click', function(ev) {
-    return $(".note").fadeOut();
-  });
-  return setTimeout(flashCallback, 3000);
-});
-
