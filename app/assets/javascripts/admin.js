@@ -35,7 +35,7 @@
 //= require ./admin/flowplayer-3.2.13.min.js
 //= require ./admin/jquery.validationEngine.js
 //= require ./admin/jquery.validationEngine-en.js
-
+//= require ./admin/jquery.spin.js
 
 $(".tooltip").tooltip()
 $("a[rel=tooltip]").tooltip()
@@ -57,4 +57,3 @@ $(function() {
   });
   return setTimeout(flashCallback, 3000);
 });
-

@@ -1,15 +1,34 @@
 $(".user_action").click(function(){
   window.location = $("#user_mode:checked").data("redirect-url")
 })
-
-$("#user_form").validationEngine({
-	promptPosition : "bottomLeft",
-	autoPositionUpdate: true
+$(document).ready(function(){
+	$("#user_form").validationEngine({
+		promptPosition : "bottomLeft",
+		autoPositionUpdate: true,
+		onValidationComplete: function(form, status) {
+			if(status == true){
+				$(window).spin();
+				return true
+			}
+		}
+	})
 });
 
 $('input[type="checkbox"]').uniform();
 
 $("#multiple_user_form").validationEngine({
 	promptPosition : "bottomLeft",
-	autoPositionUpdate: true
+	autoPositionUpdate: true,
+	onValidationComplete: function(form, status) {
+		if(status == true){
+			$(window).spin();
+			return true
+		}
+	}
 });
+
+// $(document).ready(function(){
+// 	$("#user_edit_form").click(function(){
+// 	  $(window).spin();
+// 	});
+// });
