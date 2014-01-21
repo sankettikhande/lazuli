@@ -6,4 +6,5 @@ ThinkingSphinx::Index.define :topic, :with => :active_record, :delta => Thinking
   indexes description
   has created_at, updated_at
   has channel_id
+  has course_id
 end
