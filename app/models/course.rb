@@ -35,7 +35,7 @@ class Course < ActiveRecord::Base
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
-  # after_destroy :update_course_count
+  
   #INSTANCE METHODS
   def set_channel_permission
     self.channel_course_permissions.each do |permission|
@@ -88,10 +88,6 @@ class Course < ActiveRecord::Base
   def course_channel_name
     channel.name
   end
-
-  # def update_course_count
-  #   channel.update_attribute(:course_count, channel.course_count - 1)
-  # end
 
   def self.sphinx_search options, current_user
     sort_options, search_options, sql_options, sphinx_options = {}, {}, {}, {}
