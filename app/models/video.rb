@@ -108,9 +108,10 @@ class Video < ActiveRecord::Base
     search_options.merge!(:conditions =>{ "course_id" => options[:course_id]}) if !options[:course_id].blank?
     search_options.merge!(:conditions =>{ "topic_id" => options[:topic_id]}) if !options[:topic_id].blank?
     unless current_user.is_admin?
-      accessible_video_ids = current_user.administrated_channel_video_ids
-      return [] if accessible_video_ids.blank?
-      search_options.merge!(:with =>{ "video_id" => current_user.administrated_channel_video_ids}) 
+      accessible_video_ids = current_user.administrated_channel_video_ids << current_user.administrated_course_video_ids
+      accessible_ids = accessible_video_ids.flatten.uniq
+      return [] if accessible_ids.blank?
+      search_options.merge!(:with =>{ "video_id" => accessible_ids}) 
     end
     sql_options.merge!(:sql => {:include => [{:topic => [:channel, :course]}, :tags]})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)

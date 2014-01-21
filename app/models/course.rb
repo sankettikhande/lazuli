@@ -99,7 +99,9 @@ class Course < ActiveRecord::Base
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
     unless current_user.is_admin?
-      search_options.merge!(:with => {"course_id" => accessible_ids(current_user)})
+      permitted_ids = current_user.administrated_channel_course_ids << current_user.administrated_course_ids
+      accessible_ids = permitted_ids.flatten.uniq
+      search_options.merge!(:with => {"course_id" => accessible_ids})
     end
     sql_options.merge!(:sql => {:include => :channels})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
@@ -110,16 +112,7 @@ class Course < ActiveRecord::Base
   def self.set_course_admin_user_ids(course_ids,user_id)
     Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id) if c.course_admin_user_id.blank?  } 
   end
-
-  def self.accessible_ids(current_user)
-    if current_user.is_channel_admin?
-      channel_admin_permitted_ids = current_user.administrated_channel_course_ids << current_user.administrated_course_ids
-      channel_admin_permitted_ids.blank? ? [] : channel_admin_permitted_ids
-    elsif current_user.is_course_admin?
-      current_user.administrated_course_ids.blank? ? [] : current_user.administrated_course_ids
-    end
-  end
-
+  
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
