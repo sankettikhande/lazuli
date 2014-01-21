@@ -21,7 +21,7 @@
 //= require ./application/jquery.slimscroll.min.js
 //= require ./application/offcanvas.js
 //= require ./application/respond.min.js
-//= require_tree .
+//= require_tree ./application/.
 
 
 $( function() {
