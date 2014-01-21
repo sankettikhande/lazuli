@@ -1,10 +1,12 @@
 <%= javascript_include_tag "admin/jquery.dataTables.js", "admin/DT_bootstrap.js" %>
 <section class="container">
-  <div>
-    <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel"><button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i> Add New Channel
-    </button></a>
-  </div>
   <div class="row">
+    <div class="col-md-12 nopadding">
+      <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel">
+        <button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i>   Add New Channel
+        </button>
+      </a>
+    </div>
     <div class="seperator5"></div>
     <div class="portlet-body flip-scroll">
       <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="channels">
