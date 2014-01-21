@@ -4,8 +4,8 @@
       <% videos.each do |video|%>
         <li class="vimeo-thumb">
           <a href="#">
-            <img class="img-responsive img-thumbnail" src="/assets/frontend/photos/img1.jpg" alt="Image">
-            <p>Learn Excel</p>
+            <%= image_tag(thumbnail_image(video), alt: "Image") %>
+            <p><%= video.title %></p>
           </a>
         </li>
       <% end %>
