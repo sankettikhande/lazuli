@@ -10,4 +10,6 @@ ThinkingSphinx::Index.define :video, :with => :active_record, :delta => Thinking
   indexes topic.id, :as => :topic_id
   has created_at, updated_at
   has :id, :as => :video_id
+  has course_admin_user_id
+  has channel_admin_user_id
 end
