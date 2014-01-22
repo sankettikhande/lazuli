@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
     add_role(:user) if roles.blank?
   end
 
-  def self.created_users_ids(user_id)
-    where(:created_by => user_id).select("DISTINCT id").map(&:id)
+  def created_users_ids
+    User.where(:created_by => id).map(&:id)
   end
 
   def administrated_channel_ids
@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
     sort_column_direction = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
     sort_options.merge!(:order => sort_column_direction)
     unless current_user.is_admin?
-      accessible_user_ids = current_user.administrated_channel_subscriber_ids << User.created_users_ids(current_user.id)
+      accessible_user_ids = current_user.administrated_channel_subscriber_ids << current_user.created_users_ids
       accessible_ids = accessible_user_ids.flatten.uniq
       return [] if accessible_ids.blank?
       search_options.merge!(:with => {"user_id" => accessible_ids}) 
