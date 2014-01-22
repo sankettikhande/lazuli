@@ -1,0 +1,23 @@
+<div class="col-xs-12 col-sm-5 col-md-4 sidebar-offcanvas" id="sidebar" role="navigation">
+  <div class="course-menu">
+    <h5><a href="#"><%= @course.name %></a></h5>
+    <ul class="parent-course-menu" id="accordion" >
+      <% @course.topics.each_with_index do |topic, topic_index| %>
+        <li class="<%= is_active(topic_index) %>" >
+          <a href="#topic-<%= topic_index %>" data-toggle="collapse" data-parent="#accordion">
+            <%= topic.title %>
+          </a>
+          <ul id="topic-<%= topic_index %>" class="child-course-menu collapse <%= topic_index.zero? ? "in" : "" %>">
+            <% topic.videos.each_with_index do |video, video_index| %>
+              <li class="<%= is_accordion(topic_index, video_index)%>">
+                <a href="#"> <%= video.title %>
+                  <span>2:14</span>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
