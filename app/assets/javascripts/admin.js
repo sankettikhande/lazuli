@@ -63,7 +63,7 @@ $(function() {
 function loadContents(tableId, url, aoColumns, optionNames, optionValues){
   var dtaTable = initDataTable(tableId, url, aoColumns);
   appendFilterList(optionNames, optionValues, tableId);
-  triggerFnFilter(dtaTable);
+  triggerFnFilter(dtaTable, tableId);
 };
 
 /* initializing dataTable for contents */
@@ -85,11 +85,14 @@ function appendFilterList(optionNames, optionValues, tableId){
   $.each( optionValues, function( i, val ) {
     dropdownHtml = dropdownHtml + '<option value='+val+'>'+optionNames[i]+'</option>'
   });
-  //'<option value="name">Course Name</option><option value="trainer_name">Trainer Name</option><option value="channel_name">Channel Name</option>'
   $(tableId+"_filter").append(dropdownHtml);
 };
 
 /* calls fnFilter of dataTable */
-function triggerFnFilter(dtaTable){
-  $('select#column_names').change( function() { dtaTable.fnFilter( $(this).val(), 1 ); } );
+function triggerFnFilter(dtaTable, tableId){
+  $('select#column_names').on('change', function(e){
+    if($(tableId+'_filter label input').val() != ''){
+      dtaTable.fnFilter( $(this).val(), 1 );
+    };
+  });
 };

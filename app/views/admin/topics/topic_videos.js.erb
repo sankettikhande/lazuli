@@ -5,3 +5,5 @@ $("#topics").attr("class", "tab-pane fade");
 $("#videos").attr("class", "tab-pane fade active in");
 $("#list_set_1").text("Topics");
 $("#videos").html("<%= j(render 'admin/contents/videos') %>");
+$('#video_contents_filter label input').val("<%= @course.presence.try(:name) || @topic.presence.try(:title) %>");
+$("#column_names option[value=<%=params[:col]%>]").attr('selected','selected');
