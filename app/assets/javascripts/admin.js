@@ -36,6 +36,7 @@
 //= require ./admin/jquery.validationEngine.js
 //= require ./admin/jquery.validationEngine-en.js
 //= require ./admin/jquery.spin.js
+//= require ./common.js
 
 $(".tooltip").tooltip()
 $("a[rel=tooltip]").tooltip()
@@ -57,3 +58,4 @@ $(function() {
   });
   return setTimeout(flashCallback, 3000);
 });
+
