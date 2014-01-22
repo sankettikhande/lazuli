@@ -12,3 +12,7 @@
  *= require ./common.css
  *= require_self
  */
+
+.descr{
+	min-height: 80px;
+}

@@ -4,7 +4,9 @@ $(".formClass").validationEngine({
 	autoPositionUpdate: true,
 	onValidationComplete: function(form, status) {
 		$('.formError').css("left","15px")
-		if(status == true)
+		if(status == true){
+			$(window).spin();
 			return true
+		}
 	}
 });

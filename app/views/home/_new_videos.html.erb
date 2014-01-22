@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="video-slides">
+      <h4>New Videos</h4>
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Carousel-1 Begins -->
+          <div id="new-vids" class="carousel slide new-vid-list">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+              <% @videos.in_groups(3, false).each_with_index do |videos, index| %>
+                <ul class="<%= is_active_videos(index) %> item video-thumbs">
+                  <% videos.each do |video|%>
+                    <li class="vimeo-thumb">
+                      <a href="#">
+                        <%= image_tag(video_thumbnail_image(video), alt: "Image") %>
+                        <p><%= video.title %></p>
+                      </a>
+                    </li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
+            <!-- Carousel-1 nav -->
+            <a class="carousel-control left" href="#new-vids" data-slide="prev">
+              <i class="fa fa-caret-left"></i>
+            </a>
+            <a class="carousel-control right" href="#new-vids" data-slide="next">
+              <i class="fa fa-caret-right"></i>
+            </a>
+          </div>                
+          <!-- Carousel Ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

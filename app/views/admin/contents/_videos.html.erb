@@ -23,25 +23,17 @@
 
 <script>
   $(document).ready(function(){
-    var videoDatatable = $('#video_contents').dataTable({
-      "bProcessing": true,
-      "bServerSide": true,
-      "iDisplayLength": 15,
-      "bLengthChange": false,
-      "sAjaxSource": "/admin/videos/search.json?course_id=<%= @course.presence.try(:id)%>&topic_id=<%= @topic.presence.try(:id)%>",
-      "aoColumns": [
-              { "mData": "title"},
-              { "mData": "topic_name"},
-              { "mData": "course_name"},
-              { "mData": "tags", "bSortable": false},
-              { "mData": "channel_name"},
-              { "mData": "vimeo_url", "bSortable": false, "sClass" : "text-center"},
-          ],
-      "aaSorting": [[ 1, "asc" ]] });
-  
-    $("#video_contents_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="title">Title</option><option value="topic_name">Topic Name</option><option value="course_name">Course Name</option><option value="channel_name">Channel Name</option>select>')
-    
-    $('select#column_names').change( function() { videoDatatable.fnFilter( $(this).val(), 1 ); } );
+    var tableId = '#video_contents';
+    var url = "/admin/videos/search.json?course_id=<%= @course.presence.try(:id)%>&topic_id=<%= @topic.presence.try(:id)%>";
+    var aoColumns = [{ "mData": "title"},
+    { "mData": "topic_name"},
+    { "mData": "course_name"},
+    { "mData": "tags", "bSortable": false},
+    { "mData": "channel_name"},
+    { "mData": "vimeo_url", "bSortable": false, "sClass" : "text-center"}];
+    var optionNames = ["Title", "Topic Name", "Course Name", "Channel Name"];
+    var optionValues = ["title", "topic_name", "course_name", "channel_name"];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues);
   })
 </script>
 

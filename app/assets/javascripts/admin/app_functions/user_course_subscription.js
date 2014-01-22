@@ -34,5 +34,11 @@ function get_expiry_date(subscription_date, calculated_days){
 
 $("#user_course_form").validationEngine({
   validateNonVisibleFields: true,
-  promptPosition : "bottomLeft"
+  promptPosition : "bottomLeft",
+  onValidationComplete: function(form, status) {
+    if(status == true){
+      $(window).spin();
+      return true
+    }
+  }
 });

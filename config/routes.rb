@@ -2,6 +2,8 @@ Lazuli::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => 'sessions', :registrations => 'registrations'}
 
   get "/admin", :controller => "admin", :action => :index
+  get "/delayed_job" => DelayedJobWeb, :anchor => false
+  root :to => "home#index"
   
   namespace :admin do
     resources :users do
@@ -66,6 +68,8 @@ Lazuli::Application.routes.draw do
     end
     resources :user_channel_subscriptions
   end
-  get "/delayed_job" => DelayedJobWeb, :anchor => false
-  root :to => "home#index"
+
+  resources :channels do
+    resources :courses
+  end
 end

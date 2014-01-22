@@ -1,5 +1,5 @@
 <%= javascript_include_tag 'admin/app_functions/user_channel_subscritpions' %>
-<hr>	
+<hr>
 <div class="row-align form-group">
 	<div class="col-md-3">
 		<label for="channelsS2">Channel Subscribed To<%= required_field %></label>
@@ -16,13 +16,26 @@
 	  <%= f.select 'course_id', options_for_select(@courses.collect {|c| [ c.name, c.id ] }, f.object.course_id), {:include_blank => "Please Select"}, :class => 'form-control courses_id validate[required]' %>
 	</div>
 </div>
-
-<div class="row form-group">
+<div class="row-align form-group">
 	<div class="col-md-3">
 		<label for="uname">Type of Subscription<%= required_field %></label>
 	</div>
 	<div class="col-md-3 subscription_type">
 	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ "#{s.name}- #{s.calculated_days} days", s.id, {'data-calculated_days' => s.calculated_days} ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id validate[required]' %>
+	</div>
+</div>
+<div class="row form-group" id='permissions_<%= index %>'>
+	<div class="col-md-2">
+		<label>User Permissions<%= required_field %></label>
+	</div>
+	<div class="col-md-1">
+		<%= f.check_box 'permission_watch', :checked => "checked" %><label>Watch</label>
+	</div>	
+	<div class="col-md-1">
+		<%= f.check_box 'permission_share' %><label>Share</label>
+	</div>	
+	<div class="col-md-2">
+		<%= f.check_box 'permission_create', :class =>'permission_create' %><label>Create</label>
 	</div>
 </div>
 <div class="row-align form-group">
@@ -52,25 +65,9 @@
 	</div>
 </div>
 
-<div class="row-align form-group">
-	<div class="col-md-3">
-		<label>User Permissions<%= required_field %></label>
-	</div>
-	<div class="col-md-1">
-		<%= f.check_box 'permission_watch', :checked => "checked" %><label>Watch</label>
-	</div>	
-	<div class="col-md-1">
-		<%= f.check_box 'permission_share' %><label>Share</label>
-	</div>	
-	<div class="col-md-2">
-		<%= f.check_box 'permission_create' %><label>Create</label>
-	</div>
-</div>
-
 <div class="row form-group">
-  <div class="col-md-3" style='width: 19%;'></div>
-  <div class="col-md-4 text-right">
-  	<a href="#"><i class='fa fa-3x'></i><a/>
-   	<%= f.link_to_remove "Cancel", :class => 'btn green' %>
+  <div class="col-md-11 text-right">
+  	<a href="#"><i class='fa fa-3x fa-minus'></i><a/>
+   	<%= f.link_to_remove "Remove this Course" %>
   </div>
 </div>

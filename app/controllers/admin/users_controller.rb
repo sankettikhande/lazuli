@@ -110,7 +110,7 @@ private
   end
   
   def set_instance
-    @channels = Channel.all
+    @channels = current_user.is_admin? ? Channel.all : current_user.administrated_channels  
     @subscriptions = []
     @courses = []
   end

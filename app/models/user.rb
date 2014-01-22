@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :administrated_courses, :class_name => Course, :foreign_key => :course_admin_user_id
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
+  validates_uniqueness_of :name, :message => "^User name has already taken"
   validate :subscription_params
   include Cacheable
 
@@ -28,9 +29,9 @@ class User < ActiveRecord::Base
   end
 
   def is_any_admin?
-    is_admin? || is_channel_admin? || is_course_admin?
+    role_names = roles.map(&:name)
+    !(role_names & Role.admin_roles).blank?
   end
-
 
   def add_user_role
     add_role(:user) if roles.blank?
