@@ -103,7 +103,7 @@ module ApplicationHelper
   end
 
   def flash_message
-    flash_css_classes = {:notice =>"note-info", :success => "note-success", :alert => "note-alert", :error => "note-danger"}
+    flash_css_classes = {:notice =>"note-info", :success => "note-success", :alert => "note-warning", :error => "note-danger"}
     flash.map do |key, msg|
       content_tag :div, msg, :id => key, :class => "note #{flash_css_classes[key]}"
     end.join.html_safe

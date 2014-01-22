@@ -57,3 +57,18 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  unauthorized:
+    manage:
+      all: "Not authorized to do this Task."
+      user: "Not authorized to Manage any User."
+      channel: "Not authorized to Manage any Channel"
+    create:
+      user: "Not authorized to Create any User"
+      channel: "Not authorized to Create any Channel"
+      course: "Not Authorized to Create any Course"
+    update:
+      user: "Not authorized to Update this User"
+      channel: "Not authorized to Update this Channel"
+      course: "Not authorized to Update this Course"
+      topic: "Not authorized to Update this Topic"
+      video: "Not authorized to Update this Video"

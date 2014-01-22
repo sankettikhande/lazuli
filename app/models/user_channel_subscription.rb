@@ -35,5 +35,4 @@ class UserChannelSubscription < ActiveRecord::Base
     channel.update_attribute(:user_count, channel.user_count - 1)
     course.update_attribute(:user_count, course.user_count - 1)
   end
-
 end

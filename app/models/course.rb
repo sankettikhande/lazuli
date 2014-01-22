@@ -35,7 +35,7 @@ class Course < ActiveRecord::Base
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
-  # after_destroy :update_course_count
+  
   #INSTANCE METHODS
   def set_channel_permission
     self.channel_course_permissions.each do |permission|
@@ -89,19 +89,15 @@ class Course < ActiveRecord::Base
     channel.name
   end
 
-  # def update_course_count
-  #   channel.update_attribute(:course_count, channel.course_count - 1)
-  # end
-
   def self.sphinx_search options, current_user
     sort_options, search_options, sql_options, sphinx_options = {}, {}, {}, {}
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
     unless current_user.is_admin?
-      accessible_channel_course_ids = current_user.administrated_channel_course_ids
-      return [] if accessible_channel_course_ids.blank?
-      search_options.merge!(:with => {"course_id" => accessible_channel_course_ids}) 
+      permitted_ids = current_user.administrated_channel_course_ids << current_user.administrated_course_ids
+      accessible_ids = permitted_ids.flatten.uniq
+      search_options.merge!(:with => {"course_id" => accessible_ids})
     end
     sql_options.merge!(:sql => {:include => :channels})
     sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
@@ -110,9 +106,9 @@ class Course < ActiveRecord::Base
   end
 
   def self.set_course_admin_user_ids(course_ids,user_id)
-    Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id)  } 
+    Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id) if c.course_admin_user_id.blank?  } 
   end
-
+  
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
