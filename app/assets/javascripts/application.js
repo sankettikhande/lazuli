@@ -18,11 +18,11 @@
 //= require ./application/bootstrap.min.js
 //= require ./application/excanvas.min.js
 //= require ./application/html5shiv.js
-//= require ./application/jquery.slimscroll.min.js
 //= require ./application/offcanvas.js
 //= require ./application/respond.min.js
 //= require_tree ./application/.
 //= require ./common.js
+//= require ./application/jquery.slimscroll.min.js
 
 $( function() {
     $("button[data-href]").click( function() {
