@@ -8,13 +8,9 @@ namespace :db do
 
   task :remove_nullify_courses => :environment do
   	channel_courses_ids = []
-	  ChannelCourse.find_in_batches do |channel_courses|
-	  	channel_courses_ids = channel_courses_ids + channel_courses.map(&:course_id)
-	  end
-	  courses_ids = []
-	  Course.find_in_batches do |courses|
-	  	courses_ids = courses_ids + courses.map(&:id)
-	  end
+  	courses_ids = []
+  	ChannelCourse.find_in_batches { |channel_courses| channel_courses_ids += channel_courses.map(&:course_id) }
+  	Course.find_in_batches { |courses| courses_ids += courses.map(&:id) }
 	  (courses_ids - channel_courses_ids).each do |id|
 	  	Course.find_by_id(id).destroy
 	  end
