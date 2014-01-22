@@ -3,7 +3,12 @@ class AdminController < ApplicationController
   layout 'admin'
 
   def index
-    redirect_to admin_users_path
+    user_roles = current_user.roles.map(&:name)
+    if user_roles.include? "admin" or user_roles.include? "channel_admin"
+      redirect_to admin_users_path
+    elsif user_roles.include? "course_admin"
+      redirect_to admin_contents_path
+    end
   end
 
   private

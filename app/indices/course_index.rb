@@ -5,4 +5,6 @@ ThinkingSphinx::Index.define :course, :with => :active_record, :delta => Thinkin
   indexes channels.name, :as => :channel_name, :sortable => true
   has created_at, updated_at, user_count
   has :id, :as => :course_id
+  has course_admin_user_id
+  has channel_admin_user_id
 end
