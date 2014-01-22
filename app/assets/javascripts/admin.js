@@ -59,3 +59,37 @@ $(function() {
   return setTimeout(flashCallback, 3000);
 });
 
+/* method to populate contents(chanels, users, course, topics & videos) in datatable */
+function loadContents(tableId, url, aoColumns, optionNames, optionValues){
+  var dtaTable = initDataTable(tableId, url, aoColumns);
+  appendFilterList(optionNames, optionValues, tableId);
+  triggerFnFilter(dtaTable);
+};
+
+/* initializing dataTable for contents */
+function initDataTable(tableId, url, aoColumns){
+  return $(tableId).dataTable({
+  "bProcessing": true,
+  "bServerSide": true,
+  "iDisplayLength": 15,
+  "bLengthChange": false,
+  "bAutoWidth": false,
+  "sAjaxSource": url,
+  "aoColumns": aoColumns,
+  "aaSorting": [[ 1, "asc" ]] });
+};
+
+/* appends filter dropdown */
+function appendFilterList(optionNames, optionValues, tableId){
+  var dropdownHtml = '<select class="filter_column_names" id="column_names"><option value="">ALL</option>'
+  $.each( optionValues, function( i, val ) {
+    dropdownHtml = dropdownHtml + '<option value='+val+'>'+optionNames[i]+'</option>'
+  });
+  //'<option value="name">Course Name</option><option value="trainer_name">Trainer Name</option><option value="channel_name">Channel Name</option>'
+  $(tableId+"_filter").append(dropdownHtml);
+};
+
+/* calls fnFilter of dataTable */
+function triggerFnFilter(dtaTable){
+  $('select#column_names').change( function() { dtaTable.fnFilter( $(this).val(), 1 ); } );
+};
