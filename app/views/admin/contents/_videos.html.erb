@@ -20,8 +20,6 @@
     </div>
   </div>
 </section>
-<input type="hidden" id="selected-col-name" value="<%= params[:col] %>"/>
-<input type="hidden" id="selected-key-value" value="<%= @course.presence.try(:name) || @topic.presence.try(:title) %>"/>
 <script>
   $(document).ready(function(){
     var tableId = '#video_contents';
