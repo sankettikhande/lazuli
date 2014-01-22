@@ -9,5 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_tree ./application
+ *= require ./common.css
  *= require_self
  */
+
+.descr{
+	min-height: 80px;
+}
