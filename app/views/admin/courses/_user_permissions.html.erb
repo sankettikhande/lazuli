@@ -1,0 +1,30 @@
+<div class="col-md-2">
+	<label>User Permissions<%= required_field %></label>
+</div>
+<% index = params[:permission_id].split('_').last %>
+<% if @courses_permissions.permission_watch == true %>
+	<div class="col-md-1">
+			<%= check_box("user[user_channel_subscriptions_attributes][#{index}]","permission_watch", :checked => true) %><label>Watch</label>
+	</div>
+<% end %>		
+<% if @courses_permissions.permission_share == true %>
+	<div class="col-md-1">
+			<%= check_box("user[user_channel_subscriptions_attributes][#{index}]","permission_share") %><label>Share</label>
+	</div>
+<% end %>
+<% if @courses_permissions.permission_create == true && @course. course_admin_user_id.blank? %>		
+	<div class="col-md-2">
+			<%= check_box("user[user_channel_subscriptions_attributes][#{index}]","permission_create", :class => 'permission_create') %><label>Create</label>
+	</div>
+<% end %>
+
+<script type="text/javascript">
+	 $('.permission_create').change(function(){
+    if($(this).is(":checked")) {
+    	$(this).closest(".form-group").prev().find(".subscriptions_id").removeClass('validate[required]');
+    	$(this).closest(".form-group").next().find(".subscription_date").removeClass('validate[required]');
+    	$(this).closest(".form-group").next().next().find(".expiry_date").removeClass('validate[required]');
+    }
+  })
+
+</script>
