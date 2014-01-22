@@ -11,7 +11,6 @@ class Admin::CoursesController < AdminController
 
 	def new
 		@course = Course.new
-		@channels = Channel.all
 		@course.channel_courses.build
 	end
 
@@ -24,14 +23,12 @@ class Admin::CoursesController < AdminController
 				format.html {redirect_to "#{admin_contents_url}#courses" }
 				flash[:notice] = "Course has been successfully created"
 			else
-				@channels = Channel.all
 				format.html {render "new"}
 			end
 		end
 	end
 
 	def edit
-		@channels = Channel.all
 		@course = Course.cached_find(params[:id])
 	end
 
@@ -42,7 +39,6 @@ class Admin::CoursesController < AdminController
 				format.html {redirect_to "#{admin_contents_url}#courses"}
 				flash[:notice] = "Course has been successfully updated"
 			else
-				@channels = Channel.all
 				format.html {render "edit"}
 			end
 		end
@@ -78,8 +74,9 @@ class Admin::CoursesController < AdminController
 	end
 
 	private
-  def set_initialization
-    @subscriptions = Subscription.all
-  end
+	def set_initialization
+		@channels = current_user.is_admin? ? Channel.all : current_user.administrated_channels
+		@subscriptions = Subscription.all
+	end
 
 end
