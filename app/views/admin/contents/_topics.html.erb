@@ -25,23 +25,15 @@
 
 <script>
   $(document).ready(function(){
-    var topicDatatable = $('#topic_contents').dataTable({
-      "bProcessing": true,
-      "bServerSide": true,
-      "iDisplayLength": 15,
-      "bLengthChange": false,
-      "bAutoWidth": false,
-      "sAjaxSource": "/admin/topics/search.json",
-      "aoColumns": [
-            { "mData": "title"},
-            { "mData": "course_name"},
-            { "mData": "channel_name"},
-            { "mData": "vimeo_url", "bSortable": false},
-            { "mData": "actions", "bSortable": false, "sClass" : "text-center"}],
-        "aaSorting": [[ 1, "asc" ]] });
-
-    $("#topic_contents_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="title">Title</option><option value="course_name">Course Name</option><option value="channel_name">Channel Name</option>')
-
-    $('select#column_names').change( function() { topicDatatable.fnFilter( $(this).val(), 1 ); } );
+    var tableId = '#topic_contents';
+    var url = "/admin/topics/search.json";
+    var aoColumns = [{ "mData": "title"},
+    { "mData": "course_name"},
+    { "mData": "channel_name"},
+    { "mData": "vimeo_url", "bSortable": false},
+    { "mData": "actions", "bSortable": false, "sClass" : "text-center" }];
+    var optionNames = ["Topic Name", "Course Name", "Channel Name"];
+    var optionValues = ["title", "course_name", "channel_name"];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues);
   })
 </script>

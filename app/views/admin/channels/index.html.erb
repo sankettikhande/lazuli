@@ -29,23 +29,15 @@
 
 <script>
   $(document).ready(function(){
-    var channelDatatable = $('#channels').dataTable({
-      "bProcessing": true,
-      "bServerSide": true,
-      "iDisplayLength": 15,
-      "bLengthChange": false,
-      "bAutoWidth": false,
-      "sAjaxSource": "/admin/channels/search.json",
-      "aoColumns": [
-              { "mData": "name"},
-              { "mData": "course_count", "sClass" : "text-center"},
-              { "mData": "user_count", "sClass" : "text-center"},
-              { "mData": "channel_type", "bSortable": false, "sClass" : "text-center"},
-              { "mData": "actions", "bSortable": false, "sClass" : "text-center"}],
-      "aaSorting": [[ 1, "asc" ]] });
-
-    $("#channels_filter").append('<select class="filter_column_names" id="column_names"><option value="">ALL</option><option value="name">Chanel Name</option>')
-
-    $('select#column_names').change( function() { channelDatatable.fnFilter( $(this).val(), 1 ); } );
+    var tableId = '#channels';
+    var url = "/admin/channels/search.json";
+    var aoColumns = [{ "mData": "name"},
+    { "mData": "course_count", "sClass" : "text-center"},
+    { "mData": "user_count", "sClass" : "text-center"},
+    { "mData": "channel_type", "bSortable": false, "sClass" : "text-center"},
+    { "mData": "actions", "bSortable": false, "sClass" : "text-center"}];
+    var optionNames = ["Channel Name"];
+    var optionValues = ["name"];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues);
   })
 </script>

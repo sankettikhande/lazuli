@@ -28,9 +28,9 @@ class User < ActiveRecord::Base
   end
 
   def is_any_admin?
-    is_admin? || is_channel_admin? || is_course_admin?
+    role_names = roles.map(&:name)
+    !(role_names & Role.admin_roles).blank?
   end
-
 
   def add_user_role
     add_role(:user) if roles.blank?
