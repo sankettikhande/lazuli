@@ -15,7 +15,9 @@ class Ability
         can :manage, Topic do |topic| 
             topic.channel_admin_user_id == user.id || topic.course_admin_user_id == user.id
         end
-        can :manage, User, :created_by => user.id
+        can :manage, User do |u|
+            u.created_by = user.id || user.administrated_channel_subscriber_ids.include?(u.id)
+        end
         can :manage, Video do |video| 
             video.channel_admin_user_id == user.id || video.course_admin_user_id == user.id
         end
