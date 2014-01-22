@@ -35,6 +35,7 @@
 //= require ./admin/flowplayer-3.2.13.min.js
 //= require ./admin/jquery.validationEngine.js
 //= require ./admin/jquery.validationEngine-en.js
+//= require ./admin/jquery.spin.js
 //= require ./common.js
 
 $(".tooltip").tooltip()
@@ -45,3 +46,16 @@ $( function() {
         location.href = $(this).attr("data-href");
     });
 });
+
+$(function() {
+  var flashCallback,
+    _this = this;
+  flashCallback = function() {
+    return $(".note").fadeOut();
+  };
+  $(".note").bind('click', function(ev) {
+    return $(".note").fadeOut();
+  });
+  return setTimeout(flashCallback, 3000);
+});
+
