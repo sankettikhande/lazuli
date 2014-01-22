@@ -26,9 +26,3 @@ $("#multiple_user_form").validationEngine({
 		}
 	}
 });
-
-// $(document).ready(function(){
-// 	$("#user_edit_form").click(function(){
-// 	  $(window).spin();
-// 	});
-// });
