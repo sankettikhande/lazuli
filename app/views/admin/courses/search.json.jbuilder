@@ -1,5 +1,5 @@
 json.aaData @courses do |course|
-  json.name link_to(course.name, course_videos_admin_course_url(course), :remote => true)
+  json.name link_to(course.name, course_videos_admin_course_url(course, :col => 'course_name'), :remote => true)
   json.(course, :trainer_name, :channel_name, :user_count)
   json.actions course_actions(course)
 end
