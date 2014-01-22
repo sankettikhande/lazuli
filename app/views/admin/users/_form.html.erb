@@ -7,19 +7,22 @@
 					<%= render 'user_info', :f => f %>
 				  	<div id="user_channels">
 				  	<%= f.fields_for :user_channel_subscriptions do |uc_form| %>
-				  		<%= render 'user_channel_subscription_fields', :f => uc_form %>
+				  		<%= render 'user_channel_subscription_fields', :f => uc_form, :index => !uc_form.options[:child_index].nil? ? uc_form.options[:child_index] : 0 %>
 				  	<% end %>	
 				  	</div>
 				    
 				    <div class="seperator5"></div>
 				    <div class="row form-group">
 				    	<div class="col-md-3"></div>
+				    	<div class="col-md-1 width14">
+				    		<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add a Course" ), :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'btn green' %>
+				    	</div>
 				    	<div class="col-md-1">
 				    		<%= f.submit 'Save', :class => 'btn green' %>
 				    	</div>
 				    	<div class="col-md-0">
-				    		<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add a Course" ), :user_channel_subscriptions, :data => { :target => "#user_channels" }, :class => 'btn green' %>
-				    	</div>
+							  <%= link_to "Cancel", admin_users_path, :data => {'no-turbolink' => true}, :class => 'btn default' %>
+							</div>
 				    </div>
 			    <% end %> 
 			  </div>  

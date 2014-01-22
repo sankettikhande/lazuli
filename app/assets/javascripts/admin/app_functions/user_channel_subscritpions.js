@@ -20,7 +20,7 @@ $('body').on('focus',".date-picker", function(){
          }).on('changeDate',function(ev){
          $(this).find('.formError').remove(); 
          var date_id = $(this).closest(".form-group").next().find(".expiry_date").attr('id');
-         var subscription_id = $(this).closest(".form-group").prev().find(".subscriptions_id").attr('id');
+         var subscription_id = $(this).closest(".form-group").prev().prev().find(".subscriptions_id").attr('id');
          var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
          var expiry_date = get_expiry_date(ev.date, calculated_days)
          if (calculated_days != undefined)
@@ -35,10 +35,11 @@ $('body').on('focus',".date-picker", function(){
 
     $('.courses_id').change(function(){
       var subscription_id = $(this).closest(".form-group").next().find(".subscriptions_id").attr('id');
+      var permission_id = $(this).closest(".form-group").next().next().attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
               url: "/admin/courses/"+val+"/course_subscription_types.js",
-              data: {id: val, subscription_id: subscription_id}
+              data: {id: val, subscription_id: subscription_id, permission_id: permission_id}
             });
     })
 

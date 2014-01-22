@@ -25,7 +25,7 @@ class Video < ActiveRecord::Base
   validates_presence_of :clip
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
   
-  after_save :update_bookmarks
+  after_save :update_bookmarks, :if => :bookmarked?
 
   def upload_single_video
     video = self.upload
@@ -165,5 +165,9 @@ class Video < ActiveRecord::Base
         self.errors.add(:base, 'Bookmarks time has already been taken') if id.nil? && !Bookmark.where(:video_id => self.id, :time => time).count.zero?
       end
     end
+  end
+
+  def bookmarked?
+    self.topic.is_bookmark_video
   end
 end

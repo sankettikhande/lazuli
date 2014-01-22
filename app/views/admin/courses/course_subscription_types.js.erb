@@ -1,1 +1,3 @@
 $('#<%= params[:subscription_id] %>').html("<%= escape_javascript(render 'subscription_types') %>");
+$('#<%= params[:permission_id] %>').html("<%= escape_javascript(render 'user_permissions') %>");
+$('input[type="checkbox"]').uniform();
