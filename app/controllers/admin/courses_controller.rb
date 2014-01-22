@@ -65,8 +65,9 @@ class Admin::CoursesController < AdminController
 	end
 
 	def course_subscription_types
-		course = Course.find(params[:id], :include => :subscriptions)
-		@course_subscriptions = course.subscriptions
+		@course = Course.find(params[:id], :include => :subscriptions)
+		@course_subscriptions = @course.subscriptions
+		@courses_permissions = @course.channel_course_permissions.first
 		respond_to do |format|
 			format.js
 		end
