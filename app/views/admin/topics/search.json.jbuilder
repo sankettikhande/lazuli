@@ -1,5 +1,5 @@
 json.aaData @topics do |topic|
-  json.title link_to(topic.title, topic_videos_admin_topic_url(topic), :remote => true)
+  json.title link_to(topic.title, topic_videos_admin_topic_url(topic, :col => "topic_name"), :remote => true)
   json.course_name topic.course.name
   json.channel_name topic.channel.name
   json.vimeo_url topic_album_url(topic)

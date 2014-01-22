@@ -5,3 +5,5 @@ $("#topics").attr("class", "tab-pane fade");
 $("#videos").attr("class", "tab-pane fade active in");
 $("#list_set_1").text("Topics");
 $("#videos").html("<%= j(render 'admin/contents/videos') %>");
+$('.dataTables_filter label input').val($('#selected-key-value').val());
+$('#column_names option[value='+$('#selected-col-name').val()+']').attr('selected','selected');
