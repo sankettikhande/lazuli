@@ -90,19 +90,16 @@ class Topic < ActiveRecord::Base
   end
 
   def self.sphinx_search options, current_user
-    sort_options, search_options, sql_options, sphinx_options = {}, {}, {}, {}, {}
+    sort_options, search_options, sphinx_options, select_option = {}, {}, {}, {}
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
     unless current_user.is_admin?
-      accessible_channel_course_ids = current_user.administrated_channel_course_ids
-      accessible_ids = current_user.administrated_course_ids << accessible_channel_course_ids
-      accessible_course_ids = accessible_ids.flatten.uniq
-      return [] if accessible_course_ids.blank?
-      search_options.merge!(:with => {'course_id' => accessible_course_ids}) 
+      with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
+      select_option.merge!(:select => with_permitted_user)
+      search_options.merge!(:with => {"permitted_user" => 1})
     end
-    sql_options.merge!(:sql => {:include => [:course, :channel]})
-    sphinx_options.merge!(sort_options).merge!(search_options).merge!(sql_options)
+    sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
     sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
     Topic.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
   end
