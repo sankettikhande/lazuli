@@ -103,7 +103,14 @@ function triggerFnFilter(dtaTable, tableId, aoColumns){
 /* removes filter and resets filter dropdown to default value*/
 function resetDataTable(tableId, dtaTable){
   $('.clear_filter').on('click', function(e){
-    dtaTable.fnFilter('');
-    $('select#column_names option[value=""]').attr('selected', 'selected');
+    var tab_link_id = tableId.split("_")[0] + "_tab"
+    var contents = ["#videos_tab", "#topics_tab", "#courses_tab"]
+    /* if block is for reseting contents(courses, videos & topics) dataTable */
+    if($.inArray(tab_link_id, contents) > -1){
+      $(tab_link_id).click();
+    }else{  /* else block is for reseting users & channel dataTable */
+      dtaTable.fnFilter('');
+      $('select#column_names option[value=""]').attr('selected', 'selected');
+    }
   });
 };
