@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :verify_admin, :get_user_roles
+  before_filter :get_user_roles, :verify_admin
   layout 'admin'
 
   def index
@@ -16,7 +16,6 @@ class AdminController < ApplicationController
   end  
 
   def verify_admin
-    get_user_roles
     redirect_to root_url if !(@user_roles.include? "admin" or @user_roles.include? "channel_admin" or @user_roles.include? "course_admin")
   end
 end
