@@ -11,7 +11,7 @@
             <% topic.videos.each_with_index do |video, video_index| %>
               <li>
                 <a href="/courses/<%= @course.id %>/<%= video.id %>"> <%= video.title %>
-                  <span>2:14</span>
+                  <span><%= video.vimeo_data.duration if video.vimeo_data %></span>
                 </a>
               </li>
             <% end %>

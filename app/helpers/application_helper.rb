@@ -110,7 +110,7 @@ module ApplicationHelper
   end
 
   def background_color
-    controller_name == "home" ? "brush lemon" : nil
+    "brush lemon" if controller_name == "home"
   end
 
   def course_video_url video
