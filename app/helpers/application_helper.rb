@@ -112,4 +112,8 @@ module ApplicationHelper
   def background_color
     controller_name == "home" ? "brush lemon" : nil
   end
+
+  def course_video_url video
+    "/courses/#{video.topic.course.id}/#{video.id}"
+  end
 end

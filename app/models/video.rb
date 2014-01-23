@@ -2,8 +2,7 @@ include VimeoLib
 class Video < ActiveRecord::Base
   # attr_accessible :title, :body
   serialize :vimeo_data
-  serialize :thumbnail_data
-  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes, :thumbnail_data
+  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes
   attr_accessor :bookmarks_from_params
   has_many :bookmarks, :dependent => :destroy
   belongs_to :topic
@@ -55,7 +54,7 @@ class Video < ActiveRecord::Base
     self.save!
     #private password setting remove for now
     #publish_privately
-    get_thumbnails
+    get_vimeo_info
     return self
   end
 
@@ -63,15 +62,14 @@ class Video < ActiveRecord::Base
     Hashie::Mash.new(vimeo_data)
   end
 
-  def get_thumbnails
-    thumbnail_data = VimeoLib.video.get_thumbnail_urls(vimeo_id)
-    thumbnails = hashie_get_info(thumbnail_data).thumbnails
-    update_attribute(:thumbnail_data, thumbnails)
+  def get_vimeo_info
+    vimeo_data = VimeoLib.video.get_info(vimeo_id)
+    update_attribute(:vimeo_data, hashie_get_info(vimeo_data).video.first)
   end
-  handle_asynchronously :get_thumbnails ,:run_at => Proc.new{30.minutes.from_now}
+  handle_asynchronously :get_vimeo_info, :run_at => Proc.new{30.minutes.from_now}
 
   def get_best_thumbnail
-    thumbnail_data.thumbnail[2]._content unless thumbnail_data.blank?
+    vimeo_data.thumbnails.thumbnail[2]._content unless vimeo_data.blank?
   end
 
   def description_text
