@@ -4,8 +4,6 @@ class ChannelsController < ApplicationController
 	end
 
 	def show
-		@channel = Channel.find(params[:channel_id])
-		@course = Course.find(params[:id])
 	end
 
 end
