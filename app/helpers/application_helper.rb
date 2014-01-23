@@ -112,12 +112,4 @@ module ApplicationHelper
   def background_color
     controller_name == "home" ? "brush lemon" : nil
   end
-
-  def is_active index
-    index.zero? ? "active panel" : "panel"
-  end
-
-  def is_accordion topic_index, video_index
-    topic_index.zero? && video_index.zero? ? "in" : ""
-  end
 end

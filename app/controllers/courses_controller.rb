@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
 
 	def show
 		@course = Course.find(params[:id])
-		@video = Video.find(params[:video_id])
+		@video = Video.find(params[:video_id]) if params[:video_id]
 	end
 
 end
