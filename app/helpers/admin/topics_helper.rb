@@ -53,7 +53,7 @@ module Admin::TopicsHelper
   end
 
   def thumbnail_image(video)
-    if video.thumbnail_data
+    if video.vimeo_data
       video.get_best_thumbnail
     else
      "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"

@@ -39,7 +39,7 @@ class Admin::TopicsController < AdminController
 
 	def update
 		@topic = Topic.cached_find(params[:id])
-		@topic.validate_uniq_videos params
+		@topic.validate_uniq_videos params if params[:topic]
 		@channel_courses = @topic.channel.courses
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 		if params[:SavePub]

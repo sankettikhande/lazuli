@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def created_users_ids
-    User.where(:created_by => id).map(&:id)
+    User.where(:created_by => id).select(:id).map(&:id)
   end
 
   def administrated_channel_ids
