@@ -12,6 +12,7 @@ class Ability
             course.channel_admin_user_id == user.id || course.course_admin_user_id == user.id
         end
         can :manage, Channel, :admin_user_id => user.id
+        can :get_channel, Channel
         can :manage, Topic do |topic| 
             topic.channel_admin_user_id == user.id || topic.course_admin_user_id == user.id
         end
