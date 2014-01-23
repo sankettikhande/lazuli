@@ -1,0 +1,268 @@
+<div class="navbar navbar-inverse navbar-fixed-top" id="lazuli-top-menu">
+  <div class="container">
+    <div class="row">
+      <!-- row 1  -->
+      <div class="col-xs-4 col-sm-2 nopadding-right">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Excel</a></li>
+              <li><a href="#">Word</a></li>
+              <li><a href="#">Powerpoint</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Other</li>
+              <li><a href="#">Publisher</a></li>
+              <li><a href="#">Outlook</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-6 col-sm-4 nopadding-left">
+        <form class="navbar-form" role="search">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button class="btn btn-default"><i class="fa fa-search"></i></button>
+            </div>
+            <input type="search" class="form-control" placeholder="What do you want to learn?">
+          </div>
+        </form>
+      </div>
+      <div class="col-xs-1 col-sm-4 hidden-xs">
+        <div class="lazuli-logo">
+          <a href="#" class="navbar-brand"><img class="img-responsive" src="/assets/frontend/Lazuli-text.png" alt="Lazuli Logo"></a>
+        </div>
+      </div>
+      <div class="col-xs-2 col-sm-2 dropdown text-right nopadding-left">
+        <div class="btn-group margin-top-8 text-left">
+          <button type="button" class="btn btn-dark dropdown-toggle hidden-xs" data-toggle="dropdown">Jane Doe</button>
+          <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></button>
+          <ul class="dropdown-menu pull-right">
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- row 1 ends -->
+  </div>
+</div>
+<!-- navbar ends -->    
+<div class="container">
+  <section class="btns-crumbs visible-md visible-lg">
+    <div class="row">
+      <div class="col-sm-5 col-md-4">
+        <ul class="user-option-btns">
+          <li><a href="#" class="btn btn-block btn-yellow"><i class="fa fa-clock-o"></i> History</a></li>
+          <li><a href="#" class="btn btn-block btn-yellow"><i class="fa fa-star"></i> Favourites</a></li>
+          <li><a href="#" class="btn btn-block btn-yellow"><i class="fa fa-rss-square"></i> Subscriptions</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-5 col-md-6 nopadding-left">
+        <ol class="breadcrumb">
+          <li><a href="#">Courses</a></li>
+          <li><a href="#">Excel</a></li>
+          <li><a href="#">Get to know your workplace</a></li>
+          <li class="active">Know your worksheet</li>
+        </ol>
+      </div>
+      <div class="col-sm-2 col-md-2 nopadding-left">
+        <div class="sub-ends">
+          <p class="text-center"><a href="#">Subscription Ends: <b>4th Nov, 2013</b></a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="course-menu-videos">
+    <div class="seperator10 visible-xs"></div>
+    <div class="row row-offcanvas row-offcanvas-left">
+      <%= render 'topics_accordion' %>
+      <!--/span-->
+      <div class="col-xs-12 col-sm-7 col-md-8">
+        <div class="view-course">
+          <div class="row">
+            <div class="col-sm-12 col-md-6">
+              <ul class="video-tags">
+                <li><i class="fa fa-tag"></i> Tags:</li>
+                <li><a href="#">Excel</a></li>
+                <li><a href="#">Navigate</a></li>
+              </ul>
+            </div>
+            <!-- col-8 ends -->
+            <div class="col-sm-12 col-md-6">
+              <div class="video-save-options">
+                <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-star"></i> Add to Favourites</button>
+                <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-clock-o"></i> Watch later</button>
+              </div>
+            </div>
+            <!-- col-4 ends -->
+          </div>
+          <!-- rows ends -->
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="place-video">
+                <%#= vimeo_iframe_url(@video) %>
+                <iframe src="<%= vimeo_iframe_url %>" width="1280" height="720" frameborder="0" title="Brad!" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              </div>
+            </div>
+            <!-- col-12 ends -->
+          </div>
+          <!-- row ends -->
+          <%= render 'course_header' %>
+          <!-- col-7 ends -->
+        </div>
+        <!-- row ends -->
+      </div>
+    </div>
+    <!--/row-->
+  </section>
+  <section class="user-rcmnd-videos">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Recommended Videos</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="rcmd-videos-carousel">
+          <div class="row">
+            <div class="col-sm-12">
+              <div id="rcmd-vids" class="carousel slide rcmd-vid-list">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                  <ul class="active item video-thumbs">
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Excel</p>
+                      </a>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Excel</p>
+                      </a>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Excel</p>
+                      </a>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Excel</p>
+                      </a>
+                    </li>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Excel</p>
+                      </a>
+                    </li>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Excel</p>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="item video-thumbs">
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Word</p>
+                      </a>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Word</p>
+                      </a>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Word</p>
+                      </a>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Word</p>
+                      </a>
+                    </li>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Word</p>
+                      </a>
+                    </li>
+                    </li>
+                    <li class="vimeo-link">
+                      <a href="#">
+                        <img src="/assets/frontend/photos/img2.jpg" alt="" class="img-resposnsive img-thumbnail">
+                        <p>Learn Word</p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- Carousel-1 nav -->
+                <a class="carousel-control left" href="#rcmd-vids" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                <a class="carousel-control right" href="#rcmd-vids" data-slide="next"><i class="fa fa-caret-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- container ends -->
+<footer>
+  <div class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-toggle" data-toggle="collapse" data-target="#footer-body"><i class="fa fa-ellipsis-h"></i></a>
+        <ul class="footer-bar-btns visible-sm visible-xs">
+          <li class="visible-xs"><a href="#" class="btn btn-success" data-toggle="offcanvas" title="Course Menu"><i class="fa fa-2x fa-exchange"></i></a></li>
+          <li><a href="#" class="btn" title="History"><i class="fa fa-2x fa-clock-o blue-text"></i></a></li>
+          <li><a href="#" class="btn" title="Favourites"><i class="fa fa-2x fa-star yellow-text"></i></a></li>
+          <li><a href="#" class="btn" title="Subscriptions"><i class="fa fa-2x fa-rss-square orange-text"></i></a></li>
+        </ul>
+      </div>
+      <div class="navbar-collapse collapse" id="footer-body">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Browse Our Library</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Our Partners</a></li>
+          <li><a href="#">User Review</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+     $('body').on('click', '.dropdown-menu.hold-on-click', function (e) {
+             e.stopPropagation();
+         });
+     $('.parent-course-menu').slimScroll({
+        height: '400px',
+        disableFadeOut: true
+      });
+      $('.parent-course-menu li').click(function(e){
+        $('li.active').removeClass('active');
+        $(this).addClass('active');
+      });
+  });
+  
+</script>
