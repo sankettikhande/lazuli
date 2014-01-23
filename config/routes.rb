@@ -69,6 +69,6 @@ Lazuli::Application.routes.draw do
     resources :user_channel_subscriptions
   end
 
-  resources :channels
-  resources :courses
+  resources :channels, :only => [:index, :show]
+  resources :courses, :only => [:index, :show]
 end
