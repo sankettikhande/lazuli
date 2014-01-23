@@ -108,4 +108,12 @@ module ApplicationHelper
       content_tag :div, msg, :id => key, :class => "note #{flash_css_classes[key]}"
     end.join.html_safe
   end
+
+  def background_color
+    "brush lemon" if controller_name == "home"
+  end
+
+  def course_video_url video
+    "/courses/#{video.topic.course.id}/#{video.id}"
+  end
 end
