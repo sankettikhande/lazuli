@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
 
 	def show
 		@course = Course.find(params[:id])
+		@video = Video.find(params[:video_id])
 	end
 
 end

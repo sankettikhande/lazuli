@@ -109,14 +109,16 @@ class Topic < ActiveRecord::Base
   end
 
   def validate_uniq_videos options
-    qued_for_destroy, validatable_video_attribs = {}, {}
-    options[:topic][:videos_attributes].map{|key, value| qued_for_destroy.merge!(key => value) if value["_destroy"] == "1"}
-    options[:topic][:videos_attributes].map{|key, value| validatable_video_attribs.merge!(key => value) if value["_destroy"] != "1"}
-    sequence_numbers = validatable_video_attribs.map{|k, v| v["sequence_number"]}.compact
-    titles = validatable_video_attribs.map{|k, v| v["titles"]}.compact
-    errors.add(:base, "Video sequence numbers must be unique.") if sequence_numbers != sequence_numbers.uniq
-    errors.add(:base, "Video titles must be unique.") if titles != titles.uniq
-    #validate_sequence_videos(sequence_numbers) if errors.blank?
+    if options[:topic]
+      qued_for_destroy, validatable_video_attribs = {}, {}
+      options[:topic][:videos_attributes].map{|key, value| qued_for_destroy.merge!(key => value) if value["_destroy"] == "1"}
+      options[:topic][:videos_attributes].map{|key, value| validatable_video_attribs.merge!(key => value) if value["_destroy"] != "1"}
+      sequence_numbers = validatable_video_attribs.map{|k, v| v["sequence_number"]}.compact
+      titles = validatable_video_attribs.map{|k, v| v["titles"]}.compact
+      errors.add(:base, "Video sequence numbers must be unique.") if sequence_numbers != sequence_numbers.uniq
+      errors.add(:base, "Video titles must be unique.") if titles != titles.uniq
+      #validate_sequence_videos(sequence_numbers) if errors.blank?
+    end
   end
 
   # Not Using as of now

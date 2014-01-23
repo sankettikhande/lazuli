@@ -53,7 +53,8 @@ class Video < ActiveRecord::Base
     self.status = "Publish"
     self.vimeo_url = vimeo_video_url
     self.save!
-    publish_privately
+    #private password setting remove for now
+    #publish_privately
     get_thumbnails
     return self
   end
