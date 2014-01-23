@@ -2,10 +2,12 @@
 <section class="container">
   <div class="row">
     <div class="col-md-12 nopadding">
-      <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel">
-        <button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i>   Add New Channel
-        </button>
-      </a>
+      <% if can? :create, Channel %>
+        <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel">
+          <button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i>   Add New Channel
+          </button>
+        </a>
+      <% end %>
     </div>
     <div class="seperator5"></div>
     <div class="portlet-body flip-scroll">
