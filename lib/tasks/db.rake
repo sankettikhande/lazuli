@@ -15,4 +15,18 @@ namespace :db do
 	  	Course.find_by_id(id).destroy
 	  end
   end
+
+  task :update_statuses => :environment do
+    Video.where(:status => "Publish").update_all(:status => 'Published')
+    Topic.where(:status => "Publish").update_all(:status => 'Published')
+  end
+
+  task :update_vimeo_data => :environment do
+    Video.where("vimeo_id IS NOT NULL").find_in_batches(:select => "vimeo_id") do |videos|
+      videos.each do |video|
+        video_obj = Video.find_by_vimeo_id(video.vimeo_id)
+        video_obj.get_vimeo_info
+      end
+    end
+  end
 end
