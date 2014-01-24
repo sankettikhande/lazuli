@@ -1,8 +1,9 @@
 class Topic < ActiveRecord::Base
 
-  @@topic_status = ['Published', 'InProcess', 'PartialPublished', 'Saved']
+  @@topic_statuses = ['Published', 'InProcess', 'PartialPublished', 'Saved']
 
   attr_accessible :title, :description, :course_id, :channel_id, :videos_attributes, :vimeo_album_id, :is_bookmark_video, :password
+  cattr_accessor :topic_statuses
   belongs_to :course
   belongs_to :channel
   has_many :videos, :dependent => :destroy
@@ -15,7 +16,7 @@ class Topic < ActiveRecord::Base
   validates_presence_of :title ,:message => "^Topic can't be blank"
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id] , :message => "^Same topic name has already been taken for this course."
   validate :check_uniqueness_of_title
-  validates :status, :inclusion => {:in => @@topic_status}
+  validates :status, :inclusion => {:in => @@topic_statuses}
 
   after_save :update_videos_sphinx_delta
 
