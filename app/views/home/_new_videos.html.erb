@@ -12,7 +12,7 @@
                 <ul class="<%= is_active_videos(index) %> item video-thumbs">
                   <% videos.each do |video|%>
                     <li class="vimeo-thumb">
-                      <a href="#">
+                      <a href="<%= course_video_url(video) %>">
                         <%= image_tag(video_thumbnail_image(video), alt: "Image") %>
                         <p><%= video.title %></p>
                       </a>

@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="video-descr">
+      <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="channel-logo-pic">
+            <%= image_tag(@course.image.url, :alt => "Channel Logo", :class => "img-border") %>                   
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-8 col-md-9">
+          <div class="video-descr-text">
+            <h4> <%= @course.name.titleize %></h4>
+            <p><%= @course.description %></p>
+          </div>
+        </div>
+        <div>
+        </div>
+      </div>
+      <!-- col-12 ends -->
+    </div>
+    <!-- row ends -->              
+  </div>
+  <!-- .view-course ends -->
+</div>
