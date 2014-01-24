@@ -29,4 +29,25 @@ namespace :db do
       end
     end
   end
+
+  task :update_channel_admin_user_ids => :environment do
+    Channel.find_each do |channel|
+      channel.courses.each do |course| 
+        course.update_attribute(:channel_admin_user_id, channel.admin_user_id) if course.channel_admin_user_id.blank?
+        course.topics.each do |topic|
+          topic.update_attribute(:channel_admin_user_id, course.channel_admin_user_id) if topic.channel_admin_user_id.blank?
+          topic.videos.each {|video| video.update_attribute(:channel_admin_user_id, topic.channel_admin_user_id) if video.channel_admin_user_id.blank?}
+        end
+      end
+    end
+  end
+
+  task :update_course_admin_user_ids => :environment do
+    Course.find_each do |course|
+      course.topics.each do |topic|
+        topic.update_attribute(:course_admin_user_id,course.course_admin_user_id) if topic.course_admin_user_id.blank?
+        topic.videos.each {|video| video.update_attribute(:course_admin_user_id, topic.course_admin_user_id)}
+      end
+    end
+  end
 end

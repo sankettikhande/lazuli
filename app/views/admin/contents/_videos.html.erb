@@ -2,7 +2,7 @@
   <div class="row">
     <div class="seperator5"></div>
     <div class="portlet-body flip-scroll">
-      <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="video_contents">
+      <table class="table table-bordered table-striped table-condensed flip-content table-hover" id="videos_contents">
         <thead class="flip-content">
           <tr>
             <th width="20%">Title of Video</th>
@@ -22,7 +22,7 @@
 </section>
 <script>
   $(document).ready(function(){
-    var tableId = '#video_contents';
+    var tableId = '#videos_contents';
     var url = "/admin/videos/search.json?course_id=<%= @course.presence.try(:id)%>&topic_id=<%= @topic.presence.try(:id)%>";
     var aoColumns = [{ "mData": "title"},
     { "mData": "topic_name"},

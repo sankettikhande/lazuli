@@ -75,7 +75,18 @@ class Admin::CoursesController < AdminController
 
 	private
 	def set_initialization
-		@channels = current_user.is_admin? ? Channel.all : current_user.administrated_channels
+		administrated_channels = current_user.administrated_channels
+		if current_user.is_admin?
+			@channels = Channel.all
+		else
+			if request.path.include? 'edit'
+				course = Course.cached_find(params[:id])
+				channel = course.channel
+				@channels = administrated_channels.include?(channel) ? administrated_channels : [channel]	 
+			else
+				@channels = administrated_channels
+			end
+		end
 		@subscriptions = Subscription.all
 	end
 
