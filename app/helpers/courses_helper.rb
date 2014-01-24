@@ -24,9 +24,7 @@ module CoursesHelper
 	end
 
 	def second_to_duration(seconds)
-		mins, secs = seconds.divmod(60)
-		hours, mins = mins.divmod(60)
-		[hours,mins,secs].map { |e| e.to_s.rjust(2,'0') }.join ':'
+		Time.at(seconds).utc.strftime("%H:%M:%S")
 	end
 
 	def format_duration(vimeo_data)

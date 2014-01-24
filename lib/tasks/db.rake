@@ -50,4 +50,12 @@ namespace :db do
       end
     end
   end
+
+  task :update_video_status => :environment do
+    Video.where(:status => nil).update_all(:status => 'Saved')
+  end
+
+  task :update_topic_status => :environment do
+    Topic.where(:status => nil).update_all(:status => 'Saved')
+  end
 end
