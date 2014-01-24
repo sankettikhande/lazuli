@@ -1,4 +1,7 @@
 class Topic < ActiveRecord::Base
+
+  @@topic_status = ['Published', 'InProcess', 'PartialPublished', 'InProcess', 'Saved']
+
   attr_accessible :title, :description, :course_id, :channel_id, :videos_attributes, :vimeo_album_id, :is_bookmark_video, :password
   belongs_to :course
   belongs_to :channel
@@ -12,6 +15,7 @@ class Topic < ActiveRecord::Base
   validates_presence_of :title ,:message => "^Topic can't be blank"
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id] , :message => "^Same topic name has already been taken for this course."
   validate :check_uniqueness_of_title
+  validates :status, :inclusion => {:in => @@topic_status}
 
   after_save :update_videos_sphinx_delta
 
@@ -45,7 +49,7 @@ class Topic < ActiveRecord::Base
   end
 
   def set_status
-    update_attribute(:status, "Publish") if self.videos.all? {|v| v.published? }
+    update_attribute(:status, "Published") if self.videos.all? {|v| v.published? }
   end
 
 
@@ -58,7 +62,7 @@ class Topic < ActiveRecord::Base
   # handle_asynchronously :delete_album_and_videos
 
   def published?
-    self.status == "Publish"
+    self.status == "Published"
   end
 
   def inprocess?
@@ -72,7 +76,7 @@ class Topic < ActiveRecord::Base
       assign_video << video_data.vimeo_id
     end
     create_album(assign_video) if assign_video.any?
-    self.update_attribute(:status, "Publish")
+    self.update_attribute(:status, "Published")
   end
   handle_asynchronously :upload_to_vimeo
 

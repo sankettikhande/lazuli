@@ -43,7 +43,7 @@ class Admin::TopicsController < AdminController
 		@channel_courses = @topic.channel.courses
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 		if params[:SavePub]
-			update_topic(params[:topic], "Publish")
+			update_topic(params[:topic], "Published")
 		elsif params[:Publish]
 			publish_topic(@topic)
 			redirect_to :back, notice: "Topic is being published. It will take some time. Please check status after some time."

@@ -1,5 +1,6 @@
 include VimeoLib
 class Video < ActiveRecord::Base
+  @@video_status = ['Published', 'InProcess', 'PartialPublished', 'InProcess', 'Saved']
   # attr_accessible :title, :body
   serialize :vimeo_data
   attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes
@@ -22,6 +23,7 @@ class Video < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
   validates_presence_of :clip
+  validates :status, :inclusion => {:in => @@video_status}
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
   
   after_save :update_bookmarks, :if => :bookmarked?
@@ -49,7 +51,7 @@ class Video < ActiveRecord::Base
     set_vimeo_description(self.vimeo_id, self.description_text)
     v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
     v.set_title(self.vimeo_id, self.title)
-    self.status = "Publish"
+    self.status = "Published"
     self.vimeo_url = vimeo_video_url
     self.save!
     #private password setting remove for now
@@ -86,7 +88,7 @@ class Video < ActiveRecord::Base
   end
 
   def published?
-    self.status == "Publish"
+    self.status == "Published"
   end
 
   def inprocess?

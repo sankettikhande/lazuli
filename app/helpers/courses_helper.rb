@@ -16,10 +16,6 @@ module CoursesHelper
 	end
 
 	def is_accordion topic, topic_index
-		if @video
-			"in" if @video.topic.id == topic.id
-		else
-			"in" if topic_index.zero?
-		end
+		"in" if((@video && @video.topic.id == topic.id) || topic_index.zero? )
 	end
 end
