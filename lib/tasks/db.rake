@@ -50,4 +50,11 @@ namespace :db do
       end
     end
   end
+
+  task :update_channel_ids => :environment do
+    Course.find_each do |course|
+      channel = ChannelCourse.where(:course_id => course.id).select(:channel_id).map(&:channel_id)
+      course.update_attribute(:channel_id,channel.join(","))
+    end
+  end
 end

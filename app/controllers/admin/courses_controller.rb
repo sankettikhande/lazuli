@@ -11,7 +11,6 @@ class Admin::CoursesController < AdminController
 
 	def new
 		@course = Course.new
-		@course.channel_courses.build
 	end
 
 	def create
@@ -21,7 +20,7 @@ class Admin::CoursesController < AdminController
 			if @course.save
 				@course.update_attribute(:channel_admin_user_id,@course.channel.admin_user_id)
 				format.html {redirect_to "#{admin_contents_url}#courses" }
-				flash[:notice] = "Course has been successfully created"
+				flash[:success] = "Course has been successfully created"
 			else
 				format.html {render "new"}
 			end
@@ -37,7 +36,7 @@ class Admin::CoursesController < AdminController
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
 				format.html {redirect_to "#{admin_contents_url}#courses"}
-				flash[:notice] = "Course has been successfully updated"
+				flash[:success] = "Course has been successfully updated"
 			else
 				format.html {render "edit"}
 			end

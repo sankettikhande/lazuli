@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
   # attr_accessible :title, :body
-  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, 
-                  :channel_course_permissions_attributes, :channel_courses_attributes, 
+  attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_id,
+                  :channel_course_permissions_attributes, 
                   :course_subscriptions_attributes, :subscription_ids
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
@@ -10,8 +10,7 @@ class Course < ActiveRecord::Base
                     :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   #ASSOCIATIONS
-  has_many :channel_courses
-  has_many :channels, :through => :channel_courses
+  belongs_to :channel, :counter_cache => :course_count
   has_many :topics, :dependent => :destroy
   has_many :user_channel_subscriptions, :dependent => :destroy
   has_many :channel_course_permissions, :dependent => :destroy
@@ -27,9 +26,8 @@ class Course < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_presence_of :subscription_ids, :message => "^Select atleast one Subscription"
   validate :course_name
-
+  validates_presence_of :channel_id, :message => "^Channel Name can't be blank"
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
-  accepts_nested_attributes_for :channel_courses, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
   #SCOPES
   after_save :set_channel_permission, :update_topics_sphinx_delta
@@ -39,10 +37,8 @@ class Course < ActiveRecord::Base
   #INSTANCE METHODS
   def set_channel_permission
     self.channel_course_permissions.each do |permission|
-      if !self.channel_courses.blank?
-        permission.channel_id = self.channel.id
-        permission.save
-      end
+      permission.channel_id = self.channel_id
+      permission.save
     end
   end
 
@@ -61,16 +57,12 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def channel
-    channels.first
-  end
-
   def channel_name
     channel.name if channel
   end
 
   def course_name
-    c_courses = channel_courses.first.channel.courses.to_a rescue []
+    c_courses = channel.courses.to_a rescue []
     return if c_courses.blank?
     c_courses.delete(self)
     channel_course_names = c_courses.map(&:name)
@@ -83,10 +75,6 @@ class Course < ActiveRecord::Base
 
   def users_for_course
     user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
-  end
-
-  def course_channel_name
-    channel.name
   end
 
   def self.sphinx_search options, current_user
