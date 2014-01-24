@@ -9,7 +9,7 @@
           </a>
           <ul id="topic-<%= topic_index %>" class="child-course-menu collapse <%= is_accordion(topic, topic_index) %>">
             <% topic.videos.each_with_index do |video, video_index| %>
-              <li>
+              <li class="<%= is_active_video(video) %>">
                 <a href="/courses/<%= @course.id %>/<%= video.id %>"> <%= video.title %>
                   <span><%= video.vimeo_data.duration if video.vimeo_data %></span>
                 </a>

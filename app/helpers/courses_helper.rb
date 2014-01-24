@@ -18,4 +18,8 @@ module CoursesHelper
 	def is_accordion topic, topic_index
 		"in" if((@video && @video.topic.id == topic.id) || topic_index.zero? )
 	end
+
+	def is_active_video video
+		'active' if (@video && @video.id == video.id)
+	end
 end
