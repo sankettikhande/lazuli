@@ -1,6 +1,6 @@
 include VimeoLib
 class Video < ActiveRecord::Base
-  @@video_status = ['Published', 'InProcess', 'PartialPublished', 'InProcess', 'Saved']
+  @@video_status = ['Published', 'InProcess', 'PartialPublished', 'Saved']
   # attr_accessible :title, :body
   serialize :vimeo_data
   attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes

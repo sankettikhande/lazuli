@@ -1,6 +1,6 @@
 class Topic < ActiveRecord::Base
 
-  @@topic_status = ['Published', 'InProcess', 'PartialPublished', 'InProcess', 'Saved']
+  @@topic_status = ['Published', 'InProcess', 'PartialPublished', 'Saved']
 
   attr_accessible :title, :description, :course_id, :channel_id, :videos_attributes, :vimeo_album_id, :is_bookmark_video, :password
   belongs_to :course
