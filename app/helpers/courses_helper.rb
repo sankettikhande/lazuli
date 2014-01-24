@@ -16,10 +16,20 @@ module CoursesHelper
 	end
 
 	def is_accordion topic, topic_index
-		"in" if((@video && @video.topic.id == topic.id) || topic_index.zero? )
+		"in" if((@video && @video.topic.id == topic.id) || (!@video && topic_index.zero?) )
 	end
 
 	def is_active_video video
 		'active' if (@video && @video.id == video.id)
+	end
+
+	def second_to_duration(seconds)
+		mins, secs = seconds.divmod(60)
+		hours, mins = mins.divmod(60)
+		[hours,mins,secs].map { |e| e.to_s.rjust(2,'0') }.join ':'
+	end
+
+	def format_duration(vimeo_data)
+		vimeo_data ? second_to_duration(vimeo_data.duration.to_i) : "00:00:00"
 	end
 end
