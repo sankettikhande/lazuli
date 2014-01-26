@@ -30,8 +30,7 @@ class Admin::TopicsController < AdminController
 	end
 
 	def edit
-		set_initialization
-		@topic = Topic.cached_find(params[:id])
+		edit_initialization
 		@topic_videos = @topic.videos.order(:sequence_number)
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 	end
@@ -72,40 +71,24 @@ class Admin::TopicsController < AdminController
   protected
 
   def set_initialization
-  	administrated_channels = current_user.administrated_channels
   	@channel_courses = []
-		if current_user.is_admin?
-			@channels =Channel.all
-		elsif current_user.is_channel_admin?
-			channels = current_user.administrated_channels
-			current_user.administrated_courses.each { |c| channels << c.channel}
-			@channels = channels.uniq
-		else
-			courses = Course.where(:course_admin_user_id => current_user.id)
-			channels = []
-			courses.each do |c| 
-				channels << c.channel
-			end
-			@channels = channels.uniq
-		end
+	if current_user.is_admin?
+		@channels =Channel.all
+	else
+		channel_ids = Course.where("channel_admin_user_id =? OR course_admin_user_id = ?", current_user.id,current_user.id).select("DISTINCT channel_id").map(&:channel_id)
+		@channels = Channel.where(:id => channel_ids)
+	end
   end
 
   def edit_initialization
   	@topic = Topic.cached_find(params[:id])
-  	administrated_channels = current_user.administrated_channels
-		if current_user.is_admin?
-			@channels =Channel.all
-		elsif current_user.is_channel_admin?
-			channel = @topic.channel
-			@channels = administrated_channels.include?(channel) ? administrated_channels : channel
-		else
-			courses = Course.where(:course_admin_user_id => current_user.id)
-			channels = []
-			courses.each do |c| 
-				channels << c.channel
-			end
-			@channels = channels.uniq
-		end
+  	@channel_courses = @topic.channel.permitted_courses(current_user)
+	if current_user.is_admin?
+		@channels =Channel.all
+	else
+		channel_ids = Course.where("channel_admin_user_id =? OR course_admin_user_id = ?", current_user.id,current_user.id).select("DISTINCT channel_id").map(&:channel_id)
+		@channels = Channel.where(:id => channel_ids)
+	end
   end
 
 	def update_topic(topic, publish=nil)

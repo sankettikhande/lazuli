@@ -18,7 +18,6 @@ class Admin::CoursesController < AdminController
 		@course.created_by = current_user.id
 		respond_to do |format|
 			if @course.save
-				@course.update_attribute(:channel_admin_user_id,@course.channel.admin_user_id)
 				format.html {redirect_to "#{admin_contents_url}#courses" }
 				flash[:success] = "Course has been successfully created"
 			else

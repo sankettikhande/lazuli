@@ -33,6 +33,7 @@ class Course < ActiveRecord::Base
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
+  after_create :set_channel_admin_user_ids
   
   #INSTANCE METHODS
   def set_channel_permission
@@ -47,6 +48,10 @@ class Course < ActiveRecord::Base
       topic.update_attribute(:course_admin_user_id, course_admin_user_id)
       topic.videos.map{|v| v.update_attribute(:course_admin_user_id, course_admin_user_id)}
     end
+  end
+
+  def set_channel_admin_user_ids
+    update_attribute(:channel_admin_user_id, channel.admin_user_id)
   end
 
   # updates topics indices and invoke method to update video indices
