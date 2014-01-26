@@ -67,7 +67,7 @@ class Admin::ChannelsController < AdminController
 
   def get_channel
     if params[:id]
-      @channel = Channel.find(params[:id])
+      @channel = Channel.cached_find(params[:id])
       respond_to do |format|
         format.json{}
       end
