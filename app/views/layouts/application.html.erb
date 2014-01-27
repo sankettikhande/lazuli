@@ -18,13 +18,5 @@
       <%= yield %>
     </div>  <!--  container ends -->
     <%= render 'layouts/application/footer' %>
-     
-    <script type="text/javascript">
-      $( document ).ready(function() {
-        $('body').on('click', '.dropdown-menu.hold-on-click', function (e) {
-          e.stopPropagation();
-        });
-      });
-    </script>
   </body>
 </html>
