@@ -26,6 +26,8 @@ class Video < ActiveRecord::Base
   validates_presence_of :clip
   validates :status, :inclusion => {:in => @@video_statuses}
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
+
+  scope :published, where(:status => "Published")
   
   after_save :update_bookmarks, :if => :bookmarked?
 

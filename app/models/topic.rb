@@ -18,6 +18,8 @@ class Topic < ActiveRecord::Base
   validate :check_uniqueness_of_title
   validates :status, :inclusion => {:in => @@topic_statuses}
 
+  scope :published, where(:status => "Published")
+
   after_save :update_videos_sphinx_delta
 
   def update_videos_sphinx_delta
