@@ -171,4 +171,9 @@ class Video < ActiveRecord::Base
   def bookmarked?
     self.topic.is_bookmark_video
   end
+
+  def tags_str
+    tag_list = self.tags.map { |tag| tag.name }
+    tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
+  end
 end
