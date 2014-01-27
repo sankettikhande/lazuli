@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
 
 	def show
 		@course = Course.find(params[:id])
-		@video = Video.published.find_by_id(params[:video_id]) if params[:video_id]
+		@video = Video.published.find(params[:video_id]) if params[:video_id]
 		@video_tags = @video ? @video.tags : []
 		@recommended_videos = load_recommended_videos
 	end
@@ -13,9 +13,9 @@ class CoursesController < ApplicationController
 	private
 	def load_recommended_videos
 		if @video && @video_tags.any?
-			Video.search(:conditions => sphinx_condition(@video.tags_str)).per(12)
+			Video.search(:conditions => sphinx_condition(@video.tags_str)).per(Settings.data_count.recommended_video)
 		else
-			Video.published.last(12)
+			Video.published.last(Settings.data_count.recommended_video)
 		end
 	end
 
