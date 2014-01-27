@@ -25,7 +25,7 @@
 						<label class="control-label" for="t-course">Channel<%= required_field %></label>
 					</div>
 					<div class="col-sm-3">
-						<%= f.select 'channel_id',options_for_select(Channel.all.collect{|c| [ c.name, c.id]}, f.object.channel_id),{:include_blank => "Please Select"}, :class => 'form-control channels_id validate[required]' %>
+						<%= f.select 'channel_id',options_for_select(@channels.collect{|c| [ c.name, c.id]}, f.object.channel_id),{:include_blank => "Please Select"}, :class => 'form-control channels_id validate[required]' %>
 					</div>
 				</div>
 				<div class="seperator10"></div>
