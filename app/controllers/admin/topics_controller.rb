@@ -36,7 +36,7 @@ class Admin::TopicsController < AdminController
 	def update
 		@topic = Topic.cached_find(params[:id])
 		@topic.validate_uniq_videos params if params[:topic]
-		@channel_courses = @topic.channel.courses
+		@channel_courses = @topic.channel.permitted_courses(current_user)
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 		if params[:SavePub]
 			update_topic(params[:topic], "Published")
@@ -69,11 +69,7 @@ class Admin::TopicsController < AdminController
   protected
 
   def set_initialization
-		if current_user.is_admin?
-			@channels =Channel.all
-		else
-			@channels = Channel.joins(:courses).where("courses.channel_admin_user_id =? OR courses.course_admin_user_id = ?", current_user.id,current_user.id).group(:id)
-		end
+  	@channels = current_user.permitted_channels
   end
 
 	def update_topic(topic, publish=nil)

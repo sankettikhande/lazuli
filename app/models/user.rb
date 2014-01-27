@@ -82,6 +82,14 @@ class User < ActiveRecord::Base
     User.find(administrated_channel_subscriber_ids)
   end
 
+  def permitted_channels
+    if self.is_admin?
+      Channel.all
+    else
+      Channel.joins(:courses).where("courses.channel_admin_user_id =? OR courses.course_admin_user_id = ?", self.id, self.id).group(:id)
+    end
+  end
+
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
     return User.where("(provider = '#{oauth_raw_data.provider}' AND uid = '#{oauth_raw_data.uid}') OR email='#{oauth_user_data.email}'").first || User.create!(name:oauth_user_data.name,
                             actual_name:oauth_user_data.name,
