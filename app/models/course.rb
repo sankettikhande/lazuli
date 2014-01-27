@@ -100,6 +100,11 @@ class Course < ActiveRecord::Base
   def self.set_course_admin_user_ids(course_ids,user_id)
     Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id) if c.course_admin_user_id.blank?  } 
   end
+
+  def course_first_video
+    topic = self.topics.published.try(:first)
+    topic.try(:videos).try(:first) if topic.published?
+  end
   
   private 
   def create_associations()

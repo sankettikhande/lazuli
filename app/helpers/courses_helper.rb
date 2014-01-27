@@ -3,7 +3,7 @@ module CoursesHelper
 		if @video
 			"//player.vimeo.com/video/#{@video.vimeo_id}"
 		else
-			"//player.vimeo.com/video/#{@course.topics.first.try(:videos).try(:first).try(:vimeo_id)}" if @course.topics.any?
+			"//player.vimeo.com/video/#{@course.course_first_video.try(:vimeo_id)}"
 		end
 	end
 
