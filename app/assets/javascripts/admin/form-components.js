@@ -672,7 +672,7 @@ var FormComponents = function () {
 
         function userFormatResult(user) {
             var markup = "<table class='movie-result'><tr>";
-            markup += "<td valign='top'><h5>" + user.name + "</h5>";
+            markup += "<td valign='top'><h5>" + user.actual_name + "</h5>";
             markup += "</td></tr></table>"
             return markup;
         }
@@ -681,7 +681,7 @@ var FormComponents = function () {
             $("#channel_email").val(user.email);
             $("#channel_contact_number").val(user.phone_number);
             $("#channel_user_name").val(user.name);
-            return user.name;
+            return user.actual_name;
         }
 
         $("#user_search_channel").select2({

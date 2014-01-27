@@ -98,6 +98,12 @@ function triggerFnFilter(dtaTable, tableId, aoColumns){
       dtaTable.fnFilter( $(this).val(), 1 );
     };
   });
+
+  $(tableId+'_filter label input').on('keypress', function(e){
+    /* diabling datatable's default search on keypress of search input box*/
+    $(tableId+'_filter label input').unbind('keypress');
+    dtaTable.fnFilter( $('select#column_names').val(), 1 );
+  });
 };
 
 /* removes filter and resets filter dropdown to default value*/
