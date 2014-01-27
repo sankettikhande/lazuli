@@ -1,7 +1,4 @@
 $( document ).ready(function() {
-   $('body').on('click', '.dropdown-menu.hold-on-click', function (e) {
-           e.stopPropagation();
-       });
    $('.parent-course-menu').slimScroll({
       height: '400px',
       disableFadeOut: true

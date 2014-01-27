@@ -2,7 +2,7 @@
   <div class="col-sm-12 col-md-6">
 	  <ul class="video-tags">
 	    <li><i class="fa fa-tag"></i> Tags:</li>
-	    <% @video_tags.each do |tag| %>
+	    <% @video.tags.each do |tag| %>
 	      <li><a href="#"><%= tag.name %></a></li>
 	    <% end %>
 	  </ul>
