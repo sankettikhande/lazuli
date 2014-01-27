@@ -16,6 +16,20 @@ namespace :db do
 	  end
   end
 
+  task :update_statuses => :environment do
+    Video.where(:status => "Publish").update_all(:status => 'Published')
+    Topic.where(:status => "Publish").update_all(:status => 'Published')
+  end
+
+  task :update_vimeo_data => :environment do
+    Video.where("vimeo_id IS NOT NULL").find_in_batches(:select => "vimeo_id") do |videos|
+      videos.each do |video|
+        video_obj = Video.find_by_vimeo_id(video.vimeo_id)
+        video_obj.get_vimeo_info
+      end
+    end
+  end
+
   task :update_channel_admin_user_ids => :environment do
     Channel.find_each do |channel|
       channel.courses.each do |course| 
