@@ -25,6 +25,7 @@ class Video < ActiveRecord::Base
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
   
   after_save :update_bookmarks, :if => :bookmarked?
+  after_create :update_admins_and_creator_ids
 
   def upload_single_video
     video = self.upload
@@ -151,6 +152,13 @@ class Video < ActiveRecord::Base
     destroy_elements = params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| bookmark[:time] if bookmark["_destroy"] == "1" }.compact
     time_elements.size == time_elements.uniq.size ? true : self.errors.add(:base, 'Bookmarks time has already been taken')
     validate_uniqueness_bookmarks(params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| [bookmark[:id], bookmark[:time]] if bookmark["_destroy"] == "false" }.compact, destroy_elements)
+  end
+
+  def update_admins_and_creator_ids
+    self.created_by = topic.created_by
+    self.channel_admin_user_id = topic.channel_admin_user_id
+    self.course_admin_user_id = topic.course_admin_user_id
+    self.save!
   end
 
   def validate_uniqueness_bookmarks(time_elements, destroy_elements)

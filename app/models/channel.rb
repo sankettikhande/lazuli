@@ -8,8 +8,7 @@ class Channel < ActiveRecord::Base
                   :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   #ASSOCIATIONS
-  has_many :channel_courses, :dependent => :destroy
-  has_many :courses, :through => :channel_courses
+  has_many :courses, :dependent => :destroy
   has_many :channel_course_permissions, :dependent => :destroy
   has_many :user_channel_subscriptions, :dependent => :destroy
 
@@ -58,6 +57,15 @@ class Channel < ActiveRecord::Base
         topic.videos.map {|video| video.update_attribute(:channel_admin_user_id,admin_user_id)}
       end
     end
+  end
+
+  def permitted_courses current_user
+    user_id = current_user.id
+    if current_user.is_admin? || self.admin_user_id == user_id
+      permitted_courses = self.courses
+    else
+      permitted_courses = self.courses.where(:course_admin_user_id => user_id)
+    end      
   end
 
   # updates topics indices

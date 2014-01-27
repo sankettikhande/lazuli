@@ -5,9 +5,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="row" id="course_form_header">
-					<%= f.fields_for :channel_courses, :wrapper => false do |channel_courses_fields| %>
-						<%= render 'channel' , :f => channel_courses_fields%>
-					<% end %>
+						<%= render 'channel' , :f => f %>
 				</div>
 			</div>
 		</div>
