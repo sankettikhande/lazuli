@@ -102,8 +102,10 @@ class Course < ActiveRecord::Base
   end
 
   def course_first_video
-    topic = self.topics.published.try(:first)
-    topic.try(:videos).try(:first) if topic.published?
+    self.topics.published.each do |topic|
+      videos = topic.videos.published
+      return videos.first if videos.any?
+    end
   end
   
   private 

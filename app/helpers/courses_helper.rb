@@ -1,10 +1,6 @@
 module CoursesHelper
 	def vimeo_iframe_url
-		if @video
-			"//player.vimeo.com/video/#{@video.vimeo_id}"
-		else
-			"//player.vimeo.com/video/#{@course.course_first_video.try(:vimeo_id)}"
-		end
+		"//player.vimeo.com/video/#{@video.vimeo_id}"
 	end
 
 	def is_active topic, index
