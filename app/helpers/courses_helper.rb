@@ -1,6 +1,6 @@
 module CoursesHelper
 	def vimeo_iframe_url
-		if @video && @video.vimeo_id
+		if @video
 			"//player.vimeo.com/video/#{@video.vimeo_id}"
 		else
 			"//player.vimeo.com/video/#{@course.topics.first.try(:videos).try(:first).try(:vimeo_id)}" if @course.topics.any?
