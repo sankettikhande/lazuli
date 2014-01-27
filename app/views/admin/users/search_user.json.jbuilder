@@ -1,3 +1,5 @@
 json.set! :data do
-	json.array! @users, :id, :name, :email, :phone_number, :actual_name
+	json.array! @users do |user|
+		json.partial! 'user', user: user
+	end
 end
