@@ -1,11 +1,13 @@
 class Admin::TopicsController < AdminController
+	before_filter :set_initialization, :only => [:new, :edit, :create, :update]
 	load_and_authorize_resource
 	rescue_from CanCan::AccessDenied do |exception|
 	  redirect_to root_url, :alert => exception.message
 	end
+
 	def new
-		set_initialization
 		@topic = Topic.new
+		@channel_courses = []
 		@topic_videos = @topic.videos.build()
 	end
 
@@ -14,11 +16,6 @@ class Admin::TopicsController < AdminController
 		@topic.created_by = current_user.id
 		@topic.channel_admin_user_id = @topic.channel.admin_user_id
 		@topic.course_admin_user_id = @topic.course.course_admin_user_id
-		@topic.videos.each do |video|
-			video.created_by = current_user.id
-			video.channel_admin_user_id = @topic.channel_admin_user_id
-			video.course_admin_user_id = @topic.course_admin_user_id
-		end
 		if params[:SavePub]
 			save_topic("Publish")
 		elsif params[:Publish]
@@ -30,7 +27,8 @@ class Admin::TopicsController < AdminController
 	end
 
 	def edit
-		edit_initialization
+		@topic = Topic.cached_find(params[:id])
+		@channel_courses = @topic.channel.permitted_courses(current_user)
 		@topic_videos = @topic.videos.order(:sequence_number)
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 	end
@@ -71,24 +69,11 @@ class Admin::TopicsController < AdminController
   protected
 
   def set_initialization
-  	@channel_courses = []
-	if current_user.is_admin?
-		@channels =Channel.all
-	else
-		channel_ids = Course.where("channel_admin_user_id =? OR course_admin_user_id = ?", current_user.id,current_user.id).select("DISTINCT channel_id").map(&:channel_id)
-		@channels = Channel.where(:id => channel_ids)
-	end
-  end
-
-  def edit_initialization
-  	@topic = Topic.cached_find(params[:id])
-  	@channel_courses = @topic.channel.permitted_courses(current_user)
-	if current_user.is_admin?
-		@channels =Channel.all
-	else
-		channel_ids = Course.where("channel_admin_user_id =? OR course_admin_user_id = ?", current_user.id,current_user.id).select("DISTINCT channel_id").map(&:channel_id)
-		@channels = Channel.where(:id => channel_ids)
-	end
+		if current_user.is_admin?
+			@channels =Channel.all
+		else
+			@channels = Channel.joins(:courses).where("courses.channel_admin_user_id =? OR courses.course_admin_user_id = ?", current_user.id,current_user.id).group(:id)
+		end
   end
 
 	def update_topic(topic, publish=nil)
