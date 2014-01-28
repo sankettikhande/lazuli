@@ -1,37 +1,39 @@
-<section class="user-rcmnd-videos">
-  <div class="row">
-    <div class="col-xs-12">
-      <h3>Recommended Videos</h3>
+<% unless @recommended_videos.any?%>
+  <section class="user-rcmnd-videos">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Recommended Videos</h3>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="rcmd-videos-carousel">
-        <div class="row">
-          <div class="col-sm-12">
-            <div id="rcmd-vids" class="carousel slide rcmd-vid-list">
-              <!-- Carousel items -->
-              <div class="carousel-inner">
-                <% @recommended_videos.in_groups(2, false).each_with_index do |videos, index| %>
-                  <ul class="<%= 'active' if index.zero? %> item video-thumbs">
-                    <% videos.each do |video| %>
-                      <li class="vimeo-link">
-                        <a href="<%= course_video_url(video) %>">
-                          <%= image_tag(video_thumbnail_image(video), :alt => "", :class => "img-resposnsive img-thumbnail") %>
-                          <p> <%= video.title %></p>
-                        </a>
-                      </li>
-                    <% end %>
-                  </ul>
-                <% end %>
-              </div>              
-              <!-- Carousel-1 nav -->
-              <a class="carousel-control left" href="#rcmd-vids" data-slide="prev"><i class="fa fa-caret-left"></i></a>
-              <a class="carousel-control right" href="#rcmd-vids" data-slide="next"><i class="fa fa-caret-right"></i></a>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="rcmd-videos-carousel">
+          <div class="row">
+            <div class="col-sm-12">
+              <div id="rcmd-vids" class="carousel slide rcmd-vid-list">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                  <% @recommended_videos.each_with_index do |videos, index| %>
+                    <ul class="<%= 'active' if index.zero? %> item video-thumbs">
+                      <% videos.each do |video| %>
+                        <li class="vimeo-link">
+                          <a href="<%= course_video_url(video) %>">
+                            <%= image_tag(video_thumbnail_image(video), :alt => "", :class => "img-resposnsive img-thumbnail") %>
+                            <p> <%= video.title %></p>
+                          </a>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </div>              
+                <!-- Carousel-1 nav -->
+                <a class="carousel-control left" href="#rcmd-vids" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                <a class="carousel-control right" href="#rcmd-vids" data-slide="next"><i class="fa fa-caret-right"></i></a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+<% end %>

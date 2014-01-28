@@ -1,0 +1,7 @@
+data_count:
+  latest_video: 12
+  courses: 4
+  recommended:
+    video: 12
+    video_frame: 6
+    video_frame_count: 2
