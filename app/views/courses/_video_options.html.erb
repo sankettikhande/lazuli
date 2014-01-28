@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+	  <ul class="video-tags">
+	    <li><i class="fa fa-tag"></i> Tags:</li>
+	    <% @video.tags.each do |tag| %>
+	      <li><a href="#"><%= tag.name %></a></li>
+	    <% end %>
+	  </ul>
+	</div>
+  <!-- col-8 ends -->
+  <div class="col-sm-12 col-md-6">
+    <div class="video-save-options">
+      <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-star"></i> Add to Favourites</button>
+      <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-clock-o"></i> Watch later</button>
+    </div>
+  </div>
+  <!-- col-4 ends -->
+</div>

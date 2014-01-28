@@ -1,9 +1,11 @@
 include VimeoLib
 class Video < ActiveRecord::Base
+  @@video_statuses = ['Published', 'InProcess', 'PartialPublished', 'Saved']
   # attr_accessible :title, :body
   serialize :vimeo_data
   attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes
   attr_accessor :bookmarks_from_params
+  cattr_accessor :video_statuses
   has_many :bookmarks, :dependent => :destroy
   belongs_to :topic
   acts_as_taggable
@@ -22,9 +24,13 @@ class Video < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
   validates_presence_of :clip
+  validates :status, :inclusion => {:in => @@video_statuses}
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
+
+  scope :published, where(:status => "Published")
   
   after_save :update_bookmarks, :if => :bookmarked?
+  after_create :update_admins_and_creator_ids
 
   def upload_single_video
     video = self.upload
@@ -49,7 +55,7 @@ class Video < ActiveRecord::Base
     set_vimeo_description(self.vimeo_id, self.description_text)
     v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
     v.set_title(self.vimeo_id, self.title)
-    self.status = "Publish"
+    self.status = "Published"
     self.vimeo_url = vimeo_video_url
     self.save!
     #private password setting remove for now
@@ -86,7 +92,7 @@ class Video < ActiveRecord::Base
   end
 
   def published?
-    self.status == "Publish"
+    self.status == "Published"
   end
 
   def inprocess?
@@ -153,6 +159,13 @@ class Video < ActiveRecord::Base
     validate_uniqueness_bookmarks(params[:video][:bookmarks_attributes].map{ |a,b| b }.map{ |bookmark| [bookmark[:id], bookmark[:time]] if bookmark["_destroy"] == "false" }.compact, destroy_elements)
   end
 
+  def update_admins_and_creator_ids
+    self.created_by = topic.created_by
+    self.channel_admin_user_id = topic.channel_admin_user_id
+    self.course_admin_user_id = topic.course_admin_user_id
+    self.save!
+  end
+
   def validate_uniqueness_bookmarks(time_elements, destroy_elements)
     time_elements.each do |id, time|
       if destroy_elements.any?
@@ -167,5 +180,10 @@ class Video < ActiveRecord::Base
 
   def bookmarked?
     self.topic.is_bookmark_video
+  end
+
+  def tags_str
+    tag_list = self.tags.map { |tag| tag.name }
+    tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
   end
 end

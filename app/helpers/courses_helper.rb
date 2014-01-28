@@ -1,10 +1,6 @@
 module CoursesHelper
 	def vimeo_iframe_url
-		if @video && @video.vimeo_id
-			"//player.vimeo.com/video/#{@video.vimeo_id}"
-		else
-			"//player.vimeo.com/video/#{@course.topics.first.videos.first.vimeo_id}" if @course.topics.any?
-		end
+		"//player.vimeo.com/video/#{@video.vimeo_id}"
 	end
 
 	def is_active topic, index
@@ -16,10 +12,18 @@ module CoursesHelper
 	end
 
 	def is_accordion topic, topic_index
-		if @video
-			"in" if @video.topic.id == topic.id
-		else
-			"in" if topic_index.zero?
-		end
+		"in" if((@video && @video.topic.id == topic.id) || (!@video && topic_index.zero?) )
+	end
+
+	def is_active_video video
+		'active' if (@video && @video.id == video.id)
+	end
+
+	def second_to_duration(seconds)
+		Time.at(seconds).utc.strftime("%H:%M:%S")
+	end
+
+	def format_duration(vimeo_data)
+		vimeo_data ? second_to_duration(vimeo_data.duration.to_i) : "00:00:00"
 	end
 end

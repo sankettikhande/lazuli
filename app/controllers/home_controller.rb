@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-  	@videos = Video.where(:status => "Publish").order('created_at').limit(12)
-  	@courses = Course.last(4)
+  	@videos = Video.published.order('created_at').limit(Settings.data_count.latest_video)
+  	@courses = Course.last(Settings.data_count.courses)
   end
 end

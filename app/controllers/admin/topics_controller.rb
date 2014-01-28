@@ -1,11 +1,13 @@
 class Admin::TopicsController < AdminController
+	before_filter :set_initialization, :only => [:new, :edit, :create, :update]
 	load_and_authorize_resource
 	rescue_from CanCan::AccessDenied do |exception|
 	  redirect_to root_url, :alert => exception.message
 	end
+
 	def new
-		@channel_courses = Course.all
 		@topic = Topic.new
+		@channel_courses = []
 		@topic_videos = @topic.videos.build()
 	end
 
@@ -14,11 +16,6 @@ class Admin::TopicsController < AdminController
 		@topic.created_by = current_user.id
 		@topic.channel_admin_user_id = @topic.channel.admin_user_id
 		@topic.course_admin_user_id = @topic.course.course_admin_user_id
-		@topic.videos.each do |video|
-			video.created_by = current_user.id
-			video.channel_admin_user_id = @topic.channel_admin_user_id
-			video.course_admin_user_id = @topic.course_admin_user_id
-		end
 		if params[:SavePub]
 			save_topic("Publish")
 		elsif params[:Publish]
@@ -31,9 +28,8 @@ class Admin::TopicsController < AdminController
 
 	def edit
 		@topic = Topic.cached_find(params[:id])
+		@channel_courses = @topic.channel.permitted_courses(current_user)
 		@topic_videos = @topic.videos.order(:sequence_number)
-		channel = Channel.find(@topic.channel_id)
-		@channel_courses = channel.courses
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 	end
 
@@ -43,7 +39,7 @@ class Admin::TopicsController < AdminController
 		@channel_courses = @topic.channel.courses
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
 		if params[:SavePub]
-			update_topic(params[:topic], "Publish")
+			update_topic(params[:topic], "Published")
 		elsif params[:Publish]
 			publish_topic(@topic)
 			redirect_to :back, notice: "Topic is being published. It will take some time. Please check status after some time."
@@ -71,6 +67,14 @@ class Admin::TopicsController < AdminController
 	end
 
   protected
+
+  def set_initialization
+		if current_user.is_admin?
+			@channels =Channel.all
+		else
+			@channels = Channel.joins(:courses).where("courses.channel_admin_user_id =? OR courses.course_admin_user_id = ?", current_user.id,current_user.id).group(:id)
+		end
+  end
 
 	def update_topic(topic, publish=nil)
 		respond_to do |format|

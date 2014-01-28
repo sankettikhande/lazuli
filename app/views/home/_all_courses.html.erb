@@ -30,7 +30,7 @@
             </div>
             <div class="hidden-xs col-sm-2">
               <div class="course-featured-video">
-                <img class="img-responsive" src="/assets/frontend/photos/img1.jpg" alt="Image">
+                <%= image_tag(course.channel.image.url, :alt => "Image", :class => "img-responsive" ) %>
               </div>
             </div>
           </div> <!-- row ends -->

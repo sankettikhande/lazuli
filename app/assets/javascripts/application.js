@@ -29,3 +29,9 @@ $( function() {
         location.href = $(this).attr("data-href");
     });
 });
+
+$( document ).ready(function() {
+  $('body').on('click', '.dropdown-menu.hold-on-click', function (e) {
+    e.stopPropagation();
+  });
+});
