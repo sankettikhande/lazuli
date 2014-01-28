@@ -12,8 +12,7 @@ class CoursesController < ApplicationController
 	private
 	def load_recommended_videos
 		videos = @video.tags.any? ? Video.search(:conditions => sphinx_condition(@video.tags_str), :without => {:video_id => @video.id}).per(Settings.data_count.recommended.video) : []
-		return videos.in_groups(Settings.data_count.recommended.video_frame_count, false) if videos.size > Settings.data_count.recommended.video_frame
-		return videos.in_groups(1, false)
+		return videos.in_groups_of(Settings.data_count.recommended.video_frame, false)
 		# Need more specific requirement
 		# Video.published.last(Settings.data_count.recommended.video)
 	end

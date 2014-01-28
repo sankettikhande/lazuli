@@ -10,11 +10,11 @@
         <div class="row">
           <div class="col-sm-12">
             <div id="rcmd-vids" class="carousel slide rcmd-vid-list">
+              <%= "No Recommendations" if @recommended_videos.blank? %>
               <!-- Carousel items -->
               <div class="carousel-inner">
                 <% @recommended_videos.each_with_index do |videos, index| %>
                   <ul class="<%= 'active' if index.zero? %> item video-thumbs">
-                    <%= "No Recommendations" if videos.blank?%>
                     <% videos.each do |video| %>
                       <li class="vimeo-link">
                         <a href="<%= course_video_url(video) %>">
