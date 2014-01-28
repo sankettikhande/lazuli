@@ -10,9 +10,10 @@
         <div class="row">
           <div class="col-sm-12">
             <div id="rcmd-vids" class="carousel slide rcmd-vid-list">
+              <%= "No Recommendations" if @recommended_videos.blank? %>
               <!-- Carousel items -->
               <div class="carousel-inner">
-                <% @recommended_videos.in_groups(2, false).each_with_index do |videos, index| %>
+                <% @recommended_videos.each_with_index do |videos, index| %>
                   <ul class="<%= 'active' if index.zero? %> item video-thumbs">
                     <% videos.each do |video| %>
                       <li class="vimeo-link">
@@ -26,8 +27,10 @@
                 <% end %>
               </div>              
               <!-- Carousel-1 nav -->
-              <a class="carousel-control left" href="#rcmd-vids" data-slide="prev"><i class="fa fa-caret-left"></i></a>
-              <a class="carousel-control right" href="#rcmd-vids" data-slide="next"><i class="fa fa-caret-right"></i></a>
+              <% if @recommended_videos.count > 1 %>
+                <a class="carousel-control left" href="#rcmd-vids" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                <a class="carousel-control right" href="#rcmd-vids" data-slide="next"><i class="fa fa-caret-right"></i></a>
+              <% end %>
             </div>
           </div>
         </div>
