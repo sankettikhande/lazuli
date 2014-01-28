@@ -61,12 +61,16 @@
 	        	<div class="col-md-2">
 	        		<%= f.check_box 'permission_watch' %><label>Watch</label>
 	        	</div>
-	        	<div class="col-md-2">
-	        		<%= f.check_box 'permission_share' %><label>Share</label>
-	        	</div>
-	        	<div class="col-md-2">
-	        		<%= f.check_box 'permission_create' %><label>Create</label>
-	        	</div>
+	        	<% if f.object.permission_share %>
+		        	<div class="col-md-2">
+		        		<%= f.check_box 'permission_share' %><label>Share</label>
+		        	</div>
+	        	<% end %>
+	        	<% if f.object.permission_create %>
+		        	<div class="col-md-2">
+		        		<%= f.check_box 'permission_create' %><label>Create</label>
+		        	</div>
+	        	<% end %>
 	        </div>
 	      </div>
 
