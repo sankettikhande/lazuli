@@ -1,11 +1,6 @@
 class SessionsController < Devise::SessionsController
 
-  def new
-    @courses = Course.last(3)
-    self.resource = resource_class.new(sign_in_params)
-    clean_up_passwords(resource)
-    respond_with(resource, serialize_options(resource))
-  end
+  before_filter :load_course, :only => [:new]
 
   def create
     resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
@@ -29,5 +24,10 @@ class SessionsController < Devise::SessionsController
     respond_to do |format|
       format.js
     end
+  end
+
+  private
+  def load_course
+    @courses = Course.last(3)
   end
 end
