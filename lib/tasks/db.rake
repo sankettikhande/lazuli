@@ -61,8 +61,8 @@ namespace :db do
 	
   task :update_channel_ids => :environment do
     Course.find_each do |course|
-      channel = ChannelCourse.where(:course_id => course.id).select(:channel_id).map(&:channel_id)
-      course.update_attribute(:channel_id,channel.join(",")) if course.channel_id.blank?
+      channel_id = Channel.where(:admin_user_id => course.channel_admin_user_id).pluck(:id)
+      course.update_attribute(:channel_id, channel_id.join(",")) if course.channel_id.blank?
     end
   end
 end
