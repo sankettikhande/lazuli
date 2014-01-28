@@ -1,4 +1,12 @@
 class SessionsController < Devise::SessionsController
+
+  def new
+    @courses = Course.last(3)
+    self.resource = resource_class.new(sign_in_params)
+    clean_up_passwords(resource)
+    respond_with(resource, serialize_options(resource))
+  end
+
   def create
     resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
     if resource
