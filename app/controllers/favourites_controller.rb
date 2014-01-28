@@ -4,8 +4,7 @@ class FavouritesController < ApplicationController
 
 	def create
 		fav_params = {:favouritable_type => params[:item_type], :favouritable_id => params[:item_id], :user_id => current_user.id}
-		favourite = Favourite.where(fav_params)
-		unless favourite.blank?
+		if Favourite.exists?(fav_params)
 			@alertClass = "info"
 			@msg = "#{params[:item_type]} already exists in favourite list."
 		else
