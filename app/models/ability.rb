@@ -17,12 +17,15 @@ class Ability
             topic.channel_admin_user_id == user.id || topic.course_admin_user_id == user.id
         end
         can :manage, User do |u|
-            u.created_by = user.id || user.administrated_channel_subscriber_ids.include?(u.id)
+            u.created_by == user.id || user.administrated_channel_subscriber_ids.include?(u.id)
         end
         can :manage, Video do |video| 
             video.channel_admin_user_id == user.id || video.course_admin_user_id == user.id
         end
         can :create, [Topic,Video,Course,User]
+        can :manage, UserChannelSubscription do |ccp|
+            user.administrated_channel_ids.include?(ccp.channel_id) || user.administrated_course_ids.include?(ccp.course_id)
+        end
         cannot :create, Channel
     elsif user.is_course_admin?
         can :manage, Course, :course_admin_user_id => user.id
