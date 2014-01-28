@@ -68,7 +68,7 @@ Lazuli::Application.routes.draw do
     end
     resources :user_channel_subscriptions
   end
-
+  resources :favourites
   resources :channels, :only => [:index, :show] 
   resources :courses, :only => [:index, :show]
   match 'courses/:id/:video_id' => 'courses#show'

@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, :through => :user_channel_subscriptions
   has_many :administrated_channels, :class_name => Channel, :foreign_key => :admin_user_id
   has_many :administrated_courses, :class_name => Course, :foreign_key => :course_admin_user_id
+  has_many :favourites, :dependent => :destroy
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
   validates_uniqueness_of :name, :message => "^User name has already taken"
