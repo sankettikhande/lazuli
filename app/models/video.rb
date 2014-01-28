@@ -24,6 +24,7 @@ class Video < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
   validates_presence_of :clip
+  validates_attachment_content_type :clip, :content_type => ['video/x-msvideo','video/avi','video/quicktime','video/3gpp','video/x-ms-wmv','video/mp4','video/mpeg','video/x-flv']
   validates :status, :inclusion => {:in => @@video_statuses}
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
@@ -31,7 +32,7 @@ class Video < ActiveRecord::Base
   
   after_save :update_bookmarks, :if => :bookmarked?
   after_create :update_admins_and_creator_ids
-
+  
   def upload_single_video
     video = self.upload
     video.topic.create_album_for_single_video(video) if video.topic.vimeo_album_id.blank?
