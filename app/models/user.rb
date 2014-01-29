@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, :through => :user_channel_subscriptions
   has_many :administrated_channels, :class_name => Channel, :foreign_key => :admin_user_id
   has_many :administrated_courses, :class_name => Course, :foreign_key => :course_admin_user_id
+  has_many :favourites, :dependent => :destroy
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
   validates_uniqueness_of :name, :message => "^User name has already taken"
@@ -80,6 +81,14 @@ class User < ActiveRecord::Base
 
   def administrator_channel_subscribers
     User.find(administrated_channel_subscriber_ids)
+  end
+
+  def permitted_channels
+    if self.is_admin?
+      Channel.all
+    else
+      Channel.joins(:courses).where("courses.channel_admin_user_id =? OR courses.course_admin_user_id = ?", self.id, self.id).group(:id)
+    end
   end
 
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )

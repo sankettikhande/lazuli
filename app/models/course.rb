@@ -26,7 +26,6 @@ class Course < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_presence_of :subscription_ids, :message => "^Select atleast one Subscription"
   validate :course_name
-  validates_presence_of :channel_id, :message => "^Channel Name can't be blank"
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
   #SCOPES
