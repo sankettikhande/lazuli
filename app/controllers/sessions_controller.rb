@@ -1,4 +1,7 @@
 class SessionsController < Devise::SessionsController
+
+  before_filter :load_course, :only => [:new]
+
   def create
     resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
     if resource
@@ -21,5 +24,10 @@ class SessionsController < Devise::SessionsController
     respond_to do |format|
       format.js
     end
+  end
+
+  private
+  def load_course
+    @courses = Course.last(3)
   end
 end

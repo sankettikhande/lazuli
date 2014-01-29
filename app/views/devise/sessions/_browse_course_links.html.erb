@@ -1,0 +1,17 @@
+<ul class="dropdown-menu">
+	<% topics.each do |topic| %>
+		<% videos = topic.videos %>
+		<li class="<%= 'dropdown-submenu' if videos.any? %>">
+			<%= link_to(topic.title.titleize, course_video_path(course.id)) %>
+			<% if videos.any? %>
+				<ul class="dropdown-menu">
+					<% videos.each do |video| %>
+						<li>
+							<%= link_to(video.title.titleize, course_videos_path(course.id,video.id)) %>
+						</li>
+					<% end %>
+				</ul>
+			<% end %>
+		</li>
+	<% end %>
+</ul>
