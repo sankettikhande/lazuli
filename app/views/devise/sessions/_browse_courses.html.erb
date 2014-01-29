@@ -1,0 +1,20 @@
+<div class="row hidden-xs">
+	<div class="col-xs-12">
+		<div class="btn-group">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
+				Browse Courses&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<% @courses.each do |course| %>
+					<% topics = course.topics %>
+						<li class="<%= 'dropdown-submenu' if topics.any? %>">
+						<%= link_to(course.name.titleize, course_video_path(course.id)) %>
+						<%= render 'devise/sessions/browse_course_links', :topics => topics, :course => course if topics.any? %>
+					</li>
+				<% end %>
+				<li class="divider"></li>
+				<li><a href="#">Browse Libary</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

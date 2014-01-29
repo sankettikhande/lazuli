@@ -8,11 +8,11 @@
           <div id="new-vids" class="carousel slide new-vid-list">
             <!-- Carousel items -->
             <div class="carousel-inner">
-              <% @videos.in_groups(3, false).each_with_index do |videos, index| %>
+              <% @videos.each_with_index do |videos, index| %>
                 <ul class="<%= is_active_videos(index) %> item video-thumbs">
                   <% videos.each do |video|%>
                     <li class="vimeo-thumb">
-                      <a href="<%= course_video_url(video) %>">
+                      <a href="<%= course_videos_url(video.topic.course.id, video.id) %>">
                         <%= image_tag(video_thumbnail_image(video), alt: "Image") %>
                         <p><%= video.title %></p>
                       </a>
