@@ -7,5 +7,9 @@ class CreateFavourites < ActiveRecord::Migration
     	t.integer :user_id
       t.timestamps
     end
+
+    add_index :favourites, :favouritable_type
+    add_index :favourites, :favouritable_id
+    add_index :favourites, :user_id
   end
 end

@@ -1,7 +1,4 @@
 class FavouritesController < ApplicationController
-	def index
-	end
-
 	def create
 		fav_params = {:favouritable_type => params[:item_type], :favouritable_id => params[:item_id], :user_id => current_user.id}
 		if Favourite.exists?(fav_params)
