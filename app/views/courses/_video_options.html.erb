@@ -1,3 +1,4 @@
+<div id="flash"></div>
 <div class="row">
   <div class="col-sm-12 col-md-6">
 	  <ul class="video-tags">
@@ -10,7 +11,8 @@
   <!-- col-8 ends -->
   <div class="col-sm-12 col-md-6">
     <div class="video-save-options">
-      <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-star"></i> Add to Favourites</button>
+
+      <%= link_to '<button type="button" class="btn btn-link" data-toggle="button" id="btn-add-favourite-video"><i class="fa fa-star"></i> Add to Favourites</button>'.html_safe, favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
       <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-clock-o"></i> Watch later</button>
     </div>
   </div>
