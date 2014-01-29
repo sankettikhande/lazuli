@@ -72,4 +72,5 @@ Lazuli::Application.routes.draw do
   resources :channels, :only => [:index, :show] 
   resources :courses, :only => [:index, :show]
   match 'courses/:id/:video_id' => 'courses#show', :as => :course_videos
+  match 'courses/:id' => 'courses#show', :as => :course_video
 end
