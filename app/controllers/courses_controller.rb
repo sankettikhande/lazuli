@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 	end
 
 	def show
-		@course = Course.find(params[:id])
+		@course = Course.cached_find(params[:id])
 		@video = load_video
 		@recommended_videos = load_recommended_videos
 	end
@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
 	end
 
 	def load_video
-		return Video.published.find(params[:video_id]) if params[:video_id]
+		return Video.published.cached_find(params[:video_id]) if params[:video_id]
 		@course.course_first_video
 	end
 end

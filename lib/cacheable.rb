@@ -23,16 +23,25 @@ module Cacheable
       Rails.cache.delete([self, r])
     end
     Rails.cache.delete(self.class.name)
+    Rails.cache.delete([self.class.name, "Published"])
+    Rails.cache.delete_matched("#{self.class.name}_Published_")
   end
 
   module ClassMethods
     def cached_find(id)
-
       Rails.cache.fetch([name, id]) { find(id) }
     end
 
     def cached_all
       Rails.cache.fetch(name) {all}
+    end
+
+    def cached_published_all
+      Rails.cache.fetch([name, "Published"]) { where(:status => "Published").all }
+    end
+
+    def cached_published_all(limit)
+      Rails.cache.fetch("#{name}_Published_#{limit}") { where(:status => "Published").order('created_at').limit(limit).all }
     end
   end
 end
