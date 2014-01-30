@@ -7,6 +7,7 @@ class Video < ActiveRecord::Base
   attr_accessor :bookmarks_from_params
   cattr_accessor :video_statuses
   has_many :bookmarks, :dependent => :destroy
+  has_many :favourites, :as => :favouritable
   belongs_to :topic
 
   include Cacheable
