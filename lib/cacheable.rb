@@ -36,12 +36,12 @@ module Cacheable
       Rails.cache.fetch(name) {all}
     end
 
-    def cached_published_all
-      Rails.cache.fetch([name, "Published"]) { where(:status => "Published").all }
-    end
-
-    def cached_published_all(limit)
-      Rails.cache.fetch("#{name}_Published_#{limit}") { where(:status => "Published").order('created_at').limit(limit).all }
+    def cached_published_all(limit=nil)
+      if limit
+        Rails.cache.fetch("#{name}_Published_#{limit}") { where(:status => "Published").order('created_at').limit(limit).all }
+      else
+        Rails.cache.fetch([name, "Published"]) { where(:status => "Published").all }
+      end
     end
   end
 end
