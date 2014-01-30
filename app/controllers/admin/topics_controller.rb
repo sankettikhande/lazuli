@@ -83,7 +83,7 @@ class Admin::TopicsController < AdminController
 					format.html{redirect_to "#{admin_contents_url}#topics", notice: notice}
 				end
 			else
-				@courses = Course.all
+				@courses = Course.cached_all
 				format.html { render "edit" }
 			end
 		end
@@ -99,8 +99,8 @@ class Admin::TopicsController < AdminController
 				redirect_to "#{admin_contents_url}#topics", notice: notice
 			end
 		else
-			@courses = Course.all
-			channel = Channel.find(@topic.channel_id)
+			@courses = Course.cached_all
+			channel = Channel.cached_find(@topic.channel_id)
 			@channel_courses = channel.try(:courses) || []
 			render "new"
 		end

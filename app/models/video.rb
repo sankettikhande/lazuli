@@ -8,6 +8,9 @@ class Video < ActiveRecord::Base
   cattr_accessor :video_statuses
   has_many :bookmarks, :dependent => :destroy
   belongs_to :topic
+
+  include Cacheable
+  
   acts_as_taggable
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
