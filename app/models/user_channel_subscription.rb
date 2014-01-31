@@ -8,6 +8,8 @@ class UserChannelSubscription < ActiveRecord::Base
   belongs_to :channel
   belongs_to :course
 
+  include Cacheable
+
   validates_presence_of :subscription_id, :subscription_date, :expiry_date, :if => Proc.new{|f| f.permission_create.blank? || f.permission_create == false }
   validates_presence_of :channel_id, :course_id
   validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id], :message => "^User has already subscribed to this course."}
