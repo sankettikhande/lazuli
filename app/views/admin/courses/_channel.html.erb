@@ -4,7 +4,7 @@
 	<label class="control-label">Channel<%= required_field %></label>
 </div>
 <div class="col-sm-4">
-	<%= f.collection_select :channel_id , @channels, :id, :name ,{:include_blank => "Please Select"}, {:class =>"form-control channel_id validate[required]" } %>
+	<%= f.collection_select :channel_id , @channels, :id, :name ,{:include_blank => "Please Select"}, {:class =>"channel_id select2me validate[required]", :id => "channel_id" } %>
 </div>
 <div class="col-sm-2">
 	<label class="control-label">Channel Type<%= required_field %></label>

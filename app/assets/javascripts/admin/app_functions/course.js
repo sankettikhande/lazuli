@@ -11,4 +11,24 @@ $(document).ready(function(){
 		window.location.href = '/admin/contents' + "#" +selected_fields.toLowerCase();
   });
 
+ 	$('#channel_id').change(function(){
+ 		if($(this).val() != ''){
+	  	$('#s2id_channel_id').removeClass('validate[required]');
+	  }else{
+	  	$('#s2id_channel_id').addClass('validate[required]');
+	  }
+	});
+
+	if ($('#s2id_channel_id').val() != ''){
+		$.each($(".select2me"), function (i, n) {
+			$(n).next().show().fadeTo(0, 0).height("0px").css("left", "auto");
+			$(n).prepend($(n).next());
+			$(n).delay(500).queue(function () {
+				if($(this).val() != 1){
+					$(this).removeClass("validate[required]");
+				}
+				$(this).dequeue();
+			});
+		});
+	}
 });
