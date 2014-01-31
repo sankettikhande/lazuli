@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 	def index
   	if user_signed_in?
-  		@videos = Video.cached_published_all(Settings.data_count.latest_video).in_groups_of(Settings.data_count.latest_video_frame, false)
+      @videos = Video.cached_scope('published', {:limit => Settings.data_count.latest_video }).in_groups_of(Settings.data_count.latest_video_frame, false)
   		@courses = Course.last(Settings.data_count.courses)
   	else
   		@courses = Course.last(Settings.data_count.lending_page_courses)
