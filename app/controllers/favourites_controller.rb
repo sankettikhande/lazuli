@@ -1,4 +1,5 @@
 class FavouritesController < ApplicationController
+	before_filter :authenticate_user!
 	def create
 		fav_params = {:favouritable_type => params[:item_type], :favouritable_id => params[:item_id], :user_id => current_user.id}
 		if Favourite.exists?(fav_params)
