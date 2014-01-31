@@ -38,4 +38,9 @@ class UserChannelSubscription < ActiveRecord::Base
     channel.update_attribute(:user_count, channel.user_count - 1)
     course.update_attribute(:user_count, course.user_count - 1)
   end
+
+  def set_subscription_date_range(duration)
+    self.subscription_date = Date.today
+    self.expiry_date = Date.today + duration.days
+  end
 end

@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
 	end
 
 	def show
-		@course = Course.find(params[:id])
+		@course = Course.cached_find(params[:id])
 		@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user.id, :course_id => @course.id).limit(1)
 		@video = load_video
 		@recommended_videos = load_recommended_videos
@@ -23,7 +23,7 @@ class CoursesController < ApplicationController
 	end
 
 	def load_video
-		return Video.published.find(params[:video_id]) if params[:video_id]
+		return Video.published.cached_find(params[:video_id]) if params[:video_id]
 		@course.course_first_video
 	end
 end

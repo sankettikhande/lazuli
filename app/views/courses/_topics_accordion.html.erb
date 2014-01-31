@@ -3,7 +3,7 @@
     <div class="pull-left"><h5><a href="#"><%= @course.name %></a></h5></div>
     <div class="pull-right">
       <% if @user_subscription.blank? %>
-      <span class="label label-primary" data-toggle="modal" id="lbl-sbscribe-now" data-target="#sbscriptionModal">Subscribe Now</span>
+        <span class="label label-primary" data-toggle="modal" id="lbl-sbscribe-now" data-target="#sbscriptionModal">Subscribe Now</span>
       <% end %>
     </div>
     <div class="clearfix"></div>
@@ -38,12 +38,16 @@
       </div>
       <%= form_tag subscribe_course_url @course.id do %>
         <input type="hidden" name="course_subscription[channel_id]" value="<%= @course.channel_id %>">
+        <input type="hidden" name="course_subscription[course_id]" value="<%= @course.id %>">
+        <input type="hidden" name="course_subscription[user_id]" value="<%= current_user.id %>">
+        <input type="hidden" name="course_subscription[channel_id]" value="<%= @course.channel_id %>">
+
         <input type="hidden" name="video_id" value="<%=params[:video_id] %>">
         <div class="modal-body">
           <h5>Course Name : <a href="#"><%= @course.name %></a></h5>
           <h5>Available Subscriptions</h5>
           <% @course.course_subscriptions.each do |cs| %>
-            <p style="margin-left: 50px;"><%=radio_button :course_subscription, :subscription_id, cs.subscription.id, :id => "radio-btn-course-subscription" %> <%= cs.subscription.name %></p>
+            <p style="margin-left: 50px;"><%=radio_button :course_subscription, :subscription_id, cs.subscription.id, :class => "radio-btn-course-subscription" %> <%= cs.subscription.name %></p>
             <input type="hidden" name="duration_<%= cs.subscription.id %>" value="<%= cs.subscription.calculated_days %>">
           <% end %>
         </div>
