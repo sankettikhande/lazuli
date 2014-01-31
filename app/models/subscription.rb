@@ -6,6 +6,8 @@ class Subscription < ActiveRecord::Base
   has_many :user_channel_subscriprions
   validates :name, :presence => true
 
+  include Cacheable
+  
   before_save :set_calulated_days
 
   #SCOPES

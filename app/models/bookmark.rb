@@ -3,6 +3,8 @@ class Bookmark < ActiveRecord::Base
   belongs_to :video
   before_save :update_bookmark
 
+  include Cacheable
+
   validates :title, :time, :presence => true
   validates :time, :format => { :with => /[0-9]+:[0-9]+:[0-9]+/ }, :unless => Proc.new {|c| c.time.blank?}
   

@@ -9,6 +9,9 @@ class Video < ActiveRecord::Base
   has_many :bookmarks, :dependent => :destroy
   has_many :favourites, :as => :favouritable
   belongs_to :topic
+
+  include Cacheable
+  
   acts_as_taggable
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
