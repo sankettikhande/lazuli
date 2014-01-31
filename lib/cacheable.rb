@@ -23,7 +23,7 @@ module Cacheable
       Rails.cache.delete([self, r])
     end
     Rails.cache.delete(self.class.name)
-    Rails.cache.delete_matched("#{self.class.name}_#{id}")
+    Rails.cache.delete_matched([self.class.name, id].join('_'))
   end
 
   module ClassMethods
