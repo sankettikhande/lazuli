@@ -23,11 +23,14 @@ module Cacheable
       Rails.cache.delete([self, r])
     end
     Rails.cache.delete(self.class.name)
+    Rails.cache.delete_matched("#{self.class.name}_#{id}")
   end
 
   module ClassMethods
-    def cached_find(id)
-      Rails.cache.fetch([name, id]) { find(id) }
+    def cached_find(id, options={})
+      Rails.cache.fetch([name, id, options].join('_')) { 
+        options[:include].present? ? find(id, :include => options[:include]) : find(id) 
+      }
     end
 
     def cached_all
