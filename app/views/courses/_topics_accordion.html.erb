@@ -46,7 +46,7 @@
           <h5>Available Subscriptions</h5>
           <% @course.course_subscriptions.each do |cs| %>
             <p style="margin-left: 50px;"><%=radio_button :course_subscription, :subscription_id, cs.subscription.id, :required => true %> <%= cs.subscription.name %></p>
-            <input type="hidden" name="duration_<%= cs.subscription.id %>" value="<%= cs.subscription.calculated_days %>">
+            <%= hidden_field_tag "duration_#{cs.subscription.id}", cs.subscription.calculated_days %>
           <% end %>
         </div>
         <div class="modal-footer">
