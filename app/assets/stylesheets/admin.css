@@ -88,3 +88,11 @@
 .dataTables_filter .filter_column_names{
   margin-left: 10px;
 }
+
+.select2-results{
+	max-height: 120px;
+}
+
+#s2id_channel_id {
+	width: 100%;
+}

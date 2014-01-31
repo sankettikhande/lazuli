@@ -23,8 +23,6 @@ module Cacheable
       Rails.cache.delete([self, r])
     end
     Rails.cache.delete(self.class.name)
-    Rails.cache.delete([self.class.name, "Published"])
-    Rails.cache.delete_matched("#{self.class.name}_Published_")
   end
 
   module ClassMethods
@@ -36,12 +34,10 @@ module Cacheable
       Rails.cache.fetch(name) {all}
     end
 
-    def cached_published_all(limit=nil)
-      if limit
-        Rails.cache.fetch("#{name}_Published_#{limit}") { where(:status => "Published").order('created_at').limit(limit).all }
-      else
-        Rails.cache.fetch([name, "Published"]) { where(:status => "Published").all }
-      end
+    def cached_scope(scope, options={})
+      Rails.cache.fetch([self.class.name, scope, options]) { 
+        options[:limit].present? ? send(scope).limit(options[:limit]) : send(scope) 
+      }
     end
   end
 end
