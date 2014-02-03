@@ -11,6 +11,6 @@ class VideosController < ApplicationController
 	private
 	
 	def sphinx_condition(tag)
-		tag.blank? ? {:status => 'Published'} : { :tags => "*#{tag}*", :status => 'Published' }
+		tag.blank? ? {:status => 'Published'} : { :tags => "#{tag}*", :status => 'Published' }
 	end
 end
