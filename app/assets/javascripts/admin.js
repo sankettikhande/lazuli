@@ -97,10 +97,11 @@ function triggerFnFilter(dtaTable, tableId, aoColumns){
     };
   });
 
-  $(tableId+'_filter label input').on('keypress', function(e){
-    /* diabling datatable's default search on keypress of search input box*/
-    $(tableId+'_filter label input').unbind('keypress');
-    dtaTable.fnFilter( $('select#column_names').val(), 1 );
+  $(tableId+'_filter label input').on('keyup', function(e){
+    /* diabling datatable's default search on keypup of search input box*/
+    if($(tableId+'_filter label input').val() != ''){
+      dtaTable.fnFilter($(tableId+'_filter select#column_names').val(), 1 );
+    };
   });
 };
 
