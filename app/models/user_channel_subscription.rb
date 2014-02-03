@@ -23,7 +23,7 @@ class UserChannelSubscription < ActiveRecord::Base
   end
 
   def update_course_user_count
-    course.update_attribute(:user_count, UserChannelSubscription.where(:channel_id => channel_id).count(:user_id, :distinct => true))
+    course.update_attribute(:user_count, UserChannelSubscription.where(:channel_id => channel_id, :course_id => course_id).count(:user_id, :distinct => true))
   end
 
   def create_permission_disabled?

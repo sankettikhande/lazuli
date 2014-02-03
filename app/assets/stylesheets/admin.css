@@ -86,7 +86,14 @@
 	padding-left:15px;	
 }
 .dataTables_filter .filter_column_names{
-  margin-left: 10px;
+	margin-left: 10px;
+	float: left;
+	margin-right: 30px;
+}
+
+#sort_filter{
+	float: left;
+	padding-top: 2px;
 }
 
 .select2-results{
