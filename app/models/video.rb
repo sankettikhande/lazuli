@@ -191,4 +191,8 @@ class Video < ActiveRecord::Base
     tag_list = self.tags.map { |tag| tag.name }
     tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
   end
+
+  def watchable? current_user, video_course_id
+    current_user.subscribed_course_ids.include?(video_course_id)
+  end
 end

@@ -83,6 +83,22 @@ class User < ActiveRecord::Base
     User.find(administrated_channel_subscriber_ids)
   end
 
+  def subscribed_course_ids
+    self.user_channel_subscriptions.pluck("course_id")
+  end
+
+  def subscribed_courses
+    Course.where(:id => subscribed_course_ids )
+  end
+
+  def list_subscribed_videos
+    subscribed_videos = []
+    self.subscribed_courses.includes(topics: [:videos]).each do |course|
+      course.topics.each {|topic| subscribed_videos << topic.videos}
+    end
+    return subscribed_videos
+  end
+
   def permitted_channels
     if self.is_admin?
       Channel.all
