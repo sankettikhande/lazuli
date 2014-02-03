@@ -42,3 +42,27 @@ $("#user_course_form").validationEngine({
     }
   }
 });
+
+function add_valiadate_required() {
+  $("#user_channel_subscription_subscription_id").addClass('validate[required]');
+  $("#user_channel_subscription_subscription_date").addClass('validate[required]');
+  $("#user_channel_subscription_expiry_date").addClass('validate[required]');
+} 
+
+function remove_validate_required() {
+  $("#user_channel_subscription_subscription_id").removeClass('validate[required]');
+  $("#user_channel_subscription_subscription_date").removeClass('validate[required]');
+  $("#user_channel_subscription_expiry_date").removeClass('validate[required]');
+}
+
+if($('#user_channel_subscription_permission_create').is(":checked")){
+    remove_validate_required()  
+}
+
+$('#user_channel_subscription_permission_create').change(function(){
+  if($(this).is(":checked")) {
+    remove_validate_required()
+  }else{
+    add_valiadate_required()
+  }
+})
