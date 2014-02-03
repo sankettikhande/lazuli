@@ -1,5 +1,5 @@
 <% if @videos.blank? %>
-	$("#tag_video_list").html("No videos found.");
+	$("#tag_video_list").html("No videos found for <%= params[:search] %>.");
 <% else %>
 	$("#tag_video_list").html("<%= j(render 'videos/tag_video_list', :videos => @videos)%>");
 <% end %>
