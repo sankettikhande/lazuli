@@ -1,3 +1,5 @@
+//= require ./admin/jquery.validationEngine.js
+//= require ./admin/jquery.validationEngine-en.js
 $(function() {
   var flashCallback,
     _this = this;

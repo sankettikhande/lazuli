@@ -73,4 +73,5 @@ Lazuli::Application.routes.draw do
   resources :courses, :only => [:index, :show]
   match '/courses/:id/:video_id' => 'courses#show', :as => :course_videos
   match '/courses/:id' => 'courses#show', :as => :course_video
+  match '/subscribe/course/:id' => 'subscriptions#subscribe_course', :as => :subscribe_course
 end
