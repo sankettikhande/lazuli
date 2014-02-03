@@ -30,7 +30,6 @@ $(document).ready(function(){
     	load_courses();
     }
     $('select#column_names option[value=""]').attr('selected', 'selected');
-    $('#filter-col').val('')
 	}
 
 	$('.nav-tabs').bind('click', function (e) {

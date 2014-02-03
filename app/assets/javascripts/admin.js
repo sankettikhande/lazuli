@@ -87,7 +87,6 @@ function appendFilterList(optionNames, optionValues, tableId){
   $(tableId+"_filter").append(dropdownHtml);
   clearFilterHtml = "<a class='clear_filter' style='margin-left: 15px;cursor: pointer;'><i class='fa fa-times-circle'></i> Clear Filter</a>"
   $(tableId+"_filter").append(clearFilterHtml);
-  $(tableId+"_filter").append("<input type='hidden' name='filter-col', id='filter-col' >");
 };
 
 /* calls fnFilter of dataTable */
@@ -102,7 +101,7 @@ function triggerFnFilter(dtaTable, tableId, aoColumns){
   $(tableId+'_filter label input').on('keyup', function(e){
     /* diabling datatable's default search on keypup of search input box*/
     if($(tableId+'_filter label input').val() != ''){
-      dtaTable.fnFilter($('#filter-col').val(), 1 );
+      dtaTable.fnFilter($(tableId+'_filter select#column_names').val(), 1 );
     };
   });
 };
