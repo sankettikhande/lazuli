@@ -4,12 +4,12 @@ class Admin::VideosController < AdminController
 	  redirect_to root_url, :alert => exception.message
 	end
 	def edit
-		@video = Video.find(params[:id])
+		@video = Video.cached_find(params[:id])
 		redirect_to "/admin/topics/#{@video.topic_id}/edit"
 	end
 
 	def destroy
-		@video = Video.find(params[:id])
+		@video = Video.cached_find(params[:id])
 		VimeoLib.video.delete(@video.vimeo_id) if @video.vimeo_id.present?
 		@video.destroy
 		respond_to do |format|
@@ -18,7 +18,7 @@ class Admin::VideosController < AdminController
 	end
 
 	def upload
-		@video = Video.find(params[:id])
+		@video = Video.cached_find(params[:id])
 		respond_to do |format|
 			if @video.clip.present?
 				@video.update_attribute(:status, "InProcess")

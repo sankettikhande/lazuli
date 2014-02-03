@@ -8,6 +8,8 @@ class UserChannelSubscription < ActiveRecord::Base
   belongs_to :channel
   belongs_to :course
 
+  include Cacheable
+
   validates_presence_of :subscription_id, :subscription_date, :expiry_date, :if => Proc.new{|f| f.permission_create.blank? || f.permission_create == false }
   validates_presence_of :channel_id, :course_id
   validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id], :message => "^User has already subscribed to this course."}
@@ -35,5 +37,10 @@ class UserChannelSubscription < ActiveRecord::Base
   def update_user_count
     channel.update_attribute(:user_count, channel.user_count - 1)
     course.update_attribute(:user_count, course.user_count - 1)
+  end
+
+  def set_subscription_date_range(duration)
+    self.subscription_date = Date.today
+    self.expiry_date = Date.today + duration.days
   end
 end

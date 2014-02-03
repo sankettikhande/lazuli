@@ -7,7 +7,6 @@ class Topic < ActiveRecord::Base
   belongs_to :course
   belongs_to :channel
   has_many :videos, :dependent => :destroy
-  belongs_to :channel
   accepts_nested_attributes_for :videos, :allow_destroy => true
 
   include Cacheable

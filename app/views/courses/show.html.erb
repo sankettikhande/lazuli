@@ -16,11 +16,13 @@
           <li class="active">Know your worksheet</li>
         </ol>
       </div>
-      <div class="col-sm-2 col-md-2 nopadding-left">
-        <div class="sub-ends">
-          <p class="text-center"><a href="#">Subscription Ends: <b>4th Nov, 2013</b></a></p>
+      <% unless @user_subscription.blank? %>
+        <div class="col-sm-2 col-md-2 nopadding-left">
+          <div class="sub-ends">
+            <p class="text-center"><a href="#">Subscription Ends: <b><%= @user_subscription[0].expiry_date.strftime("%a, %w %B, %Y") %></b></a></p>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </section>
   <section class="course-menu-videos">

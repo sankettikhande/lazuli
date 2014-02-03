@@ -28,6 +28,6 @@ class SessionsController < Devise::SessionsController
 
   private
   def load_course
-    @courses = Course.last(3)
+    @courses = Course.last(Settings.data_count.lending_page_courses)
   end
 end

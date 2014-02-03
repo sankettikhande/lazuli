@@ -3,12 +3,13 @@ class Admin::ChannelsController < AdminController
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
+  before_filter :set_initialization, :only => [:new, :create, :edit, :update]
+
   def index
   end
 
   def new
-    set_initialization
-  	@channel = Channel.new
+    @channel = Channel.new
     course = @channel.courses.build()
     # @subscriptions.count.times do |i|
     #   course.course_subscriptions.build
@@ -20,8 +21,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def create
-    set_initialization
-  	@channel = Channel.new(params[:channel])
+    @channel = Channel.new(params[:channel])
     @channel.courses.each do |course|
       course.created_by = current_user.id
       course.channel_admin_user_id = @channel.admin_user_id
@@ -37,7 +37,6 @@ class Admin::ChannelsController < AdminController
   end
 
   def edit
-    set_initialization
     @channel = Channel.find(params[:id], :include => :courses)
     if @channel.courses.count.zero?
       @channel.courses.build()
@@ -45,7 +44,6 @@ class Admin::ChannelsController < AdminController
   end
 
   def update
-    set_initialization
     @channel = Channel.cached_find(params[:id])
     respond_to do |format|  
       if @channel.update_attributes(params[:channel])
@@ -82,6 +80,6 @@ class Admin::ChannelsController < AdminController
 
   private
   def set_initialization
-    @subscriptions = Subscription.all
+    @subscriptions = Subscription.cached_all
   end
 end
