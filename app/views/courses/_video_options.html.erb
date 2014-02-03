@@ -4,7 +4,9 @@
 	  <ul class="video-tags">
 	    <li><i class="fa fa-tag"></i> Tags:</li>
 	    <% @video.tags.each do |tag| %>
-	      <li><a href="#"><%= tag.name %></a></li>
+	      <li>
+          <%= link_to tag.name, tag_videos_videos_path(:search => tag.name) %>
+        </li>
 	    <% end %>
 	  </ul>
 	</div>
