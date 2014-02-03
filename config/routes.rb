@@ -71,6 +71,12 @@ Lazuli::Application.routes.draw do
   resources :favourites
   resources :channels, :only => [:index, :show] 
   resources :courses, :only => [:index, :show]
+  resources :videos do
+    collection do
+      get 'tag_videos'
+      post 'tag_search'
+    end
+  end
   match '/courses/:id/:video_id' => 'courses#show', :as => :course_videos
   match '/courses/:id' => 'courses#show', :as => :course_video
 end
