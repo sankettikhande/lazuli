@@ -80,7 +80,7 @@ function initDataTable(tableId, url, aoColumns){
 
 /* appends filter dropdown */
 function appendFilterList(optionNames, optionValues, tableId){
-  var dropdownHtml = '<select class="filter_column_names" id="column_names"><option value="">ALL</option>'
+  var dropdownHtml = '<span id="sort_filter">Sort By:</span><select class="filter_column_names" id="column_names"><option value="">ALL</option>'
   $.each( optionValues, function( i, val ) {
     dropdownHtml = dropdownHtml + '<option value='+val+'>'+optionNames[i]+'</option>'
   });
