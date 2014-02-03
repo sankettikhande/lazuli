@@ -87,20 +87,23 @@ function appendFilterList(optionNames, optionValues, tableId){
   $(tableId+"_filter").append(dropdownHtml);
   clearFilterHtml = "<a class='clear_filter' style='margin-left: 15px;cursor: pointer;'><i class='fa fa-times-circle'></i> Clear Filter</a>"
   $(tableId+"_filter").append(clearFilterHtml);
+  $(tableId+"_filter").append("<input type='hidden' name='filter-col', id='filter-col' >");
 };
 
 /* calls fnFilter of dataTable */
 function triggerFnFilter(dtaTable, tableId, aoColumns){
   $('select#column_names').on('change', function(e){
+    $('#filter-col').val($(this).val());
     if($(tableId+'_filter label input').val() != ''){
       dtaTable.fnFilter( $(this).val(), 1 );
     };
   });
 
-  $(tableId+'_filter label input').on('keypress', function(e){
-    /* diabling datatable's default search on keypress of search input box*/
-    $(tableId+'_filter label input').unbind('keypress');
-    dtaTable.fnFilter( $('select#column_names').val(), 1 );
+  $(tableId+'_filter label input').on('keyup', function(e){
+    /* diabling datatable's default search on keypup of search input box*/
+    if($(tableId+'_filter label input').val() != ''){
+      dtaTable.fnFilter($('#filter-col').val(), 1 );
+    };
   });
 };
 
