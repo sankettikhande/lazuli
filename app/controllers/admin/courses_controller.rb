@@ -52,14 +52,14 @@ class Admin::CoursesController < AdminController
 	end
 
 	def get_channel_info
-		@course = Course.find(params[:id], :include => :channels)
+		@course = Course.cached_find(params[:id], :include => :channels)
 		respond_to do |format|
 			format.json{}
 		end
 	end
 
 	def course_subscription_types
-		@course = Course.find(params[:id], :include => :subscriptions)
+		@course = Course.cached_find(params[:id], :include => :subscriptions)
 		@course_subscriptions = @course.subscriptions
 		@courses_permissions = @course.channel_course_permissions.first
 		respond_to do |format|

@@ -37,7 +37,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def edit
-    @channel = Channel.find(params[:id], :include => :courses)
+    @channel = Channel.cached_find(params[:id], :include => :courses)
     if @channel.courses.count.zero?
       @channel.courses.build()
     end
@@ -56,7 +56,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def destroy
-    channel = Channel.find(params[:id], :include => :courses)
+    channel = Channel.cached_find(params[:id], :include => :courses)
     channel.destroy
     respond_to do |format|
       format.html { redirect_to admin_channels_url}   
@@ -73,7 +73,7 @@ class Admin::ChannelsController < AdminController
   end
 
   def channel_courses
-    channel = Channel.find(params[:id], :include => :courses)
+    channel = Channel.cached_find(params[:id], :include => :courses)
     @channel_courses = channel.permitted_courses(current_user)
 
   end

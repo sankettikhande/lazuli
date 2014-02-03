@@ -7,11 +7,4 @@ $( document ).ready(function() {
       $('li.active').removeClass('active');
       $(this).addClass('active');
     });
-
-	$('#btn-subscribe').on('click', function(){
-		if (!$('.radio-btn-course-subscription').val()){
-			alert('Please select a subscription');
-			return false;
-		}
-	});
 });
