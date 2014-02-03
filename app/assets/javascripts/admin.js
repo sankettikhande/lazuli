@@ -92,7 +92,6 @@ function appendFilterList(optionNames, optionValues, tableId){
 /* calls fnFilter of dataTable */
 function triggerFnFilter(dtaTable, tableId, aoColumns){
   $('select#column_names').on('change', function(e){
-    $('#filter-col').val($(this).val());
     if($(tableId+'_filter label input').val() != ''){
       dtaTable.fnFilter( $(this).val(), 1 );
     };
