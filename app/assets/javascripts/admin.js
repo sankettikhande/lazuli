@@ -80,7 +80,7 @@ function initDataTable(tableId, url, aoColumns){
 
 /* appends filter dropdown */
 function appendFilterList(optionNames, optionValues, tableId){
-  var dropdownHtml = '<span id="sort_filter">Sort By:</span><select class="filter_column_names" id="column_names"><option value="">ALL</option>'
+  var dropdownHtml = '<span id="sort_filter">Sort By:</span><select class="filter_column_names" id="column_names"><option value="all">ALL</option>'
   $.each( optionValues, function( i, val ) {
     dropdownHtml = dropdownHtml + '<option value='+val+'>'+optionNames[i]+'</option>'
   });
@@ -98,7 +98,8 @@ function triggerFnFilter(dtaTable, tableId, aoColumns){
   });
 
   $(tableId+'_filter label input').on('keyup', function(e){
-    /* diabling datatable's default search on keypup of search input box*/
+    /* TODO stop from being fired up fnfilter call twice on a single keyup event
+       --need to disable datatable's default search somehow on keypup event */
     if($(tableId+'_filter label input').val() != ''){
       dtaTable.fnFilter($(tableId+'_filter select#column_names').val(), 1 );
     };

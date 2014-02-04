@@ -1,3 +1,4 @@
+/* TODO -- Need to refactor these methods */
 $(document).ready(function(){
 	function load_topics(){
 		$.ajax({

@@ -162,8 +162,14 @@ class User < ActiveRecord::Base
     end
     sphinx_options.merge!(search_options)
     sphinx_options.merge!(sort_options)
-    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
-    User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+
+    if options[:sSearch_1] == 'all'
+      condition_string = "@(name,actual_name,email,phone_number,company_name) #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}*"
+      User.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
+    else
+      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+      User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+    end
   end
 
   def set_nest(channel_subscription)
