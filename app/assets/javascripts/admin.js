@@ -80,7 +80,7 @@ function initDataTable(tableId, url, aoColumns){
 
 /* appends filter dropdown */
 function appendFilterList(optionNames, optionValues, tableId){
-  var dropdownHtml = '<select class="filter_column_names" id="column_names"><option value="">ALL</option>'
+  var dropdownHtml = '<span id="sort_filter">Sort By:</span><select class="filter_column_names" id="column_names"><option value="">ALL</option>'
   $.each( optionValues, function( i, val ) {
     dropdownHtml = dropdownHtml + '<option value='+val+'>'+optionNames[i]+'</option>'
   });
@@ -97,10 +97,11 @@ function triggerFnFilter(dtaTable, tableId, aoColumns){
     };
   });
 
-  $(tableId+'_filter label input').on('keypress', function(e){
-    /* diabling datatable's default search on keypress of search input box*/
-    $(tableId+'_filter label input').unbind('keypress');
-    dtaTable.fnFilter( $('select#column_names').val(), 1 );
+  $(tableId+'_filter label input').on('keyup', function(e){
+    /* diabling datatable's default search on keypup of search input box*/
+    if($(tableId+'_filter label input').val() != ''){
+      dtaTable.fnFilter($(tableId+'_filter select#column_names').val(), 1 );
+    };
   });
 };
 

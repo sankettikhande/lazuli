@@ -65,4 +65,14 @@ namespace :db do
       course.update_attribute(:channel_id, channel_id.join(",")) if course.channel_id.blank?
     end
   end
+
+  task :update_user_count => :environment do
+    Channel.find_each do |channel|
+      channel.update_attribute(:user_count, UserChannelSubscription.where(:channel_id => channel.id).count(:user_id, :distinct => true))
+      channel.courses.each do |course|
+        course.update_attribute(:user_count, UserChannelSubscription.where(:channel_id => channel.id, :course_id => course.id).count(:user_id, :distinct => true))
+      end
+    end
+  end
+
 end
