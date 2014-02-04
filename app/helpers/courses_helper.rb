@@ -1,6 +1,6 @@
 module CoursesHelper
 	def vimeo_iframe_url
-		"//player.vimeo.com/video/#{@video.vimeo_id}"
+		"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1"
 	end
 
 	def is_active topic, index

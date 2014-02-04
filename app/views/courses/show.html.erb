@@ -37,7 +37,7 @@
           <div class="row">
             <div class="col-sm-12">
               <div class="place-video">
-                <iframe src="<%= vimeo_iframe_url %>" width="1280" height="720" frameborder="0" title="Brad!" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <iframe src="<%= vimeo_iframe_url %>" id="player_1" width="1280" height="720" frameborder="0" title="Brad!" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
               </div>
             </div>
             <!-- col-12 ends -->
@@ -55,3 +55,33 @@
 </div>
 
 <%= javascript_include_tag "application/main_app/course.js"%>
+
+<script>
+  $( document ).ready(function() {
+    // Listen for the ready event for any vimeo video players on the page
+    var player = $('#player_1')[0];
+    $f(player).addEvent('ready', ready);
+    
+    function addEvent(element, eventName, callback) {
+        if (element.addEventListener) {
+            element.addEventListener(eventName, callback, false);
+        }
+        else {
+            element.attachEvent(eventName, callback, false);
+        }
+    }
+
+    function ready(player_id) {
+        var froogaloop = $f(player_id);
+
+        function onPlay() {
+          froogaloop.addEvent('play', function(data) {
+              $.ajax({
+                url: "<%= remove_from_watch_list_url(@video.id, @course.id) << '.js' %>"
+              })
+          });
+        }
+        onPlay();
+    }
+  });
+</script>
