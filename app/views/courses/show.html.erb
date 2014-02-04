@@ -76,12 +76,18 @@
 
         function onPlay() {
           froogaloop.addEvent('play', function(data) {
+            if($("#watch_list_btn").data("watch") == true){
               $.ajax({
                 url: "<%= remove_from_watch_list_url(@video.id, @course.id) << '.js' %>"
-              })
+              });
+              $("#watch_list_btn").data("watch", false);
+            }
           });
         }
         onPlay();
     }
+    $("#watch_list_btn").click(function () {
+      $("#watch_list_btn").data("watch", true);
+    });
   });
 </script>
