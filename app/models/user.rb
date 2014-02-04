@@ -175,10 +175,6 @@ class User < ActiveRecord::Base
     errors.add(:base, "User course subscription must be unique for a channel.") unless (ucs_attribs.uniq.length == ucs_attribs.length)
   end  
 
-  def skip_confirmation!
-    self.confirmed_at = Time.now.utc
-  end
-
   def set_course_admin_role
     ucs_attribs = self.user_channel_subscriptions.map(&:attributes).collect{|x| x.keep_if{|k, v| ["permission_create"].include? k}}
     if ucs_attribs.include?({"permission_create"=>true})

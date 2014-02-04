@@ -13,10 +13,22 @@
   <!-- col-8 ends -->
   <div class="col-sm-12 col-md-6">
     <div class="video-save-options">
-
-      <%= link_to '<button type="button" class="btn btn-link" data-toggle="button" id="btn-add-favourite-video"><i class="fa fa-star"></i> Add to Favourites</button>'.html_safe, favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
+      <span id='add-favourite' hidden>
+        <%= link_to button_field("fa fa-star", 'btn btn-link active', 'Add to Favourites'), favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
+      </span>
+      <span id='remove-favourite' hidden>
+      <%= link_to button_field("fa fa-star red-text", 'btn btn-link', 'Remove from Favourites'), favourite_path(item_id: @video.id, item_type: "Video"), :method => :delete, :remote => true %>
+      </span>
       <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-clock-o"></i> Watch later</button>
     </div>
   </div>
   <!-- col-4 ends -->
 </div>
+
+<script type="text/javascript">
+  <% if @favourite_video %>
+    $('#remove-favourite').show()
+  <% else %>
+    $('#add-favourite').show()
+  <% end %>
+</script>
