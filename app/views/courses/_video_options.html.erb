@@ -15,7 +15,7 @@
     <div class="video-save-options">
 
       <%= link_to '<button type="button" class="btn btn-link" data-toggle="button" id="btn-add-favourite-video"><i class="fa fa-star"></i> Add to Favourites</button>'.html_safe, favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
-      <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-clock-o"></i> Watch later</button>
+      <%= link_to '<button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-clock-o"></i> Watch later</button>'.html_safe, add_to_watch_list_url(@video.id, @course.id), :method => :post, :remote => true %>
     </div>
   </div>
   <!-- col-4 ends -->
