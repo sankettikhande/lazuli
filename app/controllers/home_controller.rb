@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   		@courses = Course.last(Settings.data_count.courses)
   	else
       @topics = Topic.cached_scope('published', {:limit => 6 }).in_groups_of(2, false)
-      @courses = Course.last(Settings.data_count.lending_page_courses)
+      @courses = Course.last(Settings.data_count.landing_page_courses)
   		respond_to do |format|
 	      format.html{ render 'devise/sessions/new', :layout => 'devise' }
 	    end

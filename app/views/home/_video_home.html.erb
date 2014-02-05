@@ -1,9 +1,9 @@
-<div id="myCarousel<%= topics_index %>" class="carousel slide <%= "hidden-xs" if !topics_index.zero? %>">
+<div id="myCarousel<%= topics_index %>" class="carousel slide <%= "hidden-xs" unless topics_index.zero? %>">
 	<div class="carousel-inner">
 		<% topics.each_with_index do |topic , topic_index| %>
   			<div class="<%= "active" if topic_index.zero? %> item">
   				<ul class="wel-showcase">
-  					<% topic.videos.take(2).each do |video| %>
+  					<% topic.videos.limit(2).each do |video| %>
   						<li>
   							<a href="<%= course_videos_url(video.topic.course.id, video.id) %>">
   								<%= image_tag(video_thumbnail_image(video), alt: "Image") %>
