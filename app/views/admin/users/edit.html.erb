@@ -76,7 +76,7 @@
 <%= javascript_include_tag 'admin/app_functions/users' %>
 <script type="text/javascript">
 	$("#user_password").removeClass('validate[required, minSize[8]]')
-	<% if cannot? :update, @user %>
+	<% if @edit_permission %>
 		user_info_disabled()
 	<% end %>
 </script>
