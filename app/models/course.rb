@@ -93,7 +93,7 @@ class Course < ActiveRecord::Base
     end
     sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
 
-    if options[:sSearch_1] == 'all'
+    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
       condition_string = "@(name,channel_name,trainer_name) #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}*"
       Course.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
     else

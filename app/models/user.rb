@@ -163,7 +163,7 @@ class User < ActiveRecord::Base
     sphinx_options.merge!(search_options)
     sphinx_options.merge!(sort_options)
 
-    if options[:sSearch_1] == 'all'
+    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
       condition_string = "@(name,actual_name,email,phone_number,company_name) #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}*"
       User.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
     else

@@ -101,7 +101,7 @@ class Channel < ActiveRecord::Base
       search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids}) 
     end
     sphinx_options.merge!(sort_options).merge!(search_options)
-    if options[:sSearch_1] == 'all'
+    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
       condition_string = "@(name) #{options[:sSearch]}*"
       Channel.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
     else
