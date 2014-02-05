@@ -9,6 +9,9 @@ class FavouritesController < ApplicationController
 
 	def destroy
 		favourite = Favourite.find(:last, :conditions => ["favouritable_type = ? and favouritable_id = ?", params[:item_type], params[:item_id]])
-		favourite.destroy
+		unless favourite.destroy
+			@alertClass = "danger"
+			@msg = "#{params[:item_type]} can't be removed favourite list."
+		end
 	end
 end
