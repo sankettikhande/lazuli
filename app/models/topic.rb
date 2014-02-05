@@ -141,7 +141,7 @@ class Topic < ActiveRecord::Base
 
   def change_video_status
     self.videos.each do |video|
-      video.update_attribute(:status, "Saved") if video.description_changed?
+      video.update_attribute(:status, "Saved") if video.clip_updated_at_changed?
     end
   end
 
