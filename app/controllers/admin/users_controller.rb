@@ -32,6 +32,7 @@ class Admin::UsersController < AdminController
 
   def edit
     @user = User.cached_find(params[:id])
+    @edit_permission = (current_user.is_admin? ||@user == current_user || @user.created_by == current_user.id) ? false : true
     @user_channel = @user.user_channel_subscriptions
   end 
 
@@ -59,8 +60,9 @@ class Admin::UsersController < AdminController
 
   def search_user
     @users = User.search(name = "*#{params[:q]}*")
+    @users = @users.reject{|a| !a.confirmed? }
     respond_to do |format|
-      format.json {}   
+      format.json {}
     end  
   end
 
