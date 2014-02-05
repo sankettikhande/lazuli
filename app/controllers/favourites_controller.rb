@@ -2,21 +2,17 @@ class FavouritesController < ApplicationController
 	before_filter :authenticate_user!
 	def create
 		fav_params = {:favouritable_type => params[:item_type], :favouritable_id => params[:item_id], :user_id => current_user.id}
-		if Favourite.exists?(fav_params)
-			@alertClass = "info"
-			@msg = "#{params[:item_type]} already exists in favourite list."
-		else
-			begin
-	  		Favourite.create fav_params
-	  		@alertClass = "success"
-	  		@msg = "#{params[:item_type]} added to favourite list."
-	  	rescue Exception => e
-	  		@alertClass = "danger"
-	  		@msg = "#{params[:item_type]} can't be added to favourite list."
-	  	end
-	  end
-		respond_to do |format|
-      format.js
-    end		
+		unless Favourite.create fav_params
+			@alertClass = "danger"
+			@msg = "#{params[:item_type]} can't be added to favourite list."
+		end
+	end
+
+	def destroy
+		favourite = Favourite.find(:last, :conditions => ["favouritable_type = ? and favouritable_id = ?", params[:item_type], params[:item_id]])
+		unless favourite.destroy
+			@alertClass = "danger"
+			@msg = "#{params[:item_type]} can't be remove from favourite list."
+		end
 	end
 end

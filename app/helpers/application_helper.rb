@@ -50,6 +50,12 @@ module ApplicationHelper
     content_tag(:button, content_tag(:i, '', class: classes), class: button_classes)
   end
 
+  def button_field(classes, button_classes="btn", title)
+    content_tag(:button, class: button_classes) do
+      content_tag(:i, '', class: classes) << " #{title}"
+    end
+  end
+
   def link_raw_field(classes)
     content_tag(:i, '', class: classes)
   end

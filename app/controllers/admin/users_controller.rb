@@ -19,7 +19,6 @@ class Admin::UsersController < AdminController
   def create
     @user = User.new(params[:user])
     @user.created_by = current_user.id
-    @user.skip_confirmation!
     respond_to do |format|
       if @user.save
         @user.set_course_admin_user_id
@@ -85,7 +84,6 @@ class Admin::UsersController < AdminController
       @users = User.import_users(params[:user], created_by)
       respond_to do |format|
         if @users.map(&:valid?).all?
-          @users.each(&:skip_confirmation!)
           @users.each(&:save!)
           flash[:success] = "Users have been created."
           format.js
