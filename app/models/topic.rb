@@ -21,6 +21,8 @@ class Topic < ActiveRecord::Base
 
   after_save :update_videos_sphinx_delta
 
+  before_update :change_video_status
+
   def update_videos_sphinx_delta
     videos.each do |v|
       v.delta = true
@@ -73,7 +75,7 @@ class Topic < ActiveRecord::Base
 
   def upload_to_vimeo
     assign_video = []
-    self.videos.where(:vimeo_id => nil).each do |video|      
+    self.videos.where("vimeo_id is ? OR status = ?", nil, 'Saved').each do |video|
       video_data = video.upload
       assign_video << video_data.vimeo_id
     end
@@ -136,4 +138,11 @@ class Topic < ActiveRecord::Base
     sequence_numbers = sequence_numbers.map { |seq| seq.to_i }
     errors.add(:base, "Video Sequence not valid.") if sequence_numbers.count != sequence_numbers.sort.last 
   end
+
+  def change_video_status
+    self.videos.each do |video|
+      video.update_attribute(:status, "Saved") if video.description_changed?
+    end
+  end
+
 end

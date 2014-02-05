@@ -1,10 +1,27 @@
 $( document ).ready(function() {
-   $('.parent-course-menu').slimScroll({
-      height: '400px',
-      disableFadeOut: true
-    });
-    $('.parent-course-menu li').click(function(e){
-      $('li.active').removeClass('active');
-      $(this).addClass('active');
-    });
+  $('.parent-course-menu').slimScroll({
+    height: '400px',
+    disableFadeOut: true
+  });
+  $('.parent-course-menu li').click(function(e){
+    $('li.active').removeClass('active');
+    $(this).addClass('active');
+  });
+  $("#watch_lator").click(function () {
+    $("#watch_list_btn").data("watch", true);
+    $(this).hide();
+    $("#remove_watch_lator").show();
+  });
+
+  $("#remove_watch_lator").click(function (){
+    $("#watch_list_btn").data("watch", false);
+    $(this).hide();
+    $("#watch_lator").show();
+  });
+
+  if($("#watch_list_btn").data("watch") == true){
+    $('#watch_lator').hide();
+  }else{
+    $('#remove_watch_lator').hide();
+  }
 });

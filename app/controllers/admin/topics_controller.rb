@@ -38,6 +38,7 @@ class Admin::TopicsController < AdminController
 		@topic.validate_uniq_videos params if params[:topic]
 		@channel_courses = @topic.channel.permitted_courses(current_user)
 		@bookmark_videos = @topic.videos.first.bookmarks.order("bookmark_sec") if @topic.is_bookmark_video
+
 		if params[:SavePub]
 			update_topic(params[:topic], "Published")
 		elsif params[:Publish]
