@@ -28,6 +28,7 @@ class SessionsController < Devise::SessionsController
 
   private
   def load_course
-    @courses = Course.last(Settings.data_count.lending_page_courses)
+    @courses = Course.last(Settings.data_count.landing_page_courses)
+    @topics = Topic.cached_scope('published', {:limit => 6 }).in_groups_of(2, false)
   end
 end
