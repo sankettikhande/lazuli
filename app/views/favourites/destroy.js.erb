@@ -1,3 +1,8 @@
-$("#flash").show().css("padding-left","15px").addClass("alert-<%=@alertClass%>").html("<%= @msg %>").fadeOut(3000)
-$('#remove-favourite').hide();
-$('#add-favourite').show();
+<% if @alertClass %>
+	$("#flash").show();
+	$("#flash").css("padding-left","15px").addClass("alert-<%=@alertClass%>").html("<%= @msg %>")
+	$("#flash").fadeOut(3000);
+<% else %>
+	$('#remove-favourite').hide();
+	$('#add-favourite').show();
+<% end %>
