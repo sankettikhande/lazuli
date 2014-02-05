@@ -3,11 +3,13 @@ namespace :sphinx do
   task :setup_ts_yml, :roles => :app do
     ts_config = <<-EOF
       #{rails_env.downcase}:
-          mem_limit: 256M
-          morphology: stem_en
-          enable_star: true
-          min_infix_len: 0
-          min_prefix_len: 1
+           allow_star: true
+           charset_table: "0..9, a..z, _, A..Z->a..z, -, @, $, %, #, +, (, ), !, ', %,"
+           mem_limit: 256M
+           morphology: stem_en
+           enable_star: true
+           min_infix_len: 0
+           min_prefix_len: 1
       EOF
 
     run "mkdir -p #{shared_path}/config"
