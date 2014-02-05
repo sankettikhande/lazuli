@@ -16,7 +16,7 @@ class UserChannelSubscription < ActiveRecord::Base
   after_save :update_channel_user_count
   after_save :update_course_user_count
   after_save :update_course_admin, :if => :create_permission_disabled?
-  after_destroy :update_user_count
+  after_destroy :update_user_count, :update_course_admin
 
   def update_channel_user_count
     channel.update_attribute(:user_count, UserChannelSubscription.where(:channel_id => channel_id).count(:user_id, :distinct => true))
