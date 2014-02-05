@@ -19,9 +19,6 @@ class Ability
         can :manage, User do |u|
             u.created_by == user.id || user.administrated_channel_subscriber_ids.include?(u.id)
         end
-        cannot :update, User do |u|
-           u.created_by != user.id && user.administrated_channel_subscriber_ids.include?(u.id)
-        end
         can :manage, Video do |video| 
             video.channel_admin_user_id == user.id || video.course_admin_user_id == user.id
         end
