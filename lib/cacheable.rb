@@ -22,6 +22,9 @@ module Cacheable
     reflections_arr.each do |r|
       Rails.cache.delete([self, r])
     end
+    self.class.reflect_on_all_associations(:belongs_to).map(&:name).map(&:to_s).each do |r|
+      Rails.cache.delete_matched([r.singularize.capitalize, send(r).id].join('_'))
+    end
     Rails.cache.delete(self.class.name)
     Rails.cache.delete_matched([self.class.name, id].join('_'))
   end

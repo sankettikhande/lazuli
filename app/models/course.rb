@@ -17,6 +17,7 @@ class Course < ActiveRecord::Base
 
   has_many :course_subscriptions, :dependent => :destroy
   has_many :subscriptions, :through => :course_subscriptions
+  has_many :watch_lists, :dependent => :destroy
 
   include Cacheable
   
