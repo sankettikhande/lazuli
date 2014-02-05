@@ -1,6 +1,6 @@
 <div id="flash"></div>
 <div class="row">
-  <div class="col-sm-12 col-md-6">
+  <div class="col-sm-12 col-md-5">
 	  <ul class="video-tags">
 	    <li><i class="fa fa-tag"></i> Tags:</li>
 	    <% @video.tags.each do |tag| %>
@@ -18,15 +18,17 @@
       add_fav = '' 
       rem_fav = 'hidden' 
     end %>
-  <div class="col-sm-12 col-md-6">
+  <div class="col-sm-12 col-md-7">
     <div class="video-save-options">
       <span id='add-favourite' <%= add_fav %>>
         <%= link_to button_field("fa fa-star", 'btn btn-link active', 'Add to Favourites'), favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
       </span>
-        <span id='remove-favourite' <%= rem_fav %> >
+      <span id='remove-favourite' <%= rem_fav %> >
         <%= link_to button_field("fa fa-star red-text", 'btn btn-link', 'Remove from Favourites'), favourite_path(item_id: @video.id, item_type: "Video"), :method => :delete, :remote => true %>
-        </span>
-      <button type="button" class="btn btn-link" data-toggle="button"><i class="fa fa-clock-o"></i> Watch later</button>
+      </span>
+	    <%= hidden_field_tag "watch_list_btn", "", "data-watch"=> is_watch_listed(@video.id, @course.id) %>
+      <%= link_to button_field("fa fa-clock-o", 'btn btn-link', ' Watch later'), add_to_watch_list_url(@video.id, @course.id), :method => :post, :remote => true, :id => "watch_lator" %>
+      <%= link_to button_field("fa fa-clock-o red-text", 'btn btn-link', ' Remove Watch later'), remove_from_watch_list_url(@video.id, @course.id), :remote => true, :id => "remove_watch_lator" %>
     </div>
   </div>
   <!-- col-4 ends -->
