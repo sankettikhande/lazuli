@@ -2,4 +2,7 @@
 	$("#flash").show();
 	$("#flash").css("padding-left","15px").addClass("alert-<%=@alertClass%>").html("<%= @msg %>")
 	$("#flash").fadeOut(3000);
+<% else %>
+	$('#remove-favourite').hide();
+	$('#add-favourite').show();
 <% end %>
