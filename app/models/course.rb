@@ -92,8 +92,14 @@ class Course < ActiveRecord::Base
       search_options.merge!(:with => {"permitted_user" => 1})
     end
     sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
-    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
-    Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+
+    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
+      condition_string = "@(name,channel_name,trainer_name) #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}*"
+      Course.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
+    else
+      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+      Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+    end
   end
 
   def self.set_course_admin_user_ids(course_ids,user_id)
