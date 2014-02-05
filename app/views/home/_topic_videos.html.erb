@@ -1,0 +1,20 @@
+<div class="col-sm-6 fix-overflow"> 
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1">
+			<div class="content-left welcome-videos"> 
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>Whats New ?</h3>
+					</div>
+				</div>
+				<div class="row"> <!-- row 7 -->
+					<div class="col-sm-12">
+						<% @topics.each_with_index do |topics, topics_index| %>
+							<%= render 'home/video_home', :topics => topics, :topics_index =>  topics_index %>
+						<% end %>   
+					</div>	
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>

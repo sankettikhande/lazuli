@@ -1,6 +1,6 @@
 module CoursesHelper
 	def vimeo_iframe_url
-		"//player.vimeo.com/video/#{@video.vimeo_id}"
+		"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1"
 	end
 
 	def is_active topic, index
@@ -25,5 +25,9 @@ module CoursesHelper
 
 	def format_duration(vimeo_data)
 		vimeo_data ? second_to_duration(vimeo_data.duration.to_i) : "00:00:00"
+	end
+
+	def is_watch_listed(video_id, course_id)
+		return WatchList.where(:video_id => video_id, :course_id => course_id, :user_id => current_user.id).any? ? "true" : "false"
 	end
 end

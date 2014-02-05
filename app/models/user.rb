@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :administrated_channels, :class_name => Channel, :foreign_key => :admin_user_id
   has_many :administrated_courses, :class_name => Course, :foreign_key => :course_admin_user_id
   has_many :favourites, :dependent => :destroy
+  has_many :watch_lists, :dependent => :destroy
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
   validates_uniqueness_of :name, :message => "^User name has already taken"
@@ -178,8 +179,14 @@ class User < ActiveRecord::Base
     end
     sphinx_options.merge!(search_options)
     sphinx_options.merge!(sort_options)
-    sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank?
-    User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+
+    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
+      condition_string = "@(name,actual_name,email,phone_number,company_name) #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}* #{options[:sSearch]}*"
+      User.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
+    else
+      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+      User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+    end
   end
 
   def set_nest(channel_subscription)
