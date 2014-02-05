@@ -59,7 +59,7 @@ class Admin::UsersController < AdminController
   end
 
   def search_user
-    @users = User.search(actual_name = "#{params[:q]}*", :without => {:confirm_status => '0'})
+    @users = User.search(actual_name = "#{params[:q]}*", :without => {:confirm_status => 0})
     respond_to do |format|
       format.json {}
     end  

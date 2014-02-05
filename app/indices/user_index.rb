@@ -4,7 +4,7 @@ ThinkingSphinx::Index.define :user, :with => :active_record, :delta => ThinkingS
   indexes actual_name, :sortable => true
   indexes phone_number, :sortable => true
   indexes company_name, :sortable => true
-  indexes confirmed_at, :as => :confirm_status, :sortable => true
   has created_at, updated_at
+  has confirmed_at, :as => :confirm_status, :sortable => true
   has :id, :as => :user_id
 end
