@@ -97,7 +97,7 @@ function triggerFnFilter(dtaTable, tableId, aoColumns){
     };
   });
 
-  $(tableId+'_filter label input').one('keyup', function(e){
+  $(tableId+'_filter label input').on('keyup', function(e){
     /* TODO stop from being fired up fnfilter call twice on a single keyup event
        --need to disable datatable's default search somehow on keypup event */
     if($(tableId+'_filter label input').val() != ''){
