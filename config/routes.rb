@@ -72,7 +72,11 @@ Lazuli::Application.routes.draw do
   resources :favourites
   resources :channels, :only => [:index, :show] 
   resources :courses, :only => [:index, :show]
-  resources :watch_lists, :only => [:index]
+  resources :watch_lists, :only => [:index] do
+    collection do
+      post 'remove'
+    end
+  end
   resources :videos do
     collection do
       get 'tag_videos'
