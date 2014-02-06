@@ -1,13 +1,7 @@
 <div id="flash"><%= flash_message %></div>
 <section class="btns-crumbs visible-md visible-lg">
     <div class="row">
-      <div class="col-sm-5 col-md-4">
-        <ul class="user-option-btns">
-            <li><a href="#" class="btn btn-block btn-yellow"><i class="fa fa-clock-o"></i> History</a></li>
-            <li><a href="#" class="btn btn-block btn-yellow"><i class="fa fa-star"></i> Favourites</a></li>
-            <li><a href="#" class="btn btn-block btn-yellow"><i class="fa fa-rss-square"></i> Subscriptions</a></li>
-        </ul>
-      </div>
+      <%= render 'shared/user_options' %>
     </div>
 </section>
 <div class="seperator5"></div>
