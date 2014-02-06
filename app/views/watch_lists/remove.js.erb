@@ -1,3 +1,5 @@
 <% if @videos %>
-	$("#remove_videos").html("<%= j(render 'shared/shared', :objects => @videos) %>");
+	$("#remove_videos").html("<%= j(render 'shared/shared', :objects => @videos, :type => 'watch_list_ids') %>");
+<% else %>
+	$("#remove_videos").html("No videos are found in Watch list.");
 <% end %>
