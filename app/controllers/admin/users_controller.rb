@@ -22,7 +22,7 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       if @user.save
         @user.set_course_admin_user_id
-        flash[:success] = "User has been created."
+        flash[:success] = "User has been created. Awaiting for confirmation..."
         format.js
       else
         format.js
@@ -32,6 +32,7 @@ class Admin::UsersController < AdminController
 
   def edit
     @user = User.cached_find(params[:id])
+    @edit_permission = (current_user.is_admin? ||@user == current_user || @user.created_by == current_user.id) ? false : true
     @user_channel = @user.user_channel_subscriptions
   end 
 
@@ -58,9 +59,9 @@ class Admin::UsersController < AdminController
   end
 
   def search_user
-    @users = User.search(name = "*#{params[:q]}*")
+    @users = User.search(actual_name = "#{params[:q]}*", :without => {:confirm_status => 0})
     respond_to do |format|
-      format.json {}   
+      format.json {}
     end  
   end
 
@@ -85,7 +86,7 @@ class Admin::UsersController < AdminController
       respond_to do |format|
         if @users.map(&:valid?).all?
           @users.each(&:save!)
-          flash[:success] = "Users have been created."
+          flash[:success] = "Users have been created. Awaiting for confirmations..."
           format.js
         else
           build_user_and_association(:errors => @users.map(&:errors).map(&:full_messages).flatten)

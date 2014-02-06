@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   has_many :watch_lists, :dependent => :destroy
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
-  validates_uniqueness_of :name, :message => "^User name has already taken"
   validate :subscription_params
   include Cacheable
 

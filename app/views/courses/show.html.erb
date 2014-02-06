@@ -61,33 +61,23 @@
     // Listen for the ready event for any vimeo video players on the page
     var player = $('#player_1')[0];
     $f(player).addEvent('ready', ready);
-    
-    function addEvent(element, eventName, callback) {
-        if (element.addEventListener) {
-            element.addEventListener(eventName, callback, false);
-        }
-        else {
-            element.attachEvent(eventName, callback, false);
-        }
-    }
 
     function ready(player_id) {
         var froogaloop = $f(player_id);
 
-        function onPlay() {
+        function onPlay(url) {
           froogaloop.addEvent('play', function(data) {
             if($("#watch_list_btn").data("watch") == true){
               $.ajax({
-                url: "<%= remove_from_watch_list_url(@video.id, @course.id) << '.js' %>"
+                url: url
               });
               $("#watch_list_btn").data("watch", false);
+              $('#remove_watch_lator').hide();
+              $("#watch_lator").show();
             }
           });
         }
-        onPlay();
+        onPlay("<%= remove_from_watch_list_url(@video.id, @course.id) << '.js' %>");
     }
-    $("#watch_list_btn").click(function () {
-      $("#watch_list_btn").data("watch", true);
-    });
   });
 </script>
