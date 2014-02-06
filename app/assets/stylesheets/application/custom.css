@@ -663,3 +663,25 @@ body {padding-bottom: 70px;}
 
 .slimScrollBar {opacity: 0.6 !important;display: block !important;}
 /*.slimScrollRail {display: block !important;background: #000 !important;opacity: 0.5 !important;border-radius: 0 !important;}*/
+
+
+/********************* =favourites Page *****************/
+.fav-page {margin-top: 5px}
+.fav-content {margin-top: 5px}
+
+
+.box-record {margin-bottom: 10px}
+li.box-title {background: #454746;color: #fff;padding: 4px 6px}
+li.box-title.active {background: #579c1f;color: #fff}
+
+.btn-trans {background: transparent;color: #fff;border: none;}
+
+li.box-details {background: #fefefe;padding:12px 8px }
+.box-details .item-thumb {padding:3px;border:1px solid #ccc;background: #fff}
+.box-details .item-thumb:hover {border-color: #333;opacity: 0.7}
+.box-details .item-categ a {font-family: 'MyriadProBold'Sans-Serif;color: #3f3f34}
+.box-details .item-descr a {color:#3f3f3f;font-family: 'MyriadProRegular',Sans-Serif}
+.box-details .subs-period a {color: #3f3f3f;}
+.box-details .subs-date a{color: #f00;font-size: 12px}
+.box-details .item-viewed {color: #3f3f3f}
+.box-details .item-viewed span {color: #000}
