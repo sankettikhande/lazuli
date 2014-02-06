@@ -116,6 +116,6 @@ module ApplicationHelper
   end
 
   def background_color
-    "brush lemon" if controller_name == "home"
+    "brush lemon" if controller_name != "courses"
   end
 end

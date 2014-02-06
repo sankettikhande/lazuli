@@ -186,7 +186,8 @@ class User < ActiveRecord::Base
 
     if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
       condition_string = "@(name,actual_name,email,phone_number,company_name) #{options[:sSearch]}*"
-      User.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
+      sphinx_options.merge!(:match_mode => :extended)
+      User.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
     else
       sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
       User.search(query, sphinx_options).page(page).per(options[:iDisplayLength])

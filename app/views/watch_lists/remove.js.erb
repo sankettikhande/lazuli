@@ -1,0 +1,3 @@
+<% if @videos %>
+	$("#remove_videos").html("<%= j(render 'shared/shared', :objects => @videos) %>");
+<% end %>
