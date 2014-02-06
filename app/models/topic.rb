@@ -112,7 +112,8 @@ class Topic < ActiveRecord::Base
 
     if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
       condition_string = "@(title,course_name,channel_name) #{options[:sSearch]}*"
-      Topic.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
+      sphinx_options.merge!(:match_mode => :extended)
+      Topic.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
     else
       sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
       Topic.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
