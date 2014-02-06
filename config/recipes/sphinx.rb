@@ -3,7 +3,6 @@ namespace :sphinx do
   task :setup_ts_yml, :roles => :app do
     ts_config = <<-EOF
       #{rails_env.downcase}:
-           allow_star: true
            charset_table: "0..9, a..z, _, A..Z->a..z, -, @, $, %, #, +, (, ), !, ', %,"
            mem_limit: 256M
            morphology: stem_en
