@@ -116,7 +116,8 @@ function resetDataTable(tableId, dtaTable){
       $(tab_link_id).click();
     }else{  /* else block is for reseting users & channel dataTable */
       dtaTable.fnFilter('');
-      $('select#column_names option[value=""]').attr('selected', 'selected');
+      $('select#column_names option[value="all"]').attr('selected', 'selected');
     }
   });
 };
+

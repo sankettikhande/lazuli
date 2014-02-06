@@ -11,7 +11,7 @@ class History < ActiveRecord::Base
   end
 
   def self.get_user_videos(user)
-    histories_list = user.histories.map(&:video_id)
-    return Video.find(histories_list)
+    histories_list = user.histories.select("video_id").map(&:video_id)
+    Video.find(histories_list)
   end
 end

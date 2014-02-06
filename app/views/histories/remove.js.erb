@@ -1,5 +1,5 @@
-<% if @videos %>
-	$("#remove_videos").html("<%= j(render 'shared/shared', :objects => @videos, :type => 'history_ids') %>");
+<% if params[:history_ids] && @videos %>
+	$("#remove_videos").html("<%= j(render 'shared/shared', :objects => @videos, :type => 'history') %>");
 <% else %>
 	$("#remove_videos").html("No videos are found in History.");
 <% end %>

@@ -7,8 +7,8 @@ class WatchList < ActiveRecord::Base
 
   validates_uniqueness_of :video_id, :scope => [:course_id, :user_id], :message => "^Video already exist in watch list"
 
-  def self.get_user_videos(user)
-  	watch_list = user.watch_lists.map(&:video_id)
-		return Video.find(watch_list)
+	def self.get_user_videos(user)
+		watch_list = user.watch_lists.select("video_id").map(&:video_id)
+		Video.find(watch_list)
   end
 end

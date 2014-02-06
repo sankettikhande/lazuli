@@ -6,8 +6,7 @@ class WatchListsController < ApplicationController
 
 	def remove
 		if params[:watch_list_ids]
-			watch_list = params[:watch_list_ids].keys.map{ |int| int.to_i}
-			WatchList.where(:video_id => watch_list, :user_id => current_user.id).destroy_all
+			WatchList.where(:video_id => params[:watch_list_ids].keys, :user_id => current_user.id).destroy_all
 			@videos = WatchList.get_user_videos(current_user)
 		end
 	end
