@@ -143,7 +143,10 @@ class Topic < ActiveRecord::Base
 
   def change_video_status
     self.videos.each do |video|
-      video.update_attribute(:status, "Saved") if video.clip_updated_at_changed?
+      if video.clip_updated_at_changed?
+        video.update_attribute(:status, "Saved")
+        video.bookmarks.destroy_all if video.bookmarked?
+      end
     end
   end
 
