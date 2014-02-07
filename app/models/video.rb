@@ -81,16 +81,8 @@ class Video < ActiveRecord::Base
   end
   handle_asynchronously :get_vimeo_info, :run_at => Proc.new{30.minutes.from_now}
 
-  def get_best_thumbnail
-    vimeo_data.thumbnails.thumbnail[2]._content unless vimeo_data.blank?
-  end
-
-  def get_medium_thumbnail
-    vimeo_data.thumbnails.thumbnail[1]._content unless vimeo_data.blank?
-  end
-
-  def get_small_thumbnail
-    vimeo_data.thumbnails.thumbnail[0]._content unless vimeo_data.blank?
+  def get_best_thumbnail(element = 2)
+    vimeo_data.thumbnails.thumbnail[element]._content unless vimeo_data.blank?
   end
 
   def description_text
