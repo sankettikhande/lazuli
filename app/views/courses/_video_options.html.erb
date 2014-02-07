@@ -26,7 +26,8 @@
       <span id='remove-favourite' <%= rem_fav %> >
         <%= link_to button_field("fa fa-star red-text", 'btn btn-link', 'Remove from Favourites'), favourite_path(item_id: @video.id, item_type: "Video"), :method => :delete, :remote => true %>
       </span>
-	    <%= hidden_field_tag "watch_list_btn", "", "data-watch"=> is_watch_listed(@video.id, @course.id) %>
+	    <%= hidden_field_tag "watch_list_btn", "", "data-watch"=> is_watch_listed(@video.id, @course.id), "data-video_id" => @video.id, "data-course_id" => @course.id %>
+      <%= hidden_field_tag "history_btn", "", "data-watch"=> false %>
       <%= link_to button_field("fa fa-clock-o", 'btn btn-link', ' Watch later'), add_to_watch_list_url(@video.id, @course.id), :method => :post, :remote => true, :id => "watch_lator" %>
       <%= link_to button_field("fa fa-clock-o red-text", 'btn btn-link', ' Remove Watch later'), remove_from_watch_list_url(@video.id, @course.id), :remote => true, :id => "remove_watch_lator" %>
     </div>
