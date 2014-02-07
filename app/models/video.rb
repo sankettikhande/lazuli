@@ -85,6 +85,14 @@ class Video < ActiveRecord::Base
     vimeo_data.thumbnails.thumbnail[2]._content unless vimeo_data.blank?
   end
 
+  def get_medium_thumbnail
+    vimeo_data.thumbnails.thumbnail[1]._content unless vimeo_data.blank?
+  end
+
+  def get_small_thumbnail
+    vimeo_data.thumbnails.thumbnail[0]._content unless vimeo_data.blank?
+  end
+
   def description_text
     text = []
     self.bookmarks.each do |desc_text|
