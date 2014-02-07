@@ -1,0 +1,13 @@
+.flash_success {
+	padding-left: 15px;
+	color: #008000;
+}
+
+.flash_error {
+	padding-left: 15px;
+	color: #FF0000;
+}
+
+#subscription_confirm .modal-dialog{
+	width: 450px;
+}

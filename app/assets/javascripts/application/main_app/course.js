@@ -24,4 +24,16 @@ $( document ).ready(function() {
   }else{
     $('#remove_watch_lator').hide();
   }
+
+  $(".subscription_now").click(function(){
+    $('.content1').hide();
+    $('.content2').show();
+    return false;
+  });
+
+  $("#subscription_confirm .cancel_button").click(function(){
+    $('.content2').hide();
+    $('.content1').show();
+  });
+
 });

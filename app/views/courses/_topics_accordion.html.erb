@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<div class="modal fade alert-modal" id="subscription_confirm">
+<div class="modal fade" id="subscription_confirm">
   <div class="modal-dialog">
     <div class="modal-content content1">
       <div class="modal-header">
@@ -70,19 +70,3 @@
     </div>
     </div>
 </div>
-
-<script type="text/javascript">
-$(document).ready(function(){
- $(".subscription_now").click(function(){
-    $('.content1').hide();
-    $('.content2').show();
-    return false;
-  });
-
- $(".cancel_button").click(function(){
-    $('.content2').hide();
-    $('.content1').show();
- })
-})
-</script>
-
