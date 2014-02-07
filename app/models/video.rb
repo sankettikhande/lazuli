@@ -129,7 +129,8 @@ class Video < ActiveRecord::Base
     sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options).merge!(sql_options)
     if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
       condition_string = "@(title,topic_name,course_name,channel_name,tags) #{options[:sSearch]}*"
-      Video.search(condition_string, :match_mode => :extended).page(page).per(options[:iDisplayLength])
+      sphinx_options.merge!(:match_mode => :extended)
+      Video.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
     else
       sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
       Video.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
