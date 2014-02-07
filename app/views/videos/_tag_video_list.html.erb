@@ -1,4 +1,8 @@
-<% videos.each_with_index do |video, index| %>
-	<%= index %> : <%= video.title %>
-	<br/>
-<% end%>
+<% if videos.any? %>
+	<% videos.each_with_index do |video, index| %>
+		<%= index %> : <%= video.title %>
+		<br/>
+	<% end%>
+<% else %>
+	<span>No Data available !!!!!!</span>
+<% end %>

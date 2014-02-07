@@ -87,14 +87,17 @@ Lazuli::Application.routes.draw do
     collection do
       post 'remove'
     end
+    member do
+      get 'save_history'
+    end
   end
 
   
   match '/courses/:id/:video_id' => 'courses#show', :as => :course_videos
   match '/courses/:id' => 'courses#show', :as => :course_video
   match '/subscribe/course/:id' => 'subscriptions#subscribe_course', :as => :subscribe_course
-  match '/add/watchlist/video/:id/:course_id' => 'videos#add_to_watch_list', :as => :add_to_watch_list
-  match '/remove/watchlist/video/:id/:course_id' => 'videos#remove_from_watch_list', :as => :remove_from_watch_list
+  match '/add/watchlist/video/:id/:course_id' => 'watch_lists#add_to_watch_list', :as => :add_to_watch_list
+  match '/remove/watchlist/video/:id/:course_id' => 'watch_lists#remove_from_watch_list', :as => :remove_from_watch_list
   match '/favourites/search' => 'favourites#search', :as => :search_favourites
   match '/histories/search' => 'histories#search', :as => :search_histories
   match '/watch_lists/search' => 'watch_lists#search', :as => :search_watch_lists

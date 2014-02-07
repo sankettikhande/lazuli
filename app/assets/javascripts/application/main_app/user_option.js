@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	$('#select_all_list').unbind().click(function(){
 		if($(this).is(':checked')) {
 			$('.box-title').addClass("active");
-			$('.user_checkbox').prop("checked", true).checkboxradio("refresh");
+			$('.user_checkbox').prop("checked", true);
 		} else {
 			$('.box-title').removeClass("active");
 			$('.user_checkbox').removeAttr('checked');
