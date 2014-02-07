@@ -27,6 +27,10 @@ module CoursesHelper
 		vimeo_data ? second_to_duration(vimeo_data.duration.to_i) : "00:00:00"
 	end
 
+	def is_watch_listed(video_id, course_id)
+		return WatchList.where(:video_id => video_id, :course_id => course_id, :user_id => current_user.id).any? ? "true" : "false"
+	end
+
 	def video_play_url video, course, current_user
 		if current_user.watchable_video? video, course.id
 			course_videos_path(course.id, video.id)
