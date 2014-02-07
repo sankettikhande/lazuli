@@ -87,6 +87,9 @@ Lazuli::Application.routes.draw do
     collection do
       post 'remove'
     end
+    member do
+      get 'save'
+    end
   end
 
   
