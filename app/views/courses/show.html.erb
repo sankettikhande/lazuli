@@ -85,7 +85,7 @@
             $("#history_btn").data("watch", true);
           }
         }
-        onPlay("<%= remove_from_watch_list_url(@video.id, @course.id) << '.js' %>", "<%= save_history_url(@video) << '.js' %>");
+        onPlay("<%= remove_from_watch_list_url(@video.id, @course.id) << '.js' %>", "<%= save_history_history_url(@video) << '.js' %>");
     }
   });
 </script>

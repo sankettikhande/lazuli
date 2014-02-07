@@ -88,7 +88,7 @@ Lazuli::Application.routes.draw do
       post 'remove'
     end
     member do
-      get 'save'
+      get 'save_history'
     end
   end
 
