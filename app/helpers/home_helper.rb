@@ -3,9 +3,15 @@ module HomeHelper
 		index.zero? ? "active" : nil
 	end
 
-	def video_thumbnail_image(video)
+	def video_thumbnail_image(video, options={})
 		if video.vimeo_data
-      video.get_best_thumbnail
+      if options.blank?
+        video.get_best_thumbnail
+      elsif options[:medium]
+        video.get_best_thumbnail(1)
+      else
+        video.get_best_thumbnail(0)
+      end
     else
      video.image.present? ? video.image.url : "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
     end

@@ -47,13 +47,5 @@
   </section>
   <%= render 'recommended_videos'%>
 </div>
-<script>
-  $( document ).ready(function() {
-    var player = $('#player_1')[0];
-    watch_list_url = "<%= remove_from_watch_list_url(@video.id, @course.id) << '.js' %>"
-    history_list_url =  "<%= save_history_history_url(@video) << '.js' %>"
-    $f(player).addEvent('ready', ready);
-  });
-</script>
 
 <%= javascript_include_tag "application/main_app/course.js"%>

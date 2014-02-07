@@ -3,6 +3,8 @@
 		<div class="col-xs-12">
 			<ul class="row">
 				<% objects.each do |object| %>
+					<% topic = object.topic %>
+					<% course = topic.course %>
 					<li class="col-xs-12 col-sm-6 col-md-4">
 						<ul class="box-record">
 							<li class="box-title"><input type="checkbox" name="<%= type %>_ids[<%= object.id %>]" class="user_checkbox">
@@ -11,23 +13,29 @@
 								<div class="row">
 									<div class="col-xs-6 col-sm-5">
 										<div class="item-thumb">
-											<%= link_to(image_tag(video_thumbnail_image(object), :alt => "", :class => "img-responsive center-block")) %>
+											<%= link_to(image_tag(video_thumbnail_image(object, :medium => 1), :alt => "", :class => "img-responsive center-block")) %>
 										</div>
 									</div>
 									<div class="col-xs-6 col-sm-7">
 										<div class="row">
 											<div class="col-xs-12">
-												<div class="item-title"><a href="#">Microsoft Excel</a></div>
+												<div class="item-title">
+													<%= link_to(course.name.titleize, course_video_url(course))%>
+												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
-												<div class="item-categ"><a href="#">Graphs</a></div>
+												<div class="item-categ">
+													<%= link_to(topic.title.titleize, course_video_url(course))%>
+												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
-												<div class="item-descr"><a href="#">Creating a simple graph</a></div>
+												<div class="item-descr">
+													<%= link_to(object.title.titleize, course_videos_url(course, object))%>
+												</div>
 											</div>
 										</div>
 									</div>
