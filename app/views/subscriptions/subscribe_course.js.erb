@@ -1,0 +1,8 @@
+<% if @subscription.errors.blank? %>
+	$("#flash").addClass('flash_success').html("You are successfully subscribed to the course.").fadeOut(3000);
+	$('.close').trigger('click');
+	$("#subscription_modal").hide();
+<% else %>
+	$("#flash").addClass('flash_error').html("You have subscribed to this course.").fadeOut(3000);
+	$('.close').trigger('click');
+<% end %>

@@ -2,9 +2,6 @@
   <div class="course-menu">
     <div class="pull-left"><h5><a href="#"><%= @course.name %></a></h5></div>
     <div class="pull-right">
-      <% if !@user_subscription.blank? %>
-        <span class="label label-primary" data-toggle="modal" id="lbl-sbscribe-now" data-target="#sbscriptionModal">Subscribe Now</span>
-      <% end %>
     </div>
     <div class="clearfix"></div>
     <ul class="parent-course-menu" id="accordion" >
@@ -16,9 +13,13 @@
           <ul id="topic-<%= topic_index %>" class="child-course-menu collapse <%= is_accordion(topic, topic_index) %>">
             <% topic.videos.published.each_with_index do |video, video_index| %>
               <li class="<%= is_active_video(video) %>">
-                <a href="<%= course_videos_path(@course.id, video.id) %>"> <%= video.title %>
+                <span id='subscription_modal' data-toggle="modal" data-target="#subscription_confirm">
+                  <%= image_tag("/assets/frontend/lock.png") unless current_user.watchable_video?(video, @course.id) %>
+                </span>
+                <a href="<%= video_play_url(video, @course, current_user) %>"> <%= video.title %>             
                   <span><%= format_duration(video.vimeo_data) %></span>
                 </a>
+
               </li>
             <% end %>
           </ul>
@@ -28,15 +29,27 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="sbscriptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="subscription_confirm">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content content1">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Access Denied!</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Please subscribe to unlock the video</h4>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-primary subscription_now">Subscribe Now</a>
+       <!--  <a data-dismiss="modal" class="btn btn-primary">Try Now</a> -->
+      </div>
+    </div>
+  <div class="modal-content content2" hidden>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel">Subscribe Course</h4>
       </div>
-      <%= form_tag subscribe_course_url @course.id do %>
+      <%= form_tag subscribe_course_url(@course.id), :remote => true do %>
         <%= hidden_field(:course_subscription, :channel_id, :value => @course.channel_id) %>
         <%= hidden_field(:course_subscription, :course_id, :value => @course.id) %>
         <%= hidden_field(:course_subscription, :user_id, :value => current_user.id) %>
@@ -50,10 +63,10 @@
           <% end %>
         </div>
         <div class="modal-footer">
-          <%= submit_tag "Cancel", :class => "btn btn-default", 'data-dismiss' => "modal"%>
+          <a data-dismiss = 'modal' class="btn btn-default cancel_button">Cancel</a>
           <%= submit_tag "Subscribe", :class => "btn btn-primary" %>
         </div>
       <% end %>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+    </div>
+</div>

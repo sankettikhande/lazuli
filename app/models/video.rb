@@ -200,4 +200,5 @@ class Video < ActiveRecord::Base
     tag_list = self.tags.map { |tag| tag.name }
     tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
   end
+  
 end
