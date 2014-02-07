@@ -1,5 +1,9 @@
-class FavouritesController < ApplicationController
-	before_filter :authenticate_user!
+class FavouritesController < SharedController
+
+	def index
+		@favourite_videos = Favourite.get_videos_for(current_user)
+	end
+
 	def create
 		fav_params = {:favouritable_type => params[:item_type], :favouritable_id => params[:item_id], :user_id => current_user.id}
 		unless Favourite.create fav_params

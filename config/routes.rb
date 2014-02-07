@@ -69,7 +69,7 @@ Lazuli::Application.routes.draw do
     end
     resources :user_channel_subscriptions
   end
-  resources :favourites
+  resources :favourites, :only => [:index, :create, :destroy]
   resources :channels, :only => [:index, :show] 
   resources :courses, :only => [:index, :show]
   resources :watch_lists, :only => [:index] do
@@ -95,4 +95,7 @@ Lazuli::Application.routes.draw do
   match '/subscribe/course/:id' => 'subscriptions#subscribe_course', :as => :subscribe_course
   match '/add/watchlist/video/:id/:course_id' => 'videos#add_to_watch_list', :as => :add_to_watch_list
   match '/remove/watchlist/video/:id/:course_id' => 'videos#remove_from_watch_list', :as => :remove_from_watch_list
+  match '/favourites/search' => 'favourites#search', :as => :search_favourites
+  match '/histories/search' => 'histories#search', :as => :search_histories
+  match '/watch_lists/search' => 'watch_lists#search', :as => :search_watch_lists
 end

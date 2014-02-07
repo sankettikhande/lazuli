@@ -112,29 +112,49 @@ class Video < ActiveRecord::Base
     update_attribute(:password,password)
   end
 
-  def self.sphinx_search options, current_user
+  def self.sphinx_search options, current_user, video_ids=[]
     sort_options, search_options, sql_options, sphinx_options, select_option = {}, {}, {}, {}, {}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
-    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
-    sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
-    search_options.merge!(:conditions =>{ "course_id" => options[:course_id]}) if !options[:course_id].blank?
-    search_options.merge!(:conditions =>{ "topic_id" => options[:topic_id]}) if !options[:topic_id].blank?
-    unless current_user.is_admin?
-      with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
-      select_option.merge!(:select => with_permitted_user)
-      search_options.merge!(:with => {"permitted_user" => 1}) 
-    end
-    sql_options.merge!(:sql => {:include => [:topic, :tags]})
-    sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options).merge!(sql_options)
-    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
-      condition_string = "@(title,topic_name,course_name,channel_name,tags) #{options[:sSearch]}*"
-      sphinx_options.merge!(:match_mode => :extended)
-      Video.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
-    else
+    if video_ids.blank?
+
+      page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+      sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
+      search_options.merge!(:conditions =>{ "course_id" => options[:course_id]}) if !options[:course_id].blank?
+      search_options.merge!(:conditions =>{ "topic_id" => options[:topic_id]}) if !options[:topic_id].blank?
+      unless current_user.is_admin?
+        with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
+        select_option.merge!(:select => with_permitted_user)
+        search_options.merge!(:with => {"permitted_user" => 1}) 
+      end
+      sql_options.merge!(:sql => {:include => [:topic, :tags]})
+      sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options).merge!(sql_options)
+      if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
+        condition_string = "@(title,topic_name,course_name,channel_name,tags) #{options[:sSearch]}*"
+        sphinx_options.merge!(:match_mode => :extended)
+        Video.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
+      else
+        sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+        Video.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+      end
+
+    else ## >>>>>>>>>>>>>>>>>>>>  for search form fornt end
+
+
+      unless current_user.is_admin?
+        with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
+        select_option.merge!(:select => with_permitted_user)
+        search_options.merge!(:with => {"permitted_user" => 1})
+      end
+      search_options.deep_merge!(:with => {:video_id => video_ids})
+      sql_options.merge!(:sql => {:include => [:topic, :tags]})
+      sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options).merge!(sql_options)
+
       sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
-      Video.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+      Video.search(query, sphinx_options)
     end
+
+
   end
 
   def vimeo_video_url
