@@ -84,6 +84,26 @@ class User < ActiveRecord::Base
     User.find(administrated_channel_subscriber_ids)
   end
 
+  def subscribed_course_ids
+    self.user_channel_subscriptions.pluck("course_id")
+  end
+
+  def subscribed_courses
+     Course.joins(:user_channel_subscriptions).where(user_channel_subscriptions: {user_id: self.id})
+  end
+
+  def list_subscribed_videos
+    subscribed_videos = []
+    self.subscribed_courses.includes(topics: [:videos]).each do |course|
+      course.topics.each {|topic| subscribed_videos << topic.videos}
+    end
+    return subscribed_videos.flatten
+  end
+
+  def subscribed_video_ids
+    self.list_subscribed_videos.map(&:id)
+  end
+
   def permitted_channels
     if self.is_admin?
       Channel.all
@@ -201,5 +221,21 @@ class User < ActiveRecord::Base
   def set_course_admin_user_id
     course_ids = self.user_channel_subscriptions.where(:permission_create => true).map(&:course_id)
     Course.set_course_admin_user_ids(course_ids, id)
+  end
+
+  def watchable_course? course_id
+    self.subscribed_course_ids.include?(course_id)
+  end
+
+  def trial_course? course_id
+    self.user_channel_subscriptions.where(:subscription_id => 1).pluck(:course_id).include? (course_id)
+  end
+
+  def watchable_video? video, video_course_id
+    if self.trial_course?(video_course_id)
+       video.demo || video.trial
+    else
+      self.subscribed_course_ids.include?(video_course_id) || video.demo
+    end
   end
 end
