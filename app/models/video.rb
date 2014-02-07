@@ -9,6 +9,7 @@ class Video < ActiveRecord::Base
   has_many :bookmarks, :dependent => :destroy
   has_many :favourites, :as => :favouritable
   has_many :watch_lists, :dependent => :destroy
+  has_many :histories, :dependent => :destroy
   belongs_to :topic
 
   include Cacheable
