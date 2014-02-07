@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
 	before_filter :authenticate_user!
 
-	def tag_search
+	def tag_videos
 		@videos = Video.search(:conditions => sphinx_condition(params[:search]))
 	end
 
