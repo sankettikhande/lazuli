@@ -35,37 +35,46 @@ $( document ).ready(function() {
     $('.content2').hide();
     $('.content1').show();
   });
+
+  var player = $('#player_1')[0];
+  video_id = $("#watch_list_btn").data("video_id");
+  course_id = $("#watch_list_btn").data("course_id");
+  watch_list_url = "/remove/watchlist/video/" + video_id + "/" + course_id + ".js"
+  history_list_url =  "/histories/"+ video_id + "/save_history.js"
+
+  $f(player).addEvent('ready', ready);
+
+  function ready(player_id) {
+    var froogaloop = $f(player_id);
+
+    function onPlay(watch_list_url, history_list_url) {
+      froogaloop.addEvent('play', function(data) {
+        watch_list(watch_list_url)
+        history(history_list_url)
+      });
+    }
+
+    function watch_list(url){
+      if($("#watch_list_btn").data("watch") == true){
+        $.ajax({
+          url: url
+        });
+        $("#watch_list_btn").data("watch", false);
+        $('#remove_watch_lator').hide();
+        $("#watch_lator").show();
+      }
+    }
+
+    function history(url){
+      if($("#history_btn").data("watch") == false){
+        $.ajax({
+          url: url
+        });
+        $("#history_btn").data("watch", true);
+      }
+    }
+    $("#history_btn").data("video_id")
+    onPlay(watch_list_url, history_list_url);
+  }
 });
 
-
-function ready(player_id) {
-  var froogaloop = $f(player_id);
-
-  function onPlay(watch_list_url, history_list_url) {
-    froogaloop.addEvent('play', function(data) {
-      watch_list(watch_list_url)
-      history(history_list_url)
-    });
-  }
-
-  function watch_list(url){
-    if($("#watch_list_btn").data("watch") == true){
-      $.ajax({
-        url: url
-      });
-      $("#watch_list_btn").data("watch", false);
-      $('#remove_watch_lator').hide();
-      $("#watch_lator").show();
-    }
-  }
-
-  function history(url){
-    if($("#history_btn").data("watch") == false){
-      $.ajax({
-        url: url
-      });
-      $("#history_btn").data("watch", true);
-    }
-  }
-  onPlay(watch_list_url, history_list_url);
-}
