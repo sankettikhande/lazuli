@@ -5,7 +5,7 @@ $('body').on('focus',".date-picker", function(){
   $(document).ready(function(){
 
     $('.channels_id').change(function(){
-      var course_id = $(this).closest(".form-group").next().find(".courses_id").attr('id');
+      var course_id = $(this).closest(".fields").find(".courses_id").attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
               url: "/admin/channels/"+val+"/channel_courses.js",
@@ -19,8 +19,8 @@ $('body').on('focus',".date-picker", function(){
            autoclose: true
          }).on('changeDate',function(ev){
          $(this).find('.formError').remove(); 
-         var date_id = $(this).closest(".form-group").next().find(".expiry_date").attr('id');
-         var subscription_id = $(this).closest(".form-group").prev().prev().find(".subscriptions_id").attr('id');
+         var date_id = $(this).closest(".fields").find(".expiry_date").attr('id');
+         var subscription_id = $(this).closest(".fields").find(".subscriptions_id").attr('id');
          var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
          var expiry_date = get_expiry_date(ev.date, calculated_days)
          if (calculated_days != undefined)
@@ -34,8 +34,8 @@ $('body').on('focus',".date-picker", function(){
         }
 
     $('.courses_id').change(function(){
-      var subscription_id = $(this).closest(".form-group").next().find(".subscriptions_id").attr('id');
-      var permission_id = $(this).closest(".form-group").next().next().attr('id');
+      var subscription_id = $(this).closest(".fields").find(".subscriptions_id").attr('id');
+      var permission_id = $(this).closest(".fields").find('.permissions').attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
               url: "/admin/courses/"+val+"/course_subscription_types.js",
@@ -44,13 +44,12 @@ $('body').on('focus',".date-picker", function(){
     })
 
     $('.subscriptions_id').on('change', function(){
-      var subscription_date_id = $(this).closest(".form-group").next().next().find(".subscription_date").attr('id')
+      var subscription_date_id = $(this).closest(".fields").find(".subscription_date").attr('id')
       var subscription_id = $(this).attr('id')
       var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
-      var date_id = $(this).closest(".form-group").next().next().next().find(".expiry_date").attr('id');
+      var date_id = $(this).closest(".fields").find(".expiry_date").attr('id');
       var subscription_date_select = $('#'+subscription_date_id).val();
       var event_date = jQuery.datepicker.parseDate("dd-mm-yy", subscription_date_select)
-      // console.log(date_id + subscription_date + event_date)
       if(subscription_date_select != ""){
         if ($(this).val() != ""){
         var expiry_date = get_expiry_date(event_date, calculated_days)
