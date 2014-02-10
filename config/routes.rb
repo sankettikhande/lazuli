@@ -71,7 +71,7 @@ Lazuli::Application.routes.draw do
   end
   resources :channels, :only => [:index, :show] 
   resources :courses, :only => [:index, :show]
-  resources :watch_lists, :only => [:index] do
+  resources :watch_lists, :only => [:index, :destroy] do
     collection do
       post 'remove'
     end
@@ -82,7 +82,7 @@ Lazuli::Application.routes.draw do
       get 'tag_search'
     end
   end
-  resources :histories, :only => [:index] do
+  resources :histories, :only => [:index, :destroy] do
     collection do
       post 'remove'
     end
@@ -93,6 +93,7 @@ Lazuli::Application.routes.draw do
   resources :favourites, :only => [:index, :create, :destroy] do
     collection do
       post 'remove'
+      delete 'delete_favs'
     end
   end
 

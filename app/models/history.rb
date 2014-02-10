@@ -14,4 +14,8 @@ class History < ActiveRecord::Base
     histories_list = History.get_video_ids_for(user)
     Video.find(histories_list, :include => {:topic => :course})
   end
+
+  def self.get_video(user, video_id)
+    find_by_user_id_and_video_id(user, video_id)
+  end
 end

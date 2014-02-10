@@ -6,7 +6,11 @@
 					<li class="col-xs-12 col-sm-6 col-md-4">
 						<ul class="box-record">
 							<li class="box-title"><input type="checkbox" name="<%= params[:controller] %>_ids[<%= objekt.id %>]" class="user_checkbox">
-								<span class="pull-right"><button type="button" class="btn-trans">&times;</button></span></li>
+								<span class="pull-right">
+									<!-- <button type="button" class="btn-trans">&times;</button> -->
+									<%= link_to("&times;".html_safe, "#{params[:controller]}/#{objekt.id}", :class => "btn-trans", :method => :delete, :remote => true)%>
+								</span>
+							</li>
 							<li class="box-details">
 								<div class="row">
 									<div class="col-xs-6 col-sm-5">
