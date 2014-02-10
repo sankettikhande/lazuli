@@ -28,6 +28,6 @@ module CoursesHelper
 	end
 
 	def is_watch_listed(video_id, course_id)
-		return WatchList.where(:video_id => video_id, :course_id => course_id, :user_id => current_user.id).any? ? "true" : "false"
+		return WatchList.where(:video_id => video_id, :course_id => course_id, :user_id => current_user).any? ? "true" : "false"
 	end
 end

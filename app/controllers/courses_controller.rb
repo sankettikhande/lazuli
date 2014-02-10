@@ -9,9 +9,9 @@ class CoursesController < ApplicationController
 
 	def show
 		@course = Course.cached_find(params[:id])
-		@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user.id, :course_id => @course.id).limit(1)
+		@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user, :course_id => @course.id).limit(1)
 		@video = load_video
-		@favourite_video = @video.favourites.where(:user_id => current_user.id).last
+		@favourite_video = @video.favourites.where(:user_id => current_user).last
 		@recommended_videos = load_recommended_videos
 		authorize! :show, @video, :if => :video_param?
 	end

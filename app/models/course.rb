@@ -34,6 +34,10 @@ class Course < ActiveRecord::Base
   after_initialize :create_associations
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   after_create :set_channel_admin_user_ids
+
+  def self.public_channel_courses
+    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published').map{|c| c.courses.reject{|c| c.topics.blank?}}.flatten.first(3)
+  end
   
   #INSTANCE METHODS
   def set_channel_permission
@@ -112,7 +116,7 @@ class Course < ActiveRecord::Base
   def course_first_video
     self.topics.published.each do |topic|
       videos = topic.videos.published
-      return videos.first if videos.any?
+      return (videos.where(:demo => true).first || videos.first) if videos.any?
     end
   end
   
