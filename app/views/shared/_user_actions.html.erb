@@ -20,15 +20,19 @@
       <div class="row">
         <div class="col-sm-2 col-sm-offset-2">
           <div class="form-group">
-              <select class="form-control btn-primary" id="sort-by-btn">
-                <option value="" selected>Filter</option>
-                <option value="value-1">1</option>
+              <select class="form-control btn-primary" id="<%= params[:controller] %>-filter-select" name="search_col">
+                <option value="" selected>All</option>
+                <option value="tags">Tags</option>
+                <option value="title">Title</option>
+                <option value="topic_name">Topic Name</option>
+                <option value="course_name">Course Name</option>
+                <option value="channel_name">Channel Name</option>
               </select>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <input type="search" class="form-control" id="search-fav" placeholder="Search Favourites">
+            <%= text_field_tag :search_key, nil, :class => 'form-control', :id => "#{params[:controller]}-search-text", :placeholder => 'Search Favourites' %>
           </div>
         </div>
         <div class="col-sm-2">

@@ -1,4 +1,4 @@
-<section class="fav-content">
+<section class="fav-content" id="video_search_results">
 	<div class="row">
 		<div class="col-xs-12">
 			<ul class="row">
@@ -7,7 +7,7 @@
 					<% course = topic.course %>
 					<li class="col-xs-12 col-sm-6 col-md-4">
 						<ul class="box-record">
-							<li class="box-title"><input type="checkbox" name="<%= type %>_ids[<%= object.id %>]" class="user_checkbox">
+							<li class="box-title"><input type="checkbox" name="<%= params[:controller] %>_ids[<%= object.id %>]" class="user_checkbox">
 								<span class="pull-right"><button type="button" class="btn-trans">&times;</button></span></li>
 							<li class="box-details">
 								<div class="row">
