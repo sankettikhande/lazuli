@@ -8,6 +8,6 @@ class History < ActiveRecord::Base
 
   def self.get_user_videos(user)
     histories_list = user.histories.select("video_id").map(&:video_id)
-    Video.find(histories_list)
+    Video.find(histories_list, :include => {:topic => :course})
   end
 end

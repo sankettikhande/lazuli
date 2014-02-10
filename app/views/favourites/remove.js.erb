@@ -1,0 +1,5 @@
+<% if params[:favourites_ids] && @favourite_videos %>
+	$("#remove_videos").html("<%= j(render 'shared/shared', :objekts => @favourite_videos) %>");
+<% else %>
+	$("#remove_videos").html("No videos are found in Favourite list.");
+<% end %>

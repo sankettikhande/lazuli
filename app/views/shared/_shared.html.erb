@@ -2,39 +2,37 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<ul class="row">
-				<% objects.each do |object| %>
-					<% topic = object.topic %>
-					<% course = topic.course %>
+				<% objekts.each do |objekt| %>
 					<li class="col-xs-12 col-sm-6 col-md-4">
 						<ul class="box-record">
-							<li class="box-title"><input type="checkbox" name="<%= params[:controller] %>_ids[<%= object.id %>]" class="user_checkbox">
+							<li class="box-title"><input type="checkbox" name="<%= params[:controller] %>_ids[<%= objekt.id %>]" class="user_checkbox">
 								<span class="pull-right"><button type="button" class="btn-trans">&times;</button></span></li>
 							<li class="box-details">
 								<div class="row">
 									<div class="col-xs-6 col-sm-5">
 										<div class="item-thumb">
-											<%= link_to(image_tag(video_thumbnail_image(object, :medium => 1), :alt => "", :class => "img-responsive center-block")) %>
+											<%= link_to(image_tag(video_thumbnail_image(objekt, :medium => 1), :alt => "", :class => "img-responsive center-block")) %>
 										</div>
 									</div>
 									<div class="col-xs-6 col-sm-7">
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="item-title">
-													<%= link_to(course.name.titleize, course_video_url(course))%>
+													<%= link_to(objekt.topic.course.name.titleize, course_video_url(objekt.topic.course))%>
 												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="item-categ">
-													<%= link_to(topic.title.titleize, course_video_url(course))%>
+													<%= link_to(objekt.topic.title.titleize, course_video_url(objekt.topic.course))%>
 												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="item-descr">
-													<%= link_to(object.title.titleize, course_videos_url(course, object))%>
+													<%= link_to(objekt.title.titleize, course_videos_url(objekt.topic.course, objekt))%>
 												</div>
 											</div>
 										</div>

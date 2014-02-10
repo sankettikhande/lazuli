@@ -20,7 +20,7 @@ class Favourite < ActiveRecord::Base
   ## retuns all videos for a particular user in favourite list
   def self.get_videos_for(user)
     favourite_video_ids = Favourite.get_video_ids_for(user)
-    Video.find(favourite_video_ids)
+    Video.find(favourite_video_ids, :include => {:topic => :course})
   end
 
 end

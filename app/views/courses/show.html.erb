@@ -13,7 +13,7 @@
       <% unless @user_subscription.blank? %>
         <div class="col-sm-2 col-md-2 nopadding-left">
           <div class="sub-ends">
-            <p class="text-center"><a href="#">Subscription Ends: <b><%= @user_subscription[0].expiry_date.strftime("%a, %w %B, %Y") %></b></a></p>
+            <p class="text-center"><a href="#">Subscription Ends: <b><%= @user_subscription.expiry_date.strftime("%a, %w %B, %Y") %></b></a></p>
           </div>
         </div>
       <% end %>
