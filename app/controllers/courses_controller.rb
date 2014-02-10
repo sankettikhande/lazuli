@@ -1,14 +1,19 @@
 class CoursesController < ApplicationController
 	layout 'application'
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
+  
 	def index
 	end
 
 	def show
 		@course = Course.cached_find(params[:id])
-		@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user.id, :course_id => @course.id).limit(1)
+		@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user, :course_id => @course.id).limit(1)
 		@video = load_video
-		@favourite_video = @video.favourites.where(:user_id => current_user.id).last
+		@favourite_video = @video.favourites.where(:user_id => current_user).last
 		@recommended_videos = load_recommended_videos
+		authorize! :show, @video, :if => :video_param?
 	end
 
 	private
@@ -26,5 +31,9 @@ class CoursesController < ApplicationController
 	def load_video
 		return Video.published.cached_find(params[:video_id]) if params[:video_id]
 		@course.course_first_video
+	end
+
+	def video_param?
+		params[:video_id]
 	end
 end
