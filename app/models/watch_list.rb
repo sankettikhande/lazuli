@@ -9,6 +9,6 @@ class WatchList < ActiveRecord::Base
 
 	def self.get_user_videos(user)
 		watch_list = user.watch_lists.select("video_id").map(&:video_id)
-		Video.find(watch_list)
+		Video.find(watch_list, :include => {:topic => :course})
   end
 end

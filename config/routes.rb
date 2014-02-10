@@ -69,7 +69,6 @@ Lazuli::Application.routes.draw do
     end
     resources :user_channel_subscriptions
   end
-  resources :favourites, :only => [:index, :create, :destroy]
   resources :channels, :only => [:index, :show] 
   resources :courses, :only => [:index, :show]
   resources :watch_lists, :only => [:index] do
@@ -89,6 +88,11 @@ Lazuli::Application.routes.draw do
     end
     member do
       get 'save_history'
+    end
+  end
+  resources :favourites, :only => [:index, :create, :destroy] do
+    collection do
+      post 'remove'
     end
   end
 

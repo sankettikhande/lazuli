@@ -4,7 +4,7 @@ class WatchListsController < SharedController
 	end
 
 	def remove
-		if params[:watch_list_ids]
+		if params[:watch_lists_ids]
 			WatchList.where(:video_id => params[:watch_lists_ids].keys, :user_id => current_user.id).destroy_all
 			@videos = WatchList.get_user_videos(current_user)
 		end

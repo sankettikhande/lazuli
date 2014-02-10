@@ -19,4 +19,11 @@ class FavouritesController < SharedController
 			@msg = "#{params[:item_type]} can't be remove from favourite list."
 		end
 	end
+
+	def remove
+		if params[:favourites_ids]
+			Favourite.where(:favouritable_id => params[:favourites_ids].keys, :favouritable_type => "Video", :user_id => current_user.id).destroy_all
+			@favourite_videos = Favourite.get_videos_for(current_user)
+		end
+	end
 end
