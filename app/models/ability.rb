@@ -22,6 +22,10 @@ class Ability
         can :manage, Video do |video| 
             video.channel_admin_user_id == user.id || video.course_admin_user_id == user.id
         end
+
+        can :show, Video do |video|
+            video.channel_admin_user_id == user.id || video.course_admin_user_id == user.id || user.watchable_video?(video, video.topic.course_id)
+        end
         can :create, [Topic,Video,Course,User]
         can :manage, UserChannelSubscription do |ccp|
             user.administrated_channel_ids.include?(ccp.channel_id) || user.administrated_course_ids.include?(ccp.course_id)
@@ -31,11 +35,17 @@ class Ability
         can :manage, Course, :course_admin_user_id => user.id
         can :manage, Topic, :course_admin_user_id => user.id
         can :manage, Video, :course_admin_user_id => user.id
+        can :show, Video do |video|
+            video.course_admin_user_id == user.id || user.watchable_video?(video, video.topic.course_id)
+        end
         can [:get_channel,:channel_courses], Channel
         cannot :create, [Course,User,Channel]
         can :create, [Topic, Video]
     else
         can :search, :all
+        can :show, Video do |video|
+            user.watchable_video?(video, video.topic.course_id)
+        end
     end
     #
     # The first argument to `can` is the action you are giving the user 

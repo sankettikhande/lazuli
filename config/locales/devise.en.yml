@@ -72,3 +72,5 @@ en:
       course: "Not authorized to Update this Course"
       topic: "Not authorized to Update this Topic"
       video: "Not authorized to Update this Video"
+    show:
+      video: "Not subscribed to Watch this Video."
