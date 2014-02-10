@@ -6,8 +6,12 @@ class History < ActiveRecord::Base
 
   validates :video_id, :uniqueness => {:scope => :user_id}
 
+  def self.get_video_ids_for(user)
+    history_video_ids = user.histories.select("video_id").map(&:video_id)
+  end
+
   def self.get_user_videos(user)
-    histories_list = user.histories.select("video_id").map(&:video_id)
+    histories_list = History.get_video_ids_for(user)
     Video.find(histories_list, :include => {:topic => :course})
   end
 end
