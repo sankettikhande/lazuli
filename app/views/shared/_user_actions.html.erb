@@ -18,16 +18,16 @@
     </div>
     <div class="col-xs-12 col-sm-6">
       <div class="row">
-        <div class="col-sm-2 col-sm-offset-2">
+        <div class="col-sm-3 col-sm-offset-1">
           <div class="form-group">
-              <select class="form-control btn-primary" id="<%= params[:controller] %>-filter-select" name="search_col">
-                <option value="" selected>All</option>
-                <option value="tags">Tags</option>
-                <option value="title">Title</option>
-                <option value="topic_name">Topic Name</option>
-                <option value="course_name">Course Name</option>
-                <option value="channel_name">Channel Name</option>
-              </select>
+            <select class="form-control btn-primary" id="<%= params[:controller] %>-filter-select" name="search_col">
+              <option value="" selected>All</option>
+              <option value="tags">Tags</option>
+              <option value="title">Title</option>
+              <option value="topic_name">Topic Name</option>
+              <option value="course_name">Course Name</option>
+              <option value="channel_name">Channel Name</option>
+            </select>
           </div>
         </div>
         <div class="col-sm-6">
@@ -36,9 +36,11 @@
           </div>
         </div>
         <div class="col-sm-2">
-          <div class="text-right">
-            <button type="button" class="btn btn-primary btn-block"><i class="fa fa-filter"></i></button>
-          </div>
+        <div class="text-right">
+          <button type="button" class="btn btn-primary btn-block">
+            <i class="fa fa-filter"></i>
+          </button>
+        </div>
         </div>
       </div>
     </div>

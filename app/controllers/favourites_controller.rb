@@ -1,9 +1,4 @@
 class FavouritesController < SharedController
-
-	def index
-		@favourite_videos = Favourite.get_videos_for(current_user)
-	end
-
 	def create
 		fav_params = {:favouritable_type => params[:item_type], :favouritable_id => params[:item_id], :user_id => current_user.id}
 		unless Favourite.create fav_params
@@ -23,7 +18,7 @@ class FavouritesController < SharedController
 	def remove
 		if params[:favourites_ids]
 			Favourite.where(:favouritable_id => params[:favourites_ids].keys, :favouritable_type => "Video", :user_id => current_user.id).destroy_all
-			@favourite_videos = Favourite.get_videos_for(current_user)
+			@videos = Favourite.get_user_videos(current_user)
 		end
 	end
 end
