@@ -44,12 +44,13 @@ $('body').on('focus',".date-picker", function(){
     })
 
     $('.subscriptions_id').on('change', function(){
-      var subscription_date_id = $(this).closest(".form-group").next().find(".subscription_date").attr('id')
+      var subscription_date_id = $(this).closest(".form-group").next().next().find(".subscription_date").attr('id')
       var subscription_id = $(this).attr('id')
       var calculated_days = $('#'+subscription_id).find('option:selected').data('calculated_days');
-      var date_id = $(this).closest(".form-group").next().next().find(".expiry_date").attr('id');
+      var date_id = $(this).closest(".form-group").next().next().next().find(".expiry_date").attr('id');
       var subscription_date_select = $('#'+subscription_date_id).val();
       var event_date = jQuery.datepicker.parseDate("dd-mm-yy", subscription_date_select)
+      // console.log(date_id + subscription_date + event_date)
       if(subscription_date_select != ""){
         if ($(this).val() != ""){
         var expiry_date = get_expiry_date(event_date, calculated_days)
