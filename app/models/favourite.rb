@@ -14,7 +14,7 @@ class Favourite < ActiveRecord::Base
 
   ## retuns all video_ids for a particular user in favourite list
   def self.get_video_ids_for(user)
-    favourite_video_ids = user.favourites.videos.map(&:favouritable_id)
+    favourite_video_ids = user.favourites.videos.select("favouritable_id").map(&:favouritable_id)
   end
 
   ## retuns all videos for a particular user in favourite list
