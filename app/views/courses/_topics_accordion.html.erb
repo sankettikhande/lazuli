@@ -14,14 +14,19 @@
             <% topic.videos.published.each_with_index do |video, video_index| %>
               <li class="<%= is_active_video(video) %>">
                 <% if cannot? :show, video %>
-                <span id='subscription_modal' data-toggle="modal" data-target="#subscription_confirm">
-                  <%= image_tag("/assets/frontend/lock.png") %>
-                </span>
-                <% end %>
+                <div id='subscription_modal' data-toggle="modal" data-target="#subscription_confirm">
+                  <span>
+                    <%= image_tag("/assets/frontend/lock.png") %>
+                  </span>
+                  <a href="#"> <%= video.title %>
+                    <span><%= format_duration(video.vimeo_data) %></span>
+                  </a>
+                </div>
+                <% else %>
                 <a href="<%= course_videos_path(@course.id, video.id) %>"> <%= video.title %>
                   <span><%= format_duration(video.vimeo_data) %></span>
                 </a>
-
+                <% end %>
               </li>
             <% end %>
           </ul>

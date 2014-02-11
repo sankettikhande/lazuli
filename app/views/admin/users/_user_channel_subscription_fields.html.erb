@@ -24,7 +24,7 @@
 	  <%= f.select 'subscription_id', options_for_select(@subscriptions.collect {|s| [ "#{s.name}- #{s.calculated_days} days", s.id, {'data-calculated_days' => s.calculated_days} ] }, f.object.subscription_id), {:include_blank => "Please Select"}, :class => 'form-control subscriptions_id validate[required]' %>
 	</div>
 </div>
-<div class="row form-group" id='permissions_<%= index %>'>
+<div class="row form-group permissions" id='permissions_<%= index %>'>
 	<div class="col-md-2">
 		<label>User Permissions<%= required_field %></label>
 	</div>

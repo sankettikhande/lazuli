@@ -21,6 +21,14 @@ $(document).ready(function(){
   	var selected_fields = $("#list_set_1").text()
   	window.location.href = '/admin/contents' + "#"+selected_fields.toLowerCase();
   }); 
+
+  $('#topic_course_id').change(function(){
+    var val = $("option:selected",this).val();
+    $.ajax({
+      url: "/admin/courses/"+val+"/course_subscription_types.js",
+      data: {topic_course: true}
+    });
+  })
 })
 
 function videoAccordionForm(){
