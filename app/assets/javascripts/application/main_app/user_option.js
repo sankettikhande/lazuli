@@ -52,8 +52,8 @@ $( document ).ready(function() {
 	/*********************************** block ends here for fitering and searching videos *************************/
 
 	function clear_filters(){
-		$("#histories-search-text").val("");
-		$("#histories-filter-select").val("");
+		$("#"+controller_name+"-search-text").val("");
+		$("#"+controller_name+"-filter-select").val("").change();
 		get_search_params_and_call_search();
 	}
 
