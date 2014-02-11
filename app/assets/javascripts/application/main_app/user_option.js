@@ -50,4 +50,18 @@ $( document ).ready(function() {
 		});
 	}
 	/*********************************** block ends here for fitering and searching videos *************************/
+
+	function clear_filters(){
+		$("#"+controller_name+"-search-text").val("");
+		$("#"+controller_name+"-filter-select").val("").change();
+		get_search_params_and_call_search();
+	}
+
+	$("#filter_clear").unbind().click(function(){
+		clear_filters();
+	});
+
+	$("#remove_selected_videos").unbind().click(function(){
+		clear_filters();
+	});
 });

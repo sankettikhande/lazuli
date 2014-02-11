@@ -23,4 +23,7 @@ class Favourite < ActiveRecord::Base
     Video.find(favourite_video_ids, :include => {:topic => :course})
   end
 
+  def self.get_video(user, video_id, type="Video")
+    find_by_favouritable_id_and_user_id_and_favouritable_type(video_id, user.id, type)
+  end
 end
