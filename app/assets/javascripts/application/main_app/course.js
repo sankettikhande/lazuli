@@ -35,5 +35,15 @@ $( document ).ready(function() {
     $('.content2').hide();
     $('.content1').show();
   });
+
+  $("#remove-favourite").click(function (){
+    $('#add-favourite').show();
+    $('#remove-favourite').hide();
+  });
+
+  $("#add-favourite").click(function (){
+    $('#add-favourite').hide();
+    $('#remove-favourite').show();
+  });
 });
 
