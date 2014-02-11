@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8">
+          <h4>My Subscriptions</h4>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="form-group">
+          <input type="search" class="form-control" placeholder="Search within Subscriptions">
+        </div>
+      </div>
+    </div>
+    <div class="courses-list-box">
+      <% @subscribed_courses.each do |subscribed_course| %>
+        <div class="courses-list" id="subscribed_div_<%= subscribed_course.id %>">
+          <div class="row">
+            <div class="col-xs-5 col-sm-2 col-md-2">
+              <div class="course-logo-img">
+                <%= link_to(image_tag(course_thumbnail_image(subscribed_course.course, {:medium => true}), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), course_video_path(subscribed_course.course_id)) %>
+              </div>
+            </div>
+            <div class="col-xs-7 col-sm-6 col-md-6">
+               <ul class="list-content">
+                  <li class="title">
+                    <%= link_to(subscribed_course.course.name.titleize, course_video_path(subscribed_course.course_id)) %>
+                  </li> 
+                  <li class="descr hidden-xs">
+                    <%= subscribed_course.course.description.truncate(180) %>
+                  </li>
+                  <li class="subs-date"><a href="#">Subscription Expired</a>
+                    <span><a href="#">Renew Subscription</a></span></li>
+                </ul>
+            </div>
+            <div class="hidden-xs col-sm-2 col-md-2">
+              <div class="course-featured-video">
+                <%= image_tag(subscribed_course.channel.image.url(:medium), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ) %>
+              </div>
+            </div>
+            <div class="col-sm-2 col-md-2">
+              <div class="remove-button">
+                <div class="form-group">
+                  <%= link_to("Remove", subscription_url(subscribed_course), :method => :delete, :remote => true, :class => "btn btn-danger #{'disabled' unless subscribed_course.subscription_expired?}", :id => "subscription#{subscribed_course.id}")%>
+                </div>
+              </div>
+            </div>
+          </div> <!-- row ends -->
+        </div>
+      <% end %>
+    </div>
+  </div> <!-- col-sm-12 Ends -->
+</div> <!-- first row -->
+
+<script>
+<% if @subscribed_courses.count < 4 %>
+  $(function(){
+    $('.courses-list-box').slimScroll({
+      height: auto;
+    });
+  });
+<% else %>
+  $(function(){
+    $('.courses-list-box').slimScroll({
+      height: '370px'
+    });
+  });
+<% end %>
+</script>

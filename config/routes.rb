@@ -96,6 +96,7 @@ Lazuli::Application.routes.draw do
       delete 'delete_favs'
     end
   end
+  resources :subscriptions, :only => [:destroy]
 
   
   match '/courses/:id/:video_id' => 'courses#show', :as => :course_videos

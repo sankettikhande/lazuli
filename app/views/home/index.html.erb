@@ -8,6 +8,12 @@
 <section id="new-videos">
   <%= render 'new_videos' %>
 </section>
-<section class="all-courses">
-  <%= render 'all_courses' %>
+<section class="all-courses indigo-back">
+	<% if @subscribed_courses.blank? %>
+		<%= render 'home/all_courses' %>
+	<% else %>
+		<%= render 'home/my_subscription' %>
+	<% end %>
 </section>
+
+<%= javascript_include_tag "application/main_app/carousel.js"%>
