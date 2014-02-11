@@ -1,51 +1,49 @@
-<div class="container">
-  <section class="btns-crumbs visible-md visible-lg">
-    <div class="row">
-      <%= render 'shared/user_menu' if user_signed_in? %>
-      <div class="col-sm-5 col-md-6 nopadding-left">
-        <ol class="breadcrumb">
-          <li><a href="#">Courses</a></li>
-          <li><a href="#">Excel</a></li>
-          <li><a href="#">Get to know your workplace</a></li>
-          <li class="active">Know your worksheet</li>
-        </ol>
-      </div>
-      <% unless @user_subscription.blank? %>
-        <div class="col-sm-2 col-md-2 nopadding-left">
-          <div class="sub-ends">
-            <p class="text-center"><a href="#">Subscription Ends: <b><%= @user_subscription.expiry_date.strftime("%a, %w %B, %Y") %></b></a></p>
-          </div>
-        </div>
-      <% end %>
+<section class="btns-crumbs visible-md visible-lg">
+  <div class="row">
+    <%= render 'shared/user_menu' if user_signed_in? %>
+    <div class="col-sm-5 col-md-6 nopadding-left">
+      <ol class="breadcrumb">
+        <li><a href="#">Courses</a></li>
+        <li><a href="#">Excel</a></li>
+        <li><a href="#">Get to know your workplace</a></li>
+        <li class="active">Know your worksheet</li>
+      </ol>
     </div>
-  </section>
-  <section class="course-menu-videos">
-    <div class="seperator10 visible-xs"></div>
-    <div class="row row-offcanvas row-offcanvas-left">
-      <%= render 'topics_accordion' %>
-      <!--/span-->
-      <div class="col-xs-12 col-sm-7 col-md-8">
-        <div class="view-course">
-          <%= render 'video_options' if user_signed_in? %>
-          <!-- rows ends -->
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="place-video">
-                <iframe src="<%= vimeo_iframe_url %>" id="player_1" width="1280" height="720" frameborder="0" title="Brad!" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-              </div>
+    <% unless @user_subscription.blank? %>
+      <div class="col-sm-2 col-md-2 nopadding-left">
+        <div class="sub-ends">
+          <p class="text-center"><a href="#">Subscription Ends: <b><%= @user_subscription.expiry_date.strftime("%a, %w %B, %Y") %></b></a></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+<section class="course-menu-videos">
+  <div class="seperator10 visible-xs"></div>
+  <div class="row row-offcanvas row-offcanvas-left">
+    <%= render 'topics_accordion' %>
+    <!--/span-->
+    <div class="col-xs-12 col-sm-7 col-md-8">
+      <div class="view-course">
+        <%= render 'video_options' if user_signed_in? %>
+        <!-- rows ends -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="place-video">
+              <iframe src="<%= vimeo_iframe_url %>" id="player_1" width="1280" height="720" frameborder="0" title="Brad!" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
             </div>
-            <!-- col-12 ends -->
           </div>
-          <!-- row ends -->
-          <%= render 'course_header' %>
-          <!-- col-7 ends -->
+          <!-- col-12 ends -->
         </div>
         <!-- row ends -->
+        <%= render 'course_header' %>
+        <!-- col-7 ends -->
       </div>
+      <!-- row ends -->
     </div>
-    <!--/row-->
-  </section>
-  <%= render 'recommended_videos'%>
-</div>
+  </div>
+  <!--/row-->
+</section>
+<%= render 'recommended_videos'%>
 <%= javascript_include_tag "froogaloop2/froogaloop2.min.js" %>
 <%= javascript_include_tag "application/main_app/course.js"%>
