@@ -60,4 +60,8 @@ $( document ).ready(function() {
 	$("#filter_clear").unbind().click(function(){
 		clear_filters();
 	});
+
+	$("#remove_selected_videos").unbind().click(function(){
+		clear_filters();
+	});
 });
