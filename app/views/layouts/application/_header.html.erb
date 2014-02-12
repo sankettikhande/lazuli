@@ -47,7 +47,7 @@
                           </li>
                           <% end %>
                           <li class="divider"></li>
-                          <li><%= link_to 'Browse Libary', browse_course_path %></li>
+                          <li><%= link_to 'Browse Libary', browse_course_url %></li>
                         </ul>
                       </li>
                       </ul>
@@ -55,7 +55,14 @@
                   <div class="col-md-6">
                     <ul class="nav navbar-nav navbar-right">
                       <li><a>Welcome, <span><%= current_user.name.split(" ").first %></span></a></li>
-                      <li><a href="#about" data-target="#account-modal" data-toggle='modal'><i class="fa fa-briefcase"></i> Settings</a></li>
+                      <li><%= link_to raw_field('fa fa-briefcase', 'Settings'), '#', :data => {:toggle => 'dropdown'} %>
+                        <ul class="dropdown-menu dropdown-fix">
+                          <li><%= link_to 'My Account', '#', :data => {:target => '#account-modal', :toggle => 'modal'} %></li>
+                          <% if current_user.is_any_admin? %>
+                          <li><%= link_to 'Admin Dashboard', admin_path, "data-no-turbolink" => 'true' %></li>
+                          <% end %>
+                        </ul>
+                      </li>
                       <li><%= link_to raw_field("fa fa-sign-out","Log Out"), destroy_user_session_path, :method => :delete %></li>
                     </ul>
                   </div>
@@ -67,9 +74,11 @@
       </div> <!-- row 1 ends -->
     </div>
   </div> <!-- navbar ends -->
-  <div class="modal" id="account-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true" data-backdrop="true">
-  <%= render 'users/my_account' %>
-  </div><!-- /.modal -->
+  <div class="homepage-modals">
+    <div class="modal" id="account-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true" data-backdrop="true">
+      <%= render 'users/my_account' %>
+    </div><!-- /.modal -->
+  </div>  
 <% else %>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
@@ -86,4 +95,12 @@
       </ul>
     </div>
   </div>
+  <div class="homepage-modals">
+    <div class="modal" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true" data-backdrop="true">
+       <%= render 'devise/sessions/new' %>       
+    </div>
+    <div class="modal" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="signup-modal" aria-hidden="true" data-backdrop="true">
+      <%= render :template => '/devise/registrations/new' %>
+    </div>
+ </div> 
 <% end %>

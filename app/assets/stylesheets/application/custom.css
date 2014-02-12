@@ -127,6 +127,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 #lazuli-top-menu .navbar-nav .dropdown-menu li a:hover {color: #fff !important}
 #lazuli-top-menu .navbar-form {border:0;}
 #lazuli-top-menu.navbar {margin-bottom: 0}
+#lazuli-top-menu.navbar .navbar-right .dropdown-fix {right: auto !important;}
 
 
 
