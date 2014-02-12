@@ -55,7 +55,7 @@
                   <div class="col-md-6">
                     <ul class="nav navbar-nav navbar-right">
                       <li><a>Welcome, <span><%= current_user.name.split(" ").first %></span></a></li>
-                      <li><a href="#about"><i class="fa fa-briefcase"></i> Settings</a></li>
+                      <li><a href="#about" data-target="#account-modal" data-toggle='modal'><i class="fa fa-briefcase"></i> Settings</a></li>
                       <li><%= link_to raw_field("fa fa-sign-out","Log Out"), destroy_user_session_path, :method => :delete %></li>
                     </ul>
                   </div>
@@ -84,3 +84,6 @@
     </div>
   </div>
 <% end %>
+<div class="modal" id="account-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true" data-backdrop="true">
+  <%= render 'admin/users/my_account' %>
+</div><!-- /.modal -->

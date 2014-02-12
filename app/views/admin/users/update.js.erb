@@ -1,5 +1,9 @@
 <% if @user.errors.blank? %>
-	window.location.href = "<%= admin_users_path %>"
+  <% if request.referrer.include?('admin') %>
+	window.location.href = "<%= admin_users_url %>"
+  <% else %>
+  	window.location.href = "<%= root_url %>"
+  <% end %>
 <% else %>
 	$('#error_messages').css('color','red').html('<%= error_message_tag(@user.errors.full_messages) %>')	
 	$(window).spin('stop')
