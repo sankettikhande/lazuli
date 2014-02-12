@@ -11,4 +11,7 @@ class HomeController < ApplicationController
       end
     end
   end
+
+  def browse_course
+  end
 end
