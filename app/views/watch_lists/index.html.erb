@@ -1,7 +1,1 @@
-<%= render 'shared/shared_header'%>
-<%= render 'shared/user_actions' %>
-<% if @videos.any? %>
-  <%= form_for @videos, :url => remove_watch_lists_path, :remote => true, :method => :post, :html =>{ :id => "remove_videos" }  do |f| %>
-		<%= render 'shared/shared', :objekts => @videos %>
-	<% end %>
-<% end %>
+<%= render 'shared/shared_index', :url => remove_watch_lists_url %>

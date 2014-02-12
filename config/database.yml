@@ -2,28 +2,28 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: lazuli_development
+  database: lazuli
   pool: 5
   username: root
-  password: 
+  password: root
   socket: /var/run/mysqld/mysqld.sock
 
 test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: lazuli_test
+  database: lazuli
   pool: 5
   username: root
-  password: 
+  password: root
   socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: lazuli_production
+  database: lazuli
   pool: 5
   username: root
-  password:
+  password: root
   socket: /var/run/mysqld/mysqld.sock
