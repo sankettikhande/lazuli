@@ -2,12 +2,7 @@
   <div class="row">
     <%= render 'shared/user_menu' if user_signed_in? %>
     <div class="col-sm-5 col-md-6 nopadding-left">
-      <ol class="breadcrumb">
-        <li><a href="#">Courses</a></li>
-        <li><a href="#">Excel</a></li>
-        <li><a href="#">Get to know your workplace</a></li>
-        <li class="active">Know your worksheet</li>
-      </ol>
+      <div class='breadcrumb'><%= courses_breadcrumbs(@course, @video) %></div>
     </div>
     <% unless @user_subscription.blank? %>
       <div class="col-sm-2 col-md-2 nopadding-left">

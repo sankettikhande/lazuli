@@ -108,6 +108,55 @@ module ApplicationHelper
     end
   end
 
+  def courses_breadcrumbs(resource, resource_video, options = {})
+    default_options = {:separator => ">>"}
+    options = default_options.merge(options)
+    url = request.fullpath.split("?").first
+    crumbs = []
+    crumbs += url.split("/")
+    crumbs = crumbs.delete_if(&:blank?)
+    crumbs_list = ["courses"]
+    if(crumbs.length == 3)
+      course_name = resource.name
+      video_name = resource_video.title
+      topic_name = resource_video.topic.title
+    else
+      course_name = resource.name
+      topic_name = resource.topics.published.first.title
+      video_name = resource_video.title
+    end
+    crumbs_list << course_name << topic_name << video_name
+    crumbs_list_array(crumbs_list, crumbs, resource, resource_video, options)
+  end
+
+  def crumbs_list_array crumbs_list, crumbs, resource, resource_video, options
+    breadcrumb_array = []
+    content_tag :div, :id => "breadcrumbs" do
+      crumbs_list.each_with_index do |crumb, index|
+        if((crumbs_list.last == crumb) && (index == crumbs_list.length-1))
+          breadcrumb_array << "<span id='list_set_#{index}' class='breadcrumb'>#{crumb.to_s.titleize}</span>"
+        elsif(crumbs_list.first == crumb)
+          breadcrumb_array << "<span id='list_set_#{index}' class='breadcrumb'><a href='#' data-no-turbolink=true>#{crumb.to_s.titleize}</a></span>"
+        else
+          breadcrumb_array << "<span id='list_set_#{index}' class='breadcrumb'><a href='/#{courses_crumbs_urls(crumbs, index, resource, resource_video)}' data-no-turbolink=true>#{crumb.to_s.titleize}</a></span>"
+        end
+      end
+    end
+    breadcrumb_array.join(options[:separator]).html_safe
+  end
+
+  def courses_crumbs_urls(crumbs, index, resource, resource_video)
+    url_array = ["courses"]
+    cour_id = crumbs[1]
+    url_array << cour_id
+    if(index == 1)
+      url_array << resource.topics.published.first.try(:videos).try(:first).try(:id)
+    else
+      url_array << resource_video.topic.videos.first.id
+    end
+    url_array.join("/")
+  end
+
   def flash_message
     flash_css_classes = {:notice =>"note-info", :success => "note-success", :alert => "note-warning", :error => "note-danger"}
     flash.map do |key, msg|
