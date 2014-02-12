@@ -1,20 +1,24 @@
 <div class="col-sm-6 fix-overflow"> 
 	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1">
+		<div class="col-sm-12">
 			<div class="content-left welcome-videos"> 
 				<div class="row">
 					<div class="col-sm-12">
-						<h3>Whats New ?</h3>
+						<div class="welcome-videos-title">
+								<h3>Whats New ?</h3>
+						</div>
 					</div>
 				</div>
-				<div class="row"> <!-- row 7 -->
-					<div class="col-sm-12">
-						<% @topics.each_with_index do |topics, topics_index| %>
-							<%= render 'home/video_home', :topics => topics, :topics_index =>  topics_index %>
-						<% end %>   
-					</div>	
-				</div>
+				<% @topics.each_with_index do |topic, topic_index| %>
+					<div class="carousel-box-<%= topic_index %>">
+						<div class="row"> <!-- row 7 -->
+							<%= render 'home/video_home', :topic => topic, :topic_index =>  topic_index %>	
+						</div>
+					</div>
+				<% end %>
 			</div>	
 		</div>
 	</div>
 </div>
+
+<%= javascript_include_tag "application/main_app/multiple_carousel.js"%>

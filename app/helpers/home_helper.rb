@@ -17,7 +17,11 @@ module HomeHelper
     end
   end
 
-  def course_thumbnail_image(course)
-		course.image.present? ? course.image.url : "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+  def course_thumbnail_image(course, options={})
+    if course.image.present?
+      course.image.url(options[:image_size])
+    else
+      "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+    end
   end
 end

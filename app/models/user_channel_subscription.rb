@@ -44,4 +44,12 @@ class UserChannelSubscription < ActiveRecord::Base
     self.subscription_date = Date.today
     self.expiry_date = Date.today + duration.days
   end
+
+  def self.user_subscribed_courses(user)
+    where(:user_id => user.id).includes([:channel, :course])
+  end
+
+  def subscription_expired?
+    (self.expiry_date - self.subscription_date).to_i <= 0
+  end
 end
