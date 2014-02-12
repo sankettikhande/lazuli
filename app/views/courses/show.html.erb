@@ -1,6 +1,8 @@
 <section class="btns-crumbs visible-md visible-lg">
   <div class="row">
-    <%= render 'shared/user_menu' if user_signed_in? %>
+    <div class="col-sm-5 col-md-4">
+      <%= render 'shared/user_menu' if user_signed_in? %>
+    </div>
     <div class="col-sm-5 col-md-6 nopadding-left">
       <div class='breadcrumb'><%= courses_breadcrumbs(@course, @video) %></div>
     </div>
