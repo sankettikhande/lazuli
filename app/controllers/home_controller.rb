@@ -14,6 +14,5 @@ class HomeController < ApplicationController
   end
 
   def browse_course
-    @subscribed_courses = UserChannelSubscription.user_subscribed_courses(current_user)
   end
 end
