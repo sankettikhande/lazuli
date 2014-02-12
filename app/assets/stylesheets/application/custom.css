@@ -342,7 +342,7 @@ box-shadow:        0px 0px 5px 0px #737373;}
 
 .welcome-videos .carousel-control {top: 45px;background: none;width: 20px;height: 46px;opacity: 1;z-index: 99}
 .welcome-videos .carousel-control:hover {opacity: 0.6}
-.welcome-videos .carousel-control.left {background: url('/assets/carousel-back-left.png') no-repeat;line-height: 45px;margin-left: 0px;border-radius: 0 !important;text-indent: -2px;}
+.welcome-videos .carousel-control.left {background: url('/assets/frontend/carousel-back-left.png') no-repeat;line-height: 45px;margin-left: 0px;border-radius: 0 !important;text-indent: -2px;}
 .welcome-videos .carousel-control.right {background: url('/assets/frontend/carousel-back-right.png') no-repeat;line-height: 45px;margin-right:0px;border-radius: 0 !important;text-indent: 3px;}
 
 /** =Carousel Ends **/

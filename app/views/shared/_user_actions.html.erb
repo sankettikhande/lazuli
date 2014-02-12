@@ -32,7 +32,7 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= text_field_tag :search_key, nil, :class => 'form-control', :id => "#{params[:controller]}-search-text", :placeholder => 'Search Favourites' %>
+            <%= text_field_tag :search_key, nil, :class => 'form-control', :id => "#{params[:controller]}-search-text", :placeholder => "Search #{params[:controller].titleize}" %>
           </div>
         </div>
         <div class="col-sm-2">
