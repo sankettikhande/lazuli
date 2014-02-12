@@ -5,7 +5,8 @@
         <h4 class="modal-title">My Account</h4>
       </div>
       <div class="modal-body">
-        <%= form_for :user, :remote => true, :url => admin_user_url(current_user), :method => :put do |f| %>
+        <%= form_for :user, :remote => true, :url => user_url(current_user), :method => :put do |f| %>
+        <div id='errors'></div>
         <div class="row">
           <div class="col-xs-12">
           <div class="form-group">

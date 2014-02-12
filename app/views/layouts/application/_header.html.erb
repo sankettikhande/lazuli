@@ -1,4 +1,4 @@
-<% if current_user %>
+<% if user_signed_in? %>
   <div class="navbar navbar-inverse navbar-fixed-top" id="lazuli-top-menu">
     <div class="container">
       <div class="row">
@@ -67,6 +67,9 @@
       </div> <!-- row 1 ends -->
     </div>
   </div> <!-- navbar ends -->
+  <div class="modal" id="account-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true" data-backdrop="true">
+  <%= render 'users/my_account' %>
+  </div><!-- /.modal -->
 <% else %>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-header">
@@ -84,6 +87,3 @@
     </div>
   </div>
 <% end %>
-<div class="modal" id="account-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true" data-backdrop="true">
-  <%= render 'admin/users/my_account' if user_signed_in? %>
-</div><!-- /.modal -->
