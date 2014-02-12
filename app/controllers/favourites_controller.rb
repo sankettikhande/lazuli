@@ -19,9 +19,10 @@ class FavouritesController < SharedController
 	end
 
 	def remove
-		if params[:favourites_ids]
-			Favourite.where(:favouritable_id => params[:favourites_ids].keys, :favouritable_type => "Video", :user_id => current_user.id).destroy_all
-			@videos = Favourite.get_user_videos(current_user)
+		Favourite.where(:favouritable_id => params[:favourites_ids].keys, :favouritable_type => "Video", :user_id => current_user.id).destroy_all if params[:favourites_ids]
+		@videos = Favourite.get_user_videos(current_user)
+		respond_to do |format|
+			format.js {render '/shared/remove'}
 		end
 	end
 end

@@ -1,8 +1,9 @@
 class HistoriesController < SharedController
 	def remove
-		if params[:histories_ids]
-			History.where(:video_id => params[:histories_ids].keys, :user_id => current_user.id).destroy_all
-			@videos = History.get_user_videos(current_user)
+		History.where(:video_id => params[:histories_ids].keys, :user_id => current_user.id).destroy_all if params[:histories_ids]
+		@videos = History.get_user_videos(current_user)
+		respond_to do |format|
+			format.js {render '/shared/remove'}
 		end
 	end
 
