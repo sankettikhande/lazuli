@@ -5,7 +5,7 @@ class HomeController < ApplicationController
       @subscribed_courses = UserChannelSubscription.user_subscribed_courses(current_user)
       @courses = Course.public_channel_courses if @subscribed_courses.blank?
     else
-      @topics = Topic.published.where(:is_bookmark_video => false).limit(3)
+      @topics =  Topic.published.not_bookmarked.limit(3)
       @courses = Course.public_channel_courses
       respond_to do |format|
         format.html{ render 'devise/sessions/new', :layout => 'devise' }
@@ -14,5 +14,6 @@ class HomeController < ApplicationController
   end
 
   def browse_course
+    @subscribed_courses = UserChannelSubscription.user_subscribed_courses(current_user)
   end
 end

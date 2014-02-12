@@ -12,9 +12,15 @@ class SubscriptionsController < ApplicationController
 
 	def destroy
     @user_subscription = UserChannelSubscription.find_by_id_and_user_id(params[:id], current_user.id)
-    @user_subscription.destroy
+    @user_subscription.destroy if @user_subscription
     respond_to do |format|
 			format.js {}
 		end
+  end
+
+  def search
+		course_ids = UserChannelSubscription.search_course_ids(current_user)
+		course_ids = Course.sphinx_search(params, current_user, course_ids).map { |i| i.id}
+		@subscribed_courses = UserChannelSubscription.search_subscription(current_user, course_ids)
   end
 end
