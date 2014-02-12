@@ -52,4 +52,12 @@ class UserChannelSubscription < ActiveRecord::Base
   def subscription_expired?
     (self.expiry_date - self.subscription_date).to_i <= 0
   end
+
+  def self.search_course_ids(user)
+    where(:user_id => user.id).select('course_id').map{ |i| i.course_id}
+  end
+
+  def self.search_subscription(user, course_ids)
+    self.where("user_id = ? and course_id in (?)", user.id, course_ids).includes([:channel, :course])
+  end
 end

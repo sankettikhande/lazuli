@@ -248,7 +248,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 /***********  =Homepage ***********/
 
 /*section {padding-bottom: 0.5em;} */
-.brush {background: url(/assets/lazuli-transparent-back.png) no-repeat top center fixed; background-size:cover; -webkit-background-size: cover;
+.brush {background: url(/assets/frontend/lazuli-transparent-back.png) no-repeat top center fixed; background-size:cover; -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 }

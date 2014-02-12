@@ -86,26 +86,41 @@ class Course < ActiveRecord::Base
     user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
   end
 
-  def self.sphinx_search options, current_user
+  def self.sphinx_search options, current_user, course_ids=[]
     sort_options, search_options, sphinx_options,select_option = {}, {}, {}, {}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
-    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
-    sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
-    unless current_user.is_admin?
-      with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
-      select_option.merge!(:select => with_permitted_user)
-      search_options.merge!(:with => {"permitted_user" => 1})
-    end
-    sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
 
-    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
-      condition_string = "@(name,channel_name,trainer_name) #{options[:sSearch]}*"
-      sphinx_options.merge!(:match_mode => :extended)
-      Course.search(condition_string,sphinx_options ).page(page).per(options[:iDisplayLength])
+    if course_ids.blank?
+      page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+      sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
+      unless current_user.is_admin?
+        with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
+        select_option.merge!(:select => with_permitted_user)
+        search_options.merge!(:with => {"permitted_user" => 1})
+      end
+      sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
+
+      if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
+        condition_string = "@(name,channel_name,trainer_name) #{options[:sSearch]}*"
+        sphinx_options.merge!(:match_mode => :extended)
+        Course.search(condition_string,sphinx_options ).page(page).per(options[:iDisplayLength])
+      else
+        sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+        Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+      end
+
     else
-      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
-      Course.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+      unless current_user.is_admin?
+        with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
+        select_option.merge!(:select => with_permitted_user)
+        search_options.merge!(:with => {"permitted_user" => 1})
+      end
+      search_options.deep_merge!(:with => {:course_id => course_ids})
+      sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
+
+      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"},:sql => {:include => [:course, :channel]}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+      Course.search(query, sphinx_options)
     end
   end
 

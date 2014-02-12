@@ -18,6 +18,8 @@ class Topic < ActiveRecord::Base
   validates :status, :inclusion => {:in => @@topic_statuses}
 
   scope :published, where(:status => "Published")
+  scope :bookmarked, where(:is_bookmark_video => true)
+  scope :not_bookmarked, where(:is_bookmark_video => false)
 
   after_save :update_videos_sphinx_delta
 

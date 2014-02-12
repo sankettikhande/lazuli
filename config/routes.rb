@@ -96,7 +96,11 @@ Lazuli::Application.routes.draw do
       delete 'delete_favs'
     end
   end
-  resources :subscriptions, :only => [:destroy]
+  resources :subscriptions, :only => [:destroy] do
+    collection do
+      get 'search'
+    end
+  end
 
   
   resources :users
