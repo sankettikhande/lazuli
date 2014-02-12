@@ -1,1 +1,5 @@
-$("#courses_list_box").html("<%= j(render 'home/subscription') %>");
+<% unless @subscribed_courses.count.zero?  %>
+	$("#courses_list_box").html("<%= j(render 'home/subscription') %>");
+<% else %>
+	$("#courses_list_box").html("No Subscription found for <%= params[:sSearch] %>");
+<% end %>
