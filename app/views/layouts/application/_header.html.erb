@@ -85,5 +85,5 @@
   </div>
 <% end %>
 <div class="modal" id="account-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true" data-backdrop="true">
-  <%= render 'admin/users/my_account' %>
+  <%= render 'admin/users/my_account' if user_signed_in? %>
 </div><!-- /.modal -->
