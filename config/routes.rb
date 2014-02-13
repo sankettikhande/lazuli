@@ -1,6 +1,6 @@
 Lazuli::Application.routes.draw do
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => 'sessions', :registrations => 'registrations'}
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :sessions => 'sessions', :registrations => 'registrations', :passwords => "passwords", :confirmations => "confirmations"}
 
   get "/admin", :controller => "admin", :action => :index
   get "/delayed_job" => DelayedJobWeb, :anchor => false

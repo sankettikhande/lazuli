@@ -1,44 +1,44 @@
 <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title">Login</h4>
-    </div>
-    <div class="modal-body">
-    	<%= form_for(resource, :as => resource_name, :remote => true, :url => session_path(resource_name)) do |f| %>
-				<div id='error'></div>
-        <div class="row">
-        	<div class="col-xs-12 form-group">
-        		<label class="control-label">Email Address</label>
-        		<%= f.email_field :email, :autofocus => true, :class => 'form-control', :placeholder => 'Enter your email address', :id => "user-id-login" %>
-        	</div>
+  <div class="modal-content login_box">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Login</h4>
         </div>
-        <div class="row">
-        	<div class="col-xs-12 form-group">
-        		<label class="control-label">Password</label>
-        		<%= f.password_field :password, :class => 'form-control', :placeholder => 'Enter your password', :id => "user-id-password" %>
-        	</div>
+        <div class="modal-body">
+        	<%= form_for(resource, :as => resource_name, :remote => true, :url => session_path(resource_name)) do |f| %>
+    				<div id='error'></div>
+            <div class="row">
+            	<div class="col-xs-12 form-group">
+            		<label class="control-label">Email Address</label>
+            		<%= f.email_field :email, :autofocus => true, :class => 'form-control', :placeholder => 'Enter your email address', :id => "user-id-login" %>
+            	</div>
+            </div>
+            <div class="row">
+            	<div class="col-xs-12 form-group">
+            		<label class="control-label">Password</label>
+            		<%= f.password_field :password, :class => 'form-control', :placeholder => 'Enter your password', :id => "user-id-password" %>
+            	</div>
+            </div>
+            <div class="seperator5"></div>
+            <div class="row">
+            	<div class="col-xs-12 form-group col-sm-8">
+            		<div class="checkbox">
+            			<label><%= f.check_box :remember_me %>  Remember me</label>
+    						</div>
+    	        </div>
+            	<div class="col-xs-12 form-group col-sm-4" id='fgt_password'>
+            		<%= link_to "Forgot your password ?", '#' %>
+            	</div>
+            </div>
+            <div class="seperator10"></div>
+            <div class="row">
+            	<div class="col-xs-12 form-group text-right">
+    		        <button type="submit" class="btn btn-success">Login</button> 
+    		        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+            	</div>
+            </div>
+          <% end %>
         </div>
-        <div class="seperator5"></div>
-        <div class="row">
-        	<div class="col-xs-12 form-group col-sm-8">
-        		<div class="checkbox">
-        			<label><%= f.check_box :remember_me %>  Remember me</label>
-						</div>
-	        </div>
-        	<div class="col-xs-12 form-group col-sm-4">
-        		<%= link_to "Forgot your password ?", new_password_path(resource_name) %>
-        	</div>
-        </div>
-        <div class="seperator10"></div>
-        <div class="row">
-        	<div class="col-xs-12 form-group text-right">
-		        <button type="submit" class="btn btn-success">Login</button> 
-		        <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        	</div>
-        </div>
-      <% end %>
-    </div>
     <div class="modal-footer">
 	<ul class="social-login-btns text-center">
 		<li><%= link_to raw("<i class='fa fa-facebook'></i>"), user_omniauth_authorize_path(:facebook), :class => "btn btn-social-icon btn-facebook", :title => "Login Via Facebook" %></li>
@@ -47,4 +47,24 @@
 		</ul>
     </div>
   </div><!-- /.modal-content -->
+  <div class='modal-content forget_password' hidden>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Forgot your password?</h4>
+        </div>
+        <div class="modal-body">
+            <%= render :template => '/devise/passwords/new' %>
+        </div>    
+    </div>
+    <div class='modal-content confirm_instructions' hidden>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Resend confirmation instructions</h4>
+        </div>
+        <div class="modal-body">
+            <%= render :template => '/devise/confirmations/new' %>
+        </div>    
+    </div>
 </div><!-- /.modal-dialog -->
+ 
+ <%= javascript_include_tag "application/main_app/devise.js" %>
