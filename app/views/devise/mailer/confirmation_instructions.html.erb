@@ -1,6 +1,7 @@
 <p>Welcome <%= @email %>!</p>
-<p>Your password is : <%= @resource.password %></p>
-
+<% if @resource.password %>
+	<p>Your password is : <%= @resource.password %></p>
+<% end %>
 <p>Please confirm your Lazuli account by clicking on the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token) %></p>
