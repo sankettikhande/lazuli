@@ -1,5 +1,7 @@
-<ul class="user-option-btns">
-  <li><%= link_to(raw_field("fa fa-clock-o", "History"), histories_url, :class => "btn btn-block btn-yellow #{shared_active?("histories")}") %></li>
-  <li><%= link_to(raw_field("fa fa-star", "Favourites"), favourites_url, :class => "btn btn-block btn-yellow #{shared_active?("favourites")}") %></li>
-  <li><%= link_to(raw_field("fa fa-list-ul", "Watch List"), watch_lists_url, :class => "btn btn-block btn-yellow #{shared_active?("watch_lists")}") %></li>
-</ul>
+<div class="col-sm-5 col-md-4">
+	<ul class="user-option-btns">
+	  <li><%= link_to(raw_field("fa fa-clock-o", "History"), histories_url, :class => "btn btn-block btn-yellow #{shared_active?("histories")}") %></li>
+	  <li><%= link_to(raw_field("fa fa-star", "Favourites"), favourites_url, :class => "btn btn-block btn-yellow #{shared_active?("favourites")}") %></li>
+	  <li><%= link_to(raw_field("fa fa-list-ul", "Watch List"), watch_lists_url, :class => "btn btn-block btn-yellow #{shared_active?("watch_lists")}") %></li>
+	</ul>
+</div>
