@@ -14,7 +14,7 @@ class HomeController < ApplicationController
   end
 
   def browse_course
-
+    @channels = Channel.public_channels
   end
   
   def search

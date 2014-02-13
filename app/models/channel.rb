@@ -39,6 +39,10 @@ class Channel < ActiveRecord::Base
   end
 
   #CLASS METHODS
+  def self.public_channels
+    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published')
+  end
+    
   def set_channel_permission
     self.courses.each do |course|
       course.channel_course_permissions.each do |permission|

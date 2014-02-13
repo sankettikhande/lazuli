@@ -1,0 +1,82 @@
+<section class="btns-crumbs visible-md visible-lg">
+  <div class="row">
+    <%= render 'shared/user_menu' if user_signed_in? %>
+  </div>
+ <div class="seperator5"></div>
+ <div class="seperator5"></div>      
+</section>
+
+<section class="fr-channel-info white-back">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+          <div class="fr-company-logo">
+            <%= image_tag(@channel.image.url, :alt => "Image", :class => "img-responsive") %>
+            <h4><%= @channel.company_name %></h4>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9">
+          <div class="fr-company-descr">
+            <p class="text-justify"><%= @channel.company_description %></p>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p>Find Us:</p>
+              <ul class="social-links">
+                <li><a href="#" target="_blank"><i class="fa fa-globe"></i>&nbsp;<span>http://www.sodelsolutions.com</span></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-facebook"></i>&nbsp;<span>facebook</span></a></li>
+                <li><a href="#" target="_blank"><i class="fa fa-twitter"></i>&nbsp;<span>Twitter</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>      
+  </div>
+</section>
+<section class="channel-courses-box indigo-back">
+
+  <div class="row channel-courses-list">
+    <div class="col-xs-12">
+    <div class="row">
+    	<div class="col-xs-12 col-sm-6">
+          <h4>List of Courses</h4>		
+    	</div>
+    	<div class="col-xs-12 col-sm-3 col-sm-offset-3">
+          <div class="form-group">
+          	<input type="search" class="form-control" placeholder="Search Courses" id="search-courses">
+          </div>		
+    	</div>
+    </div>
+      <div class="channel-courses-begin">
+        <% @channel_courses.each do |course| %>
+        <ul class="row channel-each-course">
+          <li class="col-xs-12 channel-course-title"><%= course.name %></li>
+          <li class="col-xs-12">
+            <ul class="row">
+              <li class="col-xs-12 col-sm-8 col-md-8 channel-course-descr">
+                 <%= course.description %>
+              </li>
+              <li class="col-xs-6 col-sm-2 col-md-2">
+                <ul class="row text-center">
+                  <li class="col-xs-12 channel-course-trainer">
+                    Trainer: <span><%= course.trainer_name %></span>
+                  </li>
+                  <li class="col-xs-12 channel-course-vcount">
+                    <span><%= course.user_count %></span> Subscribed Users
+                  </li>
+
+                </ul>
+              </li>
+              <li class="col-xs-6 col-sm-2 col-md-2">
+                <%= image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block" ) %>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
