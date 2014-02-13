@@ -23,7 +23,7 @@
                   </a>
                 </div>
                 <% else %>
-                <a href="<%= course_videos_path(@course.id, video.id) %>"> <%= video.title %>
+                <a href="<%= course_topic_video_url(@course.id, video.topic_id, video.id) %>"> <%= video.title %>
                   <span><%= format_duration(video.vimeo_data) %></span>
                 </a>
                 <% end %>

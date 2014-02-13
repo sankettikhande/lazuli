@@ -152,4 +152,8 @@ class Topic < ActiveRecord::Base
     end
   end
 
+  def topic_first_video
+    videos = self.videos.published
+    return (videos.where(:demo => true).first || videos.first) if videos.any?
+  end
 end
