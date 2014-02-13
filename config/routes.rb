@@ -106,8 +106,9 @@ Lazuli::Application.routes.draw do
   resources :users
       
   match '/browse_course' => 'home#browse_course'
-  match '/courses/:id/:video_id' => 'courses#show', :as => :course_videos
   match '/courses/:id' => 'courses#show', :as => :course_video
+  match '/courses/:id/:topic_id' => 'courses#show', :as => :course_topic
+  match '/courses/:id/:topic_id/:video_id' => 'courses#show', :as => :course_topic_video
   match '/subscribe/course/:id' => 'subscriptions#subscribe_course', :as => :subscribe_course
   match '/add/watchlist/video/:id/:course_id' => 'watch_lists#add_to_watch_list', :as => :add_to_watch_list
   match '/remove/watchlist/video/:id/:course_id' => 'watch_lists#remove_from_watch_list', :as => :remove_from_watch_list
