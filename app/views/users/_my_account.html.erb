@@ -4,20 +4,28 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">My Account</h4>
       </div>
-      <div class="modal-body">
-        <%= form_for :user, :remote => true, :url => user_url(current_user), :method => :put do |f| %>
+      <div class="modal-body user_info">
+        <%= form_for current_user, :remote => true, :url => user_url(current_user) do |f| %>
         <div id='errors'></div>
+        <div class="row">
+          <div class="col-xs-12">
+          <div class="form-group">
+            <label class="control-label">Full Name</label>
+            <%= f.text_field :actual_name, :autofocus => true, :value => current_user.actual_name, :class => 'form-control', :placeholder => 'First Name & Last Name', :id=>"user-actual-name" %>                 
+          </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-xs-12 col-sm-6">
           <div class="form-group">
-             <label class="control-label">Full Name</label>
-            <%= f.text_field :actual_name, :autofocus => true, :class => 'form-control', :placeholder => 'First Name & Last Name', :id=>"user-actual-name", :value => current_user.actual_name %>                            
+            <label class="control-label">Username</label>
+            <%= f.text_field :name, :class => 'form-control', :value => current_user.name,:placeholder => 'User Name',:id => "user-name" %>                            
           </div>
           </div>
           <div class="col-xs-12 col-sm-6">
             <div class="form-group">
-              <label class="control-label">Username</label>
-              <%= f.text_field :name, :class => 'form-control', :placeholder => 'User Name', :value => current_user.name %>
+              <label class="control-label">Contact</label>
+              <%= f.text_field :phone_number, :value => current_user.phone_number, :class => 'form-control', :placeholder => 'Numbers only', :id => "user-company-name" %>
             </div>
           </div>
         </div>
@@ -25,47 +33,76 @@
           <div class="col-xs-12 col-sm-6">
             <div class="form-group">
               <label class="control-label">Company Name</label>
-              <%= f.text_field :company_name, :class => 'form-control', :placeholder => 'Place where you work', :id => "user-company-name", :value => current_user.company_name %>                              
+              <%= f.text_field :company_name, :value => current_user.company_name, :class => 'form-control', :placeholder => 'Place where you work', :id => "user-company-name" %>                              
             </div>
           </div>
-          <div class="col-xs-12 col-sm-6">
-            <div class="form-group">
-              <label class="control-label">Contact</label>
-              <%= f.text_field :phone_number, :class => 'form-control', :placeholder => 'Numbers only', :id => "user-company-name", :value => current_user.phone_number %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
           <div class="col-xs-12 col-sm-6">
             <div class="form-group">
               <label class="control-label">Email Address</label>
-              <%= f.email_field :email, :autofocus => true, :class => 'form-control', :placeholder => 'Enter your email address', :id => "user-id-login", :value => current_user.email %>
+              <%= f.email_field :email, :autofocus => true, :value => current_user.email, :class => 'form-control', :placeholder => 'Enter your email address', :id => "user-id-login" %>
             </div>
-          </div>
-          <div class="col-xs-12 col-sm-6">
-            <div class="form-group">
-              <label class="control-label">Password</label>
-              <%= f.password_field :password, :class => 'form-control', :placeholder => 'Password' %>
-            </div>
-          </div>                           
+          </div>                            
         </div>
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
               <label class="control-label">Address</label>
-              <%= f.text_area :address, :class => 'form-control', :placeholder => 'Complete address', :id => "user-address", :rows => 3, :value => current_user.address %>
+              <%= f.text_area :address, :value => current_user.address,:class => 'form-control', :placeholder => 'Complete address', :id => "user-address", :rows => 3 %>                              
             </div>
           </div>
-        </div><br>
+        </div>        
+        <div class="row">
+          <div class="col-xs-3 password_change">
+            <%= link_to "Change password","#" %>            
+          </div>                             
+        </div>
         <div class="row">                    
           <div class="col-xs-12 text-right">
             <div class="form-group">
               <button type="submit" class="btn btn-success">Save</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>                                
             </div>
           </div>
-        </div> 
-        <% end %>
+        </div>
+                                
+         
+        <% end %>                                                     
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+
+      <div class="modal-body change_pasword" hidden>
+        <%= form_for :user, :remote => true, :url => user_url(current_user), :method => :put do |f| %>
+        <div id='errors'></div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label class="control-label">Password</label>
+            <%= f.password_field :password, :class => 'form-control', :placeholder => 'Minimum 8 characters', :id => "user-new-pswd" %>              
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+          <div class="form-group">
+            <label class="control-label">Confirm Password</label>
+            <%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Same password', :id => "user-cnfrm-pswd" %>                          
+          </div>
+          </div>          
+        </div>       
+        <div class="row">          
+          <div class="col-xs-3 my_account" >
+            <%= link_to "My account","#" %>            
+          </div>                            
+        </div>
+        <div class="row">                    
+          <div class="col-xs-12 text-right">
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Save</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>                                
+            </div>
+          </div>
+        </div>
+                          
+        <% end %>                                                     
+      </div>     
+    </div>
+</div>  
