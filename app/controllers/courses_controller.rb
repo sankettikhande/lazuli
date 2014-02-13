@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
 		if @course.topics.published.any?
 			@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user, :course_id => @course.id).first
 			@video = load_video
+			@topic = @video.topic
 			@favourite_video = @video.favourites.where(:user_id => current_user).last
 			@recommended_videos = load_recommended_videos
 			authorize! :show, @video, :if => :video_param?
