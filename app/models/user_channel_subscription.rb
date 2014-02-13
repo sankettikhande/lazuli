@@ -50,6 +50,7 @@ class UserChannelSubscription < ActiveRecord::Base
   end
 
   def subscription_expired?
+    return false if self.permission_create
     (self.expiry_date - self.subscription_date).to_i <= 0
   end
 
