@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
 	def update
     @user = User.cached_find(params[:id])   
+    params[:user].delete('password') if params[:user][:password].blank?
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.js
