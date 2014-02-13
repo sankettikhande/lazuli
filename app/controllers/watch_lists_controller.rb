@@ -1,8 +1,9 @@
 class WatchListsController < SharedController
 	def remove
-		if params[:watch_lists_ids]
-			WatchList.where(:video_id => params[:watch_lists_ids].keys, :user_id => current_user.id).destroy_all
-			@videos = WatchList.get_user_videos(current_user)
+		WatchList.where(:video_id => params[:watch_lists_ids].keys, :user_id => current_user.id).destroy_all if params[:watch_lists_ids]
+		@videos = WatchList.get_user_videos(current_user)
+		respond_to do |format|
+			format.js {render 'shared/remove'}
 		end
 	end
 

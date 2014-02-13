@@ -4,4 +4,6 @@
   <%= form_for @videos, :url => url, :remote => true, :method => :post, :html =>{ :id => "remove_videos" }  do |f| %>
 		<%= render 'shared/shared', :objekts => @videos %>
 	<% end %>
+<% else %>
+	<label>No <%= params[:controller].titleize %> are Found.</label>
 <% end %>

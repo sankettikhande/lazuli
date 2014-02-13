@@ -1,4 +1,4 @@
-<% if @videos.any? %>
+<% unless @videos.blank? %>
 	$("#remove_videos").html("<%= j(render 'shared/shared', :objekts => @videos) %>");
 <% else %>
 	$("#remove_videos").html("<label>No <%= params[:controller].titleize %> are Found.</label>");

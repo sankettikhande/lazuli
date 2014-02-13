@@ -1,40 +1,40 @@
-<section class="user-rcmnd-videos">
-  <div class="row">
-    <div class="col-xs-12">
-      <h3>Recommended Videos</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="rcmd-videos-carousel">
-        <div class="row">
-          <div class="col-sm-12">
-            <div id="rcmd-vids" class="carousel slide rcmd-vid-list">
+<div class="row">
+  <div class="col-xs-12">
+    <div class="video-slides">
+      <h4>Recommended Videos</h4>
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Carousel-1 Begins -->
+          <div class="carousel slide landing-carousel" id="new-vids" data-interval="false">
+            <!-- Carousel items -->
+            <div class="carousel-inner landing-carousel-inner">
               <%= "No Recommendations" if @recommended_videos.blank? %>
-              <!-- Carousel items -->
-              <div class="carousel-inner">
-                <% @recommended_videos.each_with_index do |videos, index| %>
-                  <ul class="<%= 'active' if index.zero? %> item video-thumbs">
-                    <% videos.each do |video| %>
-                      <li class="vimeo-link">
-                        <a href="<%= course_video_url(video) %>">
-                          <%= image_tag(video_thumbnail_image(video), :alt => "", :class => "img-resposnsive img-thumbnail") %>
-                          <p> <%= video.title %></p>
-                        </a>
-                      </li>
-                    <% end %>
-                  </ul>
-                <% end %>
-              </div>              
-              <!-- Carousel-1 nav -->
-              <% if @recommended_videos.count > 1 %>
-                <a class="carousel-control left" href="#rcmd-vids" data-slide="prev"><i class="fa fa-caret-left"></i></a>
-                <a class="carousel-control right" href="#rcmd-vids" data-slide="next"><i class="fa fa-caret-right"></i></a>
+              <% @recommended_videos.each_with_index do |video, index| %>
+                <div class="<%= is_active_videos(index) %> item">
+                  <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
+                    <a href="<%= course_videos_url(video.topic.course_id, video.id) %>">
+                      <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
+                      <p><%= video.title %></p>
+                    </a>
+                  </div>
+                </div>
               <% end %>
             </div>
+            <!-- Carousel-1 nav -->
+            <% if @recommended_videos.count > 6 %>
+              <a class="carousel-control left" href="#new-vids" data-slide="prev">
+                <i class="fa fa-caret-left"></i>
+              </a>
+              <a class="carousel-control right" href="#new-vids" data-slide="next">
+                <i class="fa fa-caret-right"></i>
+              </a>
+            <% end %>
           </div>
+          <!-- Carousel Ends -->
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
+
+<%= javascript_include_tag "application/main_app/carousel.js"%>
