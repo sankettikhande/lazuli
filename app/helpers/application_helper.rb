@@ -122,7 +122,7 @@ module ApplicationHelper
       topic_name = resource_video.topic.title
     else
       course_name = resource.name
-      topic_name = resource.topics.published.first.title
+      topic_name = resource.topics.first.title
       video_name = resource_video.title
     end
     crumbs_list << course_name << topic_name << video_name
@@ -166,5 +166,14 @@ module ApplicationHelper
 
   def background_color
     "brush lemon" if controller_name != "courses"
+  end
+
+  def courses_breadcrumbs1(course, video, options = {})
+    link_arr = []
+    link_arr << "<ol class='breadcrumb'><li>" + link_to("Courses", "") + "</li>"
+    link_arr << "<li>" + link_to(course.name.titleize , course_video_url(course.id)) + "</li>"
+    link_arr << "<li>" + link_to(video.topic.title.titleize , course_topic_url(course.id, video.topic_id)) + "</li>"
+    link_arr << "<li class='active'>" + video.title.titleize + "</li></ol>"
+    link_arr.join(" ").html_safe
   end
 end

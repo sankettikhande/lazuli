@@ -7,7 +7,7 @@
 				<ul class="dropdown-menu">
 					<% videos.each do |video| %>
 						<li>
-							<%= link_to(video.title.titleize, course_videos_path(course.id,video.id)) %>
+							<%= link_to(video.title.titleize, course_topic_video_url(course.id, video.topic_id, video.id)) %>
 						</li>
 					<% end %>
 				</ul>

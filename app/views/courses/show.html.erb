@@ -1,15 +1,17 @@
 <section class="btns-crumbs visible-md visible-lg">
   <div class="row">
-    <div class="col-sm-5 col-md-4">
+    <% if user_signed_in? %>
       <%= render 'shared/user_menu' if user_signed_in? %>
-    </div>
+    <% else %>
+      <div class="col-sm-5 col-md-4"></div>
+    <% end %>
     <div class="col-sm-5 col-md-6 nopadding-left">
-      <div class='breadcrumb'><%= courses_breadcrumbs(@course, @video) %></div>
+      <%= courses_breadcrumbs1(@course, @video) %>
     </div>
     <% unless @user_subscription.blank? %>
       <div class="col-sm-2 col-md-2 nopadding-left">
         <div class="sub-ends">
-          <p class="text-center"><a href="#">Subscription Ends: <b><%= @user_subscription.expiry_date.strftime("%a, %w %B, %Y") %></b></a></p>
+          <p class="text-center"><a href="#">Subscription Ends: <br/><b><%= @user_subscription.expiry_date.strftime("%a, %w %B, %Y") %></b></a></p>
         </div>
       </div>
     <% end %>

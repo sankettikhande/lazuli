@@ -4,7 +4,7 @@
       <% topic.videos.limit(6).each_with_index do |video, video_index| %>
         <div class="item <%= "active" if video_index.zero? %>">
           <div class="col-xs-6">
-            <a href="<%= course_videos_url(video.topic.course.id, video.id) %>">
+            <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
               <%= image_tag(video_thumbnail_image(video), alt: "Image") %>
             </a>
           </div>
