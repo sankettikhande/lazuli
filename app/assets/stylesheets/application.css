@@ -16,3 +16,5 @@
 .descr{
 	min-height: 40px;
 }
+
+.breadcrumb li.active a{color: #ca0607;font-family: 'MyriadProBold',Sans-Serif}
