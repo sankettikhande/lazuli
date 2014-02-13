@@ -2,8 +2,19 @@
   <div class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container">
       <div class="navbar-header">
-      <a class="navbar-toggle" data-toggle="collapse" data-target="#footer-body"><i class="fa fa-ellipsis-h"></i></a>
-    </div>
+        <a class="navbar-toggle" data-toggle="collapse" data-target="#footer-body"><i class="fa fa-ellipsis-h"></i></a>
+        <ul class="footer-bar-btns visible-sm visible-xs">
+          <li>
+            <a href="#" class="btn" title="History"><i class="fa fa-2x fa-clock-o blue-text"></i></a>
+          </li>
+          <li>
+            <a href="#" class="btn" title="Favourites"><i class="fa fa-2x fa-star yellow-text"></i></a>
+          </li>
+          <li>
+            <a href="#" class="btn" title="Watch List"><i class="fa fa-2x fa-list-ul orange-text"></i></a>
+          </li>
+        </ul>
+      </div>
       <div class="navbar-collapse collapse" id="footer-body">
         <ul class="nav navbar-nav">
           <li><%= link_to 'Browse Our Library', browse_course_url %></li>
