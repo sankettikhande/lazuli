@@ -11,7 +11,7 @@
               <% @videos.each_with_index do |video, index| %>
                 <div class="<%= is_active_videos(index) %> item">
                   <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-                    <a href="<%= course_videos_url(video.topic.course_id, video.id) %>">
+                    <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
                       <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
                       <p><%= video.title %></p>
                     </a>

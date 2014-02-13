@@ -36,7 +36,7 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="item-descr">
-													<%= link_to(objekt.title.titleize, course_videos_url(objekt.topic.course, objekt))%>
+													<%= link_to(objekt.title.titleize, course_topic_video_url(objekt.topic.course_id, objekt.topic_id, objekt.id))%>
 												</div>
 											</div>
 										</div>

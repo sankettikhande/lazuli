@@ -122,7 +122,7 @@ module ApplicationHelper
       topic_name = resource_video.topic.title
     else
       course_name = resource.name
-      topic_name = resource.topics.published.first.title
+      topic_name = resource.topics.first.title
       video_name = resource_video.title
     end
     crumbs_list << course_name << topic_name << video_name
