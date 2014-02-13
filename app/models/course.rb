@@ -20,7 +20,6 @@ class Course < ActiveRecord::Base
   has_many :watch_lists, :dependent => :destroy
 
   include Cacheable
-  
   #VALIDATIONS
   validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
@@ -36,7 +35,7 @@ class Course < ActiveRecord::Base
   after_create :set_channel_admin_user_ids
 
   def self.public_channel_courses
-    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published').map{|c| c.courses.reject{|c| c.topics.blank?}}.flatten.first(3)
+    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published').map{|c| c.courses}.flatten.first(3)
   end
   
   #INSTANCE METHODS
@@ -129,10 +128,10 @@ class Course < ActiveRecord::Base
   end
 
   def course_first_video
-    self.topics.published.each do |topic|
-      videos = topic.videos.published
-      return (videos.where(:demo => true).first || videos.first) if videos.any?
+    self.topics.published.includes(:videos).each do |topic|
+      @course_videos = topic.videos.published
     end
+    return @course_videos.demo_videos.first || @course_videos.first if @course_videos.present?
   end
   
   private 

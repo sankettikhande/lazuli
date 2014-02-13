@@ -4,6 +4,7 @@ Lazuli::Application.routes.draw do
 
   get "/admin", :controller => "admin", :action => :index
   get "/delayed_job" => DelayedJobWeb, :anchor => false
+  get "/search", :controller => "home", :action => :search
   root :to => "home#index"
   
   namespace :admin do
