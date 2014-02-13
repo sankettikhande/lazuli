@@ -8,37 +8,37 @@
       <%= form_for(resource, :as => resource_name, :remote => true, :url => registration_path(resource_name) , :html =>{:class=>'deviseForm'}) do |f| %>
         <div id='errors'></div>
         <div class="row">
-        	<div class="col-xs-12 col-sm-6">
+        	<div class="col-xs-12 col-sm-6 form-group">
         		<label class="control-label">Full Name</label>
         		<%= f.text_field :actual_name, :autofocus => true, :class => 'form-control', :placeholder => 'First Name & Last Name', :id=>"user-actual-name" %>
         	</div>
-        	<div class="col-xs-12 col-sm-6">
+        	<div class="col-xs-12 col-sm-6 form-group">
         		<label class="control-label">User Name</label>
         		<%= f.text_field :name, :class => 'form-control', :placeholder => 'User Name',:id => "user-name" %>
         	</div>									        	
         </div>
         <div class="row">
-        	<div class="col-xs-12 col-sm-6">
+        	<div class="col-xs-12 col-sm-6 form-group">
         		<label class="control-label">Company&nbsp;Name</label>
         		<%= f.text_field :company_name, :class => 'form-control', :placeholder => 'Place where you work', :id => "user-company-name" %>
         	</div>
-        	<div class="col-xs-12 col-sm-6">
+        	<div class="col-xs-12 col-sm-6 form-group">
         		<label class="control-label">Contact Number</label>
         		<%= f.text_field :phone_number, :class => 'form-control', :placeholder => 'Numbers only', :id => "user-company-name" %>
         	</div>									        	
         </div>
         <div class="row">
-        	<div class="col-xs-12">
+        	<div class="col-xs-12 form-group">
         		<label class="control-label">Email Address</label>
         		<%= f.email_field :email, :class => 'form-control', :placeholder => 'Valid Email Address', :id => "user-email-add" %>
         	</div>
         </div>
         <div class="row">
-        	<div class="col-xs-12 col-sm-6">
+        	<div class="col-xs-12 col-sm-6 form-group">
         		<label class="control-label">Password</label>
         		<%= f.password_field :password, :class => 'form-control', :placeholder => 'Minimum 8 characters', :id => "user-new-pswd" %>
         	</div>
-        	<div class="col-xs-12 col-sm-6">
+        	<div class="col-xs-12 col-sm-6 form-group">
         		<label class="control-label">Confirm Password</label>
         		<%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Same password', :id => "user-cnfrm-pswd" %>
         	</div>
