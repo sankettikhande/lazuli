@@ -173,7 +173,7 @@ module ApplicationHelper
     link_arr << "<ol class='breadcrumb'><li>" + link_to("Courses", "") + "</li>"
     link_arr << "<li>" + link_to(course.name.titleize , course_video_url(course.id)) + "</li>"
     link_arr << "<li>" + link_to(video.topic.title.titleize , course_topic_url(course.id, video.topic_id)) + "</li>"
-    link_arr << "<li class='active'>" + link_to(video.title.titleize , course_topic_video_url(course.id, video.topic_id, video.id)) + "</li></ol>"
+    link_arr << "<li class='active'>" + video.title.titleize + "</li></ol>"
     link_arr.join(" ").html_safe
   end
 end
