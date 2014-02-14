@@ -12,7 +12,7 @@
               <%= link_to(subscribed_course.course.name.titleize, course_video_path(subscribed_course.course_id)) %>
             </li> 
             <li class="descr hidden-xs">
-              <%= subscribed_course.course.description.truncate(180) %>
+              <%= subscribed_course.course.description.truncate(250) %>
             </li>
             <% unless current_user.is_admin? %>
               <li class="subs-date">
