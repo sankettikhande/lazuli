@@ -10,7 +10,7 @@
     <div class="col-sm-12">
       <h4>Browse Our Library</h4>
       <div class="partial-courses-list-box">
-        <% @channels.each_with_index do |channel, index| %>
+        <% @channels.each do |channel| %>
            <div class="courses-list">
              <div class="row">
                <div class="col-xs-5 col-sm-3 col-md-2">
@@ -21,7 +21,11 @@
                </div>
                <div class="col-xs-7 col-sm-9 col-md-10">
                 <% channel_courses = channel.courses %>
-                <div class="course-offered_<%= index %>">
+                <% if channel_courses.length > 2 %>
+                  <div class="course-offered_scroll">
+                <% else %>
+                  <div class="course-offered">
+                 <% end %>
                    <div class="row">
                       <div class="col-xs-12">
                         <div class="row">
@@ -51,16 +55,7 @@
                         </div>
                         </div>
                       </div>
-                </div>
-                <% if channel_courses.length > 2 %>
-                 <script type="text/javascript">
-                    $(function(){
-                      $('.course-offered_<%= index %>').slimScroll({
-                        height: '190px'
-                      });
-                    });
-                 </script>
-                <% end %> 
+                </div> 
               </div>
             </div> <!-- row ends -->
          </div>  <!-- courses-list 1 ends -->
@@ -69,3 +64,5 @@
   </div>
 </div>
 </section>
+
+<%= javascript_include_tag "application/main_app/slim_scroll.js" %>
