@@ -32,6 +32,8 @@ class UserChannelSubscription < ActiveRecord::Base
 
   def update_course_admin
     course.update_attribute(:course_admin_user_id, nil)
+    u = User.find self.user_id
+    u.remove_role "course_admin" if u.administrated_courses.blank?
   end
 
   def update_user_count

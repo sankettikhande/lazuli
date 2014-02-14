@@ -17,7 +17,7 @@ class Topic < ActiveRecord::Base
   validate :check_uniqueness_of_title
   validates :status, :inclusion => {:in => @@topic_statuses}
 
-  scope :published, where(:status => "Published")
+  scope :published, where(:status => ["Published", "PartialPublished"])
   scope :bookmarked, where(:is_bookmark_video => true)
   scope :not_bookmarked, where(:is_bookmark_video => false)
 
