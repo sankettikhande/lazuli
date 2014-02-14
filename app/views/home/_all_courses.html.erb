@@ -20,12 +20,16 @@
                   <li class="descr hidden-xs course_descrip_landing">
                     <%= course.description %>
                   </li>
-                  <li class="subs-date">
-                    <a href="#">Subscription Expired</a>
-                    <span>
-                      <a href="#">Renew Subscription</a>
-                    </span>
-                  </li>
+                  <% unless current_user.is_admin? %>
+                    <li class="subs-date">
+                      <% unless current_user.watchable_course?(course.id) %>
+                        <a href="#">Subscription Expired</a>
+                        <span>
+                          <a href="#">Renew Subscription</a>
+                        </span>
+                      <% end %>
+                    </li>
+                  <% end %>
                 </ul>
             </div>
             <div class="hidden-xs col-sm-2">

@@ -13,7 +13,7 @@
                   <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
                     <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
                       <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
-                      <h6 class="hidden-xs"><%= video.title.titleize %></h6>
+                      <h6 class="hidden-xs"><%= video.title.titleize.truncate(30) %></h6>
                     </a>
                   </div>
                 </div>
