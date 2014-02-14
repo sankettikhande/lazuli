@@ -35,7 +35,7 @@ class Course < ActiveRecord::Base
   after_create :set_channel_admin_user_ids
 
   def self.public_channel_courses
-    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published').map{|c| c.courses}.flatten.first(3)
+    Channel.public_channels.map{|c| c.courses.order('created_at DESC').limit(3)}.flatten.first(3)
   end
   
   #INSTANCE METHODS

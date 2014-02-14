@@ -1,205 +1,63 @@
-<div class="container">
-  <section class="btns-crumbs visible-md visible-lg">
-    <div class="row">
-      <%= render 'shared/user_menu' if user_signed_in? %>
+<section class="btns-crumbs visible-md visible-lg">
+  <div class="row">
+    <%= render 'shared/user_menu' if user_signed_in? %>
+  </div>
+</section>
+<div class="seperator5"></div>
+<div class="seperator5"></div>
+<section class="all-courses indigo-back">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Browse Our Library</h4>
+      <div class="partial-courses-list-box">
+        <% @channels.each do |channel| %>
+           <div class="courses-list">
+             <div class="row">
+               <div class="col-xs-5 col-sm-3 col-md-2">
+                 <div class="course-logo-img">
+                    <h4 class="text-center company-name"><%= link_to channel.name.titleize, channel_url(channel.id) %></h4>
+                    <%= link_to image_tag(channel.image.url, :alt => "Image", :class => "img-responsive" ), channel_url(channel.id) %><br>
+                 </div>
+               </div>
+               <div class="col-xs-7 col-sm-9 col-md-10">
+                  <div class="<%= (channel.courses.length > 2) ? 'course-offered_scroll' : 'course-offered' %>" >
+                   <div class="row">
+                      <div class="col-xs-12">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <% channel.courses.each do |course| %>
+                              <div class="course-each">
+                                <div class="row">
+                                  <div class="col-xs-12 col-sm-9 col-md-10">
+                                     <ul class="list-content">
+                                        <li class="title"><%= link_to course.name.titleize, course_url(course.id) %></li>
+                                        <li class="descr hidden-xs"><%= course.description %></li>
+                                      </ul>
+                                   </div>
+                                  <div class="col-xs-12 col-sm-3 col-md-2 hidden-xs">
+                                    <div class="row">
+                                      <div class="col-xs-12">
+                                        <div class="course-featured-video">
+                                          <%= link_to(image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block" ), course_video_path(course.id)) %>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <% end %>
+                            </div>
+                        </div>
+                        </div>
+                      </div>
+                </div> 
+              </div>
+            </div> <!-- row ends -->
+         </div>  <!-- courses-list 1 ends -->
+       <% end %>
     </div>
-  </section>
-  <div class="seperator5"></div>
-  <div class="seperator5"></div>
-  <section class="all-courses indigo-back">
-    <div class="row">
-      <div class="col-sm-12">
-        <h4>Browse Our Library</h4>
-        <div class="partial-courses-list-box">
-          <div class="courses-list">
-            <div class="row">
-              <div class="col-xs-5 col-sm-3 col-md-2">
-                <div class="course-logo-img">
-                  <h4 class="text-center company-name"><a href="#">Sodel Solutions</a></h4>
-                  <a href="#"><img src="assets/frontend/study-express.png" alt="Study Express Logo" class="img-responsive center-block channel-thumbnail"></a>
-                </div>
-              </div>
-              <div class="col-xs-7 col-sm-7 col-md-8">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Word</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Excel</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="hidden-xs col-sm-2 col-md-2">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- row ends -->
-          </div>
-          <!-- courses-list 1 ends -->
-          <div class="courses-list">
-            <div class="row">
-              <div class="col-xs-5 col-sm-3 col-md-2">
-                <div class="course-logo-img">
-                  <h4 class="text-center company-name"><a href="#">Sodel Solutions</a></h4>
-                  <a href="#"><img src="assets/frontend/study-express.png" alt="Study Express Logo" class="img-responsive center-block channel-thumbnail"></a>
-                </div>
-              </div>
-              <div class="col-xs-7 col-sm-7 col-md-8">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Word</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Excel</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="hidden-xs col-sm-2 col-md-2">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- row ends -->
-          </div>
-          <!-- courses-list 1 ends -->
-          <div class="courses-list">
-            <div class="row">
-              <div class="col-xs-5 col-sm-3 col-md-2">
-                <div class="course-logo-img">
-                  <h4 class="text-center company-name"><a href="#">Sodel Solutions</a></h4>
-                  <a href="#"><img src="assets/frontend/study-express.png" alt="Study Express Logo" class="img-responsive center-block channel-thumbnail"></a>
-                </div>
-              </div>
-              <div class="col-xs-7 col-sm-7 col-md-8">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Word</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Excel</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="hidden-xs col-sm-2 col-md-2">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- row ends -->
-          </div>
-          <!-- courses-list 1 ends -->
-          <div class="courses-list">
-            <div class="row">
-              <div class="col-xs-5 col-sm-3 col-md-2">
-                <div class="course-logo-img">
-                  <h4 class="text-center company-name"><a href="#">Sodel Solutions</a></h4>
-                  <a href="#"><img src="assets/frontend/study-express.png" alt="Study Express Logo" class="img-responsive center-block channel-thumbnail"></a>
-                </div>
-              </div>
-              <div class="col-xs-7 col-sm-7 col-md-8">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Word</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <ul class="list-content">
-                      <li class="title"><a href="#">Microsoft Excel</a></li>
-                      <li class="descr hidden-xs">Microsoft is a word processor and was previously considered the main program in Office. This course is specifically designed for users who have a daily interaction with word</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="hidden-xs col-sm-2 col-md-2">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="course-featured-video">
-                      <img class="img-responsive center-block video-thumbnail" src="assets/frontend/photos/img1.jpg" alt="Image">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- row ends -->
-          </div>
-          <!-- courses-list 1 ends -->
-        </div>
-      </div>
-      <!-- col-sm-12 Ends -->
-    </div>
-    <!-- first row -->
-  </section>
+  </div>
 </div>
-<!-- container ends -->
+</section>
+
+<%= javascript_include_tag "application/main_app/slim_scroll.js" %>
