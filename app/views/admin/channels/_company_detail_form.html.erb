@@ -55,11 +55,10 @@
 					<%= f.text_field :company_postal_address, :class => "form-control" %>
 				</div>
 				<div class="col-sm-2">
-					<label for="comp-desc" class="control-label">Description</label>
+					<label for="comp-desc" class="control-label">Description<%= required_field %></label>
 				</div>
 				<div class="col-sm-4">
-					<%= f.text_area :company_description, :rows => 3, :class => "form-control" %>
-					<!-- <textarea class="form-control" id="comp-desc" name="comp-desc" rows="3"></textarea>  -->
+					<%= f.text_area :company_description, :rows => 3, :class => "form-control validate[required]" %>
 				</div>
 			</div>
 			<div class="seperator10"></div>
