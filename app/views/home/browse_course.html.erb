@@ -20,17 +20,12 @@
                  </div>
                </div>
                <div class="col-xs-7 col-sm-9 col-md-10">
-                <% channel_courses = channel.courses %>
-                <% if channel_courses.length > 2 %>
-                  <div class="course-offered_scroll">
-                <% else %>
-                  <div class="course-offered">
-                 <% end %>
+                  <div class="<%= (channel.courses.length > 2) ? 'course-offered_scroll' : 'course-offered' %>" >
                    <div class="row">
                       <div class="col-xs-12">
                         <div class="row">
                           <div class="col-xs-12">
-                            <% channel_courses.each do |course| %>  
+                            <% channel.courses.each do |course| %>
                               <div class="course-each">
                                 <div class="row">
                                   <div class="col-xs-12 col-sm-9 col-md-10">
