@@ -39,7 +39,7 @@ class Course < ActiveRecord::Base
   end
 
   def self.all_public_channel_courses
-    Channel.public_channels.map{|c| c.courses }.flatten
+    Channel.public_channels.limit(5).map{|c| c.courses }.flatten.take(10)
   end
   
   #INSTANCE METHODS
