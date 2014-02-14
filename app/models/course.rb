@@ -37,6 +37,10 @@ class Course < ActiveRecord::Base
   def self.public_channel_courses
     Channel.public_channels.map{|c| c.courses.order('created_at DESC').limit(3)}.flatten.first(3)
   end
+
+  def self.all_public_channel_courses
+    Channel.public_channels.limit(5).map{|c| c.courses }.flatten.take(10)
+  end
   
   #INSTANCE METHODS
   def set_channel_permission
