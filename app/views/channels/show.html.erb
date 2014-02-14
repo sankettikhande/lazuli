@@ -13,7 +13,7 @@
         <div class="col-xs-12 col-sm-4 col-md-3">
           <div class="fr-company-logo">
             <%= image_tag(@channel.image.url, :alt => "Image", :class => "img-responsive") %>
-            <h4><%= @channel.company_name %></h4>
+            <h4><%= @channel.company_name.titleize %></h4>
           </div>
         </div>
         <div class="col-xs-12 col-sm-8 col-md-9">
@@ -52,7 +52,7 @@
       <div class="channel-courses-begin">
         <% @channel_courses.each do |course| %>
         <ul class="row channel-each-course">
-          <li class="col-xs-12 channel-course-title"><%= course.name %></li>
+          <li class="col-xs-12 channel-course-title"><%= course.name.titleize %></li>
           <li class="col-xs-12">
             <ul class="row">
               <li class="col-xs-12 col-sm-8 col-md-8 channel-course-descr">
@@ -61,7 +61,7 @@
               <li class="col-xs-6 col-sm-2 col-md-2">
                 <ul class="row text-center">
                   <li class="col-xs-12 channel-course-trainer">
-                    Trainer: <span><%= course.trainer_name %></span>
+                    Trainer: <span><%= course.trainer_name.titleize %></span>
                   </li>
                   <li class="col-xs-12 channel-course-vcount">
                     <span><%= course.user_count %></span> Subscribed Users
