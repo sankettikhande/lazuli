@@ -39,7 +39,7 @@ class Course < ActiveRecord::Base
   end
 
   def self.all_public_channel_courses
-    Channel.public_channels.limit(5).map{|c| c.courses }.flatten.take(10)
+    Channel.public_channels.limit(10).map{|c| c.courses }.flatten.take(10)
   end
   
   #INSTANCE METHODS
@@ -92,9 +92,9 @@ class Course < ActiveRecord::Base
   def self.sphinx_search options, current_user, course_ids=[]
     sort_options, search_options, sphinx_options,select_option = {}, {}, {}, {}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
-    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
 
     if course_ids.blank?
+      query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
       page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
       sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
       unless current_user.is_admin?
@@ -114,16 +114,9 @@ class Course < ActiveRecord::Base
       end
 
     else
-      unless current_user.is_admin?
-        with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
-        select_option.merge!(:select => with_permitted_user)
-        search_options.merge!(:with => {"permitted_user" => 1})
-      end
       search_options.deep_merge!(:with => {:course_id => course_ids})
-      sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
-
-      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"},:sql => {:include => [:course, :channel]}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
-      Course.search(query, sphinx_options)
+      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}, :include => [:course, :channel]) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+      Course.search(sphinx_options)
     end
   end
 
