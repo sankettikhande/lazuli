@@ -4,15 +4,9 @@
       <div class="navbar-header">
         <a class="navbar-toggle" data-toggle="collapse" data-target="#footer-body"><i class="fa fa-ellipsis-h"></i></a>
         <ul class="footer-bar-btns visible-sm visible-xs">
-          <li>
-            <a href="#" class="btn" title="History"><i class="fa fa-2x fa-clock-o blue-text"></i></a>
-          </li>
-          <li>
-            <a href="#" class="btn" title="Favourites"><i class="fa fa-2x fa-star yellow-text"></i></a>
-          </li>
-          <li>
-            <a href="#" class="btn" title="Watch List"><i class="fa fa-2x fa-list-ul orange-text"></i></a>
-          </li>
+          <li><%= link_to(raw_field("fa fa-2x fa-clock-o blue-text"), histories_url, :class => "btn #{shared_active?("histories")}") %></li>
+          <li><%= link_to(raw_field("fa fa-2x fa-star yellow-text"), favourites_url, :class => "btn #{shared_active?("favourites")}") %></li>
+          <li><%= link_to(raw_field("fa fa-2x fa-list-ul orange-text"), watch_lists_url, :class => "btn #{shared_active?("watch_lists")}") %></li>
         </ul>
       </div>
       <div class="navbar-collapse collapse" id="footer-body">
