@@ -71,7 +71,7 @@
 
       <div class="modal-body change_pasword" hidden>
         <%= form_for :user, :remote => true, :url => user_url(current_user), :method => :put do |f| %>
-        <div id='errors'></div>
+        <div id='password_errors'></div>
         <div class="row">
           <div class="col-xs-12 col-sm-6">
           <div class="form-group">
