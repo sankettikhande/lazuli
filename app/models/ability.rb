@@ -5,6 +5,11 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
+    
+    can [:manage], User do |u|
+      u == user
+    end
+
     if user.is_admin?
         can :manage, :all
     elsif user.is_channel_admin?

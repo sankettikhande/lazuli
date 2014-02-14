@@ -29,8 +29,8 @@ class Channel < ActiveRecord::Base
   #SCOPES
   after_save :set_channel_permission, :on => :create
   after_save :update_topics_sphinix_deltas
-  after_destroy :remove_course_associations
-  after_save :update_channel_admin_user_ids, :if => :admin_user_id_changed?
+  after_destroy :remove_channel_admin_role
+  before_save :update_channel_admin_user_ids, :if => :admin_user_id_changed?
   after_create :user_assign_role
 
   #INSTANCE METHODS
@@ -39,6 +39,10 @@ class Channel < ActiveRecord::Base
   end
 
   #CLASS METHODS
+  def self.public_channels
+    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published')
+  end
+    
   def set_channel_permission
     self.courses.each do |course|
       course.channel_course_permissions.each do |permission|
@@ -50,13 +54,18 @@ class Channel < ActiveRecord::Base
 
   def update_channel_admin_user_ids
     User.assign_role(admin_user_id, :channel_admin)
-    self.courses.each do |course|
+    self.courses.includes(:topics =>[:videos]).each do |course|
       course.update_attribute(:channel_admin_user_id, admin_user_id)
       course.topics.each do |topic| 
         topic.update_attribute(:channel_admin_user_id, admin_user_id)
         topic.videos.map {|video| video.update_attribute(:channel_admin_user_id,admin_user_id)}
       end
     end
+  end
+
+  def remove_channel_admin_role
+    u = User.find self.admin_user_id
+    u.remove_role "channel_admin" if u.administrated_channels.blank?
   end
 
   def permitted_courses current_user
@@ -78,12 +87,6 @@ class Channel < ActiveRecord::Base
 
   def user_assign_role
     User.assign_role(self.admin_user_id, :channel_admin)
-  end
-
-  def remove_course_associations
-    self.courses.each do |course|
-      course.destroy
-    end
   end
 
   def users_for_channel

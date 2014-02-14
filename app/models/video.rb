@@ -35,6 +35,7 @@ class Video < ActiveRecord::Base
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
   scope :published, where(:status => "Published")
+  scope :demo_videos, where(:demo => true)
   
   after_save :update_bookmarks, :if => :bookmarked?
   after_create :update_admins_and_creator_ids
