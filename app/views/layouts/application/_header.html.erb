@@ -39,7 +39,7 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <% Course.public_channel_courses.each do |course| %>
+                          <% Course.public_channel_courses(3).each do |course| %>
                             <% topics = course.topics %>
                             <li class="<%= 'dropdown-submenu' if topics.any? %>">
                             <%= link_to(course.name.titleize, course_video_path(course.id)) %>

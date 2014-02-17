@@ -34,12 +34,8 @@ class Course < ActiveRecord::Base
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   after_create :set_channel_admin_user_ids
 
-  def self.public_channel_courses
-    Channel.public_channels.map{|c| c.courses.order('created_at DESC').limit(3)}.flatten.first(3)
-  end
-
-  def self.all_public_channel_courses
-    Channel.public_channels.limit(10).map{|c| c.courses }.flatten.take(10)
+  def self.public_channel_courses limit_record
+    Channel.public_channels.limit(10).map{|c| c.courses }.flatten.take(limit_record)
   end
   
   #INSTANCE METHODS

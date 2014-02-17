@@ -29,6 +29,6 @@ class SessionsController < Devise::SessionsController
   private
   def load_course
     @topics = Topic.published.not_bookmarked.limit(3)
-    @courses = Course.public_channel_courses
+    @courses = Course.public_channel_courses(3)
   end
 end
