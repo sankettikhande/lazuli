@@ -13,3 +13,7 @@ $('.close').click(function(){
   $('.confirm_instructions').hide();
   $('.login_box').show();
 })
+
+$('#user-actual-name').change(function(){
+  $('#user-name').val($(this).val())
+})
