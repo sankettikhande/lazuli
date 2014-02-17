@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes
+  attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes,:website, :facebook_page, :twitter_page
   # attr_accessible :courses_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
@@ -24,6 +24,7 @@ class Channel < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_uniqueness_of :name, :message => "^Channel name has already been taken."
+  validates :website, :facebook_page, :twitter_page, :format => {:with => /^((http|https):\/\/)[a-z0-9]*(\.?[a-z0-9]+)\.[a-z]{2,5}(:[0-9]{1,5})?(\/.)?$/ix }, :allow_blank => true
   accepts_nested_attributes_for :courses, :reject_if => :all_blank, :allow_destroy => true
 
   #SCOPES
