@@ -3,10 +3,10 @@ class HomeController < ApplicationController
     if user_signed_in?
       @videos = Video.cached_scope('published', {:limit => Settings.data_count.latest_video })
       @subscribed_courses = UserChannelSubscription.user_subscribed_courses(current_user)
-      @courses = Course.all_public_channel_courses if @subscribed_courses.blank?
+      @courses = Course.public_channel_courses(10) if @subscribed_courses.blank?
     else
       @topics =  Topic.published.not_bookmarked.limit(3)
-      @courses = Course.public_channel_courses
+      @courses = Course.public_channel_courses(3)
       respond_to do |format|
         format.html{ render 'devise/sessions/new', :layout => 'devise' }
       end

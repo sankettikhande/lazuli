@@ -4,8 +4,8 @@ class ChannelsController < ApplicationController
 	end
 
 	def show
-		@channel = Channel.find(params[:id], :include => :courses)
-		@channel_courses = @channel.courses
+		@channel = Channel.cached_find(params[:id])
+		@channel_courses = @channel.published_topic_courses
 	end
 
 end
