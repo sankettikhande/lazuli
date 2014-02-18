@@ -2,6 +2,7 @@ class SubscriptionsController < ApplicationController
 	before_filter :authenticate_user!
 
 	def subscribe_course
+		params[:course_subscription][:user_id] = current_user.id
 		subscription_param = params[:course_subscription].except('subscription_id')
 		@user_channel_subscription = UserChannelSubscription.where(subscription_param).first || UserChannelSubscription.new(params[:course_subscription])
 		@user_channel_subscription.subscription_id = params[:course_subscription][:subscription_id]

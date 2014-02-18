@@ -59,7 +59,6 @@
       <%= form_tag subscribe_course_url(@course.id), :remote => true do %>
         <%= hidden_field(:course_subscription, :channel_id, :value => @course.channel_id) %>
         <%= hidden_field(:course_subscription, :course_id, :value => @course.id) %>
-        <%= hidden_field(:course_subscription, :user_id, :value => current_user) %>
         <%= hidden_field_tag 'video_id', params[:video_id] %>
         <div class="modal-body">
           <h5>Course Name : <a href="#"><%= @course.name %></a></h5>
