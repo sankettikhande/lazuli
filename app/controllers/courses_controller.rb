@@ -22,6 +22,10 @@ class CoursesController < ApplicationController
 			end
 		end
 	end
+	def search
+		channel_courses_id=Channel.cached_find(params[:channel_id]).courses.map{|i| i.id}		
+		@channel_courses= Course.sphinx_search(params, current_user, channel_courses_id)		
+    end
 
 	private
 	def load_recommended_videos
@@ -41,4 +45,5 @@ class CoursesController < ApplicationController
 	def video_param?
 		params[:video_id]
 	end
+	
 end
