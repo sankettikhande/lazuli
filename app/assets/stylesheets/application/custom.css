@@ -737,3 +737,7 @@ body {padding-bottom: 70px;}
 
 .slimScrollBar {opacity: 0.6 !important;display: block !important;background: #095aab !important;opacity: 1 !important;right: 0 !important}
 .slimScrollRail {display: block !important;background: #116fb9 !important;opacity: 1 !important;border-radius: 2px !important;right: 0 !important}
+
+.modal-subscribe {color: #000;line-height: normal;}
+.modal-subscribe h4,.modal-subscribe h5,.modal-subscribe p {background: none;color: #000}
+

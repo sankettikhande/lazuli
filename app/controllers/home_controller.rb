@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if user_signed_in?
-      @videos = Video.cached_scope('published', {:limit => Settings.data_count.latest_video })
+      @videos = Video.cached_scope('published', {:limit => Settings.data_count.latest_video }).order("id desc")
       @subscribed_courses = UserChannelSubscription.user_subscribed_courses(current_user)
       @courses = Course.public_channel_courses(10) if @subscribed_courses.blank?
     else
