@@ -1,0 +1,7 @@
+<% unless @channel_courses.count.zero?  %>
+	$(".channel-courses-begin").html("<%= j(render 'courses/channel_courses') %>");
+<% else %>
+	$(".channel-courses-begin").html("No Courses found for <%= params[:sSearch] %>");
+<% end %>
+
+

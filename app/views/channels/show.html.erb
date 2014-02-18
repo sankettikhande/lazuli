@@ -42,7 +42,6 @@
   </div>
 </section>
 <section class="channel-courses-box indigo-back">
-
   <div class="row channel-courses-list">
     <div class="col-xs-12">
     <div class="row">
@@ -51,40 +50,14 @@
     	</div>
     	<div class="col-xs-12 col-sm-3 col-sm-offset-3">
           <div class="form-group">
-          	<input type="search" class="form-control" placeholder="Search Courses" id="search-courses">
+            <%= text_field_tag 'search-courses', nil , placeholder: "Search Courses" %>
+            <%= hidden_field_tag 'channel_id', @channel.id %>         
           </div>		
     	</div>
     </div>
-      <div class="channel-courses-begin">
-        <% @channel_courses.each do |course| %>
-        <ul class="row channel-each-course">
-          <li class="col-xs-12 channel-course-title"><%= link_to course.name.titleize, course_url(course.id) %></li>
-          <li class="col-xs-12">
-            <ul class="row">
-              <li class="col-xs-12 col-sm-8 col-md-8 channel-course-descr">
-                 <%= course.description %>
-              </li>
-              <li class="col-xs-6 col-sm-2 col-md-2">
-                <ul class="row text-center">
-                  <% if !course.trainer_name.blank? %>
-                    <li class="col-xs-12 channel-course-trainer">
-                      Trainer: <span><%= course.trainer_name.titleize %></span>
-                    </li>
-                  <% end %>
-                  <li class="col-xs-12 channel-course-vcount">
-                    <span><%= course.user_count %></span> Subscribed Users
-                  </li>
-
-                </ul>
-              </li>
-              <li class="col-xs-6 col-sm-2 col-md-2">
-                <%= link_to(image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block" ), course_video_path(course.id)) %>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <% end %>
-      </div>
+    <div class="channel-courses-begin">
+      <%= render 'courses/channel_courses'%>
+    </div>
     </div>
   </div>
 </section>

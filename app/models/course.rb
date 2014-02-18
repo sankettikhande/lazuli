@@ -111,7 +111,7 @@ class Course < ActiveRecord::Base
 
     else
       search_options.deep_merge!(:with => {:course_id => course_ids})
-      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}, :include => [:course, :channel]) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+      options[:sSearch].blank? ? sphinx_options.merge!(search_options).deep_merge!(:include => [:course, :channel])  : sphinx_options.merge!(search_options).deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}, :include => [:course, :channel]) 
       Course.search(sphinx_options)
     end
   end
