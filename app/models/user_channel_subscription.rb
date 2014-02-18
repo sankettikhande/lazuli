@@ -10,6 +10,7 @@ class UserChannelSubscription < ActiveRecord::Base
 
   include Cacheable
 
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates_presence_of :subscription_id, :subscription_date, :expiry_date, :if => Proc.new{|f| f.permission_create.blank? || f.permission_create == false }
   validates_presence_of :channel_id, :course_id
   validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id], :message => "^User has already subscribed to this course."}

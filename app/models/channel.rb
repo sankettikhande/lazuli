@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes,:website, :facebook_page, :twitter_page
+  attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes, :website, :facebook_page, :twitter_page
   # attr_accessible :courses_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
@@ -18,6 +18,7 @@ class Channel < ActiveRecord::Base
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
 
   #VALIDATIONS
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates :name, :company_name, :company_number, :email, :presence => true
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
   validates :admin_user_id, :presence => {:message => "Full name can't be blank."}
@@ -41,11 +42,11 @@ class Channel < ActiveRecord::Base
 
   #CLASS METHODS
   def self.public_channels
-    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published')
+    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status in (?)", ['Published', 'PartialPublished'])
   end
     
   def published_topic_courses
-    Channel.where(:id => self.id, :channel_type => 'public').includes(:courses => [:topics]).where("topics.status = 'Published'").map{|c| c.courses }.flatten
+    Channel.where(:id => self.id, :channel_type => 'public').includes(:courses => [:topics]).where("topics.status in (?)", ['Published', 'PartialPublished']).map{|c| c.courses }.flatten
   end
 
   def set_channel_permission
