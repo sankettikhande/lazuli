@@ -22,6 +22,7 @@ class Admin::ChannelsController < AdminController
 
   def create
     @channel = Channel.new(params[:channel])
+    @channel.created_by = current_user.id
     @channel.courses.each do |course|
       course.created_by = current_user.id
       course.channel_admin_user_id = @channel.admin_user_id
