@@ -102,7 +102,11 @@ Lazuli::Application.routes.draw do
     collection do
       get 'search'
     end
-  end 
+    member do
+      get 'subscribe'
+    end
+  end
+
   
   resources :users
       

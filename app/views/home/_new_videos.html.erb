@@ -11,10 +11,15 @@
               <% @videos.each_with_index do |video, index| %>
                 <div class="<%= is_active_videos(index) %> item">
                   <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-                    <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
-                      <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
+                    <% if cannot? :show, video %>
+                      <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), alt: "Image"), subscribe_subscription_path(video.topic.course), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
                       <h6 class="hidden-xs"><%= video.title.titleize.truncate(30) %></h6>
-                    </a>
+                    <% else %>
+                      <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
+                        <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
+                        <h6 class="hidden-xs"><%= video.title.titleize.truncate(30) %></h6>
+                      </a>
+                    <% end %>
                   </div>
                 </div>
               <% end %>
@@ -33,3 +38,5 @@
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag "application/main_app/course.js"%>
