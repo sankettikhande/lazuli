@@ -31,9 +31,12 @@
           <% course.course_subscriptions.each do |cs| %>
             <div class="row">
               <div class="col-xs-12">
-                <%= radio_button :course_subscription, :subscription_id, cs.subscription.id, :required => true %>
-                <%= cs.subscription.name %>
-                <%= hidden_field_tag "duration_#{cs.subscription.id}", cs.subscription.calculated_days %>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-11">
+                  <%= radio_button :course_subscription, :subscription_id, cs.subscription.id, :required => true %>
+                  <%= cs.subscription.name %>
+                  <%= hidden_field_tag "duration_#{cs.subscription.id}", cs.subscription.calculated_days %>
+                </div>
               </div>
             </div>
           <% end %>
