@@ -16,3 +16,7 @@
 .descr{
 	min-height: 40px;
 }
+
+.pagination{
+	float: right;
+}
