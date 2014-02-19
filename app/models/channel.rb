@@ -127,7 +127,7 @@ class Channel < ActiveRecord::Base
     else
       page = options[:page] || 1
       options[:sSearch] = options[:sSearch] || ""
-      options[:iDisplayLength] = 2#options[:iDisplayLength] || 15
+      options[:iDisplayLength] = options[:iDisplayLength] || 15
       search_options.deep_merge!(:conditions => {:channel_type => channel_type})
       sphinx_options.merge!(search_options).deep_merge!(:include => :courses)
       Channel.search(options[:sSearch], sphinx_options).page(page).per(options[:iDisplayLength])
