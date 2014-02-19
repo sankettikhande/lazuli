@@ -46,6 +46,10 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def course_admin_user
+    self.course_admin_user_id ? User.find(self.course_admin_user_id).name.titleize : ''
+  end  
+
   def add_destroy_keys course_subscriptions_params
     course_subscriptions_params.each {|k, v| v.merge!(:_destroy => 1) unless v.has_key?("subscription_id")}
   end  
