@@ -50,7 +50,7 @@ class Admin::ChannelsController < AdminController
     respond_to do |format|  
       if @channel.update_attributes(params[:channel])
         format.html {redirect_to admin_channels_url}
-        flash[:success] = "Channel has been successfully update"
+        flash[:success] = "Channel has been successfully updated"
       else
         format.html { render :action => "edit" }
       end 

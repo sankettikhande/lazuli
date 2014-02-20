@@ -18,7 +18,8 @@ class Channel < ActiveRecord::Base
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
 
   #VALIDATIONS
-  validates :name, :company_name, :company_number, :email, :presence => true
+  validates :user_name, :company_name, :company_number, :email, :presence => true
+  validates_presence_of :name, :message => "^Channel name cann't be blank"
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
   validates :admin_user_id, :presence => {:message => "Full name can't be blank."}
   validates_attachment_size :image, :less_than => 3.megabytes

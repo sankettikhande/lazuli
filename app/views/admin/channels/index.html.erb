@@ -3,10 +3,7 @@
   <div class="row">
     <div class="col-md-12 nopadding">
       <% if can? :create, Channel %>
-        <a href="/admin/channels/new" data-no-turbolink="true" rel="tooltip" title="Add New Channel">
-          <button type="button" class="btn btn-default btn-success pull-right"><i class="fa fa-3x fa-plus"></i>   Add New Channel
-          </button>
-        </a>
+        <%= link_to raw_field("fa fa-3x fa-plus", "Add New Channel"), new_admin_channel_url(), :class => 'btn btn-default btn-success pull-right', "data-no-turbolink" => "true" %>
       <% end %>
     </div>
     <div class="seperator5"></div>
