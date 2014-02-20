@@ -1,7 +1,7 @@
 <div id="bookmark_alert"></div>
 <div class="row">
 	<div class="col-sm-7">
-		<p href="<%= @video.try(:clip).try(:url) %>" style="display:block; width:520px; height:300px;" id="player"> </p>
+		<div href="<%= @video.try(:clip).try(:url) %>" style="display:block; width:520px; height:300px;" id="player"> </div>
 	</div>
 </div>  
 <%= nested_form_for(@video, :url => create_bulk_admin_bookmark_path(@video), :method => :post, :remote => true, :html => {:id => "bookmark_form"}) do |f| %>
