@@ -22,8 +22,11 @@ jQuery(function ($) {
             // a clip event is defined inside clip object
             autoPlay: false,
             autoBuffering: true,
-            onStart: function() {
-                // alert("clip started");
+            provider: 'lighttpd'
+        },
+        plugins: {
+            lighttpd: {
+                url: "/assets/flowplayer.pseudostreaming-3.2.13.swf"
             }
         },
         // player events are defined directly to "root" (not inside a clip)
