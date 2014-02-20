@@ -19,7 +19,7 @@ class Channel < ActiveRecord::Base
 
   #VALIDATIONS
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
-  validates :name, :company_name, :company_number, :email, :presence => true
+  validates :name, :company_name, :company_number, :email, :image, :presence => true
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
   validates :admin_user_id, :presence => {:message => "Full name can't be blank."}
   validates_attachment_size :image, :less_than => 3.megabytes
