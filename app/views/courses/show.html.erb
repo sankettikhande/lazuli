@@ -26,12 +26,8 @@
       <div class="view-course">
         <%= render 'video_options' if user_signed_in? %>
         <!-- rows ends -->
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="place-video">
-              <iframe src="<%= vimeo_iframe_url %>" id="player_1" width="1280" height="720" frameborder="0" title="Brad!" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            </div>
-          </div>
+        <div class="row" id="place_video">
+          <%= render 'embedded_video' %>
           <!-- col-12 ends -->
         </div>
         <!-- row ends -->
