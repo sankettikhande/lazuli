@@ -48,6 +48,10 @@ class Channel < ActiveRecord::Base
     Channel.where(:id => self.id, :channel_type => 'public').includes(:courses => [:topics]).where("topics.status = 'Published'").map{|c| c.courses }.flatten
   end
 
+  def channel_admin_user
+    self.admin ? self.admin.name.titleize : ''
+  end
+
   def set_channel_permission
     self.courses.each do |course|
       course.channel_course_permissions.each do |permission|
