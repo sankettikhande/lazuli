@@ -52,6 +52,10 @@ class Channel < ActiveRecord::Base
     self.admin ? self.admin.name.titleize : ''
   end
 
+  def add_subscription_destroy_key course_subscriptions_params
+    course_subscriptions_params.each {|k, v| v.each {|a, b| b.each {|c, d| d.merge!(:_destroy => 1) unless d.has_key?("subscription_id")} if a == 'course_subscriptions_attributes'}}
+  end
+
   def set_channel_permission
     self.courses.each do |course|
       course.channel_course_permissions.each do |permission|
