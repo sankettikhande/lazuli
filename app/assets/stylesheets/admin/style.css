@@ -4079,3 +4079,8 @@ Responsive Flip Scroll Tables
 .edit_user th{
   text-align: center;
 }
+
+.subscription_price{
+  margin-bottom: 4px;
+  height: 30px;
+}

@@ -32,6 +32,7 @@ class Admin::CoursesController < AdminController
 
 	def update
 		@course = Course.cached_find(params[:id])
+		@course.add_destroy_keys(params[:course][:course_subscriptions_attributes])
 		respond_to do |format|
 			if @course.update_attributes(params[:course])
 				format.html {redirect_to "#{admin_contents_url}#courses"}
