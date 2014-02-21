@@ -1,0 +1,50 @@
+<% channels.each do |channel| %>
+  <div class="courses-list">
+    <div class="row">
+      <div class="col-xs-5 col-sm-3 col-md-2">
+        <div class="course-logo-img">
+          <h4 class="text-center company-name"><%= link_to channel.name.titleize, channel_url(channel.id) %></h4>
+          <%= link_to image_tag(channel.image.url, :alt => "Image", :class => "img-responsive" ), channel_url(channel.id) %><br>
+        </div>
+      </div>
+      <div class="col-xs-7 col-sm-9 col-md-10">
+        <div class="<%= (channel.courses.length > 2) ? 'course-offered_scroll' : 'course-offered' %>" >
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="row">
+                <div class="col-xs-12">
+                  <% channel.courses.each do |course| %>
+                    <div class="course-each">
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-9 col-md-10">
+                          <ul class="list-content">
+                            <li class="title"><%= link_to course.name.titleize, course_url(course.id) %></li>
+                            <li class="descr hidden-xs"><%= course.description.truncate(300) %></li>
+                          </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-2 hidden-xs">
+                          <div class="row">
+                            <div class="col-xs-12">
+                              <div class="course-featured-video">
+                                <%= link_to(image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block" ), course_video_path(course.id)) %>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- row ends -->
+  </div>
+<!-- courses-list 1 ends -->
+<% end %>
+
+<%= paginate channels, :remote => true %>
+<!-- courses-list 1 ends -->

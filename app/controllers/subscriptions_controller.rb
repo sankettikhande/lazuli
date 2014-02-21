@@ -22,12 +22,6 @@ class SubscriptionsController < ApplicationController
 		end
   end
 
-  def search
-		course_ids = UserChannelSubscription.search_course_ids(current_user)
-		course_ids = Course.sphinx_search(params, current_user, course_ids).map { |i| i.id}
-		@subscribed_courses = UserChannelSubscription.search_subscription(current_user, course_ids)
-  end
-
   def subscribe
   	@course = Course.find params[:id]
   end

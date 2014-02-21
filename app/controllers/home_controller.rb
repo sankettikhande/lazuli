@@ -20,13 +20,4 @@ class HomeController < ApplicationController
       format.js{ render 'channels/search'}
     end
   end
-  
-  def search
-    filter_options, sql_options = {}, {}
-    options = {:star => true, :per_page => 50}
-    filter_options.merge!(:conditions => {:topic_status => "published"})
-    sql_options.merge!(:sql => {:include => [:channel, :topics]})
-    options.merge!(filter_options).merge!(sql_options)
-    @courses = Course.search params[:search], options
-  end
 end
