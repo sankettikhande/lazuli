@@ -71,11 +71,7 @@ Lazuli::Application.routes.draw do
     end
     resources :user_channel_subscriptions
   end
-  resources :channels, :only => [:index, :show] do
-    collection do
-      get 'search'
-    end
-  end
+  resources :channels, :only => [:index, :show]
   resources :courses, :only => [:index, :show]
   resources :watch_lists, :only => [:index, :destroy] do
     collection do
@@ -110,6 +106,7 @@ Lazuli::Application.routes.draw do
   resources :search do
     collection do
       get 'subscriptions'
+      get 'channels'
     end
   end
   

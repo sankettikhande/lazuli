@@ -23,4 +23,10 @@ class SearchController < ApplicationController
 		end
 	end
 
+	def channels
+		@channels = Channel.sphinx_search(params, current_user, "public")
+		respond_to do |format|
+	    format.js { render 'channels/search'}
+	  end
+	end
 end
