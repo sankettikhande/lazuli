@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
        <%= form_for :user_review, :remote => true, :url => user_reviews_url do |f| %>
-       <div id ="errors">
+       <div id ="reviews_errors"></div>
       <div class="row">
         <div class="col-xs-12">
           <p>Rate on the scale of 5 (1 being lowest)</p>
@@ -108,7 +108,7 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-               <%= f.email_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address', :value => current_user ?  current_user.email : ''  %>              
+               <%= f.text_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address', :value => current_user ?  current_user.email : ''  %>              
             </div>
           </div>
         </div>                                                                                                        
@@ -125,4 +125,3 @@
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
-
