@@ -11,6 +11,13 @@
           <div class="video-descr-text">
             <h4> <%= @course.name.titleize %></h4>
             <p><%= @course.description %></p>
+            <% bookmarks = @video.bookmarks %>
+            <% if bookmarks.any? %>
+              <p>Bookmarks</p>
+              <% bookmarks.each do |bookmark| %>
+                <p><%= link_to(bookmark.title.titleize, bookmark_time_format(bookmark.time), :remote => true) %><p>
+              <% end %>
+            <% end %>
           </div>
         </div>
         <div>
