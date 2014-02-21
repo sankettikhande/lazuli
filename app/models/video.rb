@@ -148,13 +148,6 @@ class Video < ActiveRecord::Base
       end
 
     else ## >>>>>>>>>>>>>>>>>>>>  for search form fornt end
-
-
-      unless current_user.is_admin?
-        with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
-        select_option.merge!(:select => with_permitted_user)
-        search_options.merge!(:with => {"permitted_user" => 1})
-      end
       search_options.deep_merge!(:with => {:video_id => video_ids})
       sql_options.merge!(:sql => {:include => [:topic, :tags]})
       sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options).merge!(sql_options)
