@@ -78,8 +78,8 @@ namespace :db do
   task :set_course_admin_user_ids_null => :environment do
     Course.find_each do |course|
       user = User.find_by_id(course.course_admin_user_id)
-      course.update_attribute(:course_admin_user_id, nil) unless user
+      ucs = UserChannelSubscription.where(:user_id => user).pluck(:course_id)
+      course.update_attribute(:course_admin_user_id, nil) unless user && ucs.include?(course.id)
     end
   end
-
 end
