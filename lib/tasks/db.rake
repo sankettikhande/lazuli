@@ -75,4 +75,11 @@ namespace :db do
     end
   end
 
+  task :set_course_admin_user_ids_null => :environment do
+    Course.find_each do |course|
+      user = User.find_by_id(course.course_admin_user_id)
+      course.update_attribute(:course_admin_user_id, nil) unless user
+    end
+  end
+
 end
