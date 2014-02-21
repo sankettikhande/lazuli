@@ -55,7 +55,7 @@ class Channel < ActiveRecord::Base
   end
 
   def channel_admin_user
-    self.admin ? self.admin.name.titleize : ''
+    self.admin ? self.admin.actual_name.titleize : ''
   end
 
   def add_subscription_destroy_key course_subscriptions_params
