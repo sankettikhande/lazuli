@@ -18,7 +18,7 @@
         </div>
         <div class="col-xs-12 col-sm-8 col-md-9">
           <div class="fr-company-descr">
-            <p class="text-justify"><%= @channel.company_description %></p>
+            <p class="text-justify default-height"><%= @channel.company_description %></p>
           </div>
           <div class="row">
             <div class="col-xs-12">
@@ -50,7 +50,7 @@
     	</div>
     	<div class="col-xs-12 col-sm-3 col-sm-offset-3">
           <div class="form-group">
-            <%= text_field_tag 'search-courses', nil , placeholder: "Search Courses" %>
+            <%= text_field_tag 'search-courses', nil , placeholder: "Search Courses", class: "form-control" %>
             <%= hidden_field_tag 'channel_id', @channel.id %>         
           </div>		
     	</div>

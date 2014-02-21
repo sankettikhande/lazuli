@@ -24,7 +24,7 @@ class Channel < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_uniqueness_of :name, :message => "^Channel name has already been taken."
-  validates :website, :facebook_page, :twitter_page, :format => {:with => /^((http|https):\/\/)[a-z0-9]*(\.?[a-z0-9]+)\.[a-z]{2,5}(:[0-9]{1,5})?(\/.)?$/ix }, :allow_blank => true
+  validates :website, :facebook_page, :twitter_page, :format => {:with =>  URI::regexp(%w(http https))}, :allow_blank => true
   accepts_nested_attributes_for :courses, :reject_if => :all_blank, :allow_destroy => true
 
   #SCOPES
