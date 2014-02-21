@@ -36,7 +36,7 @@ $( document ).ready(function() {
 	function get_search_params_and_call_search(){
 		var search_key = $('#'+controller_name+'-search-text').val(),
 		    search_col = $('#'+controller_name+'-filter-select').val();
-		if((search_key == '' && search_col == '') || (search_key.length > 2)){
+		if((search_key == '' && search_col == '') || (search_key.length > 2) || (search_key.length == 0)){
 			search_records(search_key, search_col);
 		}
 	}
