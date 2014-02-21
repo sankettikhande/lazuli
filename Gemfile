@@ -29,6 +29,7 @@ gem "delayed_job_web"
 gem "custom_error_message"
 gem 'thinking-sphinx', '~> 3.0.2'
 gem 'ts-delayed-delta', '~> 2.0.0'
+gem 'jquery-star-rating-rails'
 
 group :development do
   gem 'quiet_assets'

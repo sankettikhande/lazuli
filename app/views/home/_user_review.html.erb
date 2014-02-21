@@ -5,128 +5,124 @@
       <h4 class="modal-title text-center">We value your feedback.</h4>
     </div>
     <div class="modal-body">
+       <%= form_for :user_review, :remote => true, :url => user_reviews_url do |f| %>
+       <div id ="errors">
       <div class="row">
         <div class="col-xs-12">
-          <p>Which of the following areas you suggest us to improve our services better:</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-        <div class="row">
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>
-          </div>
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>
-          </div>
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>                              
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>
-          </div>
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>                              
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>
-          </div>
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>                              
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>
-          </div>
-          <div class="col-xs-6">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" value="">
-                Feature 1
-              </label>
-            </div>                              
-          </div>
-        </div>                              
+          <p>Rate on the scale of 5 (1 being lowest)</p>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <div class="form-group">
-            <textarea class="form-control" placeholder="Any other suggestions/comments ?" rows="3" id="" name=""></textarea>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Overall Course</p>
+          </div>         
+          <div class="col-xs-4"> 
+          <% UserReview::VALID_RATINGS.each do |rates| %>
+                <%= f.radio_button :overall_course, rates, :class => "star" %>
+            <% end %>           
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Quality of Audio/Video</p>
+          </div>
+          <div class="col-xs-4">
+            <% UserReview::VALID_RATINGS.each do |rates| %>
+                <%= f.radio_button :quality_of_audio_video, rates, :class => "star" %>
+            <% end %>            
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="form-group">
-            <input type="email" class="form-control" name="feedback-email" placeholder="Your Email-Address">
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Quality of Explanation</p>
+          </div>
+          <div class="col-xs-4">
+            <% UserReview::VALID_RATINGS.each do |rates| %>
+                <%= f.radio_button :quality_of_explanation, rates, :class => "star" %>
+            <% end %>          
           </div>
         </div>
-      </div>
-      <div class="row">                    
-        <div class="col-xs-12 text-center">
-          <div class="form-group">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Course Structure</p>
+          </div>
+          <div class="col-xs-4">
+            <% UserReview::VALID_RATINGS.each do |rates| %>
+                <%= f.radio_button :course_structure, rates, :class => "star" %>
+            <% end %>           
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Accessibility</p>
+          </div>
+          <div class="col-xs-4">
+            <% UserReview::VALID_RATINGS.each do |rates| %>
+                <%= f.radio_button :accessibility, rates, :class => "star" %>
+            <% end %>           
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Value for Money</p>
+          </div>
+          <div class="col-xs-4">
+            <% UserReview::VALID_RATINGS.each do |rates| %>
+                <%= f.radio_button :value_of_money, rates, :class => "star" %>
+            <% end %>            
+          </div>
+        </div>                                                                                               
+        </div>
       </div>
-    </div>
-        
+      <div class="seperator-10"></div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-8">
+                <p>Would you like to recommend this site to anyone ?</p>
+              </div>
+              <div class="col-xs-4 nopadding-left">
+                  <label class="radio-inline">
+                    <%= f.radio_button :recommand_site, true, :id => "inlineradio1"  %>
+                      Yes                    
+                  </label>
+                  <label class="radio-inline">
+                    <%= f.radio_button :recommand_site, false, :id => "inlineradio2"  %>No
+                      Yes                   
+                  </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+               <%= f.text_area :suggestion, :class => 'form-control', :placeholder => 'Any other suggestions/comments ?', :rows => 3 %>             
+              
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+               <%= f.email_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address', :value => current_user ?  current_user.email : ''  %>              
+            </div>
+          </div>
+        </div>                                                                                                        
+        <div class="row">                    
+          <div class="col-xs-12 text-center">
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Save</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>                                
+            </div>
+          </div>
+        </div>
+        <% end %>                                                      
+      </div>
+
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+

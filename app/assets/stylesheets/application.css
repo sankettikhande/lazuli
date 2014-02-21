@@ -11,6 +11,8 @@
  *= require_tree ./application
  *= require ./common.css
  *= require_self
+ *= require jquery-star-rating
+
  */
 
 .descr{

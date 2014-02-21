@@ -1,0 +1,6 @@
+<% if @user_review.errors.blank? %> 
+  	window.location.href = "<%= root_url %>"  
+<% else %>   
+	$('#errors').addClass('error_message_tag').html('<%= error_message_tag(@user_review.errors.full_messages) %>')
+	$(window).spin('stop')
+<% end %>
