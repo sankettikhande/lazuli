@@ -11,7 +11,7 @@ $( document ).ready(function() {
 	function get_search(search_key, controller_name){
 		$.ajax({
 			type: "GET",
-			url: "/"+controller_name+"/search",
+			url: "/search/" + controller_name,
 			data: {sSearch: search_key, sSearch_1: "name"}
 		});
 	}

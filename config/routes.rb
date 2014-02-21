@@ -103,14 +103,15 @@ Lazuli::Application.routes.draw do
     end
   end
   resources :subscriptions, :only => [:destroy] do
-    collection do
-      get 'search'
-    end
     member do
       get 'subscribe'
     end
   end
-
+  resources :search do
+    collection do
+      get 'subscriptions'
+    end
+  end
   
   resources :users
       
