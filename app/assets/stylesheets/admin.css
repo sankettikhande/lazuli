@@ -89,11 +89,13 @@
 	margin-left: 10px;
 	float: left;
 	margin-right: 30px;
+	height: 25px;
 }
 
 #sort_filter{
 	float: left;
 	padding-top: 2px;
+	font-size: 14px;
 }
 
 .select2-results{
