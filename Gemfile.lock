@@ -271,6 +271,8 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    validates_lengths_from_database (0.2.0)
+      activerecord (>= 2.3.2)
     vimeo (1.5.3)
       httparty (>= 0.4.5)
       httpclient (>= 2.1.5.2)
@@ -325,4 +327,5 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.0.3)
   unicorn
+  validates_lengths_from_database
   vimeo

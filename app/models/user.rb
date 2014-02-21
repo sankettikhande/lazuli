@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :favourites, :dependent => :destroy
   has_many :watch_lists, :dependent => :destroy
   has_many :histories, :dependent => :destroy
+
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
   validate :subscription_params

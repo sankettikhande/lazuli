@@ -21,13 +21,15 @@ class Course < ActiveRecord::Base
 
   include Cacheable
   #VALIDATIONS
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
+  validates :image, :presence => true
   validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
-  validates_presence_of :subscription_ids, :message => "^Select atleast one Subscription"
   validate :course_name
+  validate :course_subscription_params
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
-  accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :course_subscriptions, :reject_if => proc { |a| !a['subscription_id'].present? }, :allow_destroy => true
   #SCOPES
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
@@ -45,6 +47,18 @@ class Course < ActiveRecord::Base
       permission.save
     end
   end
+
+  def course_subscription_params
+    errors.add(:base, "Please select atleat one subscription.") if self.course_subscriptions.blank?
+  end
+
+  def course_admin_user
+    self.course_admin_user_id ? User.find(self.course_admin_user_id).name.titleize : ''
+  end  
+
+  def add_destroy_keys course_subscriptions_params
+    course_subscriptions_params.each {|k, v| v.merge!(:_destroy => 1) unless v.has_key?("subscription_id")}
+  end  
 
   def update_course_admin_user_ids
     self.topics.each do |topic|
@@ -126,7 +140,11 @@ class Course < ActiveRecord::Base
     end
     return @course_videos.demo_videos.first || @course_videos.first if @course_videos.present?
   end
-  
+
+  def course_first_subscription subscription_id
+    CourseSubscription.where(:subscription_id => subscription_id, :course_id => self.id).first
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?

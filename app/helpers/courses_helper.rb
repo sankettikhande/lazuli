@@ -1,6 +1,10 @@
 module CoursesHelper
 	def vimeo_iframe_url
-		"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1"
+		if params[:t].blank?
+			"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1"
+		else
+			"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1#t=#{params[:t]}"
+		end
 	end
 
 	def is_active topic, index
@@ -29,5 +33,14 @@ module CoursesHelper
 
 	def is_watch_listed(video_id, course_id)
 		return WatchList.where(:video_id => video_id, :course_id => course_id, :user_id => current_user).any? ? "true" : "false"
+	end
+
+	def bookmark_time_format(time_str)
+		arr = ["h","m","s"]
+		str = ""
+		time_str.split(":").each_with_index do |time, index|
+			str << time.to_i.to_s << arr[index] unless time.to_i.zero?
+		end
+		"?t=" << str unless str.blank?
 	end
 end

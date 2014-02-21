@@ -46,10 +46,11 @@ class Admin::ChannelsController < AdminController
 
   def update
     @channel = Channel.cached_find(params[:id])
+    @channel.add_subscription_destroy_key(params[:channel][:courses_attributes])
     respond_to do |format|  
       if @channel.update_attributes(params[:channel])
         format.html {redirect_to admin_channels_url}
-        flash[:success] = "Channel has been successfully update"
+        flash[:success] = "Channel has been successfully updated"
       else
         format.html { render :action => "edit" }
       end 

@@ -60,6 +60,10 @@ module ApplicationHelper
     content_tag(:i, '', class: classes)
   end
 
+  def random_time
+    Time.now.to_i + rand(100000)
+  end
+
   def add_breadcrumb(options = {})
     default_options = {:separator => ">>"}
     options = default_options.merge(options)

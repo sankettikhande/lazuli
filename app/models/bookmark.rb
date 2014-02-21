@@ -5,8 +5,10 @@ class Bookmark < ActiveRecord::Base
 
   include Cacheable
 
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates :title, :time, :presence => true
   validates :time, :format => { :with => /[0-9]+:[0-9]+:[0-9]+/ }, :unless => Proc.new {|c| c.time.blank?}
+  validates :video_id, :uniqueness => {:scope => :title}
   
   def update_bookmark
     bookmarks_time = self.time.split(":")

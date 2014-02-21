@@ -8,13 +8,21 @@
     <div class="col-sm-5 col-md-6 nopadding-left">
       <%= courses_breadcrumbs1(@course, @topic, @video) %>
     </div>
-    <% unless @user_subscription.blank? %>
       <div class="col-sm-2 col-md-2 nopadding-left">
-        <div class="sub-ends">
-          <p class="text-center"><a href="#">Subscription Ends: <br/><b><%= @user_subscription.expiry_date.try(:strftime,"%a, %w %B, %Y") %></b></a></p>
-        </div>
+        <% unless @user_subscription.blank? %>
+          <div class="sub-ends">
+            <p class="text-center">
+              <a href="#">Subscription Ends: <br/><b><%= @user_subscription.expiry_date.try(:strftime,"%a, %w %B, %Y") %></b></a>
+            </p>
+          </div>
+        <% else %>
+          <div>
+            <p class="text-right">
+              <%= link_to("Subscribe", subscribe_subscription_path(@course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
+            </p>
+          </div>
+        <% end %>
       </div>
-    <% end %>
   </div>
 </section>
 <section class="course-menu-videos">
@@ -26,12 +34,8 @@
       <div class="view-course">
         <%= render 'video_options' if user_signed_in? %>
         <!-- rows ends -->
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="place-video">
-              <iframe src="<%= vimeo_iframe_url %>" id="player_1" width="1280" height="720" frameborder="0" title="Brad!" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-            </div>
-          </div>
+        <div class="row" id="place_video">
+          <%= render 'embedded_video' %>
           <!-- col-12 ends -->
         </div>
         <!-- row ends -->
@@ -43,6 +47,7 @@
   </div>
   <!--/row-->
 </section>
+<div id="modal-window" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;"></div>
 <%= render 'recommended_videos'%>
 <%= javascript_include_tag "froogaloop2/froogaloop2.min.js" %>
 <%= javascript_include_tag "application/main_app/course.js"%>
