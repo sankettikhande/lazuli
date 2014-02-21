@@ -16,16 +16,21 @@ class CoursesController < ApplicationController
 			@favourite_video = @video.favourites.where(:user_id => current_user).last
 			@recommended_videos = load_recommended_videos
 			authorize! :show, @video, :if => :video_param?
+			respond_to do |format|
+				format.html {}
+				format.js { render 'change_bookmark'}
+			end
 		else
 			respond_to do |format|
 				format.html { redirect_to root_url }
 			end
 		end
 	end
+
 	def search
 		channel_courses_id=Channel.cached_find(params[:channel_id]).courses.map{|i| i.id}		
 		@channel_courses= Course.sphinx_search(params, current_user, channel_courses_id)		
-    end
+	end
 
 	private
 	def load_recommended_videos

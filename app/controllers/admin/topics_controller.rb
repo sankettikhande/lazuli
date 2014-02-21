@@ -43,7 +43,7 @@ class Admin::TopicsController < AdminController
 			update_topic(params[:topic], "Published")
 		elsif params[:Publish]
 			publish_topic(@topic)
-			redirect_to :back, notice: "Topic is being published. It will take some time. Please check status after some time."
+			redirect_to "#{admin_contents_url}#topics", notice: "Topic is being published. It will take some time. Please check status after some time."
 		elsif params[:Save]
 			@topic.update_attribute(:status, "PartialPublished") if @topic.errors.blank?
 			update_topic(params[:topic])
@@ -79,7 +79,7 @@ class Admin::TopicsController < AdminController
 				publish_topic(@topic) if !publish.nil?
 				notice = publish.nil? ? "Topic has been successfully Updated." : "Topic is being published. It will take some time. Please check status after some time."
 				if @topic.is_bookmark_video
-					format.html{redirect_to edit_admin_topic_url(@topic), notice: notice}
+					format.html{redirect_to "#{admin_contents_url}#topics", notice: notice}
 				else
 					format.html{redirect_to "#{admin_contents_url}#topics", notice: notice}
 				end
