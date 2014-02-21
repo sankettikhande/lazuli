@@ -30,12 +30,12 @@
                 "minSize": {
                     "regex": "none",
                     "alertText": "* Minimum ",
-                    "alertText2": " characters required"
+                    "alertText2": " characters are required"
                 },
                 "maxSize": {
                     "regex": "none",
                     "alertText": "* Maximum ",
-                    "alertText2": " characters allowed"
+                    "alertText2": " characters are allowed"
                 },
 				"groupRequired": {
                     "regex": "none",
