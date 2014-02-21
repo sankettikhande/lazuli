@@ -5,9 +5,17 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
+    
+    can [:manage], User do |u|
+      u == user
+    end
+
     if user.is_admin?
         can :manage, :all
     elsif user.is_channel_admin?
+        can :manage, UserChannelSubscription do |ucs|
+            user.subscribed_course_ids.include?(ucs.course_id)
+        end
         can :manage, Course do |course| 
             course.channel_admin_user_id == user.id || course.course_admin_user_id == user.id
         end
@@ -32,6 +40,9 @@ class Ability
         end
         cannot :create, Channel
     elsif user.is_course_admin?
+        can :manage, UserChannelSubscription do |ucs|
+            user.subscribed_course_ids.include?(ucs.course_id)
+        end
         can :manage, Course, :course_admin_user_id => user.id
         can :manage, Topic, :course_admin_user_id => user.id
         can :manage, Video, :course_admin_user_id => user.id

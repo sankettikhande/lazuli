@@ -1,0 +1,63 @@
+<section class="btns-crumbs visible-md visible-lg">
+  <div class="row">
+    <%= render 'shared/user_menu' if user_signed_in? %>
+  </div>
+ <div class="seperator5"></div>
+ <div class="seperator5"></div>      
+</section>
+
+<section class="fr-channel-info white-back">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+          <div class="fr-company-logo">
+            <%= image_tag(@channel.image.url, :alt => "Image", :class => "img-responsive") %>
+            <h4><%= @channel.company_name.titleize %></h4>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9">
+          <div class="fr-company-descr">
+            <p class="text-justify default-height"><%= @channel.company_description %></p>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p>Find Us:</p>
+              <ul class="social-links">
+                <% unless @channel.website.blank?  %>
+                <li><a href="<%= @channel.website%>" target="_blank"><i class="fa fa-globe"></i>&nbsp;<span><%=@channel.website%></span></a></li>
+                <% end %>
+                 <% unless @channel.facebook_page.blank?  %>
+                <li><a href="<%= @channel.facebook_page %>" target="_blank"><i class="fa fa-facebook"></i>&nbsp;<span>facebook</span></a></li>
+                <% end %>
+                 <% unless @channel.twitter_page.blank? %>
+                <li><a href="<%= @channel.twitter_page %>" target="_blank"><i class="fa fa-twitter"></i>&nbsp;<span>Twitter</span></a></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>      
+  </div>
+</section>
+<section class="channel-courses-box indigo-back">
+  <div class="row channel-courses-list">
+    <div class="col-xs-12">
+    <div class="row">
+    	<div class="col-xs-12 col-sm-6">
+          <h4>List of Courses</h4>		
+    	</div>
+    	<div class="col-xs-12 col-sm-3 col-sm-offset-3">
+          <div class="form-group">
+            <%= text_field_tag 'search-courses', nil , placeholder: "Search Courses", class: "form-control" %>
+            <%= hidden_field_tag 'channel_id', @channel.id %>         
+          </div>		
+    	</div>
+    </div>
+    <div class="channel-courses-begin">
+      <%= render 'courses/channel_courses'%>
+    </div>
+    </div>
+  </div>
+</section>

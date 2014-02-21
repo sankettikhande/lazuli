@@ -1,6 +1,10 @@
 <% if @user.errors.blank? %> 
   	window.location.href = "<%= root_url %>"  
-<% else %>
-	$('#errors').addClass('error_message_tag').html('<%= error_message_tag(@user.errors.full_messages) %>')	
+<% else %>    
+     <% if error_message_tag(@user.errors.full_messages).include?('Password')%>
+     $('#password_errors').addClass('error_message_tag').html('<%= error_message_tag(@user.errors.full_messages) %>')     
+     <% else %>
+	  $('#errors').addClass('error_message_tag').html('<%= error_message_tag(@user.errors.full_messages) %>')
+	 <% end %>	
 	$(window).spin('stop')
 <% end %>

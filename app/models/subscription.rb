@@ -1,9 +1,10 @@
 class Subscription < ActiveRecord::Base
   attr_accessible :name, :days, :months, :years, :calculated_days
   #ASSOCIATIONS
+  has_many :user_channel_subscriprions
 
   #VALIDATIONS
-  has_many :user_channel_subscriprions
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates :name, :presence => true
 
   include Cacheable

@@ -1,9 +1,9 @@
 $( document ).ready(function() {
 	/* triiger search on key press of search input box */
-	$("#search_subscription").unbind().keyup(function(){
+	$("#search_browse_courses").unbind().keyup(function(){
 		var search_key = $(this).val();
 		if(search_key.length == 0 || search_key.length > 2){
-			get_search(search_key, "subscriptions");
+			get_search(search_key, "channels");
 		}
 	});
 
@@ -12,7 +12,7 @@ $( document ).ready(function() {
 		$.ajax({
 			type: "GET",
 			url: "/"+controller_name+"/search",
-			data: {sSearch: search_key, sSearch_1: "name"}
+			data: {sSearch: search_key, iDisplayLength: 15}
 		});
 	}
 });

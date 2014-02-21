@@ -10,14 +10,15 @@ class Topic < ActiveRecord::Base
   accepts_nested_attributes_for :videos, :allow_destroy => true
 
   include Cacheable
-
+  
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates :course_id, :channel_id, :presence => true
   validates_presence_of :title ,:message => "^Topic can't be blank"
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id] , :message => "^Same topic name has already been taken for this course."
   validate :check_uniqueness_of_title
   validates :status, :inclusion => {:in => @@topic_statuses}
 
-  scope :published, where(:status => "Published")
+  scope :published, where(:status => ["Published", "PartialPublished"])
   scope :bookmarked, where(:is_bookmark_video => true)
   scope :not_bookmarked, where(:is_bookmark_video => false)
 

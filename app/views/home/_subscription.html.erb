@@ -12,15 +12,23 @@
               <%= link_to(subscribed_course.course.name.titleize, course_video_path(subscribed_course.course_id)) %>
             </li> 
             <li class="descr hidden-xs">
-              <%= subscribed_course.course.description.truncate(180) %>
+              <%= subscribed_course.course.description.truncate(250) %>
             </li>
-            <li class="subs-date"><a href="#">Subscription Expired</a>
-              <span><a href="#">Renew Subscription</a></span></li>
+            <% unless current_user.is_admin? %>
+              <li class="subs-date">
+                <% if subscribed_course.subscription_expired? %>
+                  <a href="#">Subscription Expired</a>
+                  <span>
+                    <a href="#">Renew Subscription</a>
+                  </span>
+                <% end %>
+              </li>
+            <% end %>
           </ul>
       </div>
       <div class="hidden-xs col-sm-2 col-md-2">
         <div class="course-featured-video">
-          <%= image_tag(subscribed_course.channel.image.url(:medium), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ) %>
+          <%= link_to(image_tag(subscribed_course.channel.image.url(:medium), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), channel_url(subscribed_course.channel)) %>
         </div>
       </div>
       <div class="col-sm-2 col-md-2">

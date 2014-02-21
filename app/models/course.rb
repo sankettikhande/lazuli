@@ -21,21 +21,23 @@ class Course < ActiveRecord::Base
 
   include Cacheable
   #VALIDATIONS
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
+  validates :image, :presence => true
   validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
-  validates_presence_of :subscription_ids, :message => "^Select atleast one Subscription"
   validate :course_name
+  validate :course_subscription_params
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
-  accepts_nested_attributes_for :course_subscriptions, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :course_subscriptions, :reject_if => proc { |a| !a['subscription_id'].present? }, :allow_destroy => true
   #SCOPES
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
   after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   after_create :set_channel_admin_user_ids
 
-  def self.public_channel_courses
-    Channel.where(:channel_type => 'public').joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status = ?", 'Published').map{|c| c.courses}.flatten.first(3)
+  def self.public_channel_courses limit_record
+    Channel.public_channels.limit(10).map{|c| c.courses }.flatten.take(limit_record)
   end
   
   #INSTANCE METHODS
@@ -45,6 +47,18 @@ class Course < ActiveRecord::Base
       permission.save
     end
   end
+
+  def course_subscription_params
+    errors.add(:base, "Please select atleat one subscription.") if self.course_subscriptions.blank?
+  end
+
+  def course_admin_user
+    self.course_admin_user_id ? User.find(self.course_admin_user_id).name.titleize : ''
+  end  
+
+  def add_destroy_keys course_subscriptions_params
+    course_subscriptions_params.each {|k, v| v.merge!(:_destroy => 1) unless v.has_key?("subscription_id")}
+  end  
 
   def update_course_admin_user_ids
     self.topics.each do |topic|
@@ -88,9 +102,9 @@ class Course < ActiveRecord::Base
   def self.sphinx_search options, current_user, course_ids=[]
     sort_options, search_options, sphinx_options,select_option = {}, {}, {}, {}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
-    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
 
     if course_ids.blank?
+      query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
       page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
       sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
       unless current_user.is_admin?
@@ -110,16 +124,9 @@ class Course < ActiveRecord::Base
       end
 
     else
-      unless current_user.is_admin?
-        with_permitted_user = "*,IF (channel_admin_user_id = #{current_user.id} OR course_admin_user_id =#{current_user.id},1,0) AS permitted_user"
-        select_option.merge!(:select => with_permitted_user)
-        search_options.merge!(:with => {"permitted_user" => 1})
-      end
       search_options.deep_merge!(:with => {:course_id => course_ids})
-      sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
-
-      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"},:sql => {:include => [:course, :channel]}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
-      Course.search(query, sphinx_options)
+      options[:sSearch].blank? ? sphinx_options.merge!(search_options).deep_merge!(:include => [:course, :channel])  : sphinx_options.merge!(search_options).deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}, :include => [:course, :channel]) 
+      Course.search(sphinx_options)
     end
   end
 
@@ -133,7 +140,11 @@ class Course < ActiveRecord::Base
     end
     return @course_videos.demo_videos.first || @course_videos.first if @course_videos.present?
   end
-  
+
+  def course_first_subscription subscription_id
+    CourseSubscription.where(:subscription_id => subscription_id, :course_id => self.id).first
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?

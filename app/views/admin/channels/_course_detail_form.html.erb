@@ -31,10 +31,10 @@
 				<div class="seperator10"></div>
 				<div class="row">
 					<div class="col-sm-2">
-						<label for="course-descr" class="control-label">Description</label>
+						<label for="course-descr" class="control-label">Description<%= required_field %></label>
 					</div>
 					<div class="col-sm-4">
-						<%= f.text_area :description, :rows => 2, :class => "form-control" %>
+						<%= f.text_area :description, :rows => 2, :class => "form-control validate[required]" %>
 					</div>
 					<div class="col-sm-2">
 						<label for="trainer-bio" class="control-label">Biography of Trainer</label>
@@ -51,11 +51,16 @@
 					<div class="col-md-4">
 					  <div class="fileupload fileupload-new" data-provides="fileupload">
 						<span class="btn blue btn-file">
-						<span class="fileupload-new"><i class="fa fa-paper-clip"></i> Upload Logo</span>
+						<span class="fileupload-new">
+							<i class="fa fa-paper-clip"></i>
+							<%= add_image_title(f.object) %>
+						</span>
 						<span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
 						<%= f.file_field :image %>
 						</span>
-						<span class="fileupload-preview" style="margin-left:5px;"></span>
+						<span class="fileupload-preview" style="margin-left:5px;">
+							<%= f.object.image_file_name %>
+						</span>
 						<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
 					 </div>
 					</div>

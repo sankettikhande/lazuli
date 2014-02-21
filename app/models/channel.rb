@@ -1,5 +1,5 @@
 class Channel < ActiveRecord::Base
-  attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes
+  attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes, :website, :facebook_page, :twitter_page
   # attr_accessible :courses_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
@@ -18,12 +18,15 @@ class Channel < ActiveRecord::Base
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
 
   #VALIDATIONS
-  validates :name, :company_name, :company_number, :email, :presence => true
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
+  validates :user_name, :company_name, :company_number, :email, :presence => true
+  validates_presence_of :name, :message => "^Channel name cann't be blank"
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
   validates :admin_user_id, :presence => {:message => "Full name can't be blank."}
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_uniqueness_of :name, :message => "^Channel name has already been taken."
+  validates :website, :facebook_page, :twitter_page, :format => {:with =>  URI::regexp(%w(http https))}, :allow_blank => true
   accepts_nested_attributes_for :courses, :reject_if => :all_blank, :allow_destroy => true
 
   #SCOPES
@@ -33,12 +36,32 @@ class Channel < ActiveRecord::Base
   before_save :update_channel_admin_user_ids, :if => :admin_user_id_changed?
   after_create :user_assign_role
 
+  scope :publicChannels, where(:channel_type => 'public')
+  scope :privateChannels, where(:channel_type => 'private')
+
+
   #INSTANCE METHODS
   def subscription_types
     Subscription.all.map(&:name).join(", ")
   end
 
   #CLASS METHODS
+  def self.public_channels
+    Channel.publicChannels.joins(:courses =>[:topics]).includes(:courses => [:topics]).where("topics.status in (?)", ['Published', 'PartialPublished'])
+  end
+    
+  def published_topic_courses
+    Channel.where(:id => self.id, :channel_type => 'public').includes(:courses => [:topics]).where("topics.status in (?)", ['Published', 'PartialPublished']).map{|c| c.courses }.flatten
+  end
+
+  def channel_admin_user
+    self.admin ? self.admin.name.titleize : ''
+  end
+
+  def add_subscription_destroy_key course_subscriptions_params
+    course_subscriptions_params.each {|k, v| v.each {|a, b| b.each {|c, d| d.merge!(:_destroy => 1) unless d.has_key?("subscription_id")} if a == 'course_subscriptions_attributes'}}
+  end
+
   def set_channel_permission
     self.courses.each do |course|
       course.channel_course_permissions.each do |permission|
@@ -89,25 +112,34 @@ class Channel < ActiveRecord::Base
     user_channel_subscriptions.blank? ? "-" : user_channel_subscriptions.count
   end
 
-  def self.sphinx_search options, current_user
+  def self.sphinx_search options, current_user, channel_type = ""
     sphinx_options, sort_options, search_options = {}, {}, {}
-    options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
-    query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
-    page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
-    sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
-    unless current_user.is_admin?
-      accessible_channel_ids = current_user.administrated_channel_ids
-      return [] if accessible_channel_ids.blank?
-      search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids}) 
-    end
-    sphinx_options.merge!(sort_options).merge!(search_options)
-    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
-      condition_string = "@(name) #{options[:sSearch]}*"
-      sphinx_options.merge!(:match_mode => :extended)
-      Channel.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
+    unless channel_type
+      options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
+      query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
+      page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
+      sort_options.merge!(:order => [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" "))
+      unless current_user.is_admin?
+        accessible_channel_ids = current_user.administrated_channel_ids
+        return [] if accessible_channel_ids.blank?
+        search_options.merge!(:with => {"channel_id" => current_user.administrated_channel_ids}) 
+      end
+      sphinx_options.merge!(sort_options).merge!(search_options)
+      if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
+        condition_string = "@(name) #{options[:sSearch]}*"
+        sphinx_options.merge!(:match_mode => :extended)
+        Channel.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
+      else
+        sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
+        Channel.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+      end
     else
-      sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
-      Channel.search(query, sphinx_options).page(page).per(options[:iDisplayLength])
+      page = options[:page] || 1
+      options[:sSearch] = options[:sSearch] || ""
+      options[:iDisplayLength] = options[:iDisplayLength] || 15
+      search_options.deep_merge!(:conditions => {:channel_type => channel_type})
+      sphinx_options.merge!(search_options).deep_merge!(:include => :courses)
+      Channel.search(options[:sSearch], sphinx_options).page(page).per(options[:iDisplayLength])
     end
   end
 end

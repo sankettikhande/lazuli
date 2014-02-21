@@ -16,6 +16,7 @@ class Video < ActiveRecord::Base
   
   acts_as_taggable
 
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
   									:default_url => ":class/:style/missing.gif", 
   									:path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
@@ -68,7 +69,7 @@ class Video < ActiveRecord::Base
     self.save!
     #private password setting remove for now
     #publish_privately
-    get_vimeo_info
+    self.delay(:run_at => 15.minutes.from_now).get_vimeo_info
     return self
   end
 
@@ -78,12 +79,19 @@ class Video < ActiveRecord::Base
 
   def get_vimeo_info
     vimeo_data = VimeoLib.video.get_info(vimeo_id)
-    update_attribute(:vimeo_data, hashie_get_info(vimeo_data).video.first)
+    if hashie_get_info(vimeo_data).video.first.is_transcoding == "0"
+      self.set_vimeo_info(vimeo_data)
+    else
+      self.delay(:run_at => 5.minutes.from_now).get_vimeo_info
+    end
   end
-  handle_asynchronously :get_vimeo_info, :run_at => Proc.new{30.minutes.from_now}
 
   def get_best_thumbnail(element = 2)
     vimeo_data.thumbnails.thumbnail[element]._content unless vimeo_data.blank?
+  end
+
+  def set_vimeo_info(vimeo_data)
+    update_attribute(:vimeo_data, hashie_get_info(vimeo_data).video.first)
   end
 
   def description_text

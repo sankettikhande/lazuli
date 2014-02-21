@@ -103,3 +103,6 @@
 #s2id_channel_id {
 	width: 100%;
 }
+
+#player :focus {outline:none;}
+#player ::-moz-focus-inner {border:0;}
