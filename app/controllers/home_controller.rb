@@ -14,7 +14,11 @@ class HomeController < ApplicationController
   end
 
   def browse_course
-    @channels = Channel.public_channels
+    @channels = Channel.sphinx_search(params, current_user, "public")
+    respond_to do |format|
+      format.html{}
+      format.js{ render 'channels/search'}
+    end
   end
   
   def search

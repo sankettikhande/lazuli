@@ -1,0 +1,5 @@
+<% if @channels.any? %>
+	$("#partial_channel_list").html("<%= j (render 'home/partial_channels', :channels => @channels) %>");
+<% else %>
+	$("#partial_channel_list").html("<label>No Channels found.</label>");
+<% end %>

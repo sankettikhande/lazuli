@@ -1,1 +1,5 @@
-$("#video_search_results").html("<%= j(render 'shared/shared', :objekts => @videos) %>");
+<% if @videos.any? %>
+	$("#video_search_results").html("<%= j(render 'shared/shared', :objekts => @videos) %>");
+<% else %>
+	$("#video_search_results").html("<label>No <%= params[:controller].titleize %> found.</label>");
+<% end %>

@@ -16,6 +16,7 @@ class Video < ActiveRecord::Base
   
   acts_as_taggable
 
+  validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
   									:default_url => ":class/:style/missing.gif", 
   									:path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
