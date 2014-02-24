@@ -64,4 +64,9 @@ class UserChannelSubscription < ActiveRecord::Base
   def self.search_subscription(user, course_ids)
     self.where("user_id = ? and course_id in (?)", user.id, course_ids).includes([:channel, :course])
   end
+
+  def course_permission_create
+    course = self.course
+    course.channel_course_permissions.first.permission_create && course.course_admin_user_id.blank?
+  end
 end
