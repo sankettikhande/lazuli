@@ -23,6 +23,7 @@
 //= require_tree ./application/.
 //= require ./common.js
 //= require ./application/jquery.slimscroll.min.js
+//= require jquery-star-rating
 
 $( function() {
     $("button[data-href]").click( function() {
