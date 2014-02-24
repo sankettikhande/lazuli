@@ -117,3 +117,7 @@
 .panel-group .panel{
 	overflow: visible;
 }
+
+.select2-no-results{
+	display: none !important;
+}
