@@ -4,7 +4,7 @@ class UserReviewsController < ApplicationController
 	    respond_to do |format|
 	      if @user_review.save
 	        format.js
-	        flash[:success] = "User Review has been successfully created."
+	        flash[:success] = "Your review is saved. Thanks !!!"
 	      else       
 	        format.js
 	      end

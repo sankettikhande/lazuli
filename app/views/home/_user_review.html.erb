@@ -19,7 +19,7 @@
             <p>Overall Course</p>
           </div>         
           <div class="col-xs-4"> 
-          <% UserReview::VALID_RATINGS.each do |rates| %>
+          <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :overall_course, rates, :class => "star" %>
             <% end %>           
           </div>
@@ -29,7 +29,7 @@
             <p>Quality of Audio/Video</p>
           </div>
           <div class="col-xs-4">
-            <% UserReview::VALID_RATINGS.each do |rates| %>
+            <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :quality_of_audio_video, rates, :class => "star" %>
             <% end %>            
           </div>
@@ -39,7 +39,7 @@
             <p>Quality of Explanation</p>
           </div>
           <div class="col-xs-4">
-            <% UserReview::VALID_RATINGS.each do |rates| %>
+            <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :quality_of_explanation, rates, :class => "star" %>
             <% end %>          
           </div>
@@ -49,7 +49,7 @@
             <p>Course Structure</p>
           </div>
           <div class="col-xs-4">
-            <% UserReview::VALID_RATINGS.each do |rates| %>
+            <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :course_structure, rates, :class => "star" %>
             <% end %>           
           </div>
@@ -59,7 +59,7 @@
             <p>Accessibility</p>
           </div>
           <div class="col-xs-4">
-            <% UserReview::VALID_RATINGS.each do |rates| %>
+            <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :accessibility, rates, :class => "star" %>
             <% end %>           
           </div>
@@ -69,7 +69,7 @@
             <p>Value for Money</p>
           </div>
           <div class="col-xs-4">
-            <% UserReview::VALID_RATINGS.each do |rates| %>
+            <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :value_of_money, rates, :class => "star" %>
             <% end %>            
           </div>
@@ -105,13 +105,31 @@
             </div>
           </div>
         </div>
+        <% if user_signed_in? %>
+         <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+               <%= f.text_field :user_id, :class => 'form-control', :placeholder => 'Your User ID', :value =>   current_user.id, :disabled =>true %>              
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-               <%= f.text_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address', :value => current_user ?  current_user.email : ''  %>              
+               <%= f.text_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address', :value =>  current_user.email, :disabled =>true   %>              
             </div>
           </div>
-        </div>                                                                                                        
+        </div>
+        <% else %>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+               <%= f.text_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address' %>           
+            </div>
+          </div>
+        </div>                                              
+        <% end %>        
+                                                                                         
         <div class="row">                    
           <div class="col-xs-12 text-center">
             <div class="form-group">
