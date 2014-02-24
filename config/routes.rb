@@ -4,7 +4,7 @@ Lazuli::Application.routes.draw do
 
   get "/admin", :controller => "admin", :action => :index
   get "/delayed_job" => DelayedJobWeb, :anchor => false
-  get "/search", :controller => "search", :action => :search
+  get "/search", :controller => "home", :action => :search
   get "courses/search", :controller => "courses", :action => :search
   root :to => "home#index"
   
@@ -71,7 +71,11 @@ Lazuli::Application.routes.draw do
     end
     resources :user_channel_subscriptions
   end
-  resources :channels, :only => [:index, :show]
+  resources :channels, :only => [:index, :show] do
+    collection do
+      get 'search'
+    end
+  end
   resources :courses, :only => [:index, :show]
   resources :watch_lists, :only => [:index, :destroy] do
     collection do
@@ -99,16 +103,14 @@ Lazuli::Application.routes.draw do
     end
   end
   resources :subscriptions, :only => [:destroy] do
+    collection do
+      get 'search'
+    end
     member do
       get 'subscribe'
     end
   end
-  resources :search do
-    collection do
-      get 'subscriptions'
-      get 'channels'
-    end
-  end
+  resources :user_reviews, :only => [:create] 
   
   resources :users
       
