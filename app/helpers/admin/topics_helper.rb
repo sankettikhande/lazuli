@@ -29,7 +29,11 @@ module Admin::TopicsHelper
   end
 
   def edit_topic_link topic
-    link_to "<i class='fa fa-edit'></i>".html_safe, edit_admin_topic_url(topic), :class => 'btn-trans pull-right',  "data-no-turbolink" => 'true',  :rel => 'tooltip', :title => 'Edit Topic'
+    if topic.inprocess?
+      link_to "<i class='fa fa-edit'></i>".html_safe, "#", :class => "btn-trans pull-right disabled",  "data-no-turbolink" => 'true',  :rel => 'tooltip', :title => 'Topic Publishing InProcess'
+    else
+      link_to "<i class='fa fa-edit'></i>".html_safe, edit_admin_topic_url(topic), :class => "btn-trans pull-right",  "data-no-turbolink" => 'true',  :rel => 'tooltip', :title => 'Edit Topic'
+    end
   end
 
   def topic_name_with_edit_link topic
@@ -57,6 +61,14 @@ module Admin::TopicsHelper
       video.get_best_thumbnail
     else
      "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+    end
+  end
+
+  def video_title_link video
+    if video.topic.inprocess?
+      link_to(video.title, "#", :class => "btn-trans disabled", :rel => 'tooltip', :title => 'Topic Publishing InProcess')
+    else
+      link_to(video.title, "#{edit_admin_topic_url(video.topic)}#collapse_#{video.id}")
     end
   end
 end
