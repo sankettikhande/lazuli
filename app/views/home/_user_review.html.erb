@@ -100,36 +100,18 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-               <%= f.text_area :suggestion, :class => 'form-control', :placeholder => 'Any other suggestions/comments ?', :rows => 3 %>             
+               <%= f.text_area :suggestion, :class => 'form-control', :placeholder => 'Any other suggestions/comments ?', :rows => 3 %>          
               
             </div>
           </div>
-        </div>
-        <% if user_signed_in? %>
-         <div class="row">
-          <div class="col-xs-12">
-            <div class="form-group">
-               <%= f.text_field :user_id, :class => 'form-control', :placeholder => 'Your User ID', :value =>   current_user.id, :disabled =>true %>              
-            </div>
-          </div>
-        </div>
+        </div>           
         <div class="row">
           <div class="col-xs-12">
             <div class="form-group">
-               <%= f.text_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address', :value =>  current_user.email, :disabled =>true   %>              
+               <%= f.text_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address', :value => user_signed_in? ?  current_user.email : '', :disabled => user_signed_in? ? true :false  %>              
             </div>
           </div>
-        </div>
-        <% else %>
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="form-group">
-               <%= f.text_field :feedback_email, :class => 'form-control', :placeholder => 'Your Email-Address' %>           
-            </div>
-          </div>
-        </div>                                              
-        <% end %>        
-                                                                                         
+        </div>                                                                                                        
         <div class="row">                    
           <div class="col-xs-12 text-center">
             <div class="form-group">
