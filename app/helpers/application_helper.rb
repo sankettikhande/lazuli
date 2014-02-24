@@ -72,7 +72,7 @@ module ApplicationHelper
     if ["index"].include? params[:action]
       crumbs << params[:controller].split("/")
       crumbs = crumbs[0]
-    elsif ["show", "edit", "new", "new_bulk" ].include? params[:action]
+    elsif ["show", "edit", "new", "new_bulk", "update", "create"].include? params[:action]
       crumbs += url.split("/")
     end
     crumbs = crumbs.delete_if(&:blank?)
