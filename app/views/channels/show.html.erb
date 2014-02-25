@@ -50,7 +50,7 @@
     	</div>
     	<div class="col-xs-12 col-sm-3 col-sm-offset-3">
           <div class="form-group">
-            <%= text_field_tag 'search-courses', nil , placeholder: "Search Courses", class: "form-control" %>
+            <%= text_field_tag 'search-courses', nil , placeholder: "Search Courses", class: "form-control", title: "Minimum 3 characters to be entered" %>
             <%= hidden_field_tag 'channel_id', @channel.id %>         
           </div>		
     	</div>
