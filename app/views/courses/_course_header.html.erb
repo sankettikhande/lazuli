@@ -4,13 +4,13 @@
       <div class="row">
         <div class="col-xs-6 col-sm-4 col-md-3">
           <div class="channel-logo-pic">
-            <%= image_tag(@course.image.url, :alt => "Channel Logo", :class => "img-border") %>                   
+            <%= image_tag(@course.channel.image.url, :alt => "Channel Logo", :class => "img-border") %>
           </div>
         </div>
         <div class="col-xs-6 col-sm-8 col-md-9">
           <div class="video-descr-text">
-            <h4> <%= @course.name.titleize %></h4>
-            <p><%= @course.description %></p>
+            <h4> <%= @video.title.titleize %></h4>
+            <p><%= @video.description.truncate(300) %></p>
             <% bookmarks = @video.bookmarks %>
             <% if bookmarks.any? %>
               <p>Bookmarks</p>
