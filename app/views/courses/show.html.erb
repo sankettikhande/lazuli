@@ -12,7 +12,7 @@
         <% unless @user_subscription.blank? %>
           <div class="sub-ends">
             <p class="text-center">
-              <a href="#">Subscription Ends: <br/><b><%= @user_subscription.expiry_date.try(:strftime,"%a, %w %B, %Y") %></b></a>
+              <a href="#">Your subscription expires <br/>on <b> <%= @user_subscription.expiry_date.try(:strftime,"#{@user_subscription.expiry_date.day.ordinalize} %b, %Y") %></b></a>
             </p>
           </div>
         <% else %>

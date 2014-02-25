@@ -23,15 +23,19 @@ class Video < ActiveRecord::Base
   									:url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   has_attached_file :clip,
+                    :styles => { 
+                      :thumb => { :geometry => "100x100#", :format => 'jpg', :time => 10 },
+                      :medium => { :geometry => "200x150#", :format => 'jpg', :time => 10 } },
                     :path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
-                    :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
+                    :url => "/system/:class/:attachment/:id/:style/:basename.:extension",
+                    :processors => [:ffmpeg]
 
   validates :title, :description, :presence => true
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_attachment_size :clip, :less_than => 500.megabytes, :message => 'Filesize must be less than 500 MegaBytes'
   validates_presence_of :clip, :message => '^Please upload the video file'
-  validates_attachment_content_type :clip, :content_type => ['video/x-msvideo','video/avi','video/quicktime','video/3gpp','video/x-ms-wmv','video/mp4','video/mpeg','video/x-flv']
+  validates_attachment_content_type :clip, :content_type => ['video/x-msvideo','video/avi','video/quicktime','video/3gpp','video/x-ms-wmv','video/mp4','video/mpeg','video/x-flv', 'application/octet-stream']
   validates :status, :inclusion => {:in => @@video_statuses}
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
@@ -153,7 +157,11 @@ class Video < ActiveRecord::Base
       sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options).merge!(sql_options)
 
       sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
-      Video.search(query, sphinx_options)
+      if sphinx_options[:conditions]
+        Video.search(sphinx_options)
+      else
+        Video.search(query, sphinx_options)
+      end
     end
 
 
@@ -221,6 +229,14 @@ class Video < ActiveRecord::Base
   def tags_str
     tag_list = self.tags.map { |tag| tag.name }
     tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
+  end
+
+  def get_video_duration
+    result = `ffmpeg -i #{self.clip.path} 2>&1`
+    r = result.match("Duration: ([0-9]+):([0-9]+):([0-9]+).([0-9]+)")
+    if r
+      r[1]+ ":" +r[2]+ ":" +r[3]
+    end
   end
   
 end

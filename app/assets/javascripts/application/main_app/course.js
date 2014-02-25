@@ -36,6 +36,11 @@ $( document ).ready(function() {
     $('.content1').show();
   });
 
+  $("#subscription_confirm .close").click(function(){
+    $('.content2').hide();
+    $('.content1').show();
+  });
+
   $("#remove-favourite").click(function (){
     $('#add-favourite').show();
     $('#remove-favourite').hide();
