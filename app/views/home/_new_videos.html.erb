@@ -8,6 +8,9 @@
           <div class="carousel slide landing-carousel" id="new-vids" data-interval="false">
             <!-- Carousel items -->
             <div class="carousel-inner landing-carousel-inner">
+              <% if @videos.blank? %>
+                <span class='active sample_text'>No videos are available</span>
+              <% end %>
               <% @videos.each_with_index do |video, index| %>
                 <div class="<%= is_active_videos(index) %> item">
                   <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">

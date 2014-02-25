@@ -6,6 +6,11 @@
       </div>
     </div>
     <div class="courses-list-box">
+      <% if @courses.blank? %>
+      <div class="courses-list">
+        <span class='sample_text col-sm-12'>No courses are available</span>
+      </div>
+      <% end %>
       <% @courses.each do |course| %>
         <div class="courses-list">
           <div class="row">
