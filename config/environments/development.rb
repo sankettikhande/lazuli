@@ -41,7 +41,5 @@ Lazuli::Application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:8080' }
-
-  Paperclip.options[:command_path] = "/usr/bin/"
-
+  
 end

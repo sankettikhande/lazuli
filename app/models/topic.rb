@@ -148,6 +148,7 @@ class Topic < ActiveRecord::Base
     self.videos.each do |video|
       if video.clip_updated_at_changed?
         video.update_attribute(:status, "Saved")
+        video.update_attribute(:vimeo_data, nil)
         video.bookmarks.destroy_all if video.bookmarked?
       end
     end

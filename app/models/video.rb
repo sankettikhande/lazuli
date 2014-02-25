@@ -23,6 +23,7 @@ class Video < ActiveRecord::Base
   									:url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   has_attached_file :clip,
+                    :restricted_characters => /[&$+,\/:;=?@<>\(\)\[\]\{\}\|\\\^~%# ]/,
                     :styles => { 
                       :thumb => { :geometry => "100x100#", :format => 'jpg', :time => 10 },
                       :medium => { :geometry => "200x150#", :format => 'jpg', :time => 10 } },
