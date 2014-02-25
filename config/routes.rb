@@ -110,6 +110,14 @@ Lazuli::Application.routes.draw do
       get 'subscribe'
     end
   end
+
+  resources :search do
+    collection do
+      get 'subscriptions'
+      get 'channels'
+    end
+  end
+
   resources :user_reviews, :only => [:create] 
   
   resources :users

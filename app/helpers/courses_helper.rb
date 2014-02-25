@@ -27,8 +27,8 @@ module CoursesHelper
 		Time.at(seconds).utc.strftime("%H:%M:%S")
 	end
 
-	def format_duration(vimeo_data)
-		vimeo_data ? second_to_duration(vimeo_data.duration.to_i) : "00:00:00"
+	def format_duration(video)
+		video.vimeo_data ? second_to_duration(video.vimeo_data.duration.to_i) : video.get_video_duration
 	end
 
 	def is_watch_listed(video_id, course_id)

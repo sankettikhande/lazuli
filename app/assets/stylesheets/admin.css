@@ -94,8 +94,6 @@
 
 #sort_filter{
 	float: left;
-	padding-top: 2px;
-	font-size: 14px;
 }
 
 .select2-results{
@@ -116,4 +114,12 @@
 
 .panel-group .panel{
 	overflow: visible;
+}
+
+.select2-no-results{
+	display: none !important;
+}
+
+.dataTables_filter label{
+	font-size: 13px;
 }
