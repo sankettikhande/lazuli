@@ -1,0 +1,22 @@
+<div class="carousel-box">
+	<div class="row"> <!-- row 7 -->
+		<div class="col-sm-12">
+		  <div class="carousel slide home-carousel" id="myCarousel<%= c %>" data-interval="false">
+		    <div class="carousel-inner home-carousel-inner">	        
+		        <% 6.times do |n|%>			      
+		        <div class="item <%= "active" if n.zero? %>">
+		          <div class="col-xs-6"><a href="#">
+		            <%=  image_tag "lazuli-logo.png", :class => "img-responsive", :alt => "Lazuli Logo" %></a>
+		          </div>
+		        </div>
+		        <% end %>				        					     
+		    </div>
+		    <div class="carousel-caption default-line-height">
+		      <h4 ></h4>
+		    </div>
+		     <a class="carousel-control left" href="#myCarousel<%= c %>" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+			 <a class="carousel-control right" href="#myCarousel<%= c %>" data-slide="next"><i class="fa fa-caret-right"></i></a>							    
+		  </div>
+		</div>
+	</div>
+</div>
