@@ -153,7 +153,11 @@ class Video < ActiveRecord::Base
       sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options).merge!(sql_options)
 
       sphinx_options.deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*"}) if !options[:sSearch_1].blank? and !options[:sSearch].blank? 
-      Video.search(query, sphinx_options)
+      if sphinx_options[:conditions]
+        Video.search(sphinx_options)
+      else
+        Video.search(query, sphinx_options)
+      end
     end
 
 
