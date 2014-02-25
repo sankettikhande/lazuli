@@ -53,7 +53,7 @@ class Course < ActiveRecord::Base
   end
 
   def course_admin_user
-    self.course_admin_user_id ? User.find(self.course_admin_user_id).name.titleize : ''
+    self.course_admin_user_id ? User.find(self.course_admin_user_id).actual_name.titleize : ''
   end  
 
   def add_destroy_keys course_subscriptions_params
