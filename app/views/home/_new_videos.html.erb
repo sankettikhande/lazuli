@@ -9,7 +9,7 @@
             <!-- Carousel items -->
             <div class="carousel-inner landing-carousel-inner">
               <% if @videos.blank? %>
-                <span class='active sample_text'>No videos are available</span>
+                <span class='active sample_text'>No videos available</span>
               <% end %>
               <% @videos.each_with_index do |video, index| %>
                 <div class="<%= is_active_videos(index) %> item">

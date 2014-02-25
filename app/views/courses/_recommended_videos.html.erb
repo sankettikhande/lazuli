@@ -8,7 +8,7 @@
           <div class="carousel slide landing-carousel" id="new-vids" data-interval="false">
             <!-- Carousel items -->
             <div class="carousel-inner landing-carousel-inner">
-              <%= "No Recommended videos are available" if @recommended_videos.blank? %>
+              <%= "No Recommended videos available" if @recommended_videos.blank? %>
               <% @recommended_videos.each_with_index do |video, index| %>
                 <div class="<%= is_active_videos(index) %> item">
                   <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">

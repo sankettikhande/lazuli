@@ -33,7 +33,7 @@ class Course < ActiveRecord::Base
   #SCOPES
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
-  after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
+  before_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   after_create :set_channel_admin_user_ids
 
   def self.public_channel_courses limit_record
