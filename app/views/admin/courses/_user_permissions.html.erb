@@ -12,7 +12,7 @@
 			<%= check_box("user[user_channel_subscriptions_attributes][#{index}]","permission_share") %><label>Share</label>
 	</div>
 <% end %>
-<% if @courses_permissions.permission_create == true && @course. course_admin_user_id.blank? %>		
+<% if @courses_permissions.permission_create == true && @course.course_admin_user_id.blank? %>
 	<div class="col-md-2">
 			<%= check_box("user[user_channel_subscriptions_attributes][#{index}]","permission_create", :class => 'permission_create') %><label>Create</label>
 	</div>

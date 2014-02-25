@@ -48,6 +48,7 @@ ul,ol,dd {list-style-type: none;padding: 0;margin: 0}
 .capitalize {text-transform: capitalize;}
 .text-justify {text-align:justify;}
 .default-height {min-height:40px;}
+.default-line-height{min-height: 17px !important;}
 .rating_inline{display:inline;}
 .star-ratings{margin-left:25px;}
 .v-center {vertical-align: middle !important;}

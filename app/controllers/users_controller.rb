@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     params[:user].delete('password') if params[:user][:password].blank?
     respond_to do |format|
       if @user.update_attributes(params[:user])
+        sign_in @user, :bypass => true
         format.js
         flash[:success] = "User has been successfully updated."
       else       

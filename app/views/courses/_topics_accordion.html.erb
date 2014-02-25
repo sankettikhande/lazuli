@@ -18,12 +18,12 @@
                   <span>
                     <%= image_tag("/assets/frontend/lock.png") %>
                   </span>
-                  <a href="#"> <%= video.title %>
+                  <a href="#"> <%= video.title.truncate(40) %>
                     <span><%= format_duration(video) %></span>
                   </a>
                 </div>
                 <% else %>
-                <a href="<%= course_topic_video_url(@course.id, video.topic_id, video.id) %>"> <%= video.title %>
+                <a href="<%= course_topic_video_url(@course.id, video.topic_id, video.id) %>"> <%= video.title.truncate(40) %>
                   <span><%= format_duration(video) %></span>
                 </a>
                 <% end %>

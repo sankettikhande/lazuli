@@ -64,20 +64,4 @@ $( document ).ready(function() {
 	$("#remove_selected_videos").unbind().click(function(){
 		clear_filters();
 	});
-	
-	$('.password_change').click(function(){
-	  $('.user_info').hide()
-	  $('.change_pasword').show()
-	  $(this).hide()
-	  $('.my_account').show()
-	  return false;
-	 })
-
-	 $('.my_account').click(function(){
-	  $('.user_info').show()
-	  $('.change_pasword').hide()
-	  $(this).hide()
-	  $('.password_change').show()
-	  return false;
-	 })
 });
