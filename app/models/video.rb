@@ -23,8 +23,12 @@ class Video < ActiveRecord::Base
   									:url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   has_attached_file :clip,
+                    :styles => { 
+                      :thumb => { :geometry => "100x100#", :format => 'jpg', :time => 10 },
+                      :medium => { :geometry => "200x150#", :format => 'jpg', :time => 10 } },
                     :path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
-                    :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
+                    :url => "/system/:class/:attachment/:id/:style/:basename.:extension",
+                    :processors => [:ffmpeg]
 
   validates :title, :description, :presence => true
   validates_attachment_size :image, :less_than => 3.megabytes
@@ -225,6 +229,14 @@ class Video < ActiveRecord::Base
   def tags_str
     tag_list = self.tags.map { |tag| tag.name }
     tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
+  end
+
+  def get_video_duration
+    result = `ffmpeg -i #{self.clip.path} 2>&1`
+    r = result.match("Duration: ([0-9]+):([0-9]+):([0-9]+).([0-9]+)")
+    if r
+      r[1]+ ":" +r[2]+ ":" +r[3]
+    end
   end
   
 end

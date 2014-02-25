@@ -19,12 +19,12 @@
                     <%= image_tag("/assets/frontend/lock.png") %>
                   </span>
                   <a href="#"> <%= video.title %>
-                    <span><%= format_duration(video.vimeo_data) %></span>
+                    <span><%= format_duration(video) %></span>
                   </a>
                 </div>
                 <% else %>
                 <a href="<%= course_topic_video_url(@course.id, video.topic_id, video.id) %>"> <%= video.title %>
-                  <span><%= format_duration(video.vimeo_data) %></span>
+                  <span><%= format_duration(video) %></span>
                 </a>
                 <% end %>
               </li>
