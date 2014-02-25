@@ -26,7 +26,7 @@ class WatchListsController < SharedController
 		if watchList
 			watchList.destroy
 			@alertClass = "success"
-			@msg = "Video remove from watch list"
+			@msg = "Video removed from watch list"
 		end
 		respond_to do |format|
 			format.js {render '/favourites/destroy'}
