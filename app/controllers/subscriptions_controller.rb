@@ -8,11 +8,17 @@ class SubscriptionsController < ApplicationController
 		@user_channel_subscription.subscription_id = params[:subscription_id]
 		duration = Subscription.cached_find(@user_channel_subscription.subscription_id).calculated_days
 		@user_channel_subscription.set_subscription_date_range(duration)
-		@user_channel_subscription.save
+		@user_channel_subscription.save if params[:st] == 'Completed'
 		@course_id = params[:course_id]
+
 		respond_to do |format|
-			# format.html { render :js => "window.location.href = ('#{request.referer}');", :notice => "You are successfully subscribed to the course."}
-		format.html
+			if @user_channel_subscription.save
+			  format.html
+			  flash[:success] = "Subscription To The Course Was Succesful"
+			else
+				format.html {redirect_to course_path(@course_id)}
+				flash[:error] = "Failed to subscribe to the Course. Please retry.."
+			end
 		end
 	end 
 

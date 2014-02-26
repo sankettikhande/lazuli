@@ -1,6 +1,2 @@
-<% if @user_channel_subscription.errors.blank? %>
-<p> subscribed to the course successfully</p>
+<div id="flash"><%= flash_message %></div>
 <%= link_to "Click here to Watch the Videos", course_path(@course_id),  :class => "btn btn-primary" %>
-<% else %>
-<p> Failed to subscribe</p>
-<% end %>
