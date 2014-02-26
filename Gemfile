@@ -31,7 +31,6 @@ gem 'thinking-sphinx', '~> 3.0.2'
 gem 'ts-delayed-delta', '~> 2.0.0'
 gem "validates_lengths_from_database"
 gem 'jquery-star-rating-rails'
-gem "paperclip-ffmpeg"
 
 group :development do
   gem 'quiet_assets'
