@@ -1,3 +1,10 @@
 #subscription_confirm .modal-dialog{
 	width: 450px;
 }
+
+.sample_text{
+	font-size: 18px;
+	margin: 60px 0px 50px 0px;
+	text-align: center;
+	color: black;
+}

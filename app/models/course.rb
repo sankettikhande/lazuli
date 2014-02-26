@@ -33,11 +33,11 @@ class Course < ActiveRecord::Base
   #SCOPES
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
-  after_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
+  before_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   after_create :set_channel_admin_user_ids
 
-  def self.public_channel_courses limit_record
-    Channel.public_channels.limit(10).map{|c| c.courses }.flatten.take(limit_record)
+  def self.public_channel_courses last_limit
+    Channel.public_channels.limit(10).map{|c| c.courses }.flatten.last(last_limit)
   end
   
   #INSTANCE METHODS
@@ -53,7 +53,7 @@ class Course < ActiveRecord::Base
   end
 
   def course_admin_user
-    self.course_admin_user_id ? User.find(self.course_admin_user_id).name.titleize : ''
+    self.course_admin_user_id ? User.find(self.course_admin_user_id).actual_name.titleize : ''
   end  
 
   def add_destroy_keys course_subscriptions_params
