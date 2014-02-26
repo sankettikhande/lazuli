@@ -69,6 +69,7 @@ class Video < ActiveRecord::Base
     set_vimeo_description(self.vimeo_id, self.description_text)
     v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
     v.set_title(self.vimeo_id, self.title)
+    VimeoLib.video_embed.set_preset(self.vimeo_id, Settings.lazuli_preset_id)
     self.status = "Published"
     self.vimeo_url = vimeo_video_url
     self.save!
