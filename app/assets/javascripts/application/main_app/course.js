@@ -31,6 +31,16 @@ $( document ).ready(function() {
     return false;
   });
 
+  $(".login_modal").click(function(){
+     $('.close').trigger('click');
+     $('.fa-sign-in').trigger('click');
+  })
+
+  $(".signup_modal").click(function(){
+     $('.close').trigger('click');
+     $('.fa-pencil-square-o').trigger('click');
+  })
+
   $("#subscription_confirm .cancel_button").click(function(){
     $('.content2').hide();
     $('.content1').show();
