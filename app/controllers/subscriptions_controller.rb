@@ -1,5 +1,4 @@
 class SubscriptionsController < ApplicationController
-	include SubscriptionsHelper
 	before_filter :authenticate_user!
 
 	def confirm_payment_and_subscribe
