@@ -9,8 +9,6 @@
     </div>
     <div class="modal-footer">
 			<%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", align: "left", style: "margin-right:7px;") , course.paypal_url(confirm_payment_and_subscribe_url(params), notification_subscriptions_url,{ :subscription_id => params[:subscription_id]})) %>
-<!--       <a href="#" class="btn btn-primary subscription_now">Subscribe Now</a> -->
-     <!--  <a data-dismiss="modal" class="btn btn-primary">Try Now</a> -->
     </div>
   </div>
 </div>
