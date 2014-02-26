@@ -82,4 +82,13 @@ namespace :db do
       course.update_attribute(:course_admin_user_id, nil) unless user && ucs.include?(course.id)
     end
   end
+
+  task :set_preset => :environment do
+    include VimeoLib
+    Video.find_each do |video|
+      puts "#{video.vimeo_id} is updating"
+      VimeoLib.video_embed.set_preset(video.vimeo_id, Settings.lazuli_preset_id) if video.vimeo_id
+      puts "#{video.vimeo_id} is updated"
+    end
+  end
 end
