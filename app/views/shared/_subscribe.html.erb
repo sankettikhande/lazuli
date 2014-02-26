@@ -35,7 +35,7 @@
                 <div class="col-xs-11">
                   <%= radio_button :course_subscription, :subscription_id, cs.subscription.id, :required => true %>
                   <%= cs.subscription.name %>
-                  <%= hidden_field_tag "duration_#{cs.subscription.id}", cs.subscription.calculated_days %>
+                  (<span> Subscription Cost: $<%= cs.subscription_price %></span>)
                 </div>
               </div>
             </div>

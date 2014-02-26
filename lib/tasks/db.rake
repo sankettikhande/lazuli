@@ -82,4 +82,10 @@ namespace :db do
       course.update_attribute(:course_admin_user_id, nil) unless user && ucs.include?(course.id)
     end
   end
+
+  task :set_default_price_for_subscriptions => :environment do
+    CourseSubscription.find_each do |cs|
+      cs.update_attribute(:subscription_price, 10) if cs.subscription_price.blank?
+    end
+  end
 end

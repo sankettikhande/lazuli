@@ -1,8 +1,2 @@
-<% if @user_channel_subscription.errors.blank? %>
-	$("#flash").addClass('alert-success').html("You are successfully subscribed to the course.").fadeOut(3000);
-	$('.close').trigger('click');
-	$("#subscription_modal").hide();
-<% else %>
-	$("#flash").addClass('alert-danger').html("You have subscribed to this course.").fadeOut(3000);
-	$('.close').trigger('click');
-<% end %>
+$("#modal-window").show();
+$("#modal-window").html("<%= j(render 'shared/payment', :course => @course, :params => @params, :course_subscription => @course_subscription) %>");
