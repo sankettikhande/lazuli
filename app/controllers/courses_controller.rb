@@ -15,7 +15,6 @@ class CoursesController < ApplicationController
 			@topic = @video.topic
 			@favourite_video = @video.favourites.where(:user_id => current_user).last
 			@recommended_videos = load_recommended_videos
-			authorize! :show, @video, :if => :video_param?
 			respond_to do |format|
 				format.html {}
 				format.js { render 'change_bookmark'}
