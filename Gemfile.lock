@@ -173,8 +173,6 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    paperclip-ffmpeg (1.0.1)
-      paperclip (>= 2.5.2)
     polyglot (0.3.3)
     pry (0.9.12.4)
       coderay (~> 1.0)
@@ -314,7 +312,6 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-linkedin
   paperclip
-  paperclip-ffmpeg
   pry-rails
   quiet_assets
   rack-mini-profiler

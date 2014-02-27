@@ -105,6 +105,7 @@ Lazuli::Application.routes.draw do
   resources :subscriptions, :only => [:destroy] do
     collection do
       get 'search'
+      post 'notification'
     end
     member do
       get 'subscribe'
@@ -127,6 +128,7 @@ Lazuli::Application.routes.draw do
   match '/courses/:id/:topic_id' => 'courses#show', :as => :course_topic
   match '/courses/:id/:topic_id/:video_id' => 'courses#show', :as => :course_topic_video
   match '/subscribe/course/:id' => 'subscriptions#subscribe_course', :as => :subscribe_course
+  match '/subscribe/confirm_payment_and_subscribe' => "subscriptions#confirm_payment_and_subscribe", :as => :confirm_payment_and_subscribe
   match '/add/watchlist/video/:id/:course_id' => 'watch_lists#add_to_watch_list', :as => :add_to_watch_list
   match '/remove/watchlist/video/:id/:course_id' => 'watch_lists#remove_from_watch_list', :as => :remove_from_watch_list
   match '/favourites/search' => 'favourites#search', :as => :search_favourites

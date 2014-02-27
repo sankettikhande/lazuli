@@ -17,7 +17,7 @@
             <div class="col-xs-5 col-sm-2 col-md-2">
               <div class="course-logo-img">
                 <a href="#">
-                  <%= link_to(image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block" ), course_video_path(course.id)) %>
+                  <%= link_to(image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), course_video_path(course.id)) %>
                 </a>
               </div>
             </div>
@@ -33,13 +33,13 @@
             </div>
             <div class="hidden-xs col-sm-2 col-md-2">
               <div class="course-featured-video">
-                <%= link_to(image_tag(course.channel.image.url, :alt => "Image", :class => "img-responsive" ), channel_url(course.channel)) %>
+                <%= link_to(image_tag(course.channel.image.url, :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), channel_url(course.channel)) %>
               </div>
             </div>
             <div class="col-sm-2 col-md-2">
               <div class="remove-button">
                 <div class="form-group">
-                  <% if  !current_user.watchable_course? course.id %>
+                  <% if   !current_user.is_admin? || (current_user.is_course_admin? && !current_user.watchable_course?(course.id)) %>
                     <%= link_to("Subscribe", subscribe_subscription_path(course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
                   <% else %>
                     <%= link_to("Subscribe", "#", :class => "btn btn-danger disabled") %>

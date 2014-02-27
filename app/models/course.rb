@@ -79,6 +79,25 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def paypal_url(return_url, notify_url, options = {})
+    values = {
+      :business => 'rakesh.patri.123@gmail.com',
+      :cmd => '_cart',
+      :upload => 1,
+      :return => return_url,
+      :notify_url => notify_url,
+      :invoice => rand(10000)
+    }
+    values.merge!({
+      "amount_1" => self.course_first_subscription(options[:subscription_id]).subscription_price,
+      "item_name_1" => "#{name} :#{Subscription.find_by_id(options[:subscription_id]).name}",
+      "item_number_1" => id,
+      "quantity_1" => '1'
+    })
+    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+     # "https://www.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
   def channel_name
     channel.name if channel
   end
@@ -134,11 +153,16 @@ class Course < ActiveRecord::Base
     Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id) if c.course_admin_user_id.blank?  } 
   end
 
-  def course_first_video
+  def course_first_video(current_user)
+    @course_videos = []
     self.topics.published.includes(:videos).each do |topic|
-      @course_videos = topic.videos.published
+      if @user_subscription || (current_user && current_user.is_admin?)
+        @course_videos.concat(topic.videos.published) if @course_videos.blank?
+      else
+        @course_videos.concat(topic.videos.published.demo_videos) if @course_videos.blank?
+      end
     end
-    return @course_videos.demo_videos.first || @course_videos.first if @course_videos.present?
+    return @course_videos.first if @course_videos.present?
   end
 
   def course_first_subscription subscription_id
@@ -149,5 +173,4 @@ class Course < ActiveRecord::Base
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
   end
-
 end
