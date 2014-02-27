@@ -79,6 +79,25 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def paypal_url(return_url, notify_url, options = {})
+    values = {
+      :business => 'rakesh.patri.123@gmail.com',
+      :cmd => '_cart',
+      :upload => 1,
+      :return => return_url,
+      :notify_url => notify_url,
+      :invoice => rand(10000)
+    }
+    values.merge!({
+      "amount_1" => self.course_first_subscription(options[:subscription_id]).subscription_price,
+      "item_name_1" => "#{name} :#{Subscription.find_by_id(options[:subscription_id]).name}",
+      "item_number_1" => id,
+      "quantity_1" => '1'
+    })
+    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+     # "https://www.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
   def channel_name
     channel.name if channel
   end
@@ -154,5 +173,4 @@ class Course < ActiveRecord::Base
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
   end
-
 end

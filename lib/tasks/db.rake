@@ -91,4 +91,10 @@ namespace :db do
       puts "#{video.vimeo_id} is updated"
     end
   end
+
+  task :set_default_price_for_subscriptions => :environment do
+    CourseSubscription.find_each do |cs|
+      cs.update_attribute(:subscription_price, 10) if cs.subscription_price.blank?
+    end
+  end
 end

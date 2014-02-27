@@ -114,7 +114,7 @@ class Channel < ActiveRecord::Base
 
   def self.sphinx_search options, current_user, channel_type = ""
     sphinx_options, sort_options, search_options = {}, {}, {}
-    unless channel_type
+    if channel_type.blank?
       options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
       query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
       page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
