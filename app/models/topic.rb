@@ -154,8 +154,14 @@ class Topic < ActiveRecord::Base
     end
   end
 
-  def topic_first_video
-    videos = self.videos.published
-    return (videos.where(:demo => true).first || videos.first) if videos.any?
+  def topic_first_video(current_user)
+    if (@user_subscription || (current_user && current_user.is_admin?))
+      videos = self.videos.published
+      return videos.first if videos.any?
+    else
+      video = self.videos.published.demo_videos
+      video = self.course.course_first_video(current_user) if video.blank?
+      return video
+    end
   end
 end

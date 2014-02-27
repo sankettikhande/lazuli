@@ -23,13 +23,8 @@ class Video < ActiveRecord::Base
   									:url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   has_attached_file :clip,
-                    :restricted_characters => /[&$+,\/:;=?@<>\(\)\[\]\{\}\|\\\^~%# ]/,
-                    :styles => { 
-                      :thumb => { :geometry => "100x100#", :format => 'jpg', :time => 10 },
-                      :medium => { :geometry => "200x150#", :format => 'jpg', :time => 10 } },
                     :path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
-                    :url => "/system/:class/:attachment/:id/:style/:basename.:extension",
-                    :processors => [:ffmpeg]
+                    :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   validates :title, :description, :presence => true
   validates_attachment_size :image, :less_than => 3.megabytes
@@ -70,12 +65,12 @@ class Video < ActiveRecord::Base
     set_vimeo_description(self.vimeo_id, self.description_text)
     v.add_tags(self.vimeo_id,self.tag_list.join(",")) if !self.tag_list.blank?
     v.set_title(self.vimeo_id, self.title)
-    self.status = "Published"
+    VimeoLib.video_embed.set_preset(self.vimeo_id, Settings.lazuli_preset_id)
     self.vimeo_url = vimeo_video_url
     self.save!
     #private password setting remove for now
     #publish_privately
-    self.delay(:run_at => 15.minutes.from_now).get_vimeo_info
+    self.delay(:run_at => 5.minutes.from_now).get_vimeo_info
     return self
   end
 
@@ -88,7 +83,7 @@ class Video < ActiveRecord::Base
     if hashie_get_info(vimeo_data).video.first.is_transcoding == "0"
       self.set_vimeo_info(vimeo_data)
     else
-      self.delay(:run_at => 5.minutes.from_now).get_vimeo_info
+      self.delay(:run_at => 2.minutes.from_now).get_vimeo_info
     end
   end
 
@@ -97,6 +92,7 @@ class Video < ActiveRecord::Base
   end
 
   def set_vimeo_info(vimeo_data)
+    update_attribute(:status, "Published")
     update_attribute(:vimeo_data, hashie_get_info(vimeo_data).video.first)
   end
 
@@ -232,13 +228,4 @@ class Video < ActiveRecord::Base
     tag_list = self.tags.map { |tag| tag.name }
     tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
   end
-
-  def get_video_duration
-    result = `ffmpeg -i #{self.clip.path} 2>&1`
-    r = result.match("Duration: ([0-9]+):([0-9]+):([0-9]+).([0-9]+)")
-    if r
-      r[1]+ ":" +r[2]+ ":" +r[3]
-    end
-  end
-  
 end

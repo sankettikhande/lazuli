@@ -153,14 +153,16 @@ class Course < ActiveRecord::Base
     Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id) if c.course_admin_user_id.blank?  } 
   end
 
-  def course_first_video
-    course_videos = []
-    course_demo_videos = []
+  def course_first_video(current_user)
+    @course_videos = []
     self.topics.published.includes(:videos).each do |topic|
-      course_videos << topic.videos.published
-      course_demo_videos << topic.videos.published.demo_videos
+      if @user_subscription || (current_user && current_user.is_admin?)
+        @course_videos.concat(topic.videos.published) if @course_videos.blank?
+      else
+        @course_videos.concat(topic.videos.published.demo_videos) if @course_videos.blank?
+      end
     end
-    return course_demo_videos.flatten.first || course_videos.flatten.first if course_videos.present?
+    return @course_videos.first if @course_videos.present?
   end
 
   def course_first_subscription subscription_id
