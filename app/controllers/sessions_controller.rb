@@ -3,11 +3,19 @@ class SessionsController < Devise::SessionsController
   before_filter :load_course, :only => [:new]
 
   def create
-    resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
-    if resource
-      sign_in_and_redirect(resource_name, resource)
-    else
-      render :action => :failure
+    user=User.find_by_email(params[:user][:email])
+    if user.confirmed?    
+      resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
+      if resource
+        sign_in_and_redirect(resource_name, resource)
+      else
+        render :action => :failure
+      end
+    else            
+      respond_to do |format|
+        format.js 
+      end
+      flash[:error] = "You have to confirm your account before continuing."    
     end
   end
 
@@ -20,7 +28,7 @@ class SessionsController < Devise::SessionsController
     end
   end
 
-  def failure
+  def failure   
     respond_to do |format|
       format.js
     end
