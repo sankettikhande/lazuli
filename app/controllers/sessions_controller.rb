@@ -9,13 +9,12 @@ class SessionsController < Devise::SessionsController
       if resource
         sign_in_and_redirect(resource_name, resource)
       else
+        @error_message = "Invalid email and password"
         render :action => :failure
       end
-    else            
-      respond_to do |format|
-        format.js 
-      end
-      flash[:error] = "You have to confirm your account before continuing."    
+    else 
+      @error_message = "You have to confirm your account before continuing."
+      render :action => :failure
     end
   end
 
