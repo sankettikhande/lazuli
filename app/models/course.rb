@@ -172,9 +172,9 @@ class Course < ActiveRecord::Base
   def has_trial_videos?
     @course_trial_videos = []
     self.topics.published.includes(:videos).each do |topic|
-      @course_trial_videos << topic.videos.published.trial_videos
+      @course_trial_videos.concat(topic.videos.published.trial_videos)
     end
-    return @course_trial_videos.flatten.present?
+    return @course_trial_videos.present?
   end
 
   def available_course_subscriptions
