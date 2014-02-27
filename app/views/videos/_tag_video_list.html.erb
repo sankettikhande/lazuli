@@ -3,9 +3,15 @@
     <div class="row">
       <div class="col-xs-5 col-sm-2 col-md-2">
         <div class="course-logo-img">
-          <a href="#">
-            <%= image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" )%>
-          </a>
+          <% if current_user.is_admin? || current_user.watchable_video?(video, video.topic.course_id)%>
+            <a href="#">
+              <%= image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" )%>
+            </a>
+          <% else %>
+            <a href="#">
+              <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" ), subscribe_subscription_path(video.topic.course_id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
+            </a>
+          <% end %>
         </div>
       </div>
       <div class="col-xs-7 col-sm-8 col-md-8">
@@ -29,4 +35,5 @@
 <div><%= videos.count %> courses Found.</div>
 <%= paginate videos, :remote => true %>
 
-<%= javascript_include_tag "application/main_app/tag_search.js"%>
+<%#= javascript_include_tag "application/main_app/tag_search.js"%>
+<%#= javascript_include_tag "application/main_app/course.js"%>

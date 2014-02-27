@@ -12,7 +12,7 @@ $( document ).ready(function() {
 		$.ajax({
 			type: "GET",
 			url: "/"+controller_name+"/tag_search",
-			data: {sSearch: search_key, sSearch1: "tags", iDisplayStart: 15}
+			data: {search: search_key}
 		});
 	}
 });
