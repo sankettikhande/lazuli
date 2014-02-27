@@ -154,14 +154,29 @@ class Course < ActiveRecord::Base
   end
 
   def course_first_video
+    course_videos = []
+    course_demo_videos = []
     self.topics.published.includes(:videos).each do |topic|
-      @course_videos = topic.videos.published
+      course_videos << topic.videos.published
+      course_demo_videos << topic.videos.published.demo_videos
     end
-    return @course_videos.demo_videos.first || @course_videos.first if @course_videos.present?
+    return course_demo_videos.flatten.first || course_videos.flatten.first if course_videos.present?
   end
 
   def course_first_subscription subscription_id
     CourseSubscription.where(:subscription_id => subscription_id, :course_id => self.id).first
+  end
+
+  def has_trial_videos?
+    @course_trial_videos = []
+    self.topics.published.includes(:videos).each do |topic|
+      @course_trial_videos << topic.videos.published.trial_videos
+    end
+    return @course_trial_videos.flatten.present?
+  end
+
+  def available_course_subscriptions
+    self.course_subscriptions.delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?}
   end
 
   private 

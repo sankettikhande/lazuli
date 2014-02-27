@@ -15,6 +15,8 @@ class CoursesController < ApplicationController
 			@topic = @video.topic
 			@favourite_video = @video.favourites.where(:user_id => current_user).last
 			@recommended_videos = load_recommended_videos
+			@course_subscriptions = @course.available_course_subscriptions
+			@current_subscription = current_user.current_subscription(@course.id ) if current_user
 			respond_to do |format|
 				format.html {}
 				format.js { render 'change_bookmark'}

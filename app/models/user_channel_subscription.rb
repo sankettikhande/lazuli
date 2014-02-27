@@ -43,9 +43,15 @@ class UserChannelSubscription < ActiveRecord::Base
   end
 
   ## TODO  change the method to take duration from subscription table
-  def set_subscription_date_range(duration)
-    self.subscription_date = Date.today
-    self.expiry_date = Date.today + duration.days
+  def set_subscription_date_range(duration, user, course_id)
+    subscription = user.user_channel_subscriptions.where(:course_id => course_id).first
+    if subscription.blank? || subscription.subscription_id == 1
+      self.subscription_date = Date.today
+      self.expiry_date = Date.today + duration.days
+    else
+      self.subscription_date = subscription.expiry_date
+      self.expiry_date = subscription.expiry_date + duration.days
+    end
   end
 
   def self.user_subscribed_courses(user)

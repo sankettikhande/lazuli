@@ -42,6 +42,7 @@ class Video < ActiveRecord::Base
 
   scope :published, where(:status => "Published")
   scope :demo_videos, where(:demo => true)
+  scope :trial_videos, where(:trial => true)
   
   after_save :update_bookmarks, :if => :bookmarked?
   after_create :update_admins_and_creator_ids

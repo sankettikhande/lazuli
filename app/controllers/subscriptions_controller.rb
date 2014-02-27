@@ -7,14 +7,14 @@ class SubscriptionsController < ApplicationController
 		@user_channel_subscription = UserChannelSubscription.where(subscription_param.except('subscription_id')).first || UserChannelSubscription.new(subscription_param)
 		@user_channel_subscription.subscription_id = params[:subscription_id]
 		duration = Subscription.cached_find(@user_channel_subscription.subscription_id).calculated_days
-		@user_channel_subscription.set_subscription_date_range(duration)
+		@user_channel_subscription.set_subscription_date_range(duration, current_user , params[:course_id])
 		@user_channel_subscription.save if params[:st] == 'Completed'
 		@course_id = params[:course_id]
-
+		@course = Course.cached_find(@course_id)
 		respond_to do |format|
 			if @user_channel_subscription.save
 			  format.html
-			  flash[:success] = "Subscription To The Course Was Succesful"
+			  flash[:success] = "Subscription to the #{@course.name} Was Succesful"
 			else
 				format.html {redirect_to course_path(@course_id)}
 				flash[:error] = "Failed to subscribe to the Course. Please retry.."
@@ -41,6 +41,8 @@ class SubscriptionsController < ApplicationController
 
   def subscribe
   	@course = Course.find params[:id]
+		@current_subscription = current_user.current_subscription(@course.id)
+		@course_subscriptions = @course.available_course_subscriptions
   end
 
   def notification
