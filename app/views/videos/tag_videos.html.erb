@@ -1,16 +1,21 @@
-<h4>Tag Search</h4>
-
-<div class="col-xs-12 nopadding-left">
-	<%= form_tag(tag_videos_videos_path, :method => "get", :html => {:class => 'navbar-form', :role => "search"}) do %>
-	  <div class="input-group pull-left col-xs-4">
-	  	<%= search_field_tag "search", params[:search], :class => "form-control", :placeholder => "What do you want to learn?" %>
-    </div>
-    <div class="input-group-btn col-xs-2">
-      <button class="btn btn-default">Search</button>
-    </div>
-  <% end %>
-</div>
-
-<div id="tag_video_list">
-	<%= render 'tag_video_list', :videos => @videos %>
-</div>
+<div class="seperator5"></div>
+<div class="seperator5"></div>
+<section class="all-courses indigo-back">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <h4>Tag Search</h4>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-sm-offset-3">
+          <div class="form-group">
+            <input type="search" class="form-control" placeholder="Search Tags" id="search_tags" title= "Minimum 3 characters to be entered">
+          </div>
+        </div>
+      </div>
+      <div class="partial-courses-list-box" id="tag_video_list">
+        <%= render 'tag_video_list', :videos => @videos %>
+      </div>
+    </div> <!-- col-sm-12 Ends -->
+  </div> <!-- first row -->
+</section>
