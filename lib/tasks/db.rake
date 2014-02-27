@@ -83,6 +83,15 @@ namespace :db do
     end
   end
 
+  task :set_preset => :environment do
+    include VimeoLib
+    Video.find_each do |video|
+      puts "#{video.vimeo_id} is updating"
+      VimeoLib.video_embed.set_preset(video.vimeo_id, Settings.lazuli_preset_id) if video.vimeo_id
+      puts "#{video.vimeo_id} is updated"
+    end
+  end
+
   task :set_default_price_for_subscriptions => :environment do
     CourseSubscription.find_each do |cs|
       cs.update_attribute(:subscription_price, 10) if cs.subscription_price.blank?

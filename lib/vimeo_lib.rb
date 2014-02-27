@@ -13,6 +13,10 @@ module VimeoLib
 			upload = Vimeo::Advanced::Upload.new(Settings.vimeo_app.consumer_key, Settings.vimeo_app.consumer_secret, :token => Settings.vimeo_app.token, :secret => Settings.vimeo_app.secret)	
 		end
 
+		def video_embed
+			video_embed = Vimeo::Advanced::VideoEmbed.new(Settings.vimeo_app.consumer_key, Settings.vimeo_app.consumer_secret, :token => Settings.vimeo_app.token, :secret => Settings.vimeo_app.secret)	
+		end
+
 	end
 
 end
