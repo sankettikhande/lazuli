@@ -1,8 +1,37 @@
-<% if videos.any? %>
-	<% videos.each_with_index do |video, index| %>
-		<%= index %> : <%= video.title %>
-		<br/>
-	<% end%>
-<% else %>
-	<span>No Data available !!!!!!</span>
+ <%  videos.each do |video| %>
+  <div class="courses-list">
+    <div class="row">
+      <div class="col-xs-5 col-sm-2 col-md-2">
+        <div class="course-logo-img">
+          <% if current_user.is_admin? || current_user.watchable_video?(video, video.topic.course_id)%>
+            <a href="#">
+              <%= link_to(image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" ), course_topic_video_url(video.topic.course_id, video.topic_id, video.id) )%>
+            </a>
+          <% else %>
+            <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" ), subscribe_subscription_path(video.topic.course_id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-xs-7 col-sm-8 col-md-8">
+         <ul class="list-content">
+            <li class="title">
+              <ol class="breadcrumb">
+                <li><a href="<%= course_path(video.topic.course_id)%>"><%= video.topic.title %></a></li><li><%= video.topic.title if video.topic %></li>
+              </ol>
+            </li>
+            <li class="descr hidden-xs"><%= video.description %></li>
+          </ul>
+      </div>
+      <div class="hidden-xs col-sm-2 col-md-2">
+        <div class="course-featured-video">
+          <%= link_to( image_tag(course_thumbnail_image(video.topic.course, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail"), course_path(video.topic.course_id)) %>
+        </div>
+      </div>
+    </div> <!-- row ends -->
+  </div>  <!-- courses-list 1 ends -->
 <% end %>
+<div><%= videos.count %> courses Found.</div>
+<%= paginate videos, :remote => true %>
+
+<%#= javascript_include_tag "application/main_app/tag_search.js"%>
+<%#= javascript_include_tag "application/main_app/course.js"%>

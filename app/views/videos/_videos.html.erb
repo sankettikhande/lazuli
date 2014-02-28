@@ -1,0 +1,42 @@
+<div class="seperator5"></div>
+<div class="seperator5"></div>
+<section class="all-courses indigo-back">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Search Results</h4>
+      <div class="partial-courses-list-box">
+        <%  videos.each do |video| %>
+        <div class="courses-list">
+          <div class="row">
+            <div class="col-xs-5 col-sm-2 col-md-2">
+              <div class="course-logo-img">
+                <a href="#"><%#= image_tag(channel_thumbnail_image(course.channel,{:image_size => 'medium'}), :alt => "Image", :class => "img-responsive center-block" )%></a>
+              </div>
+            </div>
+            <div class="col-xs-7 col-sm-8 col-md-8">
+               <ul class="list-content">
+                  <li class="title">
+                    <ol class="breadcrumb">
+                      <li><a href="<%#=course_path(course.id)%>"><%#= course.name %></a></li><li><%#= course.topics.first.title if course.topics.first %></li>
+                    </ol>
+                  </li>
+                  <li class="descr hidden-xs"><%#= course.description %></li>
+                </ul>
+            </div>
+            <div class="hidden-xs col-sm-2 col-md-2">
+              <div class="course-featured-video">
+                <%#= image_tag(course_thumbnail_image(course, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail") %>
+              </div>
+            </div>
+          </div> <!-- row ends -->
+        </div>  <!-- courses-list 1 ends -->
+        <% end %>
+        <div><%= videos.count %> video Found.</div>
+      </div>
+    </div> <!-- col-sm-12 Ends -->
+  </div> <!-- first row -->
+</section>
+
+
+<%= paginate videos, :remote => true %>
+<!-- courses-list 1 ends -->
