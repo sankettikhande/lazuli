@@ -3,17 +3,22 @@ class SessionsController < Devise::SessionsController
   before_filter :load_course, :only => [:new]
 
   def create
-    user=User.find_by_email(params[:user][:email])
-    if user.confirmed?    
-      resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
-      if resource
-        sign_in_and_redirect(resource_name, resource)
+    unless params[:user][:email].blank?
+      user=User.find_by_email(params[:user][:email])
+      if user.confirmed?
+        resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
+        if resource
+          sign_in_and_redirect(resource_name, resource)
+        else
+          @error_message = "Invalid email and password"
+          render :action => :failure
+        end
       else
-        @error_message = "Invalid email and password"
+        @error_message = "You have to confirm your account before continuing."
         render :action => :failure
       end
-    else 
-      @error_message = "You have to confirm your account before continuing."
+    else
+      @error_message = "Please enter your email id and password."
       render :action => :failure
     end
   end
@@ -35,7 +40,7 @@ class SessionsController < Devise::SessionsController
 
   private
   def load_course
-    @topics = Topic.published.not_bookmarked.limit(3)
+    @topics = Topic.published.not_bookmarked.last(3)
     @courses = Course.public_channel_courses(3)
   end
 end
