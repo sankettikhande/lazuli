@@ -2,9 +2,9 @@
 	$('#<%= params[:subscription_id] %>').html("<%= escape_javascript(render 'subscription_types') %>");
 	$('#<%= params[:permission_id] %>').html("<%= escape_javascript(render 'user_permissions') %>");
 	$('input[type="checkbox"]').uniform();
-<% elsif @is_trial_subscription %>
-	$('.trial_subscription').show()
-<% else %>
+<% elsif @is_trial_subscription.blank? %>
 	$('.trial_subscription').hide()
+<% else %>
+	$('.trial_subscription').show()
 <% end %>
 
