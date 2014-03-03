@@ -20,4 +20,24 @@ class HomeController < ApplicationController
       format.js{ render 'channels/search'}
     end
   end
+
+  def about_us
+  end
+
+  def faqs
+  end
+  
+  def our_partners
+     @channels = Channel.find(:all)
+    respond_to do |format|
+      format.html{}
+      format.js{ render 'channels/search'}
+    end
+  end
+
+  def privacy_policy
+  end
+
+  def term_conditions
+  end
 end
