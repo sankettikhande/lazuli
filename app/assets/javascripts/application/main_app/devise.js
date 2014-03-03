@@ -11,9 +11,14 @@ $('#comfirm_instruction').click(function(){
 $('.close').click(function(){
   $('.forget_password').hide();
   $('.confirm_instructions').hide();
+  $('.error').hide();
   $('.login_box').show();
 })
 
 $('#user-actual-name').change(function(){
   $('#user-name').val($(this).val())
+})
+
+$('.btn-danger').click(function(){
+  $('.error').hide();
 })
