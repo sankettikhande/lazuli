@@ -28,12 +28,9 @@
     	  			<div class="col-sm-4">
     	  				<%=f.text_field 'name', :class => "form-control validate[required]" %>
     	  			</div>
-    	  			<div class="col-sm-2">
-    	  				<label for="name-trainer" class="control-label">Name of Trainer</label>
-    	  			</div>
-    	  			<div class="col-sm-4">
-    	  				<%=f.text_field 'trainer_name', :class => "form-control"%>
-    	  			</div>
+    	  			<%= f.fields_for :channel_course_permissions do |channel_course_permissions_fields| %>
+								<%= render 'course_permission' , :f => channel_course_permissions_fields%>	
+							<% end %>
   	  			</div>
   	  			<div class="seperator10"></div>
   	  			<div class="row">
@@ -44,16 +41,7 @@
     	  				<%=f.text_area 'description', :rows =>4, :class => "form-control validate[required] "%>
     	  			</div>
     	  			<div class="col-sm-2">
-    	  				<label for="name-trainer" class="control-label">Biography of Trainer</label>
-    	  			</div>
-    	  			<div class="col-sm-4">
-    	  				<%=f.text_area 'trainer_biography', :rows =>4, :class => "form-control"%>
-    	  			</div>
-  	  			</div>
-  	  			<div class="seperator10"></div>
-						<div class="row">
-							<div class="col-sm-2">
-								<label for="course-logo" class="control-label">Course Logo</label>
+								<label for="course-logo" class="control-label">Course Logo<%= required_field %></label>
 							</div>
 							<div class="col-md-4">
 							  <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -66,20 +54,35 @@
 								<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
 							 </div>
 							</div>
-							<%= f.fields_for :channel_course_permissions do |channel_course_permissions_fields| %>
-								<%= render 'course_permission' , :f => channel_course_permissions_fields%>	
-							<% end %>
+  	  			</div>
+  	  			<div class="seperator10"></div>
+						<div class="row">
+							
 						</div>
 						<div class="seperator10"></div>
 						<div class="row">
 							<%= render 'course_subscription', :f => f %>
 						</div>
+						<div class="row">
+							<div class="col-sm-12">
+			  	  		<div id='trainers'>
+			  	  			<%= f.fields_for :course_trainers do |course_trainer| %>
+							  		<%= render 'course_trainer', :f => course_trainer %>
+							  	<% end %>
+				  			</div>
+			  			</div>
+						</div>
 	  			</div>
   			</div>
 			</div>
 		</div>
-		<div class="col-sm-2"></div>
-	</div>
+		</div>
+		<div class='row'>
+			<div class="col-sm-2">
+				<%= f.link_to_add raw_field('fa fa-3x fa-plus', "Add a Trainer" ), :course_trainers, :data => { :target => "#trainers", 'no-turbolink' => true } %>
+			</div>
+		</div>	
+
 	<div class="seperator5"></div>
 	<div class="row">
 		<div class="col-md-12">

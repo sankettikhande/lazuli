@@ -1,0 +1,24 @@
+<hr>
+<div class="row">
+	<div class="col-sm-2">
+		<label for="crs-descr" class="control-label">Name Of Trainer</label>
+	</div>
+	<div class="col-sm-4">
+		<%=f.text_field 'name', :class => "form-control"%>
+	</div>
+</div>
+<div class="seperator10"></div>
+<div class='row'>	
+	<div class="col-sm-2">
+		<label for="crs-descr" class="control-label">Biography of Trainer</label>
+	</div>
+	<div class="col-sm-4">
+		<%=f.text_area 'biography', :rows =>4, :class => "form-control"%>
+	</div>
+</div>
+<div class="row">
+  <div class="col-md-11 text-right">
+  	<a href="#"><i class='fa fa-3x fa-minus'></i><a/>
+   	<%= f.link_to_remove "Remove this Trainer" %>
+  </div>
+</div>
