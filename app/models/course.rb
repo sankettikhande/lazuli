@@ -2,7 +2,7 @@ class Course < ActiveRecord::Base
   # attr_accessible :title, :body
   attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_id,
                   :channel_course_permissions_attributes, 
-                  :course_subscriptions_attributes, :subscription_ids
+                  :course_subscriptions_attributes, :subscription_ids, :course_trainers_attributes
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                     :default_url => ":class/:style/missing.gif", 
@@ -18,6 +18,7 @@ class Course < ActiveRecord::Base
   has_many :course_subscriptions, :dependent => :destroy
   has_many :subscriptions, :through => :course_subscriptions
   has_many :watch_lists, :dependent => :destroy
+  has_many :course_trainers, :dependent => :destroy
 
   include Cacheable
   #VALIDATIONS
@@ -28,6 +29,7 @@ class Course < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validate :course_name
   validate :course_subscription_params
+  accepts_nested_attributes_for :course_trainers, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => proc { |a| !a['subscription_id'].present? }, :allow_destroy => true
   #SCOPES
@@ -184,5 +186,6 @@ class Course < ActiveRecord::Base
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
+    self.course_trainers.build if self.new_record? && self.course_trainers.size.zero?
   end
 end
