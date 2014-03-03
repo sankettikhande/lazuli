@@ -40,7 +40,7 @@ class SessionsController < Devise::SessionsController
 
   private
   def load_course
-    @topics = Topic.published.not_bookmarked.last(3)
+    @topics = Topic.published.not_bookmarked.order("id desc").first(3)
     @courses = Course.public_channel_courses(3)
   end
 end
