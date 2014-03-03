@@ -21,7 +21,7 @@
         <% else %>
           <div>
             <p class="text-right">
-              <%= link_to("Subscribe", subscribe_subscription_path(@course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) if user_signed_in? && !current_user.is_admin? || (current_user.is_course_admin? && !current_user.watchable_course?(course.id)) %>
+              <%= link_to("Subscribe", subscribe_subscription_path(@course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) if user_signed_in? && !current_user.is_admin? || (current_user && current_user.is_course_admin? && !current_user.watchable_course?(course.id)) %>
             </p>
           </div>
         <% end %>
@@ -44,8 +44,7 @@
             <%= render 'embedded_video' %>
           <% else %>
             <div class="col-sm-12">
-              <div class="place-video">
-                <%= image_tag(video_thumbnail_image(@video), :class => "div_embedded_video")%>
+              <div class="place-video div_embedded_video" style="background-image: url(' <%= video_thumbnail_image(@video) %>');">
               </div>
             </div>
           <% end %>
