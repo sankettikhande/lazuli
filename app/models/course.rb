@@ -157,10 +157,12 @@ class Course < ActiveRecord::Base
 
   def course_first_video(current_user)
     @course_videos = []
+    @videos = []
     self.topics.published.includes(:videos).each do |topic|
       @course_videos.concat(topic.videos.published.demo_videos) if @course_videos.blank?
+      @videos.concat(topic.videos.published) if @course_videos.blank?
     end
-    return @course_videos.first if @course_videos.present?
+    return @course_videos.present? ? @course_videos.first : @videos.first
   end
 
   def course_first_subscription subscription_id
