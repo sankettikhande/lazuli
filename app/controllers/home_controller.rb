@@ -28,7 +28,7 @@ class HomeController < ApplicationController
   end
   
   def our_partners
-     @channels = Channel.find(:all)
+    @channels = Channel.sphinx_search(params, current_user, "public")
     respond_to do |format|
       format.html{}
       format.js{ render 'channels/search'}

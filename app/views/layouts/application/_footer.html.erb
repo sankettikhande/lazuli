@@ -13,9 +13,9 @@
         <ul class="nav navbar-nav">
           <li><%= link_to 'Browse Our Library', browse_course_url %></li>
           <li><%= link_to 'About Us', about_us_url%></li>
-          <li><%= link_to 'Contact Us', '#'%></li>
+          <li><%= link_to 'Contact Us', '#', :data => {:target => '#contact-us-modal', :toggle => 'modal'}, 'data-no-turbolink' => 'true' %></li>
           <li><%= link_to 'FAQs', faqs_url %></li>
-          <li><%= link_to 'Our Partners','#'%></li>
+          <li><%= link_to 'Our Partners', our_partners_url %></li>
           <li><%= link_to 'User Review', '#', :data => {:target => '#feedback-modal', :toggle => 'modal'}, 'data-no-turbolink' => 'true' %></li>
           <li><%= link_to 'Terms & Conditions', term_conditions_url %></li>
           <li><%= link_to 'Privacy Policy', privacy_policy_url %></li>
@@ -26,4 +26,8 @@
 </footer>
 <div class="modal" id="feedback-modal" tabindex="-1" role="dialog" aria-labelledby="feedback-modal" aria-hidden="true" data-backdrop="true">
   <%= render 'home/user_review' %>
+</div><!-- /.modal -->
+
+<div class="modal" id="contact-us-modal" tabindex="-1" role="dialog" aria-labelledby="contact-us-modal" aria-hidden="true" data-backdrop="true">
+  <%= render 'home/contact_us' %>
 </div><!-- /.modal -->
