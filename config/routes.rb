@@ -124,6 +124,10 @@ Lazuli::Application.routes.draw do
       
   match '/videos/tag_videos/:search' => 'videos#tag_videos', :as => :tag_videos_videos
   match '/browse_course' => 'home#browse_course'
+  match '/about_us' => 'home#about_us' 
+  match '/faqs' => 'home#faqs'  
+  match '/term_conditions' => 'home#term_conditions'
+  match '/privacy_policy' => 'home#privacy_policy'
   match '/courses/:id' => 'courses#show', :as => :course_video
   match '/courses/:id/:topic_id' => 'courses#show', :as => :course_topic
   match '/courses/:id/:topic_id/:video_id' => 'courses#show', :as => :course_topic_video
