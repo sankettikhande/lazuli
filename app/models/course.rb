@@ -165,6 +165,18 @@ class Course < ActiveRecord::Base
     CourseSubscription.where(:subscription_id => subscription_id, :course_id => self.id).first
   end
 
+  def has_trial_videos?
+    @course_trial_videos = []
+    self.topics.published.includes(:videos).each do |topic|
+      @course_trial_videos.concat(topic.videos.published.trial_videos)
+    end
+    return @course_trial_videos.present?
+  end
+
+  def available_course_subscriptions
+    self.course_subscriptions.delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?}
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
