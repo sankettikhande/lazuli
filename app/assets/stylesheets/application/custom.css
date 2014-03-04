@@ -448,6 +448,8 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .channel-courses-list h4 {color: #fff;margin: 0;padding: 0}
 
 .channel-courses-begin {padding: 10px 15px;}
+.course-topics-begin {padding: 10px 15px;}
+
 
 
 .channel-each-course {border: 1px solid #ccc;border-radius: 6px;padding:10px 5px;background: #f6f6f6;margin-bottom: 4px}
@@ -521,10 +523,13 @@ box-shadow: none;
 .parent-course-menu li ul.child-course-menu {margin-left: -5px}
 .parent-course-menu li ul.child-course-menu li {background: url('/assets/frontend/play.png') no-repeat 1px 7px;} 
 .parent-course-menu li ul.child-course-menu li a {display: block;color: #fff;padding-left: 16px}
-.parent-course-menu li ul.child-course-menu li a:hover {color: #003366;}
+.parent-course-menu li ul.child-course-menu li a:hover {color: #fff;}
 .parent-course-menu li ul.child-course-menu li.active {background-color: #063c6b;color: #fff}
 .child-course-menu li span {float: right;padding-right: 20px;}
-
+.child-video-menu li {background: url('/assets/frontend/play.png') no-repeat 1px 10px !important;padding-left: 20px !important;}
+.parent-course-menu li ul.level-bookmark {background:#095795;padding-left: 2px}
+.parent-course-menu li ul.level-bookmark li.add-star {background: url('/assets/frontend/white-star.png') no-repeat;padding-left: 10px;background-position: 5px center }
+.parent-course-menu li ul.level-bookmark li.add-star.active {background-color: #063c6b}
 
 .user-rcmnd-videos {margin-top: -1px}
 .user-rcmnd-videos h3 {color: #fff;background: #e43e26;margin: 0;padding: 8px 16px; font-size: 1.2em;font-family: 'MyriadProRegular',Sans-Serif !important}
@@ -747,3 +752,4 @@ body {padding-bottom: 70px;}
 
 .rating-cancel{display: none !important;}
 .accordion_div{padding:10px !important;}
+.trainers_list li {padding-left:20px;}

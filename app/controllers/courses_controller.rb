@@ -33,6 +33,11 @@ class CoursesController < ApplicationController
 		@channel_courses= Course.sphinx_search(params, current_user, channel_courses_id)		
 	end
 
+	def list
+		@course = Course.cached_find(params[:id])		
+		@course_topics = @course.topics.published
+    end		
+
 	private
 	def load_recommended_videos
 		videos = @video.tags.any? ? Video.search(:conditions => sphinx_condition(@video.tags_str), :without => {:video_id => @video.id}).per(Settings.data_count.recommended.video) : []
