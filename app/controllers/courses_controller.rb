@@ -7,12 +7,13 @@ class CoursesController < ApplicationController
 	def index
 	end
 
-	def show
+	def show		
 		@course = Course.cached_find(params[:id])
 		if @course.topics.published.any?
 			@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user, :course_id => @course.id).first
-			@video = load_video
-			@topic = @video.topic
+			@video = load_video			
+			@topic = @video.topic			
+			@bookmark= load_bookmark if params[:t]	
 			@favourite_video = @video.favourites.where(:user_id => current_user).last
 			@recommended_videos = load_recommended_videos
 			@course_subscriptions = @course.available_course_subscriptions
@@ -52,6 +53,10 @@ class CoursesController < ApplicationController
 		return Topic.cached_find(params[:topic_id]).topic_first_video(current_user) if params[:topic_id]
 		@course.course_first_video(current_user)
 	end
+
+	def load_bookmark		
+	    return @video.bookmarks.find_by_bookmark_sec(params[:t]) if params[:t]	   
+	end	
 
 	def video_param?
 		params[:video_id]

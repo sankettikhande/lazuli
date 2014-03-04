@@ -11,9 +11,9 @@
             <%= topic.title %>
           </a>
           <ul id="topic-<%= topic_index %>" class="child-course-menu collapse <%= is_accordion(topic, topic_index) %>">
-            <% topic.videos.published.each_with_index do |video, video_index| %>
-              <li class="<%= is_active_video(video) %>">
+            <% topic.videos.published.each_with_index do |video, video_index| %>              
                 <% if cannot? :show, video %>
+                <li class="<%= is_active_video(video) %>">
                 <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
                   <span>
                     <%= image_tag("/assets/frontend/lock.png") %>
@@ -22,12 +22,29 @@
                     <span><%= format_duration(video) %></span>
                   </a>
                 </div>
-                <% else %>
-                <a href="<%= course_topic_video_url(@course.id, video.topic_id, video.id) %>"> <%= video.title.truncate(40) %>
-                  <span><%= format_duration(video) %></span>
-                </a>
-                <% end %>
               </li>
+                <% else %>
+                <li class="<%= is_active_video(video) %>">
+                 <% bookmarks = video.bookmarks.order(:created_at) %>                
+                 <% if bookmarks.any? %>                   
+                      <a href="#video-<%= video_index %>" data-toggle="collapse" data-parent="topic-<%= topic_index %>">
+                       <%= video.title.truncate(40) %>
+                       <span><%= format_duration(video) %></span>
+                      </a>
+                      <ul id="video-<%= video_index %>" class="level-bookmark in">              
+                             <% bookmarks.each_with_index do |bookmark, bookmark_index| %>
+                             <li class="add-star">
+                              <%= link_to(bookmark.title.titleize, bookmark_time_format(bookmark.time), :remote => true) %>
+                              </li>                          
+                          <% end %>
+                      </ul>                    
+                  <% else %>                 
+                   <a href="<%= course_topic_video_url(@course.id, video.topic_id, video.id) %>"> <%= video.title.truncate(40) %>
+                    <span><%= format_duration(video) %></span>
+                   </a> 
+                  <% end %>
+                  </li>
+                <% end %>             
             <% end %>
           </ul>
         </li>
