@@ -103,5 +103,11 @@ namespace :db do
     puts "Subscription #{subscription.id} is updating"
     subscription.update_attribute(:is_trial_subscription, true)
     puts "Subscription #{subscription.id} is updated"
-  end  
+  end
+
+  task :create_course_trainers => :environment do
+    Course.find_each do |cs|
+      cs.course_trainers.create if cs.course_trainers.blank?
+    end
+  end
 end
