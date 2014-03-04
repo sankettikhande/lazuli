@@ -27,3 +27,8 @@
 .carousel a {
 	color: #454746;
 }
+
+#div_embedded_video{
+	max-height: 720px;
+	max-width: 1280px;
+}
