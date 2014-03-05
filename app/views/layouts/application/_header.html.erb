@@ -26,14 +26,14 @@
           </ul>
         </div>
         <div class="col-xs-6 col-sm-4 nopadding-left">
-          <form class="navbar-form" role="search" action = '/search' method = "get" >
+          <form class="navbar-form" role="search" action = '/search' method = "get" id="main_search_form" >
             <div class="row">
               <div class="col-xs-12">
                 <div class="input-group">
                   <div class="input-group-btn">
                     <button class="btn btn-default"><i class="fa fa-search"></i></button>
                   </div>
-                   <%= text_field_tag 'search', nil, :class => 'form-control', :placeholder => 'What do you want to learn?', :title => "Minimum 3 characters to be entered" %>
+                  <input type="text" name="search" class="form-control typeahead" id="main_search" data-provide="typeahead" data-items="4" data-source="[]" autocomplete="off" value="<%= params[:search] %>" placeholder="What do you want to learn?" />
                 </div>
               </div>
             </div>
@@ -87,3 +87,5 @@
     </div>
  </div> 
 <% end %>
+
+<%= javascript_include_tag "application/main_app/main_search.js"%>

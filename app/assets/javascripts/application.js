@@ -20,10 +20,10 @@
 //= require ./application/html5shiv.js
 //= require ./application/offcanvas.js
 //= require ./application/respond.min.js
-//= require_tree ./application/.
 //= require ./common.js
 //= require ./application/jquery.slimscroll.min.js
 //= require jquery-star-rating
+//= require ./application/bootstrap3-typeahead.js
 
 $( function() {
     $("button[data-href]").click( function() {

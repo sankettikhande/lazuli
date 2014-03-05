@@ -32,3 +32,9 @@
 	max-height: 720px;
 	max-width: 1280px;
 }
+
+#main_search_form .dropdown-menu{
+	left: 0px !important;
+  top: 34px;
+  width: 345px;
+}

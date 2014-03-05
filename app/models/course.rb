@@ -181,6 +181,13 @@ class Course < ActiveRecord::Base
     self.course_subscriptions.delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?}
   end
 
+  def self.public_courses options
+    sort_options, search_options, sphinx_options, select_option = {}, {}, {}, {}
+    options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
+    sphinx_options.merge!(search_options).deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*", :channel_type => "public"}, :include => [:course, :channel]) 
+    Course.search(sphinx_options)
+  end
+
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
