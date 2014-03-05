@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
        <%= form_for :user_review, :remote => true, :url => user_reviews_url do |f| %>
-       <div id ="reviews_errors"></div>
+       <div class="error"></div>
       <div class="row">
         <div class="col-xs-12">
           <p>Rate on the scale of 5 (1 being lowest)</p>
@@ -125,3 +125,4 @@
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 <%= javascript_include_tag 'jquery-star-rating'%>
+<%=javascript_include_tag "application/main_app/devise.js"%>

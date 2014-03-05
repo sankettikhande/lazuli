@@ -7,7 +7,7 @@ class ContactUsController < ApplicationController
 	      if @contact_us.save
 	      	Emailer.delay.sent_contact_us(@contact_us)
 	        format.js
-	        flash[:success] = "Your data is saved. Thanks !!!"
+	        flash[:success] = "Your message has been sent successfully.!!!"
 	      else       
 	        format.js
 	      end
