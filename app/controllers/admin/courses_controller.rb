@@ -63,9 +63,9 @@ class Admin::CoursesController < AdminController
 		@course = Course.cached_find(params[:id], :include => :subscriptions)
 		@course_subscriptions = @course.subscriptions
 		if params[:topic_course]
-			@is_trial_subscription = @course_subscriptions.pluck('name').include?("Trial Subscription")
+			@is_trial_subscription = @course_subscriptions.keep_if{|cs| cs.is_trial_subscription?}
 		else
-			@course_subscriptions.delete_if{|cs| (cs.id == 1) && !@course.has_trial_videos?}
+			@course_subscriptions.delete_if{|cs| cs.is_trial_subscription? && !@course.has_trial_videos?}
 			@courses_permissions = @course.channel_course_permissions.first
 		end
 		respond_to do |format|

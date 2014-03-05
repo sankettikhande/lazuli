@@ -23,6 +23,7 @@ class Topic < ActiveRecord::Base
   scope :not_bookmarked, where(:is_bookmark_video => false)
 
   after_save :update_videos_sphinx_delta
+  after_save :change_status
 
   before_update :change_video_status
 
@@ -163,5 +164,10 @@ class Topic < ActiveRecord::Base
       video = self.course.course_first_video(current_user) if video.blank?
       return video
     end
+  end
+
+  def change_status
+    update_column(:status, "Published") if self.videos.all? {|v| v.published? }
+    update_column(:status, "Saved") if self.videos.all? {|v| v.saved? }
   end
 end

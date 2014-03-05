@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
       <%= form_for(resource, :as => resource_name, :remote => true, :url => registration_path(resource_name) , :html =>{:class=>'deviseForm'}) do |f| %>
-        <div id='errors'></div>
+        <div class='error'></div>
         <div class="row">
         	<div class="col-xs-12 col-sm-6 form-group">
         		<label class="control-label">Full Name</label>

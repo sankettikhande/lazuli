@@ -5,7 +5,7 @@ class HomeController < ApplicationController
       @subscribed_courses = UserChannelSubscription.user_subscribed_courses(current_user)
       @courses = Course.public_channel_courses(10) if @subscribed_courses.blank?
     else
-      @topics =  Topic.published.not_bookmarked.last(3)
+      @topics =  Topic.published.not_bookmarked.order("id desc").first(3)
       @courses = Course.public_channel_courses(3)
       respond_to do |format|
         format.html{ render 'devise/sessions/new', :layout => 'devise' }
@@ -19,5 +19,25 @@ class HomeController < ApplicationController
       format.html{}
       format.js{ render 'channels/search'}
     end
+  end
+
+  def about_us
+  end
+
+  def faqs
+  end
+  
+  def our_partners
+    @channels = Channel.sphinx_search(params, current_user, "public")
+    respond_to do |format|
+      format.html{}
+      format.js{ render 'channels/search'}
+    end
+  end
+
+  def privacy_policy
+  end
+
+  def term_conditions
   end
 end
