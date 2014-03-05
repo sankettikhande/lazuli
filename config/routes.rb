@@ -15,6 +15,7 @@ Lazuli::Application.routes.draw do
         get 'new_bulk'
         post 'create_bulk'
         get 'search'
+        get 'contact_us'
     	end
     	member do
     		get 'get_user'
