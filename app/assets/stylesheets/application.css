@@ -38,3 +38,25 @@
   top: 34px;
   width: 345px;
 }
+
+.place-video .container-fluid{
+  height:100%;
+  display:table;
+  width: 100%;
+  text-align: center;
+}
+
+.place-video .row-fluid {
+	height: 100%;
+	display:table-cell;
+	vertical-align: middle;
+}
+
+.place-video .centering {
+  float:none;
+  margin:0 auto;
+}
+
+.place-video #disabled_link_video{
+	height: 100px;
+}

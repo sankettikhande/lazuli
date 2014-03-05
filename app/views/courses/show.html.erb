@@ -44,10 +44,7 @@
           <% elsif @video.demo %>
             <%= render 'embedded_video' %>
           <% else %>
-            <div class="col-sm-12">
-              <div class="place-video div_embedded_video" style="background-image: url(' <%= video_thumbnail_image(@video) %>');">
-              </div>
-            </div>
+            <%= render 'embedded_block_video' %>
           <% end %>
           <!-- col-12 ends -->
         </div>
