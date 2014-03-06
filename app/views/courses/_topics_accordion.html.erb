@@ -25,7 +25,7 @@
               </li>
                 <% else %>
                 <li class="<%= is_active_video(video) %>">
-                 <% bookmarks = video.bookmarks.order(:created_at) %>                
+                 <% bookmarks = video.bookmarks.order(:bookmark_sec) %>                
                  <% if bookmarks.any? %>                   
                       <a href="#video-<%= video_index %>" data-toggle="collapse" data-parent="topic-<%= topic_index %>">
                        <%= video.title.truncate(40) %>
