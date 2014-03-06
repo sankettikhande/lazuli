@@ -121,6 +121,7 @@ Lazuli::Application.routes.draw do
     collection do
       get 'subscriptions'
       get 'channels'
+      get 'courses'
     end
   end
 
@@ -130,7 +131,7 @@ Lazuli::Application.routes.draw do
   
   resources :users
       
-  match '/videos/tag_videos/:search' => 'videos#tag_videos', :as => :tag_videos_videos
+  match '/videos/tag_videos/:search_tag' => 'videos#tag_videos', :as => :tag_videos_videos
   match '/browse_course' => 'home#browse_course'
   match '/about_us' => 'home#about_us' 
   match '/faqs' => 'home#faqs'

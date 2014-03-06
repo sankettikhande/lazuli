@@ -16,7 +16,18 @@
          <ul class="list-content">
             <li class="title">
               <ol class="breadcrumb">
-                <li><a href="<%= course_path(video.topic.course_id)%>"><%= video.topic.title %></a></li><li><%= video.topic.title if video.topic %></li>
+                <li>
+                  <a href="<%= course_path(video.topic.course_id)%>"><%= video.topic.course.name.truncate(35) %>
+                  </a>
+                </li>
+                <li>
+                  <a href="<%= course_topic_path(video.topic.course_id, video.topic_id)%>">
+                    <%= video.topic.title.truncate(35) %>
+                  </a>
+                </li>
+                <li>
+                  <%= video.topic.title.truncate(35) if video.topic %>
+                </li>
               </ol>
             </li>
             <li class="descr hidden-xs"><%= video.description %></li>
@@ -30,8 +41,8 @@
     </div> <!-- row ends -->
   </div>  <!-- courses-list 1 ends -->
 <% end %>
-<div><%= videos.count %> courses Found.</div>
+<div><%= videos.count %> Videos Found.</div>
 <%= paginate videos, :remote => true %>
 
-<%#= javascript_include_tag "application/main_app/tag_search.js"%>
-<%#= javascript_include_tag "application/main_app/course.js"%>
+<%= javascript_include_tag "application/main_app/tag_search.js"%>
+<%= javascript_include_tag "application/main_app/course.js"%>

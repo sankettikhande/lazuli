@@ -103,5 +103,5 @@ namespace :db do
     puts "Subscription #{subscription.id} is updating"
     subscription.update_attribute(:is_trial_subscription, true)
     puts "Subscription #{subscription.id} is updated"
-  end  
+  end
 end
