@@ -1,5 +1,5 @@
 <div class="col-sm-12">
-  <div class="place-video div_embedded_video" style="background-image: url(' <%= video_thumbnail_image(@video) %>');">
+  <div class="place-video div_embedded_video" style="background-image: url(' <%= video_thumbnail_image(@video) %>');" id='subscription_modal' data-toggle="modal" data-target="#modal-window">
   	<div class="container-fluid">
 	    <div class="row-fluid">
 	      <div class="span4" class="centering">
@@ -8,4 +8,9 @@
 	    </div>
 	  </div>
   </div>
+</div>
+
+
+<div class="modal fade" id="modal-window">
+  <%= render 'shared/subscribe', :course => @course, :course_subscriptions => @course_subscriptions, :current_subscription => @current_subscription %>
 </div>
