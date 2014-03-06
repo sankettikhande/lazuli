@@ -1,0 +1,60 @@
+<section class="btns-crumbs visible-md visible-lg">
+  <div class="row">
+    <%= render 'shared/user_menu' if user_signed_in? %>
+  </div>
+ <div class="seperator5"></div>
+ <div class="seperator5"></div>      
+</section>
+
+<section class="fr-channel-info white-back">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+          <div class="fr-company-logo">
+            <%= image_tag(@course.image.url, :alt => "Image", :class => "img-responsive") %>
+            <h4><%= @course.name.titleize %></h4>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9">
+          <div class="fr-company-descr">
+            <p class="text-justify default-height"><%= @course.description %></p>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <% trainers = @course.course_trainers%>
+              <% unless trainers.blank? %>
+              <b>List of Trainers:</b> <br/> 
+               <ul class="trainers_list">             
+                <% trainers.each do |trainer| %>
+                  <li><%= trainer.name.titleize %> </li>                 
+                <% end %>
+                </ul>
+              <% end %>           
+            </div>
+          </div>         
+        </div>
+      </div>
+    </div>      
+  </div>
+</section>
+<section class="channel-courses-box indigo-back">
+  <div class="row channel-courses-list">
+    <div class="col-xs-12">
+    <div class="row">
+    	<div class="col-xs-12 col-sm-6">
+          <h4>List of Topics</h4>		
+    	</div>
+    	<div class="col-xs-12 col-sm-3 col-sm-offset-3">
+          <div class="form-group">
+            <%= text_field_tag 'search-topics', nil , placeholder: "Search Topics", class: "form-control", title: "Minimum 3 characters to be entered" %>
+            <%= hidden_field_tag 'course_id', @course.id %>         
+          </div>		
+    	</div>
+    </div>
+    <div class="course-topics-begin">
+      <%= render 'topics/course_topics'%>
+    </div>
+    </div>
+  </div>
+</section>
