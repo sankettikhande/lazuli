@@ -15,6 +15,7 @@ Lazuli::Application.routes.draw do
         get 'new_bulk'
         post 'create_bulk'
         get 'search'
+        get 'contact_us'
     	end
     	member do
     		get 'get_user'
@@ -77,6 +78,11 @@ Lazuli::Application.routes.draw do
     end
   end
   resources :courses, :only => [:index, :show]
+  resources :topics do
+    collection do
+      get 'search'
+    end
+  end    
   resources :watch_lists, :only => [:index, :destroy] do
     collection do
       post 'remove'
@@ -131,6 +137,7 @@ Lazuli::Application.routes.draw do
   match '/our_partners' => 'home#our_partners' 
   match '/term_conditions' => 'home#term_conditions'
   match '/privacy_policy' => 'home#privacy_policy'
+  match '/courses/list/:id' => 'courses#list', :as => :list_of_course
   match '/courses/:id' => 'courses#show', :as => :course_video
   match '/courses/:id/:topic_id' => 'courses#show', :as => :course_topic
   match '/courses/:id/:topic_id/:video_id' => 'courses#show', :as => :course_topic_video
