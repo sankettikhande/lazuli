@@ -5,6 +5,7 @@ class Admin::UsersController < AdminController
     redirect_to root_url, :alert => exception.message
   end
   def index
+    @total_count=ContactUs.where("created_at > #{current_user.last_sign_in_at.try(:strftime,"%F")} and created_at < #{current_user.current_sign_in_at.try(:strftime,"%F")}").count    
   end
 
   def search
