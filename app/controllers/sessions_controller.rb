@@ -8,6 +8,7 @@ class SessionsController < Devise::SessionsController
       if user.confirmed?
         resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
         if resource
+          store_location
           sign_in_and_redirect(resource_name, resource)
         else
           @error_message = "Invalid email and password"
@@ -42,5 +43,9 @@ class SessionsController < Devise::SessionsController
   def load_course
     @topics = Topic.published.not_bookmarked.order("id desc").first(3)
     @courses = Course.public_channel_courses(3)
+  end
+
+  def store_location
+    session[:previous_url] = request.referer if request.referer.include?("/courses/")
   end
 end
