@@ -97,4 +97,11 @@ namespace :db do
       cs.update_attribute(:subscription_price, 10) if cs.subscription_price.blank?
     end
   end
+
+  task :set_trial_subscrioption => :environment do
+    subscription = Subscription.find_by_name('Trial Subscription')
+    puts "Subscription #{subscription.id} is updating"
+    subscription.update_attribute(:is_trial_subscription, true)
+    puts "Subscription #{subscription.id} is updated"
+  end
 end

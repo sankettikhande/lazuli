@@ -11,7 +11,7 @@
 				</div>
 				<% if !@topics.blank? %>
 				<% @topics.each_with_index do |topic, topic_index| %>
-					<div class="carousel-box-<%= topic_index %>">
+					<div class="carousel-box-<%= topic_index + 1 %>">
 						<div class="row"> <!-- row 7 -->
 							<%= render 'home/video_home', :topic => topic, :topic_index =>  topic_index %>	
 						</div>

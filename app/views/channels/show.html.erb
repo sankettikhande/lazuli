@@ -25,13 +25,13 @@
               <p>Find Us:</p>
               <ul class="social-links">
                 <% unless @channel.website.blank?  %>
-                <li><a href="<%= @channel.website%>" target="_blank"><i class="fa fa-globe"></i>&nbsp;<span><%=@channel.website%></span></a></li>
+                <li><a href="<%= @channel.website%>" target="_blank"><i class="fa fa-globe"></i><span><%=@channel.website%></span></a></li>
                 <% end %>
                  <% unless @channel.facebook_page.blank?  %>
-                <li><a href="<%= @channel.facebook_page %>" target="_blank"><i class="fa fa-facebook"></i>&nbsp;<span>facebook</span></a></li>
+                <li><a href="<%= @channel.facebook_page %>" target="_blank"><i class="fa fa-facebook"></i><span>facebook</span></a></li>
                 <% end %>
                  <% unless @channel.twitter_page.blank? %>
-                <li><a href="<%= @channel.twitter_page %>" target="_blank"><i class="fa fa-twitter"></i>&nbsp;<span>Twitter</span></a></li>
+                <li><a href="<%= @channel.twitter_page %>" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
                 <% end %>
               </ul>
             </div>
@@ -61,3 +61,4 @@
     </div>
   </div>
 </section>
+<%= javascript_include_tag "application/main_app/course_search.js" %>

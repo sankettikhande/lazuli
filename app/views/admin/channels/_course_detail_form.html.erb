@@ -15,32 +15,34 @@
 		<div id="collapse_<%= !f.options[:child_index].nil? ? f.options[:child_index] : (index + 3) %>" class="panel-collapse collapse">
 			<div class="panel-body form-group">
 				<div class="row">
-					<div class="col-sm-2">
-						<label for="course-name" class="control-label">Course Name<%= required_field %></label>
-					</div>
-					<div class="col-sm-4">
-						<%= f.text_field :name, :class => "form-control validate[required]" %>
-					</div>
-					<div class="col-sm-2">
-						<label for="trainer-name" class="control-label">Name of Trainer</label>
-					</div>
-					<div class="col-sm-4">
-						<%= f.text_field :trainer_name, :class => "form-control" %>
-					</div>
-				</div>
-				<div class="seperator10"></div>
-				<div class="row">
-					<div class="col-sm-2">
-						<label for="course-descr" class="control-label">Description<%= required_field %></label>
-					</div>
-					<div class="col-sm-4">
-						<%= f.text_area :description, :rows => 2, :class => "form-control validate[required]" %>
-					</div>
-					<div class="col-sm-2">
-						<label for="trainer-bio" class="control-label">Biography of Trainer</label>
-					</div>
-					<div class="col-sm-4">
-						<%= f.text_area :trainer_biography, :rows => 2, :class => "form-control" %>
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="row">
+									<div class="col-sm-4">
+										<label for="course-name" class="control-label">Course Name<%= required_field %></label>
+									</div>
+									<div class="col-sm-8">
+										<%= f.text_field :name, :class => "form-control validate[required]" %>
+									</div>
+								</div>
+							<div class="seperator10"></div>
+								<div class="row">
+									<div class="col-sm-4">
+										<label for="course-descr" class="control-label">Description<%= required_field %></label>
+									</div>
+									<div class="col-sm-8">
+										<%= f.text_area :description, :rows => 2, :class => "form-control validate[required]" %>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="col-xs-6" id='course_trainer'>
+								<%#= f.fields_for :course_trainers do |trainer| %>
+									<%#= render 'course_trainer_form', :f => trainer %>
+								<% #end %>
+							</div> -->
+						</div>
+
 					</div>
 				</div>
 				<div class="seperator10"></div>

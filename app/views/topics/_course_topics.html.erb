@@ -1,0 +1,13 @@
+<% @course_topics.each do |topic| %>
+<ul class="row channel-each-course">
+  <li class="col-xs-12 channel-course-title"><%= link_to topic.title.titleize, course_url(topic.course_id) %></li>
+  <li class="col-xs-12">
+    <ul class="row">
+      <li class="col-xs-12 col-sm-8 col-md-8 channel-course-descr">
+         <%= topic.description %>
+      </li>     
+    </ul>
+  </li>
+</ul>
+<% end %>
+</div>

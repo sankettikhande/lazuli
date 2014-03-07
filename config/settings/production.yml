@@ -16,3 +16,7 @@ vimeo_app:
   consumer_secret: ""
   token: ""
   secret: ""
+
+email_settings:
+  contact_us_recipients: "admin@lazuli.com"
+  default_from_email: "no-reply@lazuli.com"

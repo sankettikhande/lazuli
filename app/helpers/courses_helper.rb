@@ -23,6 +23,15 @@ module CoursesHelper
 		'active' if (@video && @video.id == video.id)
 	end
 
+	def is_active_bookmark bookmark, index
+		if @video
+			@video.bookmarks[index].id == bookmark.id ? "active panel" : "panel"
+		else
+  		index.zero? ? "active panel" : "panel"
+		end
+	end
+
+
 	def second_to_duration(seconds)
 		Time.at(seconds).utc.strftime("%H:%M:%S")
 	end
