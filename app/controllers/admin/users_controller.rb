@@ -8,8 +8,12 @@ class Admin::UsersController < AdminController
   end
 
   def search
-    @users = User.sphinx_search(params, current_user)
+    @users = User.sphinx_search(params, current_user)   
   end
+
+  def contact_us
+    @contact_us =ContactUs.sphinx_search(params, current_user)     
+  end  
 
   def new
     @user = User.new

@@ -7,6 +7,10 @@ $( document ).ready(function() {
     $('li.active').removeClass('active');
     $(this).addClass('active');
   });
+  $('.level-bookmark li').click(function(e){
+    $('li.active').removeClass('active');    
+    $(this).addClass('active');    
+  });
   $("#watch_lator").click(function () {
     $("#watch_list_btn").data("watch", true);
     $(this).hide();

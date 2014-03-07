@@ -7,12 +7,13 @@ class CoursesController < ApplicationController
 	def index
 	end
 
-	def show
+	def show		
 		@course = Course.cached_find(params[:id])
 		if @course.topics.published.any?
 			@user_subscription = UserChannelSubscription.where(:channel_id => @course.channel_id, :user_id => current_user, :course_id => @course.id).first
-			@video = load_video
-			@topic = @video.topic
+			@video = load_video			
+			@topic = @video.topic			
+			@bookmark= load_bookmark if params[:t]	
 			@favourite_video = @video.favourites.where(:user_id => current_user).last
 			@recommended_videos = load_recommended_videos
 			@course_subscriptions = @course.available_course_subscriptions
@@ -33,6 +34,11 @@ class CoursesController < ApplicationController
 		@channel_courses= Course.sphinx_search(params, current_user, channel_courses_id)		
 	end
 
+	def list
+		@course = Course.cached_find(params[:id])		
+		@course_topics = @course.topics.published
+    end		
+
 	private
 	def load_recommended_videos
 		videos = @video.tags.any? ? Video.search(:conditions => sphinx_condition(@video.tags_str), :without => {:video_id => @video.id}).per(Settings.data_count.recommended.video) : []
@@ -47,6 +53,10 @@ class CoursesController < ApplicationController
 		return Topic.cached_find(params[:topic_id]).topic_first_video(current_user) if params[:topic_id]
 		@course.course_first_video(current_user)
 	end
+
+	def load_bookmark		
+	    return @video.bookmarks.find_by_bookmark_sec(params[:t]) if params[:t]	   
+	end	
 
 	def video_param?
 		params[:video_id]
