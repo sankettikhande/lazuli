@@ -169,7 +169,7 @@ module ApplicationHelper
   end
 
   def background_color
-    "brush lemon" if !(controller_name == "courses" && action_name== "show")
+    "brush lemon" if !(controller_name == "courses" && action_name == "show")
   end
 
   def courses_breadcrumbs1(course, topic, video)

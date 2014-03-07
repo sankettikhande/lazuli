@@ -3,7 +3,12 @@ class ContactUs < ActiveRecord::Base
   attr_accessible :name, :email, :subject, :message  
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
   validates :name, :subject, :email, :message, :presence => true  
-
+  
+  def self.admin_inbox_count current_user
+    if current_user.is_admin?
+       ContactUs.where("created_at > #{current_user.last_sign_in_at.try(:strftime,"%F")} and created_at < #{current_user.current_sign_in_at.try(:strftime,"%F")}").count         
+    end 
+  end  
 
    def self.sphinx_search options, current_user,user_ids=[]    	
     sphinx_options, search_options, sort_options,select_option = {}, {}, {},{}

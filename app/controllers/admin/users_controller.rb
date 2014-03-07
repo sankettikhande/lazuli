@@ -4,7 +4,7 @@ class Admin::UsersController < AdminController
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
-  def index
+  def index     
   end
 
   def search
