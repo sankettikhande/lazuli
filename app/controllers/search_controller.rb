@@ -12,11 +12,13 @@ class SearchController < ApplicationController
 	def search
 		filter_options, sql_options = {}, {}
 		params[:search] = params[:search].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
-		options = {:star => true, :per_page => 50}
-		filter_options.merge!(:conditions => {:topic_status => "published"})
-		sql_options.merge!(:sql => {:include => [:channel, :topics]})
-		options.merge!(filter_options).merge!(sql_options)
-		@courses = Course.search params[:search], options
+		options = {:star => true}
+		filter_options.merge!(:conditions => {:status => "published"})
+		# sql_options.merge!(:sql => {:include => [:channel, :topics]})
+		sort_options = {:sort_mode =>  :extended, :order => :custom_model_sort}
+		options.merge!(filter_options).merge!(sql_options).merge!(:classes => [Course, Topic, Video]).merge!(sort_options)
+		@results = ThinkingSphinx.search(params[:search], options).page(params[:page]).per(20)
+
 		respond_to do |format|
 			format.html { render 'home/search' }
 		end

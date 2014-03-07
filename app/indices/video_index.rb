@@ -13,4 +13,5 @@ ThinkingSphinx::Index.define :video, :with => :active_record, :delta => Thinking
   has :id, :as => :video_id
   has course_admin_user_id
   has channel_admin_user_id
+  has "3", :as => :custom_model_sort, :type => :integer
 end

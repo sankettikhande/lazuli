@@ -109,6 +109,10 @@ class Video < ActiveRecord::Base
     object.set_description(vimeo_id, description_text)
   end
 
+  def course
+    self.topic.course
+  end
+
   def published?
     self.status == "Published"
   end

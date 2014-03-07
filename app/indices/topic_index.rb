@@ -8,5 +8,6 @@ ThinkingSphinx::Index.define :topic, :with => :active_record, :delta => Thinking
   has created_at, updated_at
   has course_admin_user_id
   has channel_admin_user_id
-   has :id, :as => :topic_id
+  has :id, :as => :topic_id
+  has "2", :as => :custom_model_sort, :type => :integer
 end

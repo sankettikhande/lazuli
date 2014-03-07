@@ -11,33 +11,89 @@
     <div class="col-sm-12">
       <h4>Search Results</h4>
       <div class="partial-courses-list-box">
-        <%  @courses.each do |course| %>
+        <%  @results.each do |result| %>
+        <% if result.instance_of?(Course) %>
         <div class="courses-list">
           <div class="row">
             <div class="col-xs-5 col-sm-2 col-md-2">
               <div class="course-logo-img">
-                <a href="#"><%= image_tag(channel_thumbnail_image(course.channel,{:image_size => 'medium'}), :alt => "Image", :class => "img-responsive center-block" )%></a>
+                <div class="green-text"><strong>COURSE</strong></div>
+                <a href="#"><%= image_tag(channel_thumbnail_image(result.channel,{:image_size => 'medium'}), :alt => "Image", :class => "img-responsive center-block" )%></a>
               </div>
             </div>
             <div class="col-xs-7 col-sm-8 col-md-8">
                <ul class="list-content">
                   <li class="title">
                     <ol class="breadcrumb">
-                      <li><a href="<%=course_path(course.id)%>"><%= course.name %></a></li><li><%= course.topics.first.title if course.topics.first %></li>
+                      <li><a href="<%=course_path(result.id)%>"><%= result.name %></a></li><li><%= result.topics.first.title if result.topics.first %></li>
                     </ol>
                   </li>
-                  <li class="descr hidden-xs"><%= course.description %></li>
+                  <li class="descr hidden-xs"><%= result.description %></li>
                 </ul>
             </div>
             <div class="hidden-xs col-sm-2 col-md-2">
               <div class="course-featured-video">
-                <%= image_tag(course_thumbnail_image(course, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail") %>
+                <%= image_tag(course_thumbnail_image(result, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail") %>
               </div>
             </div>
           </div> <!-- row ends -->
         </div>  <!-- courses-list 1 ends -->
+        <% elsif result.instance_of?(Topic) %>
+         <div class="courses-list">
+          <div class="row">
+            <div class="col-xs-5 col-sm-2 col-md-2">
+              <div class="course-logo-img">
+                <div class="red-text"><strong>TOPIC</strong></div>
+                <a href="#"><%= image_tag(channel_thumbnail_image(result.channel,{:image_size => 'medium'}), :alt => "Image", :class => "img-responsive center-block" )%></a>
+              </div>
+            </div>
+            <div class="col-xs-7 col-sm-8 col-md-8">
+               <ul class="list-content">
+                  <li class="title">
+                    <ol class="breadcrumb">
+                      <li><a href="<%=course_topic_path(result.course.id,result.id)%>"><%= result.title %></a></li><li><%= result.title if result %></li>
+                    </ol>
+                  </li>
+                  <li class="descr hidden-xs"><%= result.description %></li>
+                </ul>
+            </div>
+            <div class="hidden-xs col-sm-2 col-md-2">
+              <div class="course-featured-video">
+                <%= image_tag(video_thumbnail_image(result.videos.first, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail") %>
+              </div>
+            </div>
+          </div> <!-- row ends -->
+        </div>
+        <% else %>
+         <div class="courses-list">
+          <div class="row">
+            <div class="col-xs-5 col-sm-2 col-md-2">
+              <div class="course-logo-img">
+                <div class="blue-text"><strong>VIDEO</strong></div>
+                <a href="#"><%= image_tag(channel_thumbnail_image(result.topic.channel,{:image_size => 'medium'}), :alt => "Image", :class => "img-responsive center-block" )%></a>
+              </div>
+            </div>
+            <div class="col-xs-7 col-sm-8 col-md-8">
+               <ul class="list-content">
+                  <li class="title">
+                    <ol class="breadcrumb">
+                      <li><a href="<%=course_topic_video_path(result.course.id,result.topic.id,result.id)%>"><%= result.title %></a><!-- </li><li><%#= result.topic.title if result.topic %></li> -->
+                    </ol>
+                  </li>
+                  <li class="descr hidden-xs"><%= result.description %></li>
+                </ul>
+            </div>
+            <div class="hidden-xs col-sm-2 col-md-2">
+              <div class="course-featured-video">
+                <%= image_tag(video_thumbnail_image(result, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail") %>
+              </div>
+            </div>
+          </div> <!-- row ends -->
+        </div>        
         <% end %>
-        <div><%= @courses.count %> courses Found.</div>
+        <% end %>
+        <div><%= @results.count %> Results Found.</div>
+        <%= paginate @results %>
       </div>
     </div> <!-- col-sm-12 Ends -->
   </div> <!-- first row -->
