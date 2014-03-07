@@ -18,8 +18,11 @@
       add_fav = '' 
       rem_fav = 'hidden' 
     end %>
-  <div class="col-sm-12 col-md-7">
+  <div class = "col-sm-12 col-md-2"><%= social_share_button_tag(@course.name, :url => course_topic_video_url(@course.id, @topic.id, @video.id)) %>
+  </div>
+  <div class="col-sm-12 col-md-5">
     <div class="video-save-options">
+      <%#= social_share_button_tag(@course.name, :url => course_topic_video_url(@course.id, @topic.id, @video.id)) %>
       <span id='add-favourite' <%= add_fav %>>
         <%= link_to button_field("fa fa-star", 'btn btn-link active', 'Add to Favourites'), favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
       </span>
