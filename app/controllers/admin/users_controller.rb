@@ -4,8 +4,7 @@ class Admin::UsersController < AdminController
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
-  def index
-    @total_count=ContactUs.where("created_at > #{current_user.last_sign_in_at.try(:strftime,"%F")} and created_at < #{current_user.current_sign_in_at.try(:strftime,"%F")}").count    
+  def index     
   end
 
   def search
