@@ -1,1 +1,5 @@
-window.location = '<%= root_path %>'
+<% if session[:previous_url] %>
+	window.location = '<%= session[:previous_url] %>'
+<% else %>
+	window.location = '<%= root_path %>'
+<% end %>
