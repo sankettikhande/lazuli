@@ -9,8 +9,7 @@
       <li class="col-xs-6 col-sm-2 col-md-2">
         <ul class="row text-center">          
             <li class="col-xs-12 channel-course-trainer">
-              Trainer: 
-              <span><%= course.course_trainers.blank? ? '' : course. default_lead_trainer %></span>
+              Trainer: <span><%= course.course_trainers.blank? ? '' : course.default_lead_trainer %></span>
             </li>         
           <li class="col-xs-12 channel-course-vcount">
             <span><%= course.user_count %></span> Subscribed Users
