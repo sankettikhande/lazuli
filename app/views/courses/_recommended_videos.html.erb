@@ -34,27 +34,19 @@
 
 <%#= javascript_include_tag "application/main_app/carousel.js"%>
 <script>
-  $(document).ready(function(){
-    $('.slider4').bxSlider({
-      slideWidth: 180,
-      minSlides: 2,
-      maxSlides: 6,
-      moveSlides: 1,
-      slideMargin: 10,
-      pager: false,
-      infiniteLoop: false,
-      hideControlOnEnd: false,
-      speed: 1000
+  <% if !@recommended_videos.count.zero? %>
+    $(document).ready(function(){
+      $('.slider4').bxSlider({
+        slideWidth: 180,
+        minSlides: 2,
+        maxSlides: 6,
+        moveSlides: 1,
+        slideMargin: 10,
+        pager: false,
+        infiniteLoop: false,
+        hideControlOnEnd: false,
+        speed: 1000
+      });
     });
-  });
+  <% end %>
 </script>
-
-<style>
-.bx-wrapper .bx-viewport{
-  box-shadow: none;
-}
-
-.bx-wrapper{
-  max-width: 100% !important;
-}
-</style>
