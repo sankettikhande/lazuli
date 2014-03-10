@@ -82,6 +82,6 @@ Lazuli::Application.configure do
     :email => {
       :email_prefix => "[Exception-Lazuli] ",
       :sender_address => %{"Exception Notifier" <error@lazuli.com>},
-      :exception_recipients => %w{pravin.mhatre@sodelsolutions.com suvarna.kanade@sodelsolutions.com}
+      :exception_recipients => %w{pravin.mhatre@sodelsolutions.com rakesh.patri@sodelsolutions.com suvarna.kanade@sodelsolutions.com}
     }
 end

@@ -757,3 +757,4 @@ body {padding-bottom: 70px;}
 .accordion_div{padding:10px !important;}
 .trainers_list li {padding-left:20px;}
 .trainer_name{float: left; width: 100px;}
+.login_error{color: #FF0000}
