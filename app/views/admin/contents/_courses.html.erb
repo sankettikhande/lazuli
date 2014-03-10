@@ -10,11 +10,11 @@
 		<table class="table table-bordered table-striped table-condensed flip-content table-hover" id="courses_list">
 			<thead class="flip-content">
 				<tr>
-			      <th width="20%">Course Name</th>
-			      <th width="20%">Trainer Name</th>
+			      <th width="20%">Course Name</th>			      
 			      <th width="20%">Channel Name</th>
 			      <th width="20%">Course Admin</th>
 			      <th width="15%">Number of Users</th>
+			      <th width="20%">Trainer Name</th>
 			      <th width="5%">Action</th>
 				</tr>
 			</thead>
@@ -30,11 +30,11 @@
 	$(document).ready(function(){
 		var tableId = '#courses_list';
 		var url = "/admin/courses/search.json";
-		var aoColumns = [{ "mData": "name"},
-		{ "mData": "trainer_name"},
+		var aoColumns = [{ "mData": "name"},		
 		{ "mData": "channel_name"},
 		{ "mData": "course_admin_user"},
 		{ "mData": "user_count", "sClass" : "text-center"},
+		{ "mData": "courses_trainer_name", "bSortable": false},
 		{ "mData": "actions", "bSortable": false, "sClass" : "text-center" }];
 		var optionNames = ["Course Name", "Trainer Name", "Channel Name"];
 		var optionValues = ["name", "trainer_name", "channel_name"];
