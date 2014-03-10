@@ -28,9 +28,11 @@
                <ul class="trainers_list">             
                 <% trainers.each do |trainer| %>
                   <li>
-                    <div class="trainer_name">Name:</div><div> <%=  trainer.name.titleize %></div>
-                    <div  class="trainer_name">Biography:</div><div><%=  trainer.biography %></div>
-                    <div class="trainer_separator"></div> </li> 
+                    <div class="trainer_info">Name:</div><div class="trainer_name"> <%=  trainer.name.titleize %></div>
+                    <div  class="trainer_info">Biography:</div><div class="trainer_name"><%=  trainer.biography %></div>
+                     <div class="trainer_separator"></div> 
+                    </li>
+                    
                 <% end %>                
                 </ul>
               <% end %>           
