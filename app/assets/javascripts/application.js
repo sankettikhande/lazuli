@@ -24,7 +24,7 @@
 //= require ./application/jquery.slimscroll.min.js
 //= require jquery-star-rating
 //= require ./application/bootstrap3-typeahead.js
-
+//= require social-share-button
 $( function() {
     $("button[data-href]").click( function() {
         location.href = $(this).attr("data-href");
