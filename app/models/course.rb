@@ -50,6 +50,17 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def courses_trainer_name
+    self.trainer_name ? self.course_trainers.pluck('name').join(',') : ''
+  end  
+
+  def default_lead_trainer 
+    if self.course_trainers   
+      lead_trainer = self.course_trainers.where(:as_lead => true).first.name 
+      return lead_trainer.present? ? lead_trainer : self.course_trainers.first.name    
+    end  
+  end 
+
   def course_subscription_params
     errors.add(:base, "Please select atleat one subscription.") if self.course_subscriptions.blank?
   end

@@ -25,7 +25,10 @@
       </a>
       <ul class="dropdown-menu">
         <li><%= link_to raw_field('fa fa-user', 'My Dashboard'), root_url(), :data => {'no-turbolink' => true} %></li>
-        <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge badge-danger">3</span></a></li>
+        <li><a href="#"><i class="fa fa-envelope"></i> Inbox 
+          <% unless @total_count.blank? %>
+            <span class="badge badge-danger"><%= @total_count %></span>
+          <% end %></a></li>
         <li class="divider"></li>
         <li><a href="/users/sign_out" data-method='delete'><i class="fa fa-key"></i> Log Out</a>
         </li>  

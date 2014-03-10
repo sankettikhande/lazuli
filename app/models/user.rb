@@ -235,6 +235,10 @@ class User < ActiveRecord::Base
     self.subscribed_course_ids.include?(course_id)
   end
 
+  def sharable_course? course_id
+    self.user_channel_subscriptions.where(:permission_share => true).pluck(:course_id).include?(course_id)
+  end
+
   def trial_course? course_id
     self.user_channel_subscriptions.where(:subscription_id => 1).pluck(:course_id).include? (course_id)
   end

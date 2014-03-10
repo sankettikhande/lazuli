@@ -22,12 +22,12 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <% trainers = @course.course_trainers%>
+              <% trainers = @course.course_trainers %>
               <% unless trainers.blank? %>
               <b>List of Trainers:</b> <br/> 
                <ul class="trainers_list">             
                 <% trainers.each do |trainer| %>
-                  <li><%= trainer.name.titleize %> </li>                 
+                  <li><span class="trainer_name"><%= trainer.name.titleize %></span><span><%= trainer.biography %></span> </li>                 
                 <% end %>
                 </ul>
               <% end %>           
@@ -58,3 +58,5 @@
     </div>
   </div>
 </section>
+
+<%= javascript_include_tag "application/main_app/topic_search.js"%>
