@@ -756,5 +756,6 @@ body {padding-bottom: 70px;}
 .rating-cancel{display: none !important;}
 .accordion_div{padding:10px !important;}
 .trainers_list li {padding-left:20px;}
-.trainer_name{float: left; width: 100px;}
+.trainer_name{float: left; width: 80px;}
+.trainer_separator{min-height: 15px;}
 .login_error{color: #FF0000}

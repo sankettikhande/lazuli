@@ -27,8 +27,11 @@
               <b>List of Trainers:</b> <br/> 
                <ul class="trainers_list">             
                 <% trainers.each do |trainer| %>
-                  <li><span class="trainer_name"><%= trainer.name.titleize %></span><span><%= trainer.biography %></span> </li>                 
-                <% end %>
+                  <li>
+                    <div class="trainer_name">Name:</div><div> <%=  trainer.name.titleize %></div>
+                    <div  class="trainer_name">Biography:</div><div><%=  trainer.biography %></div>
+                    <div class="trainer_separator"></div> </li> 
+                <% end %>                
                 </ul>
               <% end %>           
             </div>
