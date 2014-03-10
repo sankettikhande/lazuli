@@ -122,6 +122,7 @@ Lazuli::Application.routes.draw do
       get 'subscriptions'
       get 'channels'
       get 'courses'
+      get 'suggestions'
     end
   end
 

@@ -1,0 +1,27 @@
+<div class="courses-list">
+  <div class="row">
+    <div class="col-xs-5 col-sm-2 col-md-2">
+      <div class="course-logo-img">
+        <div class="blue-text"><strong>VIDEO</strong></div>
+        <a href="#"><%= image_tag(channel_thumbnail_image(result.topic.channel,{:image_size => 'medium'}), :alt => "Image", :class => "img-responsive center-block" )%></a>
+      </div>
+    </div>
+    <div class="col-xs-7 col-sm-8 col-md-8">
+       <ul class="list-content">
+          <li class="title">
+            <ol class="breadcrumb">
+              <li><a href="<%=course_path(result.course.id)%>"><%= result.course.name %></a></li>
+              <li><a href="<%=course_topic_path(result.course.id,result.topic.id)%>"><%= result.topic.title %></a></li>
+              <li><a href="<%=course_topic_video_path(result.course.id,result.topic.id,result.id)%>"><%= result.title %></a>
+            </ol>
+          </li>
+          <li class="descr hidden-xs"><%= result.description %></li>
+        </ul>
+    </div>
+    <div class="hidden-xs col-sm-2 col-md-2">
+      <div class="course-featured-video">
+        <%= image_tag(video_thumbnail_image(result, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail") %>
+      </div>
+    </div>
+  </div> <!-- row ends -->
+</div>

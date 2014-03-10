@@ -1,5 +1,5 @@
 ThinkingSphinx::Index.define :course, :with => :active_record, :delta => ThinkingSphinx::Deltas::DelayedDelta do
-  indexes name, :sortable => true
+  indexes name, :as => :title, :sortable => true
   indexes description
   indexes trainer_name, :sortable => true
   indexes channel.name, :as => :channel_name, :sortable => true

@@ -2,6 +2,7 @@ ThinkingSphinx::Index.define :topic, :with => :active_record, :delta => Thinking
   indexes title, :sortable => true
   indexes course.name , :as => :course_name, :sortable => true
   indexes channel.name, :as => :channel_name , :sortable => true
+  indexes channel.channel_type, :as => :channel_type
   indexes vimeo_album_id , :as => :vimeo_url
   indexes description
   indexes status, :as => :status
