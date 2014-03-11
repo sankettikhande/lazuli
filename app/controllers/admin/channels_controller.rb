@@ -1,8 +1,6 @@
 class Admin::ChannelsController < AdminController
   load_and_authorize_resource
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
+  
   before_filter :set_initialization, :only => [:new, :create, :edit, :update]
 
   def index
