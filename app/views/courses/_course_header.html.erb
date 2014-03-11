@@ -9,7 +9,7 @@
         </div>
         <div class="col-xs-6 col-sm-8 col-md-9">
           <div class="video-descr-text">
-            <% bookmarks = @video.bookmarks.order(:created_at) %>  
+            <% bookmarks = @video.bookmarks.order(:bookmark_sec) %>  
             <% if bookmarks.any? %>
               <% if @bookmark.blank? %>
                <h4> <%= bookmarks.first.title.titleize %></h4>
