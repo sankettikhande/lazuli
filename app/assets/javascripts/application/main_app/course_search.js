@@ -13,7 +13,7 @@ $( document ).ready(function() {
 		$.ajax({
 			type: "GET",
 			url: "/"+controller_name+"/search",
-			data: {channel_id: channel_id, sSearch: search_key, sSearch_1: "name"}
+			data: {channel_id: channel_id, sSearch: search_key, sSearch_1: "title"}
 		});
 	}
 });

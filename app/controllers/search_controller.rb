@@ -10,13 +10,7 @@ class SearchController < ApplicationController
 	end
 
 	def search
-		filter_options, sql_options = {}, {}
-		params[:search] = params[:search].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
-		options = {:star => true, :per_page => 50}
-		filter_options.merge!(:conditions => {:topic_status => "published"})
-		sql_options.merge!(:sql => {:include => [:channel, :topics]})
-		options.merge!(filter_options).merge!(sql_options)
-		@courses = Course.search params[:search], options
+		@results = WideSearch.search_results(params[:search]).page(params[:page]).per(20)
 		respond_to do |format|
 			format.html { render 'home/search' }
 		end
@@ -26,6 +20,13 @@ class SearchController < ApplicationController
 		@channels = Channel.sphinx_search(params, current_user, "public")
 		respond_to do |format|
 	    format.js { render 'channels/search'}
+	  end
+	end
+
+	def suggestions
+		@results = WideSearch.search_suggestions params
+		respond_to do |format|
+	    format.json { render 'home/suggestions'}
 	  end
 	end
 

@@ -50,6 +50,10 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def title
+    self.name
+  end
+
   def courses_trainer_name
     self.trainer_name ? self.course_trainers.pluck('name').join(',') : ''
   end  
@@ -147,7 +151,7 @@ class Course < ActiveRecord::Base
       sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
 
       if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
-        condition_string = "@(name,channel_name,trainer_name) #{options[:sSearch]}*"
+        condition_string = "@(title,channel_name,trainer_name) #{options[:sSearch]}*"
         sphinx_options.merge!(:match_mode => :extended)
         Course.search(condition_string,sphinx_options ).page(page).per(options[:iDisplayLength])
       else
@@ -195,8 +199,9 @@ class Course < ActiveRecord::Base
   def self.public_courses options
     sort_options, search_options, sphinx_options, select_option = {}, {}, {}, {}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
-    sphinx_options.merge!(search_options).deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*", :channel_type => "public"}, :include => [:course, :channel]) 
-    Course.search(sphinx_options)
+    sphinx_options.merge!(search_options).deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*", :channel_type => "public", :status => "published"}, :include => [:course, :channel]) 
+    sphinx_options.merge!(:classes => [Course,Topic,Video])
+    ThinkingSphinx.search(sphinx_options)
   end
 
   private 

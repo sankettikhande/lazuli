@@ -242,7 +242,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 
 
 .input-group-btn .btn {height: 34px}
-
+.input-group-btn .btn-danger {height: 34px}
 /******** =Colors **********/
 
 .violet {background: #103e8b !important;}
