@@ -1,0 +1,36 @@
+<%= javascript_include_tag "admin/jquery.dataTables.js", "admin/DT_bootstrap.js" %>
+<section class="container">  
+  <div class="row">    
+    <div class="seperator5"></div>
+    <div class="portlet-body flip-scroll">
+      <table class="table table-bordered table-striped table-condensed flip-content table-hover datatable" id="messages">
+        <thead class="flip-content">
+          <tr>
+              <th width='15%;'>Name</th>
+              <th width='15%'>Email ID</th>
+              <th width='15%;'>Subject</th>              
+              <th width='18%;'>Message</th>              
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+ 
+<%= javascript_include_tag 'admin/app_functions/users' %>
+
+<script>
+  $(document).ready(function(){
+    var tableId = '#messages';
+    var url = "/admin/messages/search.json";
+    var aoColumns = [{ "mData": "name"},
+    {"mData":"email"},
+    { "mData": "subject"},   
+    { "mData": "message", "bSortable": false }];
+    var optionNames = ["Name", "Email ID", "Subject", "Message"];
+    var optionValues = ["name","email", "subject", "message"];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues);
+  })
+</script>

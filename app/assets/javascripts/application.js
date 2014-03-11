@@ -25,6 +25,8 @@
 //= require jquery-star-rating
 //= require ./application/bootstrap3-typeahead.js
 //= require social-share-button
+//= require ./application/jquery.bxslider.min.js
+
 $( function() {
     $("button[data-href]").click( function() {
         location.href = $(this).attr("data-href");

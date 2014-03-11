@@ -5,36 +5,24 @@
       <div class="row">
         <div class="col-sm-12">
           <!-- Carousel-1 Begins -->
-          <div class="carousel slide landing-carousel" id="new-vids" data-interval="false">
-            <!-- Carousel items -->
-            <div class="carousel-inner landing-carousel-inner">
-              <%= "No Recommended videos available" if @recommended_videos.blank? %>
-              <% @recommended_videos.each_with_index do |video, index| %>
-                <div class="<%= is_active_videos(index) %> item">
-                  <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-                    <% if can? :show, video %>
-                      <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
-                        <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
-                        <p><%= video.title %></p>
-                      </a>
-                    <% else %>
-                      <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
-                        <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
-                        <p><%= video.title %></p>
-                      </div>
-                    <% end %>
+          <div class="slider4">
+            <%= "No Recommended videos available" if @recommended_videos.blank? %>
+            <% @recommended_videos.each_with_index do |video, index| %>
+              <% if can? :show, video %>
+                <div class="slide">
+                  <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
+                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
+                    <p><%= video.title %></p>
+                  </a>
+                </div>
+              <% else %>
+                <div class="slide">
+                  <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
+                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
+                    <p><%= video.title %></p>
                   </div>
                 </div>
               <% end %>
-            </div>
-            <!-- Carousel-1 nav -->
-            <% if @recommended_videos.count > 6 %>
-              <a class="carousel-control left" href="#new-vids" data-slide="prev">
-                <i class="fa fa-caret-left"></i>
-              </a>
-              <a class="carousel-control right" href="#new-vids" data-slide="next">
-                <i class="fa fa-caret-right"></i>
-              </a>
             <% end %>
           </div>
           <!-- Carousel Ends -->
@@ -44,4 +32,20 @@
   </div>
 </div>
 
-<%= javascript_include_tag "application/main_app/carousel.js"%>
+<script>
+  <% if !@recommended_videos.count.zero? %>
+    $(document).ready(function(){
+      $('.slider4').bxSlider({
+        slideWidth: 180,
+        minSlides: 2,
+        maxSlides: 6,
+        moveSlides: 1,
+        slideMargin: 10,
+        pager: false,
+        infiniteLoop: false,
+        hideControlOnEnd: false,
+        speed: 1000
+      });
+    });
+  <% end %>
+</script>

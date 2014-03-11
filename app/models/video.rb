@@ -94,6 +94,7 @@ class Video < ActiveRecord::Base
   def set_vimeo_info(vimeo_data)
     update_attribute(:status, "Published")
     update_attribute(:vimeo_data, hashie_get_info(vimeo_data).video.first)
+    topic.set_status
   end
 
   def description_text
@@ -107,6 +108,10 @@ class Video < ActiveRecord::Base
   def set_vimeo_description(vimeo_id, description_text)
     object = VimeoLib.video
     object.set_description(vimeo_id, description_text)
+  end
+
+  def course
+    self.topic.course
   end
 
   def published?

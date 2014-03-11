@@ -11,7 +11,7 @@
 				<label><%= subscription.name %></label>
 			</div>
 				<div class="col-sm-2">
-          <%= text_field_tag "channel[courses_attributes][#{index}][course_subscriptions_attributes][#{cs.try(:id) || random}][subscription_price]", cs.try(:subscription_price), :class=>'form-control subscription_price', :placeholder => 'Price' %>
+          <%= text_field_tag "channel[courses_attributes][#{index}][course_subscriptions_attributes][#{cs.try(:id) || random}][subscription_price]", (subscription.is_trial_subscription? ? subscription.price : cs.try(:subscription_price)), :class=>'form-control subscription_price', :placeholder => 'Price' %>
          <%= hidden_field_tag "channel[courses_attributes][#{index}][course_subscriptions_attributes][#{cs.try(:id)}][id]", cs.id if !cs.blank? %>
         </div>
 		<% end %>

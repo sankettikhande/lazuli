@@ -1,6 +1,10 @@
 class AdminController < ApplicationController
   before_filter :authenticate_user!
   before_filter :get_user_roles, :verify_admin, :get_inbox_count
+  
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
   layout 'admin'
 
   def index

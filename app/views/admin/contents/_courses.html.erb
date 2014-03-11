@@ -30,14 +30,14 @@
 	$(document).ready(function(){
 		var tableId = '#courses_list';
 		var url = "/admin/courses/search.json";
-		var aoColumns = [{ "mData": "name"},		
+		var aoColumns = [{ "mData": "title"},
 		{ "mData": "channel_name"},
 		{ "mData": "course_admin_user"},
 		{ "mData": "user_count", "sClass" : "text-center"},
 		{ "mData": "courses_trainer_name", "bSortable": false},
 		{ "mData": "actions", "bSortable": false, "sClass" : "text-center" }];
 		var optionNames = ["Course Name", "Trainer Name", "Channel Name"];
-		var optionValues = ["name", "trainer_name", "channel_name"];
+		var optionValues = ["title", "trainer_name", "channel_name"];
 		loadContents(tableId, url, aoColumns, optionNames, optionValues);
 	})
 </script>

@@ -1,0 +1,1 @@
+json.results @results.map{ |c| c.title}

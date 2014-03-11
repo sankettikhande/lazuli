@@ -23,7 +23,7 @@ class Course < ActiveRecord::Base
   include Cacheable
   #VALIDATIONS
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
-  validates :image, :presence => true
+  validates_presence_of :image, :message => "^Please upload the course logo."
   validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
@@ -50,19 +50,28 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def courses_trainer_name
-    self.trainer_name ? self.course_trainers.pluck('name').join(',') : ''
-  end  
+  def courses_trainer_name    
+    if self.course_trainers
+     lead_trainer = self.course_trainers.as_lead.first.name  if self.course_trainers.as_lead.first
+     trainer_name = lead_trainer.present? ? lead_trainer : self.course_trainers.pluck('name').join(',') 
+    end   
+    self.trainer_name ? trainer_name : ''  
+  end
+
+  def title
+    self.name
+  end
+  
 
   def default_lead_trainer 
     if self.course_trainers   
-      lead_trainer = self.course_trainers.where(:as_lead => true).first.name 
+      lead_trainer = self.course_trainers.as_lead.first.name  if self.course_trainers.as_lead.first
       return lead_trainer.present? ? lead_trainer : self.course_trainers.first.name    
     end  
   end 
 
   def course_subscription_params
-    errors.add(:base, "Please select atleat one subscription.") if self.course_subscriptions.blank?
+    errors.add(:base, "Please select atleast one subscription.") if self.course_subscriptions.blank?
   end
 
   def course_admin_user
@@ -147,7 +156,7 @@ class Course < ActiveRecord::Base
       sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
 
       if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
-        condition_string = "@(name,channel_name,trainer_name) #{options[:sSearch]}*"
+        condition_string = "@(title,channel_name,trainer_name) #{options[:sSearch]}*"
         sphinx_options.merge!(:match_mode => :extended)
         Course.search(condition_string,sphinx_options ).page(page).per(options[:iDisplayLength])
       else
@@ -195,8 +204,9 @@ class Course < ActiveRecord::Base
   def self.public_courses options
     sort_options, search_options, sphinx_options, select_option = {}, {}, {}, {}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
-    sphinx_options.merge!(search_options).deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*", :channel_type => "public"}, :include => [:course, :channel]) 
-    Course.search(sphinx_options)
+    sphinx_options.merge!(search_options).deep_merge!(:conditions => {options[:sSearch_1] => "#{options[:sSearch]}*", :channel_type => "public", :status => "published"}, :include => [:course, :channel]) 
+    sphinx_options.merge!(:classes => [Course,Topic,Video])
+    ThinkingSphinx.search(sphinx_options)
   end
 
   private 

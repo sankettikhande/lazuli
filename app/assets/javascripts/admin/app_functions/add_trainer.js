@@ -1,3 +1,5 @@
+$('input[type="checkbox"]').uniform();
+
 var countChecked = function() {
 var n = $( ".as_lead input:checked").length;
 if (n >= 2){
