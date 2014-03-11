@@ -46,7 +46,7 @@ Lazuli::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( ie.js admin.js utils.js admin.css admin/app_functions/* admin/jquery.dataTables.js admin/DT_bootstrap.js admin/jquery.form.js application/main_app/* froogaloop2/* jquery-star-rating.js)
+  config.assets.precompile += %w( ie.js admin.js utils.js admin.css admin/app_functions/* admin/jquery.dataTables.js admin/DT_bootstrap.js admin/jquery.form.js application/main_app/* froogaloop2/* jquery-star-rating.js ie/respond.min.js ie/excanvas.min.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -82,6 +82,6 @@ Lazuli::Application.configure do
     :email => {
       :email_prefix => "[Exception-Lazuli] ",
       :sender_address => %{"Exception Notifier" <error@lazuli.com>},
-      :exception_recipients => %w{pravin.mhatre@sodelsolutions.com rakesh.patri@sodelsolutions.com suvarna.kanade@sodelsolutions.com}
+      :exception_recipients => %w{pravin.mhatre@sodelsolutions.com rakesh.patri@sodelsolutions.com suvarna.kanade@sodelsolutions.com prakash.laxkar@sodelsolutions.com}
     }
 end

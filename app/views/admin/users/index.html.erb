@@ -24,25 +24,7 @@
         </tbody>
       </table>
     </div>
-  </div>
-  <div class="row">    
-    <div class="seperator5"></div>
-    <div class="portlet-body flip-scroll">
-      <table class="table table-bordered table-striped table-condensed flip-content table-hover datatable" id="contact_us">
-        <thead class="flip-content">
-          <tr>
-              <th width='15%;'>Name</th>
-              <th width='15%'>Email ID</th>
-              <th width='15%;'>Subject</th>              
-              <th width='18%;'>Message</th>              
-          </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-      </table>
-    </div>
-  </div>
+  </div>  
 </section>
  <div class="modal fade" id="add-user" tabindex="-1" role="basic" aria-hidden="true">
   <div class="modal-dialog">
@@ -92,16 +74,6 @@
     { "mData": "actions", "bSortable": false, "sClass" : "text-center"}];
     var optionNames = ["User Name", "Full Name", "Email", "Contact Number", "Company Name"];
     var optionValues = ["name", "actual_name", "email", "phone_number", "company_name"];
-    loadContents(tableId, url, aoColumns, optionNames, optionValues);
-
-    var tableId = '#contact_us';
-    var url = "/admin/users/contact_us.json";
-    var aoColumns = [{ "mData": "name"},
-    {"mData":"email"},
-    { "mData": "subject"},   
-    { "mData": "message", "bSortable": false }];
-    var optionNames = ["Name", "Email ID", "Subject", "Message"];
-    var optionValues = ["name","email", "subject", "message"];
     loadContents(tableId, url, aoColumns, optionNames, optionValues);
   })
 </script>

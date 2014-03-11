@@ -1,9 +1,7 @@
 class Admin::TopicsController < AdminController
 	before_filter :set_initialization, :only => [:new, :edit, :create, :update]
 	load_and_authorize_resource
-	rescue_from CanCan::AccessDenied do |exception|
-	  redirect_to root_url, :alert => exception.message
-	end
+	
 
 	def new
 		@topic = Topic.new

@@ -1,13 +1,13 @@
 <hr>
 <div class="row">
 	<div class="col-sm-2">
-		<label for="crs-descr" class="control-label">Name of the Trainer</label>
+		<label for="crs-descr" class="control-label">Name of the Trainer<%= required_field %></label>
 	</div>
 	<div class="col-sm-4">
-		<%=f.text_field 'name', :class => "form-control"%>
+		<%=f.text_field 'name', :class => "form-control validate[required]"%>
 	</div>	
 	<div class="col-sm-4 as_lead">		
-		 <span> <%=f.check_box 'as_lead', :class=>'form-control'  %></span>	
+		 <%= f.check_box 'as_lead', :class=>'form-control' %>	
 		 <label for="crs-descr" class="control-label">Mark As Lead Trainer</label>	
 	</div>	
 </div>

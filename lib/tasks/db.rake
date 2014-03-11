@@ -101,7 +101,9 @@ namespace :db do
   task :set_trial_subscrioption => :environment do
     subscription = Subscription.find_by_name('Trial Subscription')
     puts "Subscription #{subscription.id} is updating"
-    subscription.update_attribute(:is_trial_subscription, true)
+    subscription.is_trial_subscription = true
+    subscription.price = 'Free'
+    subscription.save
     puts "Subscription #{subscription.id} is updated"
   end
 end

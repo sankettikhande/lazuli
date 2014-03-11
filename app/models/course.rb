@@ -23,7 +23,7 @@ class Course < ActiveRecord::Base
   include Cacheable
   #VALIDATIONS
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
-  validates :image, :presence => true
+  validates_presence_of :image, :message => "^Please upload the course logo."
   validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
@@ -50,23 +50,28 @@ class Course < ActiveRecord::Base
     end
   end
 
+  def courses_trainer_name    
+    if self.course_trainers
+     lead_trainer = self.course_trainers.as_lead.first.name  if self.course_trainers.as_lead.first
+     trainer_name = lead_trainer.present? ? lead_trainer : self.course_trainers.pluck('name').join(',') 
+    end   
+    self.trainer_name ? trainer_name : ''  
+  end
+
   def title
     self.name
   end
-
-  def courses_trainer_name
-    self.trainer_name ? self.course_trainers.pluck('name').join(',') : ''
-  end  
+  
 
   def default_lead_trainer 
     if self.course_trainers   
-      lead_trainer = self.course_trainers.where(:as_lead => true).first.name 
+      lead_trainer = self.course_trainers.as_lead.first.name  if self.course_trainers.as_lead.first
       return lead_trainer.present? ? lead_trainer : self.course_trainers.first.name    
     end  
   end 
 
   def course_subscription_params
-    errors.add(:base, "Please select atleat one subscription.") if self.course_subscriptions.blank?
+    errors.add(:base, "Please select atleast one subscription.") if self.course_subscriptions.blank?
   end
 
   def course_admin_user

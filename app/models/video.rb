@@ -94,6 +94,7 @@ class Video < ActiveRecord::Base
   def set_vimeo_info(vimeo_data)
     update_attribute(:status, "Published")
     update_attribute(:vimeo_data, hashie_get_info(vimeo_data).video.first)
+    topic.set_status
   end
 
   def description_text

@@ -18,6 +18,7 @@ class Channel < ActiveRecord::Base
   belongs_to :creator, :class_name => User, :foreign_key => :created_by
 
   #VALIDATIONS
+  validates_presence_of :image, :message => "^Please upload the company logo."
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates :user_name, :company_name, :company_number, :email, :presence => true
   validates_presence_of :name, :message => "^Channel name cann't be blank"

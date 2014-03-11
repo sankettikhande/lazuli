@@ -16,13 +16,24 @@
             <h4><%= @channel.company_name.titleize %></h4>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-8 col-md-9">
+        <div class="col-xs-7 col-sm-8 col-md-8">
+          <% if @main_parent %>
+          <ul class="list-content channel_breadcrumb">
+            <li class="title">
+              <ol class="breadcrumb">
+                <li class="main_class"><%= @main_parent.upcase %></li>
+                <li><%= @channel.name.capitalize %></li>
+              </ol>
+            </li>
+            <li class="descr hidden-xs"><%#= course.description %></li>
+          </ul>
+          <% end %>
           <div class="fr-company-descr">
             <p class="text-justify default-height"><%= @channel.company_description %></p>
-          </div>
+          </div>           
           <div class="row">
             <div class="col-xs-12">
-              <p>Find Us:</p>
+              <p class="main_class">Find Us:</p>
               <ul class="social-links">
                 <% unless @channel.website.blank?  %>
                 <li><a href="<%= @channel.website%>" target="_blank"><i class="fa fa-globe"></i><span><%=@channel.website%></span></a></li>
