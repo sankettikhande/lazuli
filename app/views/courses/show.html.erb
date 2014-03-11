@@ -11,12 +11,11 @@
       <div class="col-sm-2 col-md-2 nopadding-left">
         <% unless @user_subscription.blank? %>
           <% unless @course.course_admin_user_id == current_user.id %>
-          <div class="sub-ends">
-            <p class="text-center">
-              <a data-toggle="modal" data-target="#modal-window" data-remote="true" href="/subscriptions/4/subscribe" data-no-turbolink = 'true'>Your subscription expires <br/>on <b> <%= @user_subscription.expiry_date.try(:strftime,"#{@user_subscription.expiry_date.day.ordinalize} %b, %Y") %></b></a>
-            </p>
-          </div>
-          <%#= link_to("Extend Subscription", subscribe_subscription_path(@course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) if user_signed_in? %>
+            <div class="sub-ends">
+              <p class="text-center">
+                <a data-toggle="modal" data-target="#modal-window" data-remote="true" href="/subscriptions/4/subscribe" data-no-turbolink = 'true'>Your subscription expires <br/>on <b> <%= @user_subscription.expiry_date.try(:strftime,"#{@user_subscription.expiry_date.day.ordinalize} %b, %Y") %></b></a>
+              </p>
+            </div>
           <% end %>
         <% else %>
           <div>
