@@ -6,7 +6,7 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     
-    can [:manage], User do |u|
+    can [:update], User do |u|
       u == user
     end
 
