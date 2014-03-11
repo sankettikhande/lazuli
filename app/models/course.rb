@@ -71,7 +71,7 @@ class Course < ActiveRecord::Base
   end 
 
   def course_subscription_params
-    errors.add(:base, "Please select atleat one subscription.") if self.course_subscriptions.blank?
+    errors.add(:base, "Please select atleast one subscription.") if self.course_subscriptions.blank?
   end
 
   def course_admin_user
