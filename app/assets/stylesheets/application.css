@@ -60,3 +60,11 @@
 .place-video #disabled_link_video{
 	height: 100px;
 }
+
+.bx-wrapper .bx-viewport{
+  box-shadow: none;
+}
+
+.bx-wrapper{
+  max-width: 100% !important;
+}

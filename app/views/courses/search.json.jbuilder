@@ -1,1 +1,1 @@
-json.courses @courses.map{ |c| c.name}
+json.courses @courses.map{ |c| c.title}
