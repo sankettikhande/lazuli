@@ -14,8 +14,7 @@ Lazuli::Application.routes.draw do
     		get 'search_user'
         get 'new_bulk'
         post 'create_bulk'
-        get 'search'
-        get 'contact_us'
+        get 'search'        
     	end
     	member do
     		get 'get_user'
@@ -30,6 +29,12 @@ Lazuli::Application.routes.draw do
         get 'search'
       end
     end
+
+    resources :messages do
+      collection do
+        get 'search'
+      end
+    end    
 
     resources	:contents do
       collection do
