@@ -3,8 +3,9 @@ class CourseSubscription < ActiveRecord::Base
   belongs_to :course
   belongs_to :subscription
 
-  validates_presence_of :subscription_price, :if => :subscription_id?
+  validates_presence_of :subscription_price, :message => '^Please enter price for selected subscriptions.', :if => :subscription_id?
   validates_uniqueness_of :subscription_id, :scope => :course_id
+  validates_numericality_of :subscription_price, :message => "^Please enter numeric value for subscription price.", :if => Proc.new { |s| !s.subscription.is_trial_subscription? }
 
   before_destroy :check_course_subscription
 
@@ -16,4 +17,5 @@ class CourseSubscription < ActiveRecord::Base
   		return false
   	end
   end
+
 end
