@@ -15,7 +15,8 @@ class VideosController < ApplicationController
 
 	private
 
-	def sphinx_condition(tag)
-		tag.blank? ? {:status => 'Published'} : { :tags => "#{tag}*", :status => 'Published' }
+	def sphinx_condition(tags)
+		public_condition = {:channel_type => "Public",:status => 'Published'}
+		tags.blank? ? public_condition : public_condition.deep_merge!({:tags => tags})
 	end
 end

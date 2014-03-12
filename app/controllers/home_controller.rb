@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
   def index
     if user_signed_in?
-      @videos = Video.joins(:topic).order("videos.id desc").where("topics.status = ? and videos.status = ?", "Published", "Published").limit(Settings.data_count.latest_video)
+      @videos = Video.joins(topic: :channel).order("videos.id desc").where("topics.status = ? and videos.status = ? and channels.channel_type = ?", "Published", "Published", "Public").limit(Settings.data_count.latest_video)
       @subscribed_courses = UserChannelSubscription.user_subscribed_courses(current_user)
       @courses = Course.public_channel_courses(10) if @subscribed_courses.blank?
     else
-      @topics =  Topic.published.not_bookmarked.order("id desc").first(3)
+      @topics =  Topic.published.joins(:channel).where("channels.channel_type = ?", "Public").not_bookmarked.order("id desc").first(3)
       @courses = Course.public_channel_courses(3)
       respond_to do |format|
         format.html{ render 'devise/sessions/new', :layout => 'devise' }

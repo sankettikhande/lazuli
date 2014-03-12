@@ -139,8 +139,9 @@ class Channel < ActiveRecord::Base
       options[:sSearch] = options[:sSearch] || ""
       options[:iDisplayLength] = options[:iDisplayLength] || 15
       search_options.deep_merge!(:conditions => {:channel_type => channel_type})
+      condition_string = "@(name) #{options[:sSearch]}*"
       sphinx_options.merge!(search_options).deep_merge!(:sql => {:joins => {:courses => :topics}, :include => {:courses => :topics}}, :conditions => {:topic_status => 'Published'})
-      Channel.search(options[:sSearch], sphinx_options).page(page).per(options[:iDisplayLength])
+      Channel.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
     end
   end
 end
