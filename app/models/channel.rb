@@ -73,6 +73,7 @@ class Channel < ActiveRecord::Base
   end
 
   def update_channel_admin_user_ids
+    User.eliminate_role(self.admin_user_id_was,:channel_admin, :channel => self)
     User.assign_role(admin_user_id, :channel_admin)
     self.courses.includes(:topics =>[:videos]).each do |course|
       course.update_attribute(:channel_admin_user_id, admin_user_id)
@@ -84,8 +85,7 @@ class Channel < ActiveRecord::Base
   end
 
   def remove_channel_admin_role
-    u = User.find self.admin_user_id
-    u.remove_role "channel_admin" if u.administrated_channels.blank?
+    User.eliminate_role(self.admin_user_id,:channel_admin)
   end
 
   def permitted_courses current_user

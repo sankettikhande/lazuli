@@ -16,7 +16,7 @@ class UserChannelSubscription < ActiveRecord::Base
   validates :user_id, :uniqueness => {:scope => [:channel_id, :course_id], :message => "^User has already subscribed to this course."}
   after_save :update_channel_user_count
   after_save :update_course_user_count
-  after_save :update_course_admin, :if => :create_permission_disabled?
+  before_save :update_course_admin, :if => :create_permission_disabled?
   after_destroy :update_user_count, :update_course_admin
 
   def update_channel_user_count

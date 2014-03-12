@@ -13,7 +13,7 @@
             <li class="<%=  set_selected("users") %>"><%= link_to 'Manage Users',admin_users_path, "data-no-turbolink" => true %></li>
         <% end %>
         <li class="<%=  set_selected(["contents", "courses", "topics"]) %>"><%= link_to 'Manage Content',admin_contents_path, "data-no-turbolink" => true %></li>
-        <%if can? :manage, User %>
+        <%if can? :manage, Channel %>
           <li class="<%=  set_selected("channels") %>"><%= link_to 'Manage Channels',admin_channels_path, "data-no-turbolink" => true %></li>
         <% end %> 
       </ul>
