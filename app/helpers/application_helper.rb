@@ -68,6 +68,8 @@ module ApplicationHelper
     default_options = {:separator => ">>"}
     options = default_options.merge(options)
     url = request.fullpath.split("?").first
+    url.gsub!('new','Add Single user') if url == '/admin/users/new'
+    url.gsub!('new_bulk','Add Multiple users') if url == '/admin/users/new_bulk'
     crumbs = []
     if ["index"].include? params[:action]
       crumbs << params[:controller].split("/")
