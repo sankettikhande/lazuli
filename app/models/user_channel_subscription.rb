@@ -75,4 +75,8 @@ class UserChannelSubscription < ActiveRecord::Base
     course = self.course
     course.channel_course_permissions.first.permission_create && course.course_admin_user_id.blank?
   end
+
+  def course_permission_share
+    self.course.channel_course_permissions.first.permission_share
+  end
 end
