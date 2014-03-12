@@ -4,8 +4,8 @@ class SessionsController < Devise::SessionsController
 
   def create
     unless params[:user][:email].blank?
-      user=User.find_by_email(params[:user][:email])
-      if user.confirmed?
+      user = User.find_by_email(params[:user][:email])
+      if user && user.confirmed?
         resource = warden.authenticate(:scope => resource_name, :recall => 'sessions#failure')
         if resource
           store_location
@@ -15,7 +15,7 @@ class SessionsController < Devise::SessionsController
           render :action => :failure
         end
       else
-        @error_message = "You have to confirm your account before continuing."
+        @error_message = user.blank? ? "You dont have valid account.Please sign in." : "You have to confirm your account before continuing."
         render :action => :failure
       end
     else
