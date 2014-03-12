@@ -18,14 +18,11 @@
       add_fav = '' 
       rem_fav = 'hidden' 
     end %>
-  <% if current_user.sharable_course?(@course.id) %>
-    <div class = "col-sm-12 col-md-2"><%= social_share_button_tag(@course.name, :url => course_topic_video_url(@course.id, @topic.id, @video.id)) %>
-    </div>
-    <div class="col-sm-12 col-md-6">
-  <% else %>
-    <div class="col-sm-12 col-md-8">
-  <% end %>
+  <div class="col-sm-12 col-md-8">
     <div class="video-save-options">
+      <span>
+        <%= link_to button_field("fa fa-share", 'btn btn-link active', 'Share'), '#', :data => {:target => "#share_modal", :toggle => 'modal'} if !current_user.sharable_course?(@course.id) %>
+      </span> 
       <span id='add-favourite' <%= add_fav %>>
         <%= link_to button_field("fa fa-star", 'btn btn-link active', 'Add to Favourites'), favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
       </span>
@@ -39,4 +36,18 @@
     </div>
   </div>
   <!-- col-4 ends -->
+</div>
+
+<div class="modal fade" id="share_modal" tabindex="-1" role="dialog" aria-labelledby="share_modal" aria-hidden="true" data-backdrop="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Share</h4>
+      </div>
+      <div class='modal-body'>
+        <%= social_share_button_tag(@course.name, :url => course_topic_video_url(@course.id, @topic.id, @video.id)) %>        
+      </div>
+    </div>
+  </div>
 </div>

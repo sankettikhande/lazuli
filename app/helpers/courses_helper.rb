@@ -52,4 +52,10 @@ module CoursesHelper
 		end
 		"?t=" << str unless str.blank?
 	end
+
+	def subscription_end_on(user_subscription)
+		days = user_subscription.expiry_date - Date.today
+		(days > 7) ? (return false) : (return true)
+	end
+
 end

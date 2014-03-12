@@ -76,6 +76,19 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 .navbar-container {padding-right: 15px}
 .no-container {margin: 0;padding: 0}
 
+
+/**********  =Homepage *********************/
+
+/*.srch-bar button.lens-btn {width: 40px}
+*/.srch-bar input.home-srch-bar {border:none;margin-left: -3px;}
+
+
+.three-btns .col-xs-4 {padding-right: 5px;padding-left: 5px}
+.three-btns .col-xs-4:first-child {padding-left: 15px}
+.three-btns .col-xs-4:last-child {padding-right: 15px}
+
+.three-btns .col-xs-4 .btn {padding: 0 6px}
+
 /*********** +Multilevel Dropdown for Homepage *********/
 
 .dropdown-submenu{
@@ -330,6 +343,20 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
     color:    #9c9c9c;
 }
 
+/***********   =Placeholder        *****/
+.srch-bar ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #000;
+}
+.srch-bar :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #000;
+}
+.srch-bar ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #000;
+}
+.srch-bar :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #000;
+}
+
 .left-padding-fix {padding-left: 6px;}
 
 .welcome-text {color:#fff;margin-bottom: 10px;}
@@ -363,7 +390,7 @@ a.btn {height:34px;line-height: 2.2em}
 .home-carousel-inner img {min-width: 160px;min-height: 122px;}
 
 .welcome-videos .carousel-inner {background: #fff;height: 175px}
-.welcome-videos .item img {max-width: 160px;height: auto;border: 3px solid #fff;margin: 10px auto; }
+.welcome-videos .item img {max-width: 160px;height: auto;border: 3px solid #fff;margin: 10px auto; min-width: 160px;}
 
 .yellow-shadow {
 -webkit-box-shadow: 0px 0px 5px 0px #737373;
@@ -762,4 +789,12 @@ body {padding-bottom: 70px;}
 .login_error{color: #FF0000}
 .recommends-carousel-inner {height: 122px !important;background-color:#f5f5f5;font-size: 16px;padding-top:40px;}
 .main_class{font-size:16px;}
-.channel_breadcrumb li{margin-top:0px!important;}
+.right-align{float:right;}
+
+
+/*** =Responsive ***********************/
+
+@media (max-width: 320px) {
+.welcome-text h4 {width: 100%}
+
+}

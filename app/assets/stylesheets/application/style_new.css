@@ -8,3 +8,24 @@
 	text-align: center;
 	color: black;
 }
+#share_modal .modal-dialog{
+	width:300px !important;
+}
+
+#share_modal .social-share-button .social-share-button-twitter {
+	background: url("/assets/tshare.png") !important;
+	width: 81px;
+	height: 29px;
+}
+
+#share_modal .social-share-button .social-share-button-google_plus {
+	background: url("/assets/gshare.png") !important;
+	width: 81px;
+	height: 29px;
+}
+
+#share_modal .social-share-button .social-share-button-facebook {
+	background: url("/assets/fshare.png") !important;
+	width: 81px;
+	height: 29px;
+}

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
-  validates_format_of :phone_number, :with => /^$|^[0-9\ \+\.\,\(\)\/\-\ \/]+$/, :message => "^Contact number can't be blank"
+  validates_format_of :phone_number, :with => /^$|^[0-9\ \+\.\,\(\)\/\-\ \/]+$/, :message => "^Contact number is invalid."
   validate :subscription_params
   include Cacheable
 
@@ -262,4 +262,10 @@ class User < ActiveRecord::Base
       self.subscribed_course_ids.include?(video_course_id) || video.demo
     end
   end
+
+  def wachable_admin_channel_course? course_id
+    wachable_course = Course.includes(:channel).where('courses.channel_admin_user_id = ?', self.id).pluck('id')
+    wachable_course.include?(course_id) if wachable_course
+  end  
+
 end
