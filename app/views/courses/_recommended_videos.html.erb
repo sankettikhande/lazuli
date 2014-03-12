@@ -6,7 +6,11 @@
         <div class="col-sm-12">
           <!-- Carousel-1 Begins -->
           <div class="slider4">
-            <%= "No Recommended videos available" if @recommended_videos.blank? %>
+            <%  if @recommended_videos.blank? %>
+            <div class="recommends-carousel-inner text-center">
+              No Recommended videos available
+            </div >
+            <% else %>
             <% @recommended_videos.each_with_index do |video, index| %>
               <% if can? :show, video %>
                 <div class="slide">
@@ -23,6 +27,7 @@
                   </div>
                 </div>
               <% end %>
+            <% end %>
             <% end %>
           </div>
           <!-- Carousel Ends -->
