@@ -226,6 +226,18 @@ class User < ActiveRecord::Base
     user.add_role(role) if !user.has_role? role
   end
 
+  def self.eliminate_role(user_id, role, options ={} )
+    user = User.find(user_id)
+    if role == :channel_admin && options[:channel]
+      administrated_abilities = user.administrated_channels-[options[:channel]]
+    elsif role == :channel_admin
+      administrated_abilities = user.administrated_channels
+    else role == :course_admin
+      administrated_abilities = user.administrated_courses
+    end
+    user.remove_role(role) if administrated_abilities.blank?
+  end
+
   def set_course_admin_user_id
     course_ids = self.user_channel_subscriptions.where(:permission_create => true).map(&:course_id)
     Course.set_course_admin_user_ids(course_ids, id)
