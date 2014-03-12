@@ -262,4 +262,10 @@ class User < ActiveRecord::Base
       self.subscribed_course_ids.include?(video_course_id) || video.demo
     end
   end
+
+  def wachable_admin_channel_course? course_id
+    wachable_course = Course.includes(:channel).where('courses.channel_admin_user_id = ?', self.id).pluck('id')
+    wachable_course.include?(course_id) if wachable_course
+  end  
+
 end
