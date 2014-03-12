@@ -128,6 +128,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def permitted_courses
+    if self.is_admin?
+      Course.all
+    else
+      Course.joins(:user_channel_subscriptions).where("channel_admin_user_id =? OR course_admin_user_id = ? OR user_channel_subscriptions.user_id = ?", self.id, self.id, self.id).group(:id)
+    end
+  end
+
   def self.find_for_oauth(oauth_raw_data, oauth_user_data, signed_in_resource=nil )
     return User.where("(provider = '#{oauth_raw_data.provider}' AND uid = '#{oauth_raw_data.uid}') OR email='#{oauth_user_data.email}'").first || User.create!(name:oauth_user_data.name,
                             actual_name:oauth_user_data.name,
@@ -274,6 +282,5 @@ class User < ActiveRecord::Base
   def wachable_admin_channel_course? course_id
     wachable_course = Course.includes(:channel).where('courses.channel_admin_user_id = ?', self.id).pluck('id')
     wachable_course.include?(course_id) if wachable_course
-  end  
-
+  end
 end
