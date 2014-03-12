@@ -63,16 +63,14 @@ class CoursesController < ApplicationController
 	end
 
 	def bookmark_sec_format(time)
-		str= time
-    	if str.include?('h') || str.include?('m')
+		str = time
+		unless str.blank?	
 	        str= str.include?('h') ? str.gsub('h',':') : str.insert(0, '00:') 
 		    str= str.include?('m') ? str.gsub('m',':') : str << '00:' 
 		    str = str.include?('s') ? str.gsub('s','') : str << '00'
-		    bookmarks_time= DateTime.parse(str).strftime("%H:%M:%S").split(":")
-	        bookmark_sec = bookmarks_time.first.to_i * 3600 + bookmarks_time.second.to_i * 60 + bookmarks_time.third.to_i
-	    else
-	        bookmark_sec = str.include?('s') ?  str.gsub('s','') : "" 
-	    end 
+		    bookmarks_time= DateTime.parse(str).strftime("%H:%M:%S").split(":") 
+		end    
+        bookmark_sec = bookmarks_time.first.to_i * 3600 + bookmarks_time.second.to_i * 60 + bookmarks_time.third.to_i unless bookmarks_time.blank?
 	    return bookmark_sec unless bookmark_sec.blank?  
     end		
 
