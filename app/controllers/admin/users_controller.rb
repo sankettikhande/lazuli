@@ -11,10 +11,6 @@ class Admin::UsersController < AdminController
     @users = User.sphinx_search(params, current_user)   
   end
 
-  def contact_us
-    @contact_us =ContactUs.sphinx_search(params, current_user)     
-  end  
-
   def new
     @user = User.new
     @user.user_channel_subscriptions.build
