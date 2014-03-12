@@ -15,7 +15,7 @@ class SessionsController < Devise::SessionsController
           render :action => :failure
         end
       else
-        @error_message = user.blank? ? "You dont have valid account.Please sign in." : "You have to confirm your account before continuing."
+        @error_message = user.blank? ? "You dont have valid account. Please sign in." : "You have to confirm your account before continuing."
         render :action => :failure
       end
     else
