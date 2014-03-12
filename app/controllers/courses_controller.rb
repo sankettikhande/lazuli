@@ -69,7 +69,7 @@ class CoursesController < ApplicationController
 		    str= str.include?('m') ? str.gsub('m',':') : str << '00:' 
 		    str = str.include?('s') ? str.gsub('s','') : str << '00'
 		    bookmarks_time= DateTime.parse(str).strftime("%H:%M:%S").split(":")
-	        bookmark_sec = bookmarks_time.first.to_i * 3600 + bookmarks_time.second.to_i * 60 + bookmarks_time.third.to_i
+	        bookmark_sec = bookmarks_time.first.to_i * 3600 + bookmarks_time.second.to_i * 60 + bookmarks_time.third.to_i unless bookmarks_time.blank?
 	    else
 	        bookmark_sec = str.include?('s') ?  str.gsub('s','') : "" 
 	    end 

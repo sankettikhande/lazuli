@@ -4,13 +4,13 @@
       <h4>Recommended Videos</h4>
       <div class="row">
         <div class="col-sm-12">
-          <!-- Carousel-1 Begins -->
-          <div class="slider4">
+          <!-- Carousel-1 Begins -->         
             <%  if @recommended_videos.blank? %>
             <div class="recommends-carousel-inner text-center">
               No Recommended videos available
             </div >
             <% else %>
+             <div class="slider4">
             <% @recommended_videos.each_with_index do |video, index| %>
               <% if can? :show, video %>
                 <div class="slide">
