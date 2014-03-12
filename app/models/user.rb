@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
-  validates_format_of :phone_number, :with => /^$|^[0-9\ \+\.\,\(\)\/\-\ \/]+$/, :message => "^Contact number can't be blank"
+  validates_format_of :phone_number, :with => /^$|^[0-9\ \+\.\,\(\)\/\-\ \/]+$/, :message => "^Contact number is invalid."
   validate :subscription_params
   include Cacheable
 
