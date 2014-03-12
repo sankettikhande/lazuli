@@ -4,8 +4,13 @@ class ChannelsController < ApplicationController
 	end
 
 	def show
-		@channel = Channel.cached_find(params[:id])
+		parent=request.referrer
+		@channel = Channel.cached_find(params[:id])		 
 		@channel_courses = @channel.published_topic_courses
+		if parent
+			parent = parent.split('/').last
+			@main_parent = (parent == 'browse_course') ? 'Browse Our Library' : 'Our Partners'
+		end 	
 	end
 
 	def search
