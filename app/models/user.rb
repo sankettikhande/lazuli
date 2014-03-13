@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
 
   after_create :add_user_role
   after_save :set_course_admin_role, :set_course_admin_user_id
+  after_destroy :update_channel_admin, :if => :is_channel_admin?
 
   def confirm_status
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
@@ -36,6 +37,13 @@ class User < ActiveRecord::Base
   def is_any_admin?
     role_names = roles.map(&:name)
     !(role_names & Role.admin_roles).blank?
+  end
+
+  def update_channel_admin
+    admin = User.with_role(:admin)
+    self.administrated_channels.each do |channel|
+      channel.update_attribute(:admin_user_id, admin.id)
+    end
   end
 
   def add_user_role
@@ -117,6 +125,14 @@ class User < ActiveRecord::Base
       Channel.all
     else
       Channel.joins(:courses).where("courses.channel_admin_user_id =? OR courses.course_admin_user_id = ?", self.id, self.id).group(:id)
+    end
+  end
+
+  def permitted_courses
+    if self.is_admin?
+      Course.all
+    else
+      Course.joins('LEFT OUTER JOIN user_channel_subscriptions ON user_channel_subscriptions.course_id = courses.id').where("channel_admin_user_id =? OR course_admin_user_id = ? OR user_channel_subscriptions.user_id = ?", self.id, self.id, self.id).group(:id)
     end
   end
 
@@ -266,6 +282,5 @@ class User < ActiveRecord::Base
   def wachable_admin_channel_course? course_id
     wachable_course = Course.includes(:channel).where('courses.channel_admin_user_id = ?', self.id).pluck('id')
     wachable_course.include?(course_id) if wachable_course
-  end  
-
+  end
 end
