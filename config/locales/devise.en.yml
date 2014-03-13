@@ -67,7 +67,7 @@ en:
       channel: "Not authorized to Create any Channel"
       course: "Not Authorized to Create any Course"
     update:
-      user: "Not authorized to Update this User"
+      user: "Successfully Updated"
       channel: "Not authorized to Update this Channel"
       course: "Not authorized to Update this Course"
       topic: "Not authorized to Update this Topic"

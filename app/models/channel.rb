@@ -73,6 +73,7 @@ class Channel < ActiveRecord::Base
   end
 
   def update_channel_admin_user_ids
+    User.eliminate_role(self.admin_user_id_was,:channel_admin, :channel => self)
     User.assign_role(admin_user_id, :channel_admin)
     self.courses.includes(:topics =>[:videos]).each do |course|
       course.update_attribute(:channel_admin_user_id, admin_user_id)
@@ -84,8 +85,7 @@ class Channel < ActiveRecord::Base
   end
 
   def remove_channel_admin_role
-    u = User.find self.admin_user_id
-    u.remove_role "channel_admin" if u.administrated_channels.blank?
+    User.eliminate_role(self.admin_user_id,:channel_admin)
   end
 
   def permitted_courses current_user
@@ -139,8 +139,9 @@ class Channel < ActiveRecord::Base
       options[:sSearch] = options[:sSearch] || ""
       options[:iDisplayLength] = options[:iDisplayLength] || 15
       search_options.deep_merge!(:conditions => {:channel_type => channel_type})
+      condition_string = "@(name) #{options[:sSearch]}*"
       sphinx_options.merge!(search_options).deep_merge!(:sql => {:joins => {:courses => :topics}, :include => {:courses => :topics}}, :conditions => {:topic_status => 'Published'})
-      Channel.search(options[:sSearch], sphinx_options).page(page).per(options[:iDisplayLength])
+      Channel.search(condition_string, sphinx_options).page(page).per(options[:iDisplayLength])
     end
   end
 end

@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates_presence_of :actual_name, :message => "^Full name can't be blank"
   validates_presence_of :name, :message => "^User name can't be blank"
-  validates_format_of :phone_number, :with => /^$|^[0-9\ \+\.\,\(\)\/\-\ \/]+$/, :message => "^Contact number can't be blank"
+  validates_format_of :phone_number, :with => /^$|^[0-9\ \+\.\,\(\)\/\-\ \/]+$/, :message => "^Contact number is invalid."
   validate :subscription_params
   include Cacheable
 
@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
 
   after_create :add_user_role
   after_save :set_course_admin_role, :set_course_admin_user_id
+  after_destroy :update_channel_admin, :if => :is_channel_admin?
 
   def confirm_status
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
@@ -36,6 +37,13 @@ class User < ActiveRecord::Base
   def is_any_admin?
     role_names = roles.map(&:name)
     !(role_names & Role.admin_roles).blank?
+  end
+
+  def update_channel_admin
+    admin = User.with_role(:admin)
+    self.administrated_channels.each do |channel|
+      channel.update_attribute(:admin_user_id, admin.id)
+    end
   end
 
   def add_user_role
@@ -117,6 +125,14 @@ class User < ActiveRecord::Base
       Channel.all
     else
       Channel.joins(:courses).where("courses.channel_admin_user_id =? OR courses.course_admin_user_id = ?", self.id, self.id).group(:id)
+    end
+  end
+
+  def permitted_courses
+    if self.is_admin?
+      Course.all
+    else
+      Course.joins('LEFT OUTER JOIN user_channel_subscriptions ON user_channel_subscriptions.course_id = courses.id').where("channel_admin_user_id =? OR course_admin_user_id = ? OR user_channel_subscriptions.user_id = ?", self.id, self.id, self.id).group(:id)
     end
   end
 
@@ -226,6 +242,18 @@ class User < ActiveRecord::Base
     user.add_role(role) if !user.has_role? role
   end
 
+  def self.eliminate_role(user_id, role, options ={} )
+    user = User.find(user_id)
+    if role == :channel_admin && options[:channel]
+      administrated_abilities = user.administrated_channels-[options[:channel]]
+    elsif role == :channel_admin
+      administrated_abilities = user.administrated_channels
+    else role == :course_admin
+      administrated_abilities = user.administrated_courses
+    end
+    user.remove_role(role) if administrated_abilities.blank?
+  end
+
   def set_course_admin_user_id
     course_ids = self.user_channel_subscriptions.where(:permission_create => true).map(&:course_id)
     Course.set_course_admin_user_ids(course_ids, id)
@@ -249,5 +277,10 @@ class User < ActiveRecord::Base
     else
       self.subscribed_course_ids.include?(video_course_id) || video.demo
     end
+  end
+
+  def wachable_admin_channel_course? course_id
+    wachable_course = Course.includes(:channel).where('courses.channel_admin_user_id = ?', self.id).pluck('id')
+    wachable_course.include?(course_id) if wachable_course
   end
 end

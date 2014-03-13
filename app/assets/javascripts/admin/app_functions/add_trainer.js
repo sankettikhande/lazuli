@@ -4,9 +4,13 @@ var countChecked = function() {
 var n = $( ".as_lead input:checked").length;
 if (n >= 2){
   alert("You can add only one Lead Trainer");
-    $(this).attr('checked',false); 
+    $(this).closest('.checked').removeClass('checked')
+    return false;
   }
 };
 countChecked();
 $( "input[type=checkbox]").on( "click", countChecked );
 
+$(document).on('nested:fieldRemoved:course_trainers', function(event) {
+	$(event.target).find("[class*='validate[']").remove()
+});
