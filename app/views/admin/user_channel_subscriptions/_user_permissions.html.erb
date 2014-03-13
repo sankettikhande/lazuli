@@ -61,7 +61,7 @@
 	        	<div class="col-md-2">
 	        		<%= f.check_box 'permission_watch' %><label>Watch</label>
 	        	</div>
-	        	<% if f.object.permission_share %>
+	        	<% if @user_subscription.course_permission_share %>
 		        	<div class="col-md-2">
 		        		<%= f.check_box 'permission_share' %><label>Share</label>
 		        	</div>

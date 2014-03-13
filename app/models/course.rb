@@ -29,7 +29,7 @@ class Course < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validate :course_name
   validate :course_subscription_params
-  accepts_nested_attributes_for :course_trainers, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :course_trainers, :reject_if => proc { |c| !c['name'].present? }, :allow_destroy => true
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => proc { |a| !a['subscription_id'].present? }, :allow_destroy => true
   #SCOPES
