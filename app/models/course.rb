@@ -50,12 +50,12 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def courses_trainer_name    
+  def courses_trainer_name
     if self.course_trainers
-     lead_trainer = self.course_trainers.as_lead.first.name  if self.course_trainers.as_lead.first
-     trainer_name = lead_trainer.present? ? lead_trainer : self.course_trainers.pluck('name').join(',') 
-    end   
-    self.trainer_name ? trainer_name : ''  
+      lead_trainer = self.course_trainers.as_lead.first.name  if self.course_trainers.as_lead.first
+      trainer_name = lead_trainer.present? ? lead_trainer : self.course_trainers.pluck('name').join(',')
+    end
+    trainer_name
   end
 
   def title
