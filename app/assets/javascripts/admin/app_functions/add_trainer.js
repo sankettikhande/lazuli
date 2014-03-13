@@ -11,3 +11,6 @@ if (n >= 2){
 countChecked();
 $( "input[type=checkbox]").on( "click", countChecked );
 
+$(document).on('nested:fieldRemoved:course_trainers', function(event) {
+	$(event.target).find("[class*='validate[']").remove()
+});
