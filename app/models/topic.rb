@@ -23,6 +23,7 @@ class Topic < ActiveRecord::Base
   scope :not_bookmarked, where(:is_bookmark_video => false)
 
   after_save :update_videos_sphinx_delta
+  after_save :change_status
 
   before_update :change_video_status
 
@@ -83,7 +84,7 @@ class Topic < ActiveRecord::Base
       assign_video << video_data.vimeo_id
     end
     create_album(assign_video) if assign_video.any?
-    self.update_attribute(:status, "Published")
+    update_column(:status, "InProcess")
   end
   handle_asynchronously :upload_to_vimeo
 
@@ -172,7 +173,8 @@ class Topic < ActiveRecord::Base
   end
 
   def change_status
-    update_column(:status, "Published") if self.videos && self.videos.all? {|v| v.published? }
-    update_column(:status, "Saved") if self.videos && self.videos.all? {|v| v.saved? }
+    update_column(:status,"PartialPublished") if self.videos.pluck(:status).include?("Saved")
+    update_column(:status, "Published") if self.videos.all? {|v| v.published? }
+    update_column(:status, "Saved") if self.videos.all? {|v| v.saved? }
   end
 end
