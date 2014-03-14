@@ -48,7 +48,7 @@ module CoursesHelper
 		arr = ["h","m","s"]
 		str = ""
 		time_str.split(":").each_with_index do |time, index|
-			str << time.to_i.to_s << arr[index] unless time.to_i.zero?
+			str << time.to_i.to_s << arr[index]
 		end
 		"?t=" << str unless str.blank?
 	end
