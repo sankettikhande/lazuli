@@ -6,17 +6,18 @@ class ContactUs < ActiveRecord::Base
   
   def self.admin_inbox_count current_user
     if current_user.is_admin?
-       ContactUs.where("created_at > #{current_user.last_sign_in_at.try(:strftime,"%F")} and created_at < #{current_user.current_sign_in_at.try(:strftime,"%F")}").count         
+      ContactUs.where("created_at > #{current_user.last_sign_in_at.try(:strftime,"%F")} or created_at < #{current_user.current_sign_in_at.try(:strftime,"%F")}").count
     end 
-  end  
+  end
 
-   def self.sphinx_search options, current_user,user_ids=[]    	
+  def self.sphinx_search options, current_user,user_ids=[]
     sphinx_options, search_options, sort_options,select_option = {}, {}, {},{}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
     query = options[:sSearch].blank? ? "" : "#{options[:sSearch]}*"
     page = (options[:iDisplayStart].to_i/options[:iDisplayLength].to_i) + 1
     sort_column_direction = [options["mDataProp_#{options[:iSortCol_0]}"], options[:sSortDir_0]].join(" ")
     sort_options.merge!(:order => sort_column_direction)
+    sphinx_options.merge!(sort_options).merge!(select_option).merge!(search_options)
     if current_user.is_admin?       
 	    if options[:sSearch_1] == 'all' && !options[:sSearch].blank?
 	      condition_string = "@(name,email,subject) #{options[:sSearch]}*"
