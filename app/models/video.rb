@@ -41,6 +41,7 @@ class Video < ActiveRecord::Base
   
   after_save :update_bookmarks, :if => :bookmarked?
   after_create :update_admins_and_creator_ids
+  after_destroy :change_status
   
   def upload_single_video
     video = self.upload
@@ -236,5 +237,9 @@ class Video < ActiveRecord::Base
   def tags_str
     tag_list = self.tags.map { |tag| tag.name }
     tag_list.uniq.map {|tag| "*" << tag << "*"}.join(" | ")
+  end
+
+  def change_status
+    self.topic.change_status
   end
 end
