@@ -148,8 +148,13 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 .navbar-right .dropdown-fix {right: auto !important;}
 
 #lazuli-top-menu .input-group input#main_search {border: none}
+#lazuli-top-menu .lazuli-dd-user-btn button {background: #454545;}
+#lazuli-top-menu .lazuli-dd-user-btn:hover button.btn {background: #000;border-color: #000}
+#lazuli-top-menu .lazuli-dd-user-btn button.text-btn {border-top-right-radius: 0;border-bottom-right-radius: 0}
 
 .login-options li a {text-transform: capitalize;}
+
+
 
 /************* +Multilevel Ends ****************************/
 
@@ -493,6 +498,9 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 .user-option-btns li {display: inline-block;width:32.6%;}
 .user-option-btns li a {float: left;border-radius: 0 ;line-height: 34px}
+.user-option-btns li .fa {margin-right: 3px;}
+
+
 
 .breadcrumb {background: #fff;margin-bottom: 0;}
 .breadcrumb>li+li:before {content:">";color: #095795; padding: 0 2px !important;}
@@ -529,6 +537,24 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .place-video {height: 332px;border: 1px solid #ccc}
 .place-video iframe {width: 100%;height: 100%;}
 
+
+/*.place-video {
+  position: relative;
+  padding-bottom: 56.25%; 
+  height: 0;
+  max-height: 332px;
+  min-height: 332px;
+  border:1px solid #ccc;
+}
+.place-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+*/
 .video-descr {background: #f5f5f5 !important;margin-top: 10px}
 .video-descr .channel-logo-pic {border: 1px solid #919191;height: 55px;}
 .video-descr .channel-logo-pic img {min-height: 100%;min-width: 100%;max-width: 100%;max-height: 100%}
@@ -536,7 +562,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .video-descr-text p {color: #000}
 
 .course-menu {background: #095795;padding-top: 2px;padding-right: 10px;padding-bottom: 10px;}
-.course-menu h5 {color: #fff;margin-top: 7px;margin-left: 10px;}
+.course-menu h5 {color: #fff;margin-top: 7px;margin-left: 10px;text-transform: capitalize;}
 .course-menu h5 a {text-decoration: underline;color: #fff;}
 .course-menu h5 a:hover {text-decoration: none;color: #fff;}
 
@@ -803,13 +829,18 @@ body {padding-bottom: 70px;}
 @media (max-width: 320px) {
 .welcome-text h4 {width: 100%}
 
-.container {padding-right: 0;padding-left: 0}
-
 .landing-carousel-inner.carousel-inner {height: 135px;overflow: hidden;}
 
+.btn.block-xs {width: 100%}
 
+.nopadding-right-xs {padding-right: 0}
+.nopadding-left-xs {padding-left: 0}
 }
 
+
+.test-1 {border:1px solid #000;}
+.test-2 {border:1px solid #0f0;}
+.test-3 {border:1px solid #00f;}
 
 .float-center {
   float: right;
