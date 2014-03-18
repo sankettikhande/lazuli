@@ -6,7 +6,7 @@ class ContactUs < ActiveRecord::Base
   
   def self.admin_inbox_count current_user
     if current_user.is_admin?
-      ContactUs.where("created_at > #{current_user.last_sign_in_at.try(:strftime,"%F")} or created_at < #{current_user.current_sign_in_at.try(:strftime,"%F")}").count
+      ContactUs.where("created_at > ? and created_at <= ?", current_user.last_sign_in_at, Time.now.utc).count
     end 
   end
 
