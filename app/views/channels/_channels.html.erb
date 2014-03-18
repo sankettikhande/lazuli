@@ -18,7 +18,7 @@
                       <div class="row">
                         <div class="col-xs-12 col-sm-9 col-md-10">
                           <ul class="list-content">
-                            <li class="title"><%= link_to course.name.titleize, course_url(course.id) %></li>
+                            <li class="title"><%= link_to course.name.titleize, list_of_course_url(course.id) %></li>
                             <li class="descr hidden-xs"><%= course.description.truncate(300) %></li>
                           </ul>
                         </div>

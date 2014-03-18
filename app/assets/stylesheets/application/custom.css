@@ -123,6 +123,24 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
     margin-right:-10px;
 }
 
+@media (max-width: 1024px) {
+
+.lazuli-course-dd .dropdown-submenu > a:after{
+    display:none;}
+
+.lazuli-course-dd .dropdown-submenu .dropdown-menu {padding: 0}
+
+.lazuli-course-dd .open .dropdown-menu > li > a {padding-left: 15px}
+
+.hide-this-menu {display: none !important; }
+
+.lazuli-course-dd {position: absolute;z-index: 999999;}
+.lazuli-course-dd-content {background: #333}
+.navbar-nav .open .dropdown-menu {background: #fff}
+
+
+}
+
 .dropdown-submenu:hover > a:after{
     border-left-color:#ffffff;
 }
@@ -284,7 +302,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 .navbar-inverse {background: #454646;border-color: #454646;border-bottom: none;}
 .navbar-nav li {font-size: 1em;text-transform: uppercase;}
 .navbar-nav li a{color:#ececec !important;}
-.navbar-nav li a:hover {color: #fff !important;background: #000 !important}
+#lazuli-top-menu .navbar-nav li a:hover {color: #fff !important;background: #000}
 
 
 .navbar-default .navbar-nav > .a {filter:progid:DXImageTransform.Microsoft.gradient(enabled = 'false'); }
@@ -499,7 +517,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .user-option-btns li {display: inline-block;width:32.6%;}
 .user-option-btns li a {float: left;border-radius: 0 ;line-height: 34px}
 .user-option-btns li .fa {margin-right: 3px;}
-
+.user-option-btns .btn {box-shadow: none;padding:0 }
 
 
 .breadcrumb {background: #fff;margin-bottom: 0;}
@@ -610,7 +628,7 @@ box-shadow: none;
 
 /***** =Footer ********/
 footer .navbar {margin-bottom: 0;min-height: 40px;border: 0}
-footer .navbar-nav li a {padding-top: 10px;padding-bottom: 10px;color: #ececec !important;font-size: 14px;}
+footer .navbar-nav li a {padding-top: 10px;padding-bottom: 10px;color: #ececec !important;font-size: 14px;padding:10px }
 
 footer .navbar-nav li a:hover {text-decoration: none;background: #000 !important}
 
@@ -623,21 +641,21 @@ footer .navbar-header .btn {padding: 2px 10px !important}
 .fav-content {margin-top: 5px}
 
 
-.box-record {margin-bottom: 10px}
+.box-record {margin-bottom: 10px;min-height: 153px;background: #fff;}
 li.box-title {background: #454746;color: #fff;padding: 4px 6px}
 li.box-title.active {background: #579c1f;color: #fff}
 
 .btn-trans {background: transparent;color: #fff;border: none;}
 
 li.box-details {background: #fefefe;padding:12px 8px }
-.box-details .item-thumb {padding:3px;border:1px solid #ccc;background: #fff}
-.box-details .item-thumb:hover {border-color: #333;opacity: 0.7}
-.box-details .item-categ a {font-family: 'MyriadProBold',Sans-Serif;color: #3f3f34}
-.box-details .item-descr a {color:#3f3f3f;font-family: 'MyriadProRegular',Sans-Serif}
-.box-details .subs-period a {color: #3f3f3f;}
-.box-details .subs-date a{color: #f00;font-size: 12px}
-.box-details .item-viewed {color: #3f3f3f}
-.box-details .item-viewed span {color: #000}
+li.box-details .item-thumb {padding:3px;border:1px solid #ccc;background: #fff}
+li.box-details .item-thumb:hover {border-color: #333;opacity: 0.7}
+li.box-details .item-categ a {font-family: 'MyriadProBold',Sans-Serif;color: #3f3f34}
+li.box-details .item-descr a {color:#3f3f3f;font-family: 'MyriadProRegular',Sans-Serif}
+li.box-details .subs-period a {color: #3f3f3f;}
+li.box-details .subs-date a{color: #f00;font-size: 12px}
+li.box-details .item-viewed {color: #3f3f3f}
+li.box-details .item-viewed span {color: #000}
 
 
  /*********** =Thumbnail Sizes*********************************/
@@ -697,8 +715,8 @@ footer .navbar-inverse .navbar-toggle:hover {background: none;color: #000;}
 /*************************   =media 756 mobile ends    ************************************/
 @media only screen and (max-width:767px) {
 #lazuli-top-menu .navbar-form {border:0;margin: 0}
-#lazuli-top-menu .navbar-nav .open .dropdown-menu li a{color: #fff !important}
-
+/*#lazuli-top-menu .navbar-nav .open .dropdown-menu li a{color: #fff !important}
+*/
 .carousel-box-1 .carousel-inner {height: 125px }
 .carousel-box-1 .item a img {max-width: 100px;}
 .carousel-box-1 .carousel-control {top: 20%}
