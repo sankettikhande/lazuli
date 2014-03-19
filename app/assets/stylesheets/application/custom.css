@@ -608,7 +608,7 @@ box-shadow: none;
 .child-course-menu li span {float: right;padding-right: 20px;}
 .child-video-menu li {background: url('/assets/frontend/play.png') no-repeat 1px 10px !important;padding-left: 20px !important;}
 .parent-course-menu li ul.level-bookmark {background:#095795;padding-left: 2px}
-.parent-course-menu li ul.level-bookmark li.add-star {background: url('/assets/frontend/white-star.png') no-repeat;padding-left: 5px;background-position: 5px center }
+.parent-course-menu li ul.level-bookmark li.add-star {background: url('/assets/frontend/bookmark-icon.png') no-repeat;padding-left: 5px;background-position: 5px center }
 .parent-course-menu li ul.level-bookmark li.add-star.active {background-color: #063c6b}
 
 .user-rcmnd-videos {margin-top: -1px}
