@@ -5,7 +5,7 @@
     <div class="col-xs-12">
       <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-3">
-          <div class="fr-company-logo">
+          <div class="fr-company-logo text-center">
             <%= image_tag(@course.image.url, :alt => "Image", :class => "img-responsive") %>
             <h4><%= @course.name.titleize %></h4>
           </div>
@@ -19,13 +19,13 @@
               <% trainers = @course.course_trainers %>
               <% unless trainers.blank? %>
               <b>List of Trainers:</b> <br/> 
-               <ul class="trainers_list">             
+               <ul class="trainers_list row">             
                 <% trainers.each do |trainer| %>
                   <li>
-                    <div class="trainer_info">Name:</div><div class="trainer_name"> <%=  trainer.name.titleize %></div>
-                    <div  class="trainer_info">Biography:</div><div class="trainer_name"><%=  trainer.biography %></div>
+                    <div class="trainer_info col-xs-12 col-sm-2">Name:</div><div class="trainer_name col-xs-12 col-sm-10"> <%=  trainer.name.titleize %></div>
+                    <div  class="trainer_info col-xs-12 col-sm-2">Biography:</div><div class="trainer_name col-xs-12 col-sm-10"><%=  trainer.biography %></div>
                      <div class="trainer_separator"></div> 
-                    </li>                    
+                  </li>                    
                 <% end %>                
                 </ul>
               <% end %>           
