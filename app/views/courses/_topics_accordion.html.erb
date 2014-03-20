@@ -15,11 +15,11 @@
                 <% if cannot? :show, video %>
                 <li class="<%= is_active_video(video) %>">
                 <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
-                  <span>
-                    <%= image_tag("/assets/frontend/lock.png") %>
-                  </span>
                   <a href="#"> <%= video.title.truncate(40) %>
                     <span><%= format_duration(video) %></span>
+                    <span style="cursor:default">
+                    <%= image_tag("/assets/frontend/lock.png") %>
+                  </span>
                   </a>
                 </div>
               </li>
