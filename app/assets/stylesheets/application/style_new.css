@@ -31,5 +31,10 @@
 }
 
 .browse_subscription {
-  margin-top:10px;
+  margin-top:15px;
+  border-bottom: none !important;
+}
+.browse_subscription li {line-height: 8px;}
+.one_yr_subscription{
+	font-size: 10px;
 }

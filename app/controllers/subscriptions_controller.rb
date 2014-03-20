@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => :subscribe
 
 	def confirm_payment_and_subscribe
 		params[:user_id] = current_user.id
@@ -40,9 +40,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscribe
-  	@course = Course.find params[:id]
-		@current_subscription = current_user.current_subscription(@course.id)
-		@course_subscriptions = @course.available_course_subscriptions
+    if user_signed_in?
+      @course = Course.find params[:id]
+      @current_subscription = current_user.current_subscription(@course.id)
+      @course_subscriptions = @course.available_course_subscriptions
+    end
   end
 
   def notification
