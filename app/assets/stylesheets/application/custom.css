@@ -67,8 +67,7 @@ hr.white {border-color:#fff !important;}
 
 body {padding-top:55px !important;font-family:'MyriadProRegular', Sans-Serif !important;padding-bottom: 60px;font-size: 14px;}
 
-h1,h2,h3,h4,h5,h6,.myriad-bold {font-family: 'MyriadProBold', Sans-Serif;}
-b,strong {font-weight: normal;font-family: 'MyriadProBold', Sans-Serif;}
+h1,h2,h3,h4,h5,h6,b,strong,.myriad-bold {font-family: 'MyriadProBold', Sans-Serif;font-weight: normal;}
 p {font-family: 'MyriadProRegular',Sans-Serif;}
 
 
@@ -162,6 +161,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 #lazuli-top-menu .navbar-nav .dropdown-menu li a {color: #000 !important}
 #lazuli-top-menu .navbar-nav .dropdown-menu li a:hover {color: #fff !important}
 #lazuli-top-menu .navbar-form {border:0;}
+#lazuli-top-menu .navbar-form .input-group .input-group-btn button {border-right:1px solid #ccc;}
 #lazuli-top-menu.navbar {margin-bottom: 0}
 .navbar-right .dropdown-fix {right: auto !important;}
 
@@ -476,6 +476,11 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .courses-list .remove-button {line-height: 80px;text-align: center;}
 
 .course-featured-video img{max-width: 100px;max-height: 70px;margin: 12px auto;border: 3px solid #fff}
+ 
+/****** =browse courses ***********/
+.course-each .list-content {border-bottom: 1px solid #eaeaea;padding-bottom: 5px;}
+.course-each .list-content li.title a {color: #000}
+
 
 
 .course-logo-img img {margin: 12px auto;max-width: 150px;max-height: 70px;border:2px solid #fff;}
@@ -732,7 +737,6 @@ ul.list-content {list-style-type:none;padding-left: 0}
 .list-content li.subs-date span {display: inline-block;}
 .list-content li.subs-date span a{text-decoration: underline;float: none;}
 .list-content li.subs-date span a:hover {text-decoration: none}
-
 
 
 .landing-carousel .item img {max-width: 140px;height: auto;border: 3px solid #fff;margin: 10px auto; }
