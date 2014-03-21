@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_course_ids
-    self.user_channel_subscriptions.pluck("course_id")
+    self.user_channel_subscriptions.where("expiry_date >= ?",Date.today).pluck("course_id")
   end
 
   def subscribed_courses
@@ -268,7 +268,7 @@ class User < ActiveRecord::Base
   end
 
   def trial_course? course_id
-    self.user_channel_subscriptions.where(:subscription_id => 1).pluck(:course_id).include? (course_id)
+    self.user_channel_subscriptions.joins(:subscription).where("is_trial_subscription = ? AND expiry_date >= ?", true,Date.today).pluck(:course_id).include? (course_id)
   end
 
   def watchable_video? video, video_course_id

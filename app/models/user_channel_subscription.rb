@@ -60,7 +60,7 @@ class UserChannelSubscription < ActiveRecord::Base
 
   def subscription_expired?
     return false if self.permission_create
-    (self.expiry_date - self.subscription_date).to_i <= 0
+    (self.expiry_date <= Date.today)
   end
 
   def self.search_course_ids(user)
@@ -79,4 +79,5 @@ class UserChannelSubscription < ActiveRecord::Base
   def course_permission_share
     self.course.channel_course_permissions.first.permission_share
   end
+
 end
