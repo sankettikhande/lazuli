@@ -44,3 +44,6 @@ Notes
   background-color: #EBFCEE;
   border-color: #3cc051;
 }
+ @media (max-width: 767px){
+  .center-xs {text-align: center;}
+  }
