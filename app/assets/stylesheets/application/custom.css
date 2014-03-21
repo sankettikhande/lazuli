@@ -26,7 +26,7 @@
 ul,ol,dd {list-style-type: none;padding: 0;margin: 0}
 
 .seperator5 {min-height: 5px}
-.seperator10 {min-height: 10px}
+.seperator10,.seperator-10 {min-height: 10px}
 .seperator15 {min-height: 15px}
 .seperator20 {min-height: 20px}
 

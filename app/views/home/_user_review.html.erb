@@ -15,60 +15,61 @@
       <div class="row">
         <div class="col-xs-12">
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-7 col-sm-7">
             <p>Overall Course</p>
           </div>         
-          <div class="col-xs-4"> 
+          <div class="col-xs-5 col-sm-5"> 
           <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :overall_course, rates, :class => "star" %>
             <% end %>           
           </div>
         </div> 
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-7 col-sm-7">
             <p>Quality of Audio/Video</p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :quality_of_audio_video, rates, :class => "star" %>
             <% end %>            
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-7 col-sm-7">
             <p>Quality of Explanation</p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :quality_of_explanation, rates, :class => "star" %>
             <% end %>          
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-7 col-sm-7">
             <p>Course Structure</p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :course_structure, rates, :class => "star" %>
             <% end %>           
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-7 col-sm-7">
             <p>Accessibility</p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :accessibility, rates, :class => "star" %>
             <% end %>           
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-7 col-sm-7">
+            <div class="seperator-5 visible-xs"></div>
             <p>Value for Money</p>
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
                 <%= f.radio_button :value_of_money, rates, :class => "star" %>
             <% end %>            
@@ -80,10 +81,10 @@
         <div class="row">
           <div class="col-xs-12">
             <div class="row">
-              <div class="col-xs-8">
+              <div class="col-xs-12 col-sm-7">
                 <p>Would you like to recommend this site to anyone ?</p>
               </div>
-              <div class="col-xs-4 nopadding-left">
+              <div class="col-xs-12 col-sm-5 center-xs">
                   <label class="radio-inline">
                     <%= f.radio_button :recommand_site, true, :id => "inlineradio1"  %>
                       Yes                    
@@ -93,6 +94,7 @@
                   </label>
               </div>
             </div>
+            <div class="seperator-10"></div>
           </div>
         </div>
 
