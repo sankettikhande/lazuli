@@ -37,12 +37,9 @@
                             <% if user_signed_in? %>
                               <% if current_user && !current_user.permitted_courses.include?(course) %>
                                 <li>
-                                  <!-- <div class="form-group"> -->
                                   <%= link_to("Subscribe", subscribe_subscription_path(course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
-                                  <!-- </div> -->
                                 </li>
                                   <%= browse_course_subscriptions(course) %>
-                                <li class="one_yr_subscription"> More Options..</li>
                               <% else %>
                                 <li>
                                   <%= link_to("Subscribe", "#", :class => "btn btn-danger disabled") %>
@@ -54,7 +51,6 @@
                               </li>
                                </li>
                                   <%= browse_course_subscriptions(course) %>
-                                <li class="one_yr_subscription"> More Options..</li>
                             <% end %>
                             </ul>
                           </div>
