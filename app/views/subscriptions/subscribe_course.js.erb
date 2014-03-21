@@ -1,2 +1,6 @@
-$("#modal-window").show();
-$("#modal-window").html("<%= j(render 'shared/payment', :course => @course, :params => @params, :course_subscription => @course_subscription) %>");
+<% if @subscription.is_trial_subscription? %>	
+	window.location.href ='<%= course_url(@course.id) %>'
+<% else %>
+	$("#modal-window").show();
+	$("#modal-window").html("<%= j(render 'shared/payment', :course => @course, :params => @params, :course_subscription => @course_subscription) %>");
+<% end %>
