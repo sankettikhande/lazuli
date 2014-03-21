@@ -59,7 +59,7 @@
         </div>
         <div class="modal-footer">
           <a data-dismiss = 'modal' class="btn btn-danger cancel_button">Cancel</a>
-          <%= submit_tag "Subscribe", :class => "btn btn-primary" %>
+          <%= submit_tag "Subscribe", :class => "btn btn-primary", :data => { disable_with: "Please wait.." } %>
         </div>
       <% end %>
     </div>
