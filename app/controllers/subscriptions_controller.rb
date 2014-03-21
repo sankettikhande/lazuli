@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, :except => :subscribe
 
 	def confirm_payment_and_subscribe
 		params[:user_id] = current_user.id
@@ -25,7 +25,15 @@ class SubscriptionsController < ApplicationController
 	def subscribe_course
 		@params = params[:course_subscription]
 		@course = Course.cached_find(params[:id])
-		@course_subscription = @course.course_subscriptions.where(:subscription_id => @params[:subscription_id]).first
+		@subscription = Subscription.cached_find(@params[:subscription_id])
+		if @subscription.is_trial_subscription?
+			user_channel_subscription = UserChannelSubscription.new(:channel_id => @params[:channel_id], :course_id => @params[:course_id], :user_id => current_user.id, :subscription_id => @params[:subscription_id])
+			user_channel_subscription.set_subscription_date_range(@subscription.calculated_days, current_user , params[:course_id])
+			user_channel_subscription.save
+			flash[:success] = "Subscription to the #{@course.name} Was Succesful"
+		else
+			@course_subscription = @course.course_subscriptions.where(:subscription_id => @params[:subscription_id]).first
+		end
 		respond_to do |format|
 			format.js
 		end
@@ -40,9 +48,11 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscribe
-  	@course = Course.find params[:id]
-		@current_subscription = current_user.current_subscription(@course.id)
-		@course_subscriptions = @course.available_course_subscriptions
+    if user_signed_in?
+      @course = Course.find params[:id]
+      @current_subscription = current_user.current_subscription(@course.id)
+      @course_subscriptions = @course.available_course_subscriptions
+    end
   end
 
   def notification

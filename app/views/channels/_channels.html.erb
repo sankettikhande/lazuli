@@ -16,9 +16,9 @@
                   <% channel.courses.each do |course| %>
                     <div class="course-each">
                       <div class="row">
-                        <div class="col-xs-12 col-sm-9 col-md-10">
+                        <div class="col-xs-12 col-sm-6 col-md-7">
                           <ul class="list-content">
-                            <li class="title"><%= link_to course.name.titleize, course_url(course.id) %></li>
+                            <li class="title"><%= link_to course.name.titleize, list_of_course_url(course.id) %></li>
                             <li class="descr hidden-xs"><%= course.description.truncate(300) %></li>
                           </ul>
                         </div>
@@ -29,6 +29,30 @@
                                 <%= link_to(image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block" ), course_video_path(course.id)) %>
                               </div>
                             </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3">
+                          <div class="col-xs-12">
+                            <ul class="list-content browse_subscription">
+                            <% if user_signed_in? %>
+                              <% if current_user && !current_user.permitted_courses.include?(course) %>
+                                <li>
+                                  <%= link_to("Subscribe", subscribe_subscription_path(course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
+                                </li>
+                                  <%= browse_course_subscriptions(course) %>
+                              <% else %>
+                                <li>
+                                  <%= link_to("Subscribe", "#", :class => "btn btn-danger disabled") %>
+                                </li>
+                              <% end %>
+                            <% else %>
+                              <li>
+                                <%= link_to("Subscribe", subscribe_subscription_path(course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'})  %>
+                              </li>
+                               </li>
+                                  <%= browse_course_subscriptions(course) %>
+                            <% end %>
+                            </ul>
                           </div>
                         </div>
                       </div>
@@ -45,6 +69,6 @@
   </div>
 <!-- courses-list 1 ends -->
 <% end %>
-
+<div id="modal-window" class="modal fade black-text" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none; color:black"></div>
 <%= paginate channels, :remote => true %>
 <!-- courses-list 1 ends -->
