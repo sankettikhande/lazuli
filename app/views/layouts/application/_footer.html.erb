@@ -5,6 +5,7 @@
         <a class="navbar-toggle" data-toggle="collapse" data-target="#footer-body"><i class="fa fa-ellipsis-h"></i></a>
         <% list_array = ["courses", "favourites", "watch_lists", "histories"] %>
         <% if(user_signed_in?) %>
+          <% unless (params[:controller] == "courses"&& params[:action] == "list") %>
           <ul class="footer-bar-btns visible-sm visible-xs">
             <% if params[:controller] == "courses" %>
               <li class="visible-xs"><a href="#" class="btn btn-success" data-toggle="offcanvas" title="Course Menu"><i class="fa fa-2x fa-exchange"></i></a></li>
@@ -15,6 +16,7 @@
               <li><%= link_to(raw_field("fa fa-2x fa-list-ul orange-text"), watch_lists_url, :class => "btn #{shared_active?("watch_lists")}") %></li>
             <% end %>
           </ul>
+          <% end %>
         <% end %>
       </div>
       <div class="navbar-collapse collapse" id="footer-body">
