@@ -54,11 +54,6 @@ module CoursesHelper
 		"?t=" << str unless str.blank?
 	end
 
-	def subscription_end_on(user_subscription)
-		days = user_subscription.expiry_date - Date.today
-		(days > 7 || days < 0) ? (return false) : (return true)
-	end
-
 	def subscription_button_link course
 		link_to("Subscribe", subscribe_subscription_path(course), {:remote => true, :class => "btn btn-danger", 'data-toggle' =>  "modal", 'data-target' => '#modal-window'})
 	end
