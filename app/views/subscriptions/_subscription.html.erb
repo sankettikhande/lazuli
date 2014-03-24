@@ -19,7 +19,7 @@
                 <% if subscribed_course.subscription_expired? %>
                   <a href="#">Subscription Expired</a>
                   <span>
-                    <a href="#">Renew Subscription</a>
+                    <%= link_to("Renew Subscription", subscribe_subscription_path(subscribed_course.course_id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
                   </span>
                 <% end %>
               </li>
@@ -40,5 +40,6 @@
       </div>
     </div> <!-- row ends -->
   </div>
+  <div id="modal-window black-text" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;"></div>
 <% end %>
 <%= javascript_include_tag "application/main_app/landing_search.js"%>
