@@ -36,6 +36,7 @@ class Course < ActiveRecord::Base
   after_save :set_channel_permission, :update_topics_sphinx_delta
   after_initialize :create_associations
   before_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
+  before_update :update_user_channel_subscriptions_channel_id, :if => :channel_id_changed?
   after_create :set_channel_admin_user_ids
 
   def self.public_channel_courses last_limit
@@ -93,6 +94,10 @@ class Course < ActiveRecord::Base
     update_attribute(:channel_admin_user_id, channel.admin_user_id)
   end
 
+  def update_user_channel_subscriptions_channel_id
+    self.user_channel_subscriptions.update_all(channel_id: self.channel_id)
+  end
+
   # updates topics indices and invoke method to update video indices
   def update_topics_sphinx_delta
     topics.each do |t|
@@ -103,7 +108,7 @@ class Course < ActiveRecord::Base
 
   def paypal_url(return_url, notify_url, options = {})
     values = {
-      :business => 'rakesh.patri.123@gmail.com',
+      :business => 'eobrien-facilitator@bokmeister.com',
       :cmd => '_cart',
       :upload => 1,
       :return => return_url,
