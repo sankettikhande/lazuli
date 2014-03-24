@@ -80,4 +80,7 @@ class UserChannelSubscription < ActiveRecord::Base
     self.course.channel_course_permissions.first.permission_share
   end
 
+  def days_to_expire
+    days = self.expiry_date - Date.today
+  end
 end

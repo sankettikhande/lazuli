@@ -83,8 +83,12 @@ class Topic < ActiveRecord::Base
       video_data = video.upload
       assign_video << video_data.vimeo_id
     end
-    create_album(assign_video) if assign_video.any?
-    update_column(:status, "InProcess")
+    if assign_video.any?
+      create_album(assign_video)
+      update_column(:status, "InProcess")
+    else
+      update_attribute(:status, "Published")
+    end
   end
   handle_asynchronously :upload_to_vimeo
 
