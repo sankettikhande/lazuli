@@ -20,7 +20,7 @@
           </div>         
           <div class="col-xs-5 col-sm-5"> 
           <% UserReview.valid_ratings.each do |rates| %>
-                <%= f.radio_button :overall_course, rates, :class => "star" %>
+                <%= f.radio_button :overall_course, rates, :class => "star {split:2}" %>
             <% end %>           
           </div>
         </div> 
@@ -30,7 +30,7 @@
           </div>
           <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
-                <%= f.radio_button :quality_of_audio_video, rates, :class => "star" %>
+                <%= f.radio_button :quality_of_audio_video, rates, :class => "star {split:2}" %>
             <% end %>            
           </div>
         </div>
@@ -40,7 +40,7 @@
           </div>
           <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
-                <%= f.radio_button :quality_of_explanation, rates, :class => "star" %>
+                <%= f.radio_button :quality_of_explanation, rates, :class => "star {split:2}", :style => "color: yellow"%>
             <% end %>          
           </div>
         </div>
@@ -50,7 +50,7 @@
           </div>
           <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
-                <%= f.radio_button :course_structure, rates, :class => "star" %>
+                <%= f.radio_button :course_structure, rates, :class => "star {split:2}" %>
             <% end %>           
           </div>
         </div>
@@ -60,7 +60,7 @@
           </div>
           <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
-                <%= f.radio_button :accessibility, rates, :class => "star" %>
+                <%= f.radio_button :accessibility, rates, :class => "star  {split:2}" %>
             <% end %>           
           </div>
         </div>
@@ -71,7 +71,7 @@
           </div>
           <div class="col-xs-5 col-sm-5">
             <% UserReview.valid_ratings.each do |rates| %>
-                <%= f.radio_button :value_of_money, rates, :class => "star" %>
+                <%= f.radio_button :value_of_money, rates, :class => "star {split:2}" %>
             <% end %>            
           </div>
         </div>                                                                                               
@@ -128,3 +128,4 @@
 </div><!-- /.modal-dialog -->
 <%= javascript_include_tag 'jquery-star-rating'%>
 <%=javascript_include_tag "application/main_app/devise.js"%>
+<%=javascript_include_tag "application/jquery.metadata.js"%>

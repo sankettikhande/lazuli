@@ -16,7 +16,7 @@
                 <li class="<%= is_active_video(video) %>">
                 <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
                   <a href="#"> <%= video.title.truncate(40) %>
-                    <span><%= format_duration(video) %></span>
+                    <span class="width75"><%= format_duration(video) %></span>
                     <span style="cursor:default">
                     <%= image_tag("/assets/frontend/lock.png") %>
                   </span>
