@@ -33,7 +33,8 @@ module CoursesHelper
 
 
 	def second_to_duration(seconds)
-		seconds.divmod(60).join(":")
+		time_array = seconds.divmod(60)
+		time_array.map{|x| (x == time_array.last) ? sprintf( "%02d", x): x}.join(":")
 	end
 
 	def format_duration(video)
