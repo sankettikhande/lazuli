@@ -1,13 +1,19 @@
 <% @course_topics.each do |topic| %>
-<ul class="row channel-each-course">
-  <li class="col-xs-12 channel-course-title"><%= link_to topic.title.titleize, course_url(topic.course_id) %></li>
-  <li class="col-xs-12">
-    <ul class="row">
-      <li class="col-xs-12 col-sm-8 col-md-8 channel-course-descr">
-         <%= topic.description %>
-      </li>     
-    </ul>
-  </li>
-</ul>
+  <ul class="row channel-each-course">
+    <div class="col-xs-7 col-sm-9 col-md-9">
+      <li class="col-xs-12 channel-course-title"><%= link_to topic.title.titleize, course_topic_url(@course.id, topic.id) %></li>
+      <li class="col-xs-12">
+        <ul class="row">
+          <li class="col-xs-12 col-sm-8 col-md-8 channel-course-descr">
+             <%= topic.description %>
+          </li>
+        </ul>
+      </li>
+    </div>
+    <div class="hidden-xs col-sm-3 col-md-3">
+      <div class="course-featured-video"><a href="">
+        <%= link_to image_tag(video_thumbnail_image(topic.videos.first, {:medium => true}), :alt => "Image", :class => "img-responsive center-block video-thumbnail"), course_topic_url(topic.course_id, topic.id) %></a>
+      </div>
+    </div>
+  </ul>
 <% end %>
-</div>
