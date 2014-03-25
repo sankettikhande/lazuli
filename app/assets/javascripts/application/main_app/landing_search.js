@@ -12,7 +12,7 @@ $( document ).ready(function() {
 		$.ajax({
 			type: "GET",
 			url: "/search/" + controller_name,
-			data: {sSearch: search_key, sSearch_1: "name"}
+			data: {sSearch: search_key, sSearch_1: "title"}
 		});
 	}
 });

@@ -18,7 +18,7 @@
         </ul>
       </li>
       <li class="col-xs-6 col-sm-2 col-md-2">
-        <%= link_to(image_tag(course_thumbnail_image(course), :alt => "Image", :class => "img-responsive center-block" ), course_video_path(course.id)) %>
+        <%= displaying_demo_videos_thumbnail(course) %>
       </li>
     </ul>
   </li>

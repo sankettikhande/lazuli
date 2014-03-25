@@ -52,7 +52,7 @@ class Channel < ActiveRecord::Base
   end
     
   def published_topic_courses
-    Channel.where(:id => self.id, :channel_type => 'public').includes(:courses => [:topics]).where("topics.status in (?)", ['Published', 'PartialPublished']).map{|c| c.courses }.flatten
+    Course.includes(:channel, :topics).where("topics.status in (?) AND channels.channel_type = ? AND courses.channel_id = ? ", ['Published', 'PartialPublished'], 'public', self.id)
   end
 
   def channel_admin_user

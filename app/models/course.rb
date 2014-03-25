@@ -194,6 +194,10 @@ class Course < ActiveRecord::Base
     CourseSubscription.where(:subscription_id => subscription_id, :course_id => self.id).first
   end
 
+  def latest_published_demo_video
+     Video.published.demo_videos.joins(:topic => [:course]).where("courses.id = ? AND topics.status IN (?)", self.id, ["published","partialPublished"]).order('id desc').limit(1).first
+  end
+
   def has_trial_videos?
     @course_trial_videos = []
     self.topics.published.includes(:videos).each do |topic|
