@@ -170,7 +170,7 @@ class Topic < ActiveRecord::Base
       videos = self.videos.published
       return videos.first if videos.any?
     else
-      video = self.videos.published.demo_videos
+      video = self.videos.published.demo_videos.first
       video = self.course.course_first_video(current_user) if video.blank?
       return video
     end
