@@ -12,13 +12,13 @@
       <h4>Search Results</h4>
       <div class="partial-courses-list-box">
         <%  @results.each do |result| %>
-        <% if result.instance_of?(Course) %>
-          <%= render 'home/course_results', :result => result%>
-        <% elsif result.instance_of?(Topic) %>
-         <%= render 'home/topic_results', :result => result%>
-        <% else %>
-         <%= render 'home/video_results', :result => result%>        
-        <% end %>
+          <% if result.instance_of?(Course) %>
+            <%= render 'home/course_results', :result => result%>
+          <% elsif result.instance_of?(Topic) %>
+           <%= render 'home/topic_results', :result => result%>
+          <% else %>
+           <%= render 'home/video_results', :result => result%>
+          <% end %>
         <% end %>
         <div><%= @results.count %> Results Found.</div>
         <%= paginate @results %>
