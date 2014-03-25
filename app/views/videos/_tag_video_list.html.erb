@@ -3,13 +3,7 @@
     <div class="row">
       <div class="col-xs-5 col-sm-2 col-md-2">
         <div class="course-logo-img">
-          <% if current_user.is_admin? || current_user.watchable_video?(video, video.topic.course_id)%>
-            <a href="#">
-              <%= link_to(image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" ), course_topic_video_url(video.topic.course_id, video.topic_id, video.id) )%>
-            </a>
-          <% else %>
-            <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" ), subscribe_subscription_path(video.topic.course_id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
-          <% end %>
+          <%= link_to(image_tag(video.topic.channel.image.url, :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), channel_url(video.topic.channel)) %>
         </div>
       </div>
       <div class="col-xs-7 col-sm-8 col-md-8">
@@ -17,7 +11,7 @@
             <li class="title">
               <ol class="breadcrumb">
                 <li>
-                  <a href="<%= course_path(video.topic.course_id)%>"><%= video.topic.course.name.truncate(35) %>
+                  <a href="<%= course_path(video.topic.course_id)%>"><%= video.course.name.truncate(35) %>
                   </a>
                 </li>
                 <li>
@@ -35,7 +29,13 @@
       </div>
       <div class="hidden-xs col-sm-2 col-md-2">
         <div class="course-featured-video">
-          <%= link_to( image_tag(course_thumbnail_image(video.topic.course, {:image_size => "medium"}), :alt => "Image", :class => "img-responsive center-block video-thumbnail"), course_path(video.topic.course_id)) %>
+          <% if current_user.is_admin? || current_user.watchable_video?(video, video.topic.course_id)%>
+            <a href="#">
+              <%= link_to(image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" ), course_topic_video_url(video.topic.course_id, video.topic_id, video.id) )%>
+            </a>
+          <% else %>
+            <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block" ), subscribe_subscription_path(video.topic.course_id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
+          <% end %>
         </div>
       </div>
     </div> <!-- row ends -->

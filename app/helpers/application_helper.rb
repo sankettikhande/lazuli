@@ -182,4 +182,13 @@ module ApplicationHelper
     link_arr << "<li class='active'>" + video.title.titleize + "</li></ol>"
     link_arr.join(" ").html_safe
   end
+
+  def displaying_demo_videos_thumbnail(course)
+    demo_video_to_display = course.latest_published_demo_video
+    if demo_video_to_display
+      link_to(image_tag(video_thumbnail_image(demo_video_to_display, {:medium => true}), :alt => "Image", :class => "img-responsive center-block video-thumbnail" ), course_topic_video_path(course.id, demo_video_to_display.topic.id, demo_video_to_display.id))
+    else
+      image_tag("no-demo.png",:alt => "Image", :class => "img-responsive center-block video-thumbnail")
+    end
+  end
 end
