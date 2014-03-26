@@ -207,7 +207,7 @@ class Course < ActiveRecord::Base
   end
 
   def available_course_subscriptions
-    self.course_subscriptions.delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?}
+    self.course_subscriptions.order('subscription_id').delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?}
   end
 
   def self.public_courses options
