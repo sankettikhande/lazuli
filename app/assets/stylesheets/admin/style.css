@@ -4084,9 +4084,3 @@ Responsive Flip Scroll Tables
   margin-bottom: 4px;
   height: 30px;
 }
-
-
-/* fixes for loader image */
-.js-spin-spinner {
-  background-image: url("/assets/uM2gq.gif") !important;
-}
