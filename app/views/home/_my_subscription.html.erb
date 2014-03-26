@@ -17,7 +17,7 @@
 </div> <!-- first row -->
 
 <script>
-<% if @subscribed_courses.count < 4 %>
+<% if @subscribed_courses.length < 4 %>
   $(function(){
     $('.courses-list-box').slimScroll({
       height: 'auto'

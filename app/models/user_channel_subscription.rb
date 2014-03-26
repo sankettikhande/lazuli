@@ -55,7 +55,7 @@ class UserChannelSubscription < ActiveRecord::Base
   end
 
   def self.user_subscribed_courses(user)
-    where(:user_id => user.id).includes([:channel, :course])
+    where(:user_id => user.id).includes([:channel, :course]).joins(:course => [:topics => [:videos]]).where("topics.status IN (?) AND videos.status =?", ['published', 'partialpublished'], 'published').group("user_channel_subscriptions.id")
   end
 
   def subscription_expired?

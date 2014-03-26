@@ -9,5 +9,5 @@ $(function() {
   $(".note").bind('click', function(ev) {
     return $(".note").fadeOut();
   });
-  return setTimeout(flashCallback, 3000);
+  return setTimeout(flashCallback, 8000);
 });
