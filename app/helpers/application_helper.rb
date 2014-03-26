@@ -183,12 +183,13 @@ module ApplicationHelper
     link_arr.join(" ").html_safe
   end
 
-  def displaying_demo_videos_thumbnail(course)
-    demo_video_to_display = course.latest_published_demo_video
-    if demo_video_to_display
-      link_to(image_tag(video_thumbnail_image(demo_video_to_display, {:medium => true}), :alt => "Image", :class => "img-responsive center-block video-thumbnail" ), course_topic_video_path(course.id, demo_video_to_display.topic.id, demo_video_to_display.id))
-    else
-      image_tag("no-demo.png",:alt => "Image", :class => "img-responsive center-block video-thumbnail")
+  def displaying_videos_thumbnail(source)
+    if source.is_a?(Course)
+      video_to_display = source.course_first_video
+      link_to(image_tag(video_thumbnail_image(video_to_display, {:medium => true}), :alt => "Image", :class => "img-responsive center-block video-thumbnail" ), course_topic_video_path(source.id, video_to_display.topic.id, video_to_display.id))
+    elsif source.is_a?(Topic)
+      video_to_display = source.topic_first_video
+      link_to(image_tag(video_thumbnail_image(video_to_display, {:medium => true}), :alt => "Image", :class => "img-responsive center-block video-thumbnail" ), course_topic_video_path(source.course_id, source.id, video_to_display.id))
     end
   end
 end
