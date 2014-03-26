@@ -18,10 +18,13 @@
               <li class="subs-date">
                 <% if subscribed_course.subscription_expired? %>
                   <a href="#">Subscription Expired</a>
-                  <span>
-                    <%= link_to("Renew Subscription", subscribe_subscription_path(subscribed_course.course_id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
-                  </span>
                 <% end %>
+                <% unless (subscribed_course.subscription_expired? or subscribed_course.days_to_expire > 7) %>
+                  <a class="subscribe_days" href="javascript:void(0)">Subscription Expires in <%= subscribed_course.days_to_expire.to_s.split('/').first %> days</a>
+                <% end %>
+                <span>
+                  <%= link_to("Renew Subscription", subscribe_subscription_path(subscribed_course.course_id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) if(subscribed_course.days_to_expire < 7) %>
+                </span>
               </li>
             <% end %>
           </ul>
