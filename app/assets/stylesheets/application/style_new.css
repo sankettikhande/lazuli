@@ -45,3 +45,7 @@
 span div.star-rating-on a {
   background-position: 0 -32px !important;
 }
+
+.slimScrollDiv, #courses_list_box {
+	height: auto !important;
+}

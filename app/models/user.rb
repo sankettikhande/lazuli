@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
 
   def current_subscription course_id
     current_subscription = self.user_channel_subscriptions.joins(:subscription).where(:course_id => course_id).first
-    current_subscription ? current_subscription.subscription.name : "Not Yet Subscribed."
+    current_subscription ? ((current_subscription.expiry_date <= Date.today) ? "Expired" : current_subscription.subscription.name) : "Not Yet Subscribed."
   end
 
   def list_subscribed_videos
