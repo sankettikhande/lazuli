@@ -180,7 +180,7 @@ class Course < ActiveRecord::Base
     Course.where(:id => course_ids).map { |c| c.update_attribute(:course_admin_user_id, user_id) if c.course_admin_user_id.blank?  } 
   end
 
-  def course_first_video(current_user)
+  def course_first_video
     @course_videos = []
     @videos = []
     self.topics.published.includes(:videos).each do |topic|

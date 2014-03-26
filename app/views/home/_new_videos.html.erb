@@ -15,8 +15,8 @@
                 <div class="<%= is_active_videos(index) %> item">
                   <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
                     <% if cannot? :show, video %>
-                      <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), alt: "Image"), subscribe_subscription_path(video.topic.course), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) %>
-                      <h6 class="hidden-xs"><%= video.title.titleize.truncate(30) %></h6>
+                      <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), alt: "Image"), course_topic_video_url(video.course.id, video.topic_id, video.id)) %>
+                      <h6 class="text-left"><%= video.title.titleize.truncate(30) %></h6>
                     <% else %>
                       <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
                         <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
