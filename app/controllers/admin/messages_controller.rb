@@ -1,6 +1,7 @@
 class Admin::MessagesController < AdminController	  
 
-  def index     
+  def index
+  	session[:index] = 'checked'
   end
 
   def search
