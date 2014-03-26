@@ -51,8 +51,8 @@ class CoursesController < ApplicationController
 
 	def load_video
 		return Video.published.cached_find(params[:video_id]) if params[:video_id]
-		return Topic.cached_find(params[:topic_id]).topic_first_video(current_user) if params[:topic_id]
-		@course.course_first_video(current_user)
+		return Topic.cached_find(params[:topic_id]).topic_first_video if params[:topic_id]
+		@course.course_first_video
 	end
 
 	def load_bookmark		

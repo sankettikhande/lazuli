@@ -13,8 +13,7 @@
     </div>
     <div class="hidden-xs col-sm-3 col-md-3">
       <div class="course-featured-video"><a href="">
-        <% first_published_video = topic.videos.published.first %>
-        <%= link_to image_tag(video_thumbnail_image(first_published_video, {:medium => true}), :alt => "Image", :class => "img-responsive center-block video-thumbnail"), course_topic_video_url(topic.course_id, topic.id,first_published_video) %></a>
+        <%= displaying_videos_thumbnail(topic) %></a>
       </div>
     </div>
   </ul>

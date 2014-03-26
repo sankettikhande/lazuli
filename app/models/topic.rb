@@ -165,15 +165,10 @@ class Topic < ActiveRecord::Base
     end
   end
 
-  def topic_first_video(current_user)
-    if (@user_subscription || (current_user && current_user.is_admin?))
-      videos = self.videos.published
-      return videos.first if videos.any?
-    else
-      video = self.videos.published.demo_videos.first
-      video = self.course.course_first_video(current_user) if video.blank?
-      return video
-    end
+  def topic_first_video
+    video = self.videos.published.demo_videos.first
+    video = self.videos.published.first if video.blank?
+    return video
   end
 
   def change_status
