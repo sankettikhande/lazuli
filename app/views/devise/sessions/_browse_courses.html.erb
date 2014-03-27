@@ -8,7 +8,7 @@
 				<% @courses.each do |course| %>
 					<% topics = course.topics %>
 						<li class="<%= 'dropdown-submenu' if topics.any? %>">
-						<%= link_to(course.name.titleize, course_video_path(course.id)) %>
+						<%= link_to(course.name.titleize.truncate(20), course_video_path(course.id)) %>
 						<%= render 'devise/sessions/browse_course_links', :topics => topics, :course => course if topics.any? %>
 					</li>
 				<% end %>

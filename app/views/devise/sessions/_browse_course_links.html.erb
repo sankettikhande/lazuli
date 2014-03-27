@@ -2,12 +2,12 @@
 	<% topics.each do |topic| %>
 		<% videos = topic.videos %>
 		<li class="<%= 'dropdown-submenu' if videos.any? %>">
-			<%= link_to(topic.title.titleize, course_video_path(course.id)) %>
+			<%= link_to(topic.title.titleize.truncate(20), course_video_path(course.id)) %>
 			<% if videos.any? %>
 				<ul class="dropdown-menu">
 					<% videos.each do |video| %>
 						<li>
-							<%= link_to(video.title.titleize, course_topic_video_url(course.id, video.topic_id, video.id)) %>
+							<%= link_to(video.title.titleize.truncate(20), course_topic_video_url(course.id, video.topic_id, video.id)) %>
 						</li>
 					<% end %>
 				</ul>
