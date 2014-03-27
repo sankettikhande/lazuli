@@ -298,6 +298,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 .navbar-inverse {background: #454646;border-color: #454646;border-bottom: none;}
 .navbar-nav li {font-size: 1em;text-transform: uppercase;}
 .navbar-nav li a{color:#ececec !important;}
+.navbar-nav.login-options li a:hover {background: #000}
 #lazuli-top-menu .navbar-nav li a:hover {color: #fff !important;background: #000}
 
 .navbar-default .navbar-nav > .a {filter:progid:DXImageTransform.Microsoft.gradient(enabled = 'false'); }
@@ -430,23 +431,9 @@ box-shadow:        0px 0px 5px 0px #737373;}
 .video-slides h4 {background: #e43e26;padding: 6px 10px;color: #fff;margin: 0;}
 
 /************* =Landing page Carousel ****************/
-
-.landing-carousel-inner.carousel-inner {height: 155px;overflow: hidden;}
-.landing-carousel-inner .active.left { left: -16.666666666666664%; }
-.landing-carousel-inner .next { left:  16.666666666666664%; }
-.landing-carousel-inner .prev {left: -16.666666666666664%;}
-.landing-carousel-inner .active.right {left: 16.666666666666664%;}
-
-.landing-carousel-inner {background: #fff}
-.landing-carousel .item img {max-width: 160px;height: auto;border: 3px solid #fff;margin: 10px auto 5px; }
-.landing-carousel .item h6 {margin-top: 0;font-family: 'MyriadProRegular',Sans-Serif;color: #454746}
-.landing-carousel .item h6:hover {color: #000;}
-
-
-.landing-carousel .carousel-control {top: 45px;background: none;width: 20px;height: 46px;opacity: 1;z-index: 99;color: #fff}
-.landing-carousel .carousel-control:hover {opacity: 0.6}
-.landing-carousel .carousel-control.left {background: url('/assets/frontend/carousel-back-left.png') no-repeat;line-height: 45px;margin-left: 0px;border-radius: 0 !important;text-indent: -2px;}
-.landing-carousel .carousel-control.right {background: url('/assets/frontend/carousel-back-right.png') no-repeat;line-height: 45px;margin-right:0px;border-radius: 0 !important;text-indent: 3px;}
+.video-slides .bx-viewport .slide img {max-width: 160px;height: auto;border: 3px solid #fff;margin: 10px auto 5px; }
+.video-slides .slide h6 {margin-top: 0;font-family: 'MyriadProRegular',Sans-Serif;color: #454746;max-width: 160px; margin: 1px 10px 10px;}
+.video-slides .slide h6:hover {color: #000;}
 
 .all-courses {border: 1px solid #063c6b;color: #fff;padding:5px 10px;border-radius: 4px}
 
@@ -456,6 +443,8 @@ box-shadow:        0px 0px 5px 0px #737373;}
 .courses-list {overflow: hidden;background: #fff;border-bottom: 5px solid #095795;}
 .courses-list:last-child {border-bottom: none;}
 .courses-list .list-content {list-style-type: none;color: #000;}
+
+.partners-list .course-logo-img h4 a {font-size: 16px;text-transform: capitalize;}
 
 ul.list-content {list-style-type:none;padding-left: 0;}
 .list-content li {margin-top: 5px;}
@@ -748,18 +737,11 @@ ul.list-content {list-style-type:none;padding-left: 0}
 .list-content li.subs-date span a{text-decoration: underline;float: none;}
 .list-content li.subs-date span a:hover {text-decoration: none}
 
-
-.landing-carousel .item img {max-width: 140px;height: auto;border: 3px solid #fff;margin: 10px auto; }
-.landing-carousel-inner.carousel-inner {height: 138px;overflow: hidden;}
-.landing-carousel-inner.carousel-inner .item {text-align: center;}
-.landing-carousel-inner .active.left { left: -50%; }
-.landing-carousel-inner .next { left:  50%; }
-.landing-carousel-inner .prev {left: -50%;}
-.landing-carousel-inner .active.right {left: 50%;}
-
 .footer-bar-btns li {display: inline-block;padding-left: 5px;}
 .footer-bar-btns li.offcanvas-toggler-btn a {margin-left: 5px;;margin-right:-30px }
 
+.sub-ends {min-height: 30px;font-size: 18px;}
+.sub-ends a {line-height: 30px;}
 
 footer #footer-body .navbar-nav li {font-size: 12px;}
 .courses-list-box {height: 200px;overflow-y:scroll;overflow-x: hidden;}
@@ -794,12 +776,6 @@ body {padding-bottom: 70px;}
 
 .welcome-videos .carousel-inner {height: 175px}
 .welcome-videos .item img {max-width: 120px;height: auto;}
-
-.landing-carousel-inner .active.left { left: -33.33333333333333%; }
-.landing-carousel-inner .next { left:  33.33333333333333%; }
-.landing-carousel-inner .prev {left: -33.33333333333333%;}
-.landing-carousel-inner .active.right {left: 33.33333333333333%;}
-
 
 }
 /**------------------ =Off Canvas----------------*/
@@ -852,6 +828,7 @@ body {padding-bottom: 70px;}
 
 .login_error{color: #FF0000}
 .recommends-carousel-inner {height: 122px !important;background-color:#f5f5f5;font-size: 16px;padding-top:40px;}
+
 .main_class{font-size:16px;}
 .right-align{float:right;}
 
@@ -860,8 +837,6 @@ body {padding-bottom: 70px;}
 
 @media (max-width: 320px) {
 .welcome-text h4 {width: 100%}
-
-.landing-carousel-inner.carousel-inner {height: 135px;overflow: hidden;}
 
 .btn.block-xs {width: 100%}
 
