@@ -22,8 +22,10 @@
               <% else %>
                 <div class="slide">
                   <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
+                  <a href="#">
                     <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
                     <p><%= video.title %></p>
+                  </a>
                   </div>
                 </div>
               <% end %>
@@ -42,7 +44,7 @@
     $(document).ready(function(){
       $('.slider4').bxSlider({
         slideWidth: 180,
-        minSlides: 2,
+        minSlides: 1,
         maxSlides: 6,
         moveSlides: 1,
         slideMargin: 10,
