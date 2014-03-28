@@ -3,36 +3,40 @@
     <div class="video-slides">
       <h4>New Videos</h4>
       <div class="row">
-        <div class="col-sm-12">
-          <!-- Carousel-1 Begins -->
-          <div class="carousel slide landing-carousel" id="new-vids" data-interval="false">
-            <!-- Carousel items -->
-            <div class="carousel-inner landing-carousel-inner">
-              <% if @videos.blank? %>
-                <span class='active sample_text'>No videos available</span>
-              <% end %>
-              <% @videos.each_with_index do |video, index| %>
-                <div class="<%= is_active_videos(index) %> item">
-                  <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
-                    <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), alt: "Image"), course_topic_video_url(video.course.id, video.topic_id, video.id)) %>
-                    <h6 class="text-left"><%= video.title.titleize.truncate(30) %></h6>
-                  </div>
-                </div>
-              <% end %>
+        <div class="col-sm-12">         
+          <% if @videos.blank? %>
+           <div class="recommends-carousel-inner text-center">
+            <span class='active sample_text'>No videos available</span>
+           </div> 
+          <% end %>
+         <div class="slider4"> 
+          <% @videos.each_with_index do |video, index| %>
+            <div class="slide">
+                <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), alt: "Image"), course_topic_video_url(video.course.id, video.topic_id, video.id)) %>
+                <h6 class="text-left"><%= video.title.titleize.truncate(30) %></h6>
             </div>
-            <!-- Carousel-1 nav -->
-            <a class="carousel-control left" href="#new-vids" data-slide="prev">
-              <i class="fa fa-caret-left"></i>
-            </a>
-            <a class="carousel-control right" href="#new-vids" data-slide="next">
-              <i class="fa fa-caret-right"></i>
-            </a>
-          </div>                
-          <!-- Carousel Ends -->
+          <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<%= javascript_include_tag "application/main_app/course.js"%>
+<script>
+  <% if !@videos.count.zero? %>
+    $(document).ready(function(){
+      $('.slider4').bxSlider({
+        slideWidth: 180,
+        minSlides: 1,
+        maxSlides: 6,
+        moveSlides: 1,
+        slideMargin: 10,
+        pager: false,
+        infiniteLoop: false,
+        hideControlOnEnd: false,
+        speed: 1000
+      });
+    });
+  <% end %>
+</script>
