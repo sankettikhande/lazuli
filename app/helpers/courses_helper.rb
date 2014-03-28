@@ -1,9 +1,9 @@
 module CoursesHelper
 	def vimeo_iframe_url
 		if params[:t].blank?
-			"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1"
+			"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1;autoplay=1"
 		else
-			"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1#t=#{params[:t]}"
+			"//player.vimeo.com/video/#{@video.vimeo_id}?api=1&amp;player_id=player_1;autoplay=1#t=#{params[:t]}"
 		end
 	end
 
