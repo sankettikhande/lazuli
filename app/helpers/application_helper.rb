@@ -108,9 +108,9 @@ module ApplicationHelper
   def set_title_for_id(fields, id)
     fields = fields.capitalize.singularize.constantize
     if(fields != Topic)
-      fields.find(id).name
+      fields.find(id).name.truncate(60)
     else
-      fields.find(id).title
+      fields.find(id).title.truncate(60)
     end
   end
 
@@ -177,9 +177,9 @@ module ApplicationHelper
   def courses_breadcrumbs1(course, topic, video)
     link_arr = []
     link_arr << "<ol class='breadcrumb'><li>" + link_to("Courses", "") + "</li>"
-    link_arr << "<li>" + link_to(course.name.titleize , course_video_url(course.id)) + "</li>"
-    link_arr << "<li>" + link_to(topic.title.titleize , course_topic_url(course.id, video.topic_id)) + "</li>"
-    link_arr << "<li class='active'>" + video.title.titleize + "</li></ol>"
+    link_arr << "<li>" + link_to(course.name.titleize.truncate(31) , course_video_url(course.id)) + "</li>"
+    link_arr << "<li>" + link_to(topic.title.titleize.truncate(31) , course_topic_url(course.id, video.topic_id).truncate(40)) + "</li>"
+    link_arr << "<li class='active'>" + video.title.titleize.truncate(31) + "</li></ol>"
     link_arr.join(" ").html_safe
   end
 

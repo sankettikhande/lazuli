@@ -1,9 +1,11 @@
 <div id="flash"><%= flash_message %></div>
-<section class="btns-crumbs visible-md visible-lg">
-    <div class="row">
-      <%= render 'shared/user_menu' %>
-    </div>
-</section>
+<% if current_user %>
+  <section class="btns-crumbs visible-md visible-lg">
+      <div class="row">
+        <%= render 'shared/user_menu' %>
+      </div>
+  </section>
+<% end %>
 <div class="seperator5"></div>
 <div class="seperator5"></div>
 <section class="all-courses indigo-back">

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-toggle" data-toggle="collapse" data-target="#footer-body"><i class="fa fa-bars"></i></a>
-        <% list_array = ["courses", "favourites", "watch_lists", "histories"] %>
+        <% list_array = ["courses", "favourites", "watch_lists", "histories", "search"] %>
         <% if(user_signed_in?) %>
           <% unless (params[:controller] == "courses"&& params[:action] == "list") %>
           <ul class="footer-bar-btns visible-sm visible-xs">

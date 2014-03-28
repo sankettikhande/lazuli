@@ -467,7 +467,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 
 
-.course-logo-img img {margin: 12px auto;max-width: 150px;max-height: 70px;border:2px solid #fff;}
+.course-logo-img img {margin: 12px auto -18px;max-width: 150px;max-height: 70px;border:2px solid #fff;}
 .course-logo-img h4.company-name {margin-top: 8px}
 /************ =Channel Page*************************/
 .fr-channel-info {padding:10px;border: 1px solid #ccc;border-radius: 6px}
@@ -488,8 +488,8 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .channel-courses-list {padding: 10px 5px}
 .channel-courses-list h4 {color: #fff;margin: 0;padding: 0}
 
-.channel-courses-begin {padding: 0 15px 5px;}
-.course-topics-begin {padding: 0 15px 5px;}
+.channel-courses-begin {padding: 0 15px 5px; color:white;}
+.course-topics-begin {padding: 0 15px 5px; color:white;}
 
 
 .channel-each-course {border: 1px solid #ccc;border-radius: 6px;padding:10px 5px;background: #f6f6f6;margin-bottom: 4px}
@@ -498,7 +498,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .channel-course-trainer span {font-family: 'MyriadProRegular',Sans-Serif;text-transform: capitalize;}
 .channel-course-vcount span {font-family: 'MyriadProBold',Sans-Serif;color: #000}
 .channel-course-vcount {font-family: 'MyriadProRegular',Sans-Serif;margin-top: 5px;}
-
+.channel-each-course .channel-course-descr{color:black;} 
 
 /************* =Course Selected   ********/
 
@@ -873,3 +873,9 @@ footer .navbar-nav li {width: 50%;float: left;}
 
 h4.page-header {font-size: 24px;}
 .panel-heading:hover {cursor: pointer;}
+
+
+.subs-modal .form-group .radio {margin-top: 0}
+.subs-modal .form-group input[type="radio"] {margin-top:1px }
+.subs-modal .form-group input {margin-top: 2px}
+.subs-modal .form-group label {font-weight: normal;}
