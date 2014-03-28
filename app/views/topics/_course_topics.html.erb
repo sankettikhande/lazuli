@@ -1,6 +1,6 @@
 <% @course_topics.each do |topic| %>
   <ul class="row channel-each-course">
-    <div class="col-xs-7 col-sm-9 col-md-9">
+    <div class="col-xs-7 col-sm-10 col-md-10">
       <li class="col-xs-12 channel-course-title"><%= link_to topic.title.titleize, course_topic_url(topic.course_id, topic.id) %></li>
 
       <li class="col-xs-12">
@@ -11,7 +11,7 @@
         </ul>
       </li>
     </div>
-    <div class="hidden-xs col-sm-3 col-md-3">
+    <div class="hidden-xs col-sm-2 col-md-2">
       <div class="course-featured-video"><a href="">
         <%= displaying_videos_thumbnail(topic) %></a>
       </div>

@@ -511,8 +511,8 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 .breadcrumb {background: #fff;margin-bottom: 0;}
 .breadcrumb>li+li:before {content:">";color: #095795; padding: 0 2px !important;}
-.breadcrumb li a {color: #095795;font-size: 12px;}
-.breadcrumb li.active {color: #ca0607;font-family: 'MyriadProBold',Sans-Serif;font-size: 12px}
+.breadcrumb li a {color: #095795;font-size: 14px;}
+.breadcrumb li.active {color: #ca0607;font-family: 'MyriadProBold',Sans-Serif;font-size: 14px}
 
 
 .sub-ends p a{color: #fff;font-size: 0.8em;padding: 0 5px;}
