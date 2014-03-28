@@ -132,7 +132,7 @@ class User < ActiveRecord::Base
     if self.is_admin?
       Course.all
     else
-      Course.joins('LEFT OUTER JOIN user_channel_subscriptions ON user_channel_subscriptions.course_id = courses.id').where("channel_admin_user_id =? OR course_admin_user_id = ? OR user_channel_subscriptions.user_id = ?", self.id, self.id, self.id).group(:id)
+      Course.joins('LEFT OUTER JOIN user_channel_subscriptions ON user_channel_subscriptions.course_id = courses.id').where("channel_admin_user_id =? OR course_admin_user_id = ? OR user_channel_subscriptions.user_id = ? And user_channel_subscriptions.expiry_date > ?", self.id, self.id, self.id, Date.today).group(:id)
     end
   end
 
