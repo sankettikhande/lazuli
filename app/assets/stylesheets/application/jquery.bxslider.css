@@ -16,7 +16,7 @@
 
 .bx-wrapper {
 	position: relative;
-	margin: 0 auto 60px;
+	margin: 0 auto;
 	padding: 0;
 	*zoom: 1;
 }
@@ -30,11 +30,11 @@
 ===================================*/
 
 .bx-wrapper .bx-viewport {
-	-moz-box-shadow: 0 0 5px #ccc;
+/*	-moz-box-shadow: 0 0 5px #ccc;
 	-webkit-box-shadow: 0 0 5px #ccc;
 	box-shadow: 0 0 5px #ccc;
 	border: solid #fff 5px;
-/*	left: -5px;
+	left: -5px;
 */	
 	left: 0;
 	background: #fff;
@@ -60,7 +60,7 @@
 	z-index: 2000;
 }
 
-/* PAGER */
+/* PAGER 
 
 .bx-wrapper .bx-pager {
 	text-align: center;
@@ -141,7 +141,9 @@
 }
 
 .bx-wrapper .bx-controls-direction a.disabled {
-	display: none;
+/*	display: none;
+*/
+display: block;
 }
 
 /* AUTO CONTROLS (START / STOP) */
@@ -192,7 +194,7 @@
 	width: 35px;
 }
 
-/* IMAGE CAPTIONS */
+/* IMAGE CAPTIONS *
 
 .bx-wrapper .bx-caption {
 	position: absolute;

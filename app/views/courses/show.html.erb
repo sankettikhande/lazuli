@@ -8,7 +8,7 @@
     <div class="col-md-6 nopadding-left visible-md visible-lg">
       <%= courses_breadcrumbs1(@course, @topic, @video) %>
     </div>
-    <div class="col-sm-7 col-md-2">
+    <div class="col-sm-12 col-md-2">
       <% if @user_subscription && (@course.course_admin_user_id != current_user.id)%>
         <% if @user_subscription.days_to_expire < 7 && @user_subscription.days_to_expire > 0 %>
           <div class="sub-ends">
@@ -30,10 +30,8 @@
           </p>
         </div>
       <% else %>
-        <div>
-          <p class="text-right">
+        <div class="pull-right">
             <%= subscription_button_link(@course) %>
-          </p>
         </div>  
       <% end %>
     </div>

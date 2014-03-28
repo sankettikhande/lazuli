@@ -7,7 +7,7 @@
 			<% cs = f.object.course_first_subscription(subscription.id) %>
 			<div class="col-sm-3">
 				<% random = random_time %>
-				<%= check_box_tag "channel[courses_attributes][#{index}][course_subscriptions_attributes][#{cs.try(:id) || random}][subscription_id]", subscription.id, f.object.subscription_ids.include?(subscription.id), :class=>'form-control' %>
+				<%= check_box_tag "channel[courses_attributes][#{index}][course_subscriptions_attributes][#{cs.try(:id) || random}][subscription_id]", subscription.id, f.object.subscription_ids.include?(subscription.id), :class=>"form-control require-one_#{index}" %>
 				<label><%= subscription.name %></label>
 			</div>
 				<div class="col-sm-2">
@@ -18,3 +18,16 @@
 	</div>
 </div>
 <div class="seperator10"></div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.require-one_<%= index %>').click(function(){
+    if ($('.require-one_<%= index %>:checked').size() > 0)
+      return true;
+    else{
+      alert("Please select atleast one subscriptions with price");
+      $(this).attr("checked", "checked");
+      }
+  });
+})
+</script>
