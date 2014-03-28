@@ -1,22 +1,32 @@
 <div class="col-sm-12">
-  <div class="carousel slide home-carousel" id="myCarousel<%= topic_index %>" data-interval="false">
-    <div class="carousel-inner home-carousel-inner">
+    <div class="slider4<%= topic_index %>">
       <% topic.videos.published.limit(6).each_with_index do |video, video_index| %>
-        <div class="item <%= "active" if video_index.zero? %>">
-          <div class="col-xs-12 col-sm-6">
+          <div class="slide">
             <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
-              <%= image_tag(video_thumbnail_image(video), :alt => "Image", :class => "img-responsive center-block") %>
+              <%= image_tag(video_thumbnail_image(video), :alt => "Image") %>
             </a>
           </div>
-        </div>
       <% end %>
     </div>
-    <div class="carousel-caption">
+    <div class="bx-caption">
       <h4><%= topic.title.titleize %></h4>
     </div>
-    <% if topic.videos.count >= 3 %>
-      <a class="carousel-control left" href="#myCarousel<%= topic_index %>" data-slide="prev"><i class="fa fa-caret-left"></i></a>
-      <a class="carousel-control right" href="#myCarousel<%= topic_index %>" data-slide="next"><i class="fa fa-caret-right"></i></a>
-    <% end %>
-  </div>
 </div>
+
+<script>
+  <% if !topic.videos.count.zero? %>
+    $(document).ready(function(){
+      $('.slider4<%= topic_index %>').bxSlider({
+        slideWidth: 145,
+        minSlides: 1,
+        maxSlides: 2,
+        moveSlides: 1,
+//        slideMargin: 80,
+        pager: false,
+        infiniteLoop: true,
+        hideControlOnEnd: false,
+        speed: 1000
+      });
+    });
+  <% end %>
+</script>
