@@ -9,7 +9,8 @@
               <th width='15%;'>Name</th>
               <th width='15%'>Email ID</th>
               <th width='15%;'>Subject</th>              
-              <th width='18%;'>Message</th>              
+              <th width='18%;'>Message</th>
+              <th width='18%;'>Received At</th>
           </tr>
         </thead>
         <tbody>
@@ -26,11 +27,12 @@
     var tableId = '#messages';
     var url = "/admin/messages/search.json";
     var aoColumns = [{ "mData": "name"},
-    {"mData":"email"},
+    { "mData": "email"},
     { "mData": "subject"},   
-    { "mData": "message", "bSortable": false }];
-    var optionNames = ["Name", "Email ID", "Subject", "Message"];
-    var optionValues = ["name","email", "subject", "message"];
-    loadContents(tableId, url, aoColumns, optionNames, optionValues);
+    { "mData": "message", "bSortable": false },
+    { "mData": "created_time"}];
+    var optionNames = ["Name", "Email ID", "Subject", "Message","created_time"];
+    var optionValues = ["name","email", "subject", "message","created_time"];
+    loadMessages(tableId, url, aoColumns, optionNames, optionValues);
   })
 </script>
