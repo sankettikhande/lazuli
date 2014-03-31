@@ -34,7 +34,7 @@
       <%= form_tag subscribe_course_url(course.id), :remote => true do %>
         <%= hidden_field(:course_subscription, :channel_id, :value => course.channel_id) %>
         <%= hidden_field(:course_subscription, :course_id, :value => course.id) %>
-        <div class="modal-body text-left">
+        <div class="modal-body text-left subs-modal">
           <div class="row">
             <div class="col-xs-12">
               <h5>Subscription :<span class = "red-text"> <%= current_subscription %> </span></h5>
@@ -48,13 +48,14 @@
                 <div class="col-xs-12">
                   <div class="col-xs-1"></div>
                   <div class="col-xs-11">
-                    <%= radio_button :course_subscription, :subscription_id, cs.subscription.id, :required => true %>
-                    <%= cs.subscription.name %>
-                    <% if cs.subscription_price == 'Free' %>
-                      (<span> Subscription Cost: <b><%= cs.subscription_price %></b></span>)
-                    <% else %>
-                      (<span> Subscription Cost: <b>$<%= cs.subscription_price %></b></span>)
-                    <% end %>
+                    <label class="radio">
+                    <%= radio_button :course_subscription, :subscription_id, cs.subscription.id, :required => true %> <%= cs.subscription.name %>
+                      <% if cs.subscription_price == 'Free' %>
+                        (<span> Subscription Cost: <b><%= cs.subscription_price %></b></span>)
+                      <% else %>
+                        (<span> Subscription Cost: <b>$<%= cs.subscription_price %></b></span>)
+                      <% end %>
+                    </label>  
                   </div>
                 </div>
               </div>

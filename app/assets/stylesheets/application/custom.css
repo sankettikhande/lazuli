@@ -483,9 +483,8 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .channel-courses-list {padding: 10px 5px}
 .channel-courses-list h4 {color: #fff;margin: 0;padding: 0}
 
-.channel-courses-begin {padding: 0 15px 5px;}
-.course-topics-begin {padding: 0 15px 5px;}
-
+.channel-courses-begin {padding: 0 15px 5px; color:white;}
+.course-topics-begin {padding: 0 15px 5px; color:white;}
 
 .channel-each-course {border: 1px solid #ccc;border-radius: 6px;padding:10px 5px;background: #f6f6f6;margin-bottom: 4px}
 .channel-course-title {font-family: 'MyriadProBold',Sans-Serif;color: #000}
@@ -493,6 +492,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .channel-course-trainer span {font-family: 'MyriadProRegular',Sans-Serif;text-transform: capitalize;}
 .channel-course-vcount span {font-family: 'MyriadProBold',Sans-Serif;color: #000}
 .channel-course-vcount {font-family: 'MyriadProRegular',Sans-Serif;margin-top: 5px;}
+.channel-each-course .channel-course-descr{color:black;}
 
 
 /************* =Course Selected   ********/
@@ -506,8 +506,8 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 .breadcrumb {background: #fff;margin-bottom: 0;}
 .breadcrumb>li+li:before {content:">";color: #095795; padding: 0 2px !important;}
-.breadcrumb li a {color: #095795;font-size: 12px;}
-.breadcrumb li.active {color: #ca0607;font-family: 'MyriadProBold',Sans-Serif;font-size: 12px}
+.breadcrumb li a {color: #095795;font-size: 14px;}
+.breadcrumb li.active {color: #ca0607;font-family: 'MyriadProBold',Sans-Serif;font-size: 14px}
 
 
 .sub-ends p a{color: #fff;font-size: 0.8em;padding: 0 5px;}
@@ -873,4 +873,8 @@ footer .navbar-nav li {width: 50%;float: left;}
 
 h4.page-header {font-size: 24px;}
 .panel-heading:hover {cursor: pointer;}
+
+.subs-modal .form-group .radio {margin-top: 0}
+.subs-modal .form-group input {margin-top: 2px}
+.subs-modal .form-group label {font-weight: normal;}
 

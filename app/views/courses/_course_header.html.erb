@@ -12,14 +12,14 @@
             <% bookmarks = @video.bookmarks.order(:bookmark_sec) %>  
             <% if bookmarks.any? && params[:t] %>
               <% if @bookmark.blank? %>
-               <h4> <%= bookmarks.first.title.titleize %></h4>
+               <h4> <%= bookmarks.first.title.titleize.truncate(60) %></h4>
                <p><%= bookmarks.first.description.truncate(300) %></p>  
               <% else %>
-                <h4> <%= @bookmark.title.titleize %></h4>
+                <h4> <%= @bookmark.title.titleize.truncate(60) %></h4>
                 <p><%= @bookmark.description.truncate(300) %></p>  
               <% end %>                  
             <% else %>
-             <h4> <%= @video.title.titleize %></h4>
+             <h4> <%= @video.title.titleize.truncate(60) %></h4>
              <p><%= @video.description.truncate(300) %></p>          
             <% end %>
           </div>
