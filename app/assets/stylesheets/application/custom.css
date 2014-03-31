@@ -344,7 +344,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 .social-login-btns li {display: inline-block;padding: 0 10px;}
 
 .content-right {padding-right: 0;margin-top: 100px;margin-right:50px; }
-.content-left {padding-left: 0;margin-top: 10px;margin-left: 6px;}
+.content-left {padding-left: 0;margin-top: 50px;margin-left: 6px;}
 
 /***********   =Placeholder        *****/
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -734,7 +734,7 @@ footer .navbar-inverse .navbar-toggle:hover {color: #dedede;}
 .carousel-box-2, .carousel-box-3 {display: none;}
 
 .content-right {padding-right:0;margin-top: 0;margin-right: 0} /**  remove padding in mobile view ***/
-.content-left {padding-left: 0}
+.content-left {padding-left: 0;margin-top: 10px;}
 
 ul.list-content {list-style-type:none;padding-left: 0}
 .list-content li {margin-top: 5px;}
