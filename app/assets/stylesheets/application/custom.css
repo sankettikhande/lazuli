@@ -462,7 +462,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 
 
-.course-logo-img img {margin: 12px auto -18px;max-width: 150px;max-height: 70px;border:2px solid #fff;}
+.course-logo-img img {margin: 12px auto;max-width: 150px;max-height: 70px;border:2px solid #fff;}
 .course-logo-img h4.company-name {margin-top: 8px}
 /************ =Channel Page*************************/
 .fr-channel-info {padding:10px;border: 1px solid #ccc;border-radius: 6px}
@@ -875,7 +875,6 @@ h4.page-header {font-size: 24px;}
 .panel-heading:hover {cursor: pointer;}
 
 .subs-modal .form-group .radio {margin-top: 0}
-.subs-modal .form-group input[type="radio"] {margin-top:1px }
 .subs-modal .form-group input {margin-top: 2px}
 .subs-modal .form-group label {font-weight: normal;}
 
