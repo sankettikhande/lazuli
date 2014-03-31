@@ -62,3 +62,11 @@ span div.star-rating-on a {
 	height: 34px;
 	line-height: 2.2em;
 }
+
+.width50{
+	width: 65px !important;
+	padding-right: 0px;
+}
+.tage_name_list{
+	padding: 0px;
+}
