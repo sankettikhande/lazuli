@@ -7,7 +7,7 @@
 			<% cs = @course.course_first_subscription(subscription.id) %>
 			<div class="col-sm-3">
 				<% random = random_time %>
-				<%= check_box_tag "course[course_subscriptions_attributes][#{cs.try(:id) || random}][subscription_id]", subscription.id, f.object.subscription_ids.include?(subscription.id), :class=>'form-control require-one' %>
+				<%= check_box_tag "course[course_subscriptions_attributes][#{cs.try(:id) || random}][subscription_id]", subscription.id, f.object.subscription_ids.include?(subscription.id), :class=>'require-one' %>
 				<label><%= subscription.name %></label>
 			</div>
 				<div class="col-sm-2">

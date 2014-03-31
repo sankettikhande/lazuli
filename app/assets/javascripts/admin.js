@@ -64,7 +64,6 @@ function loadContents(tableId, url, aoColumns, optionNames, optionValues){
   triggerFnFilter(dtaTable, tableId, aoColumns);
   resetDataTable(tableId, dtaTable);
 };
-
 /* initializing dataTable for contents */
 function initDataTable(tableId, url, aoColumns){
   return $(tableId).dataTable({
@@ -76,6 +75,27 @@ function initDataTable(tableId, url, aoColumns){
   "sAjaxSource": url,
   "aoColumns": aoColumns,
   "aaSorting": [[ 1, "asc" ]] });
+};
+
+/* method to populate contents Messages in datatable */
+function loadMessages(tableId, url, aoColumns, optionNames, optionValues){
+  var dtaTable = initDataTableOfMessages(tableId, url, aoColumns);
+  appendFilterList(optionNames, optionValues, tableId);
+  triggerFnFilter(dtaTable, tableId, aoColumns);
+  resetDataTable(tableId, dtaTable);
+};
+
+/* initializing dataTable for Messages */
+function initDataTableOfMessages(tableId, url, aoColumns){
+  return $(tableId).dataTable({
+  "bProcessing": true,
+  "bServerSide": true,
+  "iDisplayLength": 15,
+  "bLengthChange": false,
+  "bAutoWidth": false,
+  "sAjaxSource": url,
+  "aoColumns": aoColumns,
+  "aaSorting": [[ 4, "desc" ]] });
 };
 
 /* appends filter dropdown */
