@@ -27,7 +27,7 @@
         <li><%= link_to raw_field('fa fa-user', 'My Dashboard'), root_url(), :data => {'no-turbolink' => true} %></li>
         <li><a data-no-turbolink="true" href="<%= admin_messages_path %>"><i class="fa fa-envelope"></i> Inbox
           <% unless @total_count == 0 %>
-            <% if session[:index].blank? && current_user.is_admin? %>
+            <% if current_user.is_admin? %>
               <span class="badge badge-danger"><%= @total_count %></span>
             <% end %>
           <% end %></a></li>
