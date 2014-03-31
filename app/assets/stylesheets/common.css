@@ -47,3 +47,8 @@ Notes
  @media (max-width: 767px){
   .center-xs {text-align: center;}
   }
+
+  .subs-date a.subscribe_days{
+  cursor: default;
+  text-decoration: none;
+}

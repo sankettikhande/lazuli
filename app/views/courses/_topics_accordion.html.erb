@@ -1,6 +1,6 @@
 <div class="col-xs-12 col-sm-5 col-md-4 sidebar-offcanvas" id="sidebar" role="navigation">
   <div class="course-menu">
-    <div class="pull-left"><h5><a href="#"><%= @course.name %></a></h5></div>
+    <div class="pull-left"><h5><a href="#"><%= @course.name.truncate(50)  %></a></h5></div>
     <div class="pull-right">
     </div>
     <div class="clearfix"></div>
@@ -8,7 +8,7 @@
       <% @course.topics.published.each_with_index do |topic, topic_index| %>
         <li class="<%= is_active(topic, topic_index) %>" >
           <a href="#topic-<%= topic_index %>" data-toggle="collapse" data-parent="#accordion">
-            <%= topic.title %>
+            <%= topic.title.truncate(40) %>
           </a>
           <ul id="topic-<%= topic_index %>" class="child-course-menu collapse <%= is_accordion(topic, topic_index) %>">
             <% topic.videos.published.each_with_index do |video, video_index| %>              
@@ -34,7 +34,7 @@
                     <ul id="video-<%= video_index %>" class="level-bookmark in">
                       <% bookmarks.each_with_index do |bookmark, bookmark_index| %>
                       <li class="add-star">
-                        <%= link_to(bookmark.title.titleize, course_topic_video_url(@course.id, video.topic_id, video.id) << bookmark_time_format(bookmark.time)) %>
+                        <%= link_to(bookmark.title.titleize.truncate(40), course_topic_video_url(@course.id, video.topic_id, video.id) << bookmark_time_format(bookmark.time)) %>
                       </li>
                       <% end %>
                     </ul>
