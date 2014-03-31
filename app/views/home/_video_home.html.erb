@@ -21,12 +21,16 @@
         minSlides: 1,
         maxSlides: 2,
         moveSlides: 1,
-//        slideMargin: 80,
         pager: false,
         infiniteLoop: true,
         hideControlOnEnd: false,
         speed: 1000
       });
     });
+  <% end %>
+  <% if topic.videos.count < 3 %>
+    $(document).ready(function(){
+      $(".carousel-box-<%= topic_index + 1 %> .bx-controls-direction").hide();
+    })
   <% end %>
 </script>
