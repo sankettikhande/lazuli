@@ -15,19 +15,3 @@
     </div>
   </div> <!-- col-sm-12 Ends -->
 </div> <!-- first row -->
-
-<script>
-<% if @subscribed_courses.length < 4 %>
-  $(function(){
-    $('.courses-list-box').slimScroll({
-      height: 'auto'
-    });
-  });
-<% else %>
-  $(function(){
-    $('.courses-list-box').slimScroll({
-      height: '370px'
-    });
-  });
-<% end %>
-</script>

@@ -47,5 +47,7 @@ span div.star-rating-on a {
 }
 
 .slimScrollDiv, #courses_list_box {
-	height: auto !important;
+	height: auto:;
 }
+.channel-courses-list .form-group input.form-control{height: 29px;}
+
