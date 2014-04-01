@@ -28,7 +28,7 @@
       });
     });
   <% end %>
-  <% if topic.videos.count < 3 %>
+  <% if topic.videos.count < 2 %>
     $(document).ready(function(){
       $(".carousel-box-<%= topic_index + 1 %> .bx-controls-direction").hide();
     })
