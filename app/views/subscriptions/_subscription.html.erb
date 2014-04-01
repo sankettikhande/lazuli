@@ -14,7 +14,7 @@
             <li class="descr hidden-xs">
               <%= subscribed_course.course.description.truncate(250) %>
             </li>
-            <% unless current_user.is_admin? %>
+            <% unless current_user.permitted_courses.include?(subscribed_course.course) %>
               <li class="subs-date">
                 <% if subscribed_course.subscription_expired? %>
                   <a href="#">Subscription Expired</a>
