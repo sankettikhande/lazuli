@@ -15,17 +15,16 @@
               <% if can? :show, video %>
                 <div class="slide">
                   <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
-                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
-                    <p><%= video.title %></p>
-                  </a>
+                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %></a>
+                    <p class="text-center video-title"><%= video.title %></p>
                 </div>
               <% else %>
                 <div class="slide">
                   <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
                   <a href="#">
                     <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
-                    <p><%= video.title %></p>
                   </a>
+                  <p class="text-center video-title"><%= video.title %></p>
                   </div>
                 </div>
               <% end %>
