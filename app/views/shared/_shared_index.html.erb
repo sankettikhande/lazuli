@@ -6,5 +6,7 @@
 		<%= render 'shared/shared', :objekts => @videos, :deleted_objekts => @deleted_videos %>
 	<% end %>
 <% else %>
+<div class="form-control indigo-back white-text">
 	<label>No <%= params[:controller].titleize %> found.</label>
+</div>	
 <% end %>

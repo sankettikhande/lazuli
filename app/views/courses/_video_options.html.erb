@@ -1,13 +1,15 @@
 <div id="flash"></div>
 <div class="row">
-  <div class="col-sm-12 col-md-4">
-	  <ul class="video-tags">
-	    <li><i class="fa fa-tag"></i> Tags:</li>
-	    <% @video.tags.each do |tag| %>
-	      <li>
+  <div class="col-sm-12 col-md-6">
+    <ul class="video-tags">
+      <div class="col-sm-3 col-xs-4 col-md-3 width65"><i class="fa fa-tag"></i> Tags:</div>
+      <div class="col-sm-9 col-xs-8 col-md-9 tage_name_list">
+        <% @video.tags.each do |tag| %>
+        <li>
           <%= link_to tag.name, tag_videos_videos_path(:search_tag => tag.name) %>
         </li>
-	    <% end %>
+        <% end %>
+      </div>
 	  </ul>
 	</div>
   <!-- col-8 ends -->
@@ -18,7 +20,7 @@
       add_fav = '' 
       rem_fav = 'hidden' 
     end %>
-  <div class="col-sm-12 col-md-8">
+  <div class="col-sm-12 col-md-6">
     <div class="video-save-options">
       <span>
         <%= link_to button_field("fa fa-share", 'btn btn-link active', 'Share'), '#', :data => {:target => "#share_modal", :toggle => 'modal'} if !current_user.sharable_course?(@course.id) %>
