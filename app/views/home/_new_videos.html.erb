@@ -13,7 +13,7 @@
           <% @videos.each_with_index do |video, index| %>
             <div class="slide">
                 <%= link_to( image_tag(video_thumbnail_image(video, :medium => true), alt: "Image"), course_topic_video_url(video.course.id, video.topic_id, video.id)) %>
-                <h6 class="text-left"><%= video.title.titleize.truncate(30) %></h6>
+                <p class="text-center video_title"><%= video.title.titleize.truncate(30) %></p>
             </div>
           <% end %>
           </div>
