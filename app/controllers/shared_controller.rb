@@ -4,6 +4,7 @@ class SharedController < ApplicationController
 	def index
 		klass = controller_name.classify
 		@videos = klass.constantize.get_user_videos(current_user)
+		@deleted_videos = klass.constantize.get_user_deleted_videos(current_user)
 	end
 
 	def search
@@ -18,6 +19,7 @@ class SharedController < ApplicationController
   	video = klass.constantize.get_video(current_user, params[:id])
   	video.destroy if video
 		@videos = klass.constantize.get_user_videos(current_user)
+		@deleted_videos = klass.constantize.get_user_deleted_videos(current_user)
 		respond_to do |format|
 			format.js {render '/shared/destroy'}
 		end

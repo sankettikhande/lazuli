@@ -1,5 +1,5 @@
-<% unless @videos.blank? %>
-	$("#remove_videos").html("<%= j(render 'shared/shared', :objekts => @videos) %>");
-<% else %>
+<% if @videos.blank? && @deleted_videos.blank? %>
 	$("#remove_videos").html("<label>No <%= params[:controller].titleize %> found.</label>");
+<% else %>
+	$("#remove_videos").html("<%= j(render 'shared/shared', :objekts => @videos, :deleted_objekts => @deleted_videos ) %>");
 <% end %>

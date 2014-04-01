@@ -5,7 +5,7 @@ class Favourite < ActiveRecord::Base
   belongs_to :favouritable, :polymorphic => true
   belongs_to :user
 
-  attr_accessible :favouritable_id, :favouritable_type, :user_id
+  attr_accessible :favouritable_id, :favouritable_type, :user_id, :title, :thumbnail
   cattr_accessor :favouritable_types
 
   validates :favouritable_type, :inclusion => {:in => self.favouritable_types, :message => "should be either of ('Course', 'Topic', 'Video')"}
@@ -17,10 +17,17 @@ class Favourite < ActiveRecord::Base
     favourite_video_ids = user.favourites.videos.select("favouritable_id").map(&:favouritable_id)
   end
 
+  def self.available_video_ids(user)
+    favourite_video_ids = Favourite.get_video_ids_for(user)
+    Video.where(:id => favourite_video_ids).pluck(:id)
+  end
   ## retuns all videos for a particular user in favourite list
   def self.get_user_videos(user)
-    favourite_video_ids = Favourite.get_video_ids_for(user)
-    Video.find(favourite_video_ids, :include => {:topic => :course})
+    Video.find(self.available_video_ids(user), :include => {:topic => :course})
+  end
+
+  def self.get_user_deleted_videos(user)
+    user.favourites.videos - Favourite.where(:favouritable_id => self.available_video_ids(user), :user_id => user.id)
   end
 
   def self.get_video(user, video_id, type="Video")

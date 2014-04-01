@@ -10,9 +10,17 @@ class History < ActiveRecord::Base
     history_video_ids = user.histories.select("video_id").map(&:video_id)
   end
 
+  def self.available_video_ids(user)
+    history_video_ids = History.get_video_ids_for(user)
+    Video.where(:id => history_video_ids).pluck(:id)
+  end
+
   def self.get_user_videos(user)
-    histories_list = History.get_video_ids_for(user)
-    Video.find(histories_list, :include => {:topic => :course})
+    Video.find(self.available_video_ids(user), :include => {:topic => :course})
+  end
+
+  def self.get_user_deleted_videos(user)
+    user.histories - History.where(:video_id => self.available_video_ids(user), :user_id => user.id)
   end
 
   def self.get_video(user, video_id)
