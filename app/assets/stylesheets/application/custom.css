@@ -400,6 +400,8 @@ a.btn {height:34px;line-height: 2.2em}
 
 /********************************** =Home Carousel  *************************************/
 .welcome-videos .slide {height: 115px;margin:0 60px;padding-top: 10px}
+.welcome-videos .carousel-box .bx-wrapper .bx-viewport .slide img {height:50px;width:162px;}
+.welcome-videos .carousel-box .slide{margin-top: 20px;}
 
 .bx-wrapper .bx-viewport .slide img {height: 95px;width: 145px;border:3px solid #fff;-webkit-box-shadow: 0px 0px 8px 0px rgba(11,11,11, 0.75);
 -moz-box-shadow:    0px 0px 8px 0px rgba(11,11,11, 0.75);
@@ -732,6 +734,7 @@ footer .navbar-inverse .navbar-toggle:hover {color: #dedede;}
 /*#lazuli-top-menu .navbar-nav .open .dropdown-menu li a{color: #fff !important}
 */
 .carousel-box-2, .carousel-box-3 {display: none;}
+.welcome-videos .carousel-box:nth-of-type(2), .carousel-box:nth-of-type(3){display: none;}
 
 .content-right {padding-right:0;margin-top: 0;margin-right: 0} /**  remove padding in mobile view ***/
 .content-left {padding-left: 0;margin-top: 10px;}
