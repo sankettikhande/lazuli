@@ -456,7 +456,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 .courses-list .remove-button {line-height: 80px;text-align: center;}
 
-.course-featured-video img{max-width: 100px;max-height: 70px;margin:8px 12px}
+.course-featured-video img{max-width: 100px;max-height: 70px;margin:8px 12px;border: 2px solid #fff;}
  
 /****** =browse courses ***********/
 .course-each .list-content {border-bottom: 1px solid #eaeaea;padding-bottom: 5px;}
