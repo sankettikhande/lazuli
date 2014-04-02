@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
   after_create :add_user_role
   after_save :set_course_admin_role, :set_course_admin_user_id
-  after_destroy :update_channel_admin, :if => :is_channel_admin?
+  before_destroy :update_channel_admin, :if => :is_channel_admin?
 
   def confirm_status
     self.confirmed_at.blank? ? 'Awaiting confirmation' : 'Confirmed'
@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   def update_channel_admin
     admin = User.with_role(:admin)
     self.administrated_channels.each do |channel|
-      channel.update_attribute(:admin_user_id, admin.id)
+      channel.update_attribute(:admin_user_id, admin.first.id)
     end
   end
 

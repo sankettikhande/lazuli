@@ -106,4 +106,14 @@ namespace :db do
     subscription.save
     puts "Subscription #{subscription.id} is updated"
   end
+
+  task :update_channel_admin_for_deleted_users => :environment do
+    admin = User.with_role :admin
+    Channel.find_each do |channel|
+      unless User.exists?(channel.admin_user_id)
+        channel.update_attribute(:admin_user_id, admin.first.id)
+        puts "updated #{channel.id}"
+      end
+    end
+  end
 end
