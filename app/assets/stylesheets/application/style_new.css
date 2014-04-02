@@ -38,6 +38,9 @@
 .one_yr_subscription{
 	font-size: 11px;
 }
+.more_options_avaliable{
+	font-size: 10px;	
+}
 .width75{
 	text-align: right;
 	width: 50px;
@@ -47,7 +50,7 @@ span div.star-rating-on a {
 }
 
 .slimScrollDiv, #courses_list_box {
-	height: auto:;
+	height: auto;
 }
 .channel-courses-list .form-group input.form-control{height: 29px;}
 
@@ -63,10 +66,15 @@ span div.star-rating-on a {
 	line-height: 2.2em;
 }
 
-.width65{
-	width: 65px !important;
-	padding-right: 0px;
+.video-tags .width55 {
+	width: 55px !important;
+	padding: 0px 0px 0px 5px;
 }
-.tage_name_list{
+.video-tags .tage_name_list {
 	padding: 0px;
+}
+
+.video_title {
+	font-size: 13px;
+	color: #333333;
 }

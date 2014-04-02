@@ -5,33 +5,21 @@
       <div class="row">
         <div class="col-sm-12">
           <!-- Carousel-1 Begins -->         
-            <%  if @recommended_videos.blank? %>
+            <% if @recommended_videos.blank? %>
             <div class="recommends-carousel-inner text-center">
               No Recommended videos available
             </div >
             <% else %>
              <div class="slider4">
-            <% @recommended_videos.each_with_index do |video, index| %>
-              <% if can? :show, video %>
+              <% @recommended_videos.each_with_index do |video, index| %>
                 <div class="slide">
                   <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
-                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
-                    <p><%= video.title %></p>
-                  </a>
-                </div>
-              <% else %>
-                <div class="slide">
-                  <div id='subscription_modal' data-toggle="modal" data-target="#modal-window">
-                  <a href="#">
-                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %>
-                    <p><%= video.title %></p>
-                  </a>
-                  </div>
+                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %></a>
+                    <p class="text-center video-title"><%= video.title %></p>
                 </div>
               <% end %>
+              </div>
             <% end %>
-            <% end %>
-          </div>
           <!-- Carousel Ends -->
         </div>
       </div>
@@ -47,7 +35,7 @@
         minSlides: 1,
         maxSlides: 6,
         moveSlides: 1,
-//        slideMargin: 10,
+        slideMargin: 10,
         pager: false,
         infiniteLoop: false,
         hideControlOnEnd: false,

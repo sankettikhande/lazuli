@@ -7,14 +7,15 @@
          <p><%= course.description %></p>
       </li>
       <li class="col-xs-6 col-sm-2 col-md-2">
-        <ul class="row text-left">          
+        <ul class="row text-left">  
+          <% unless course.course_trainers.blank? %>        
             <li class="col-xs-12 channel-course-trainer">
-              Trainer: <span><%= course.course_trainers.blank? ? '' : course.default_lead_trainer %></span>
-            </li>         
+              Trainer : <span><%= course.default_lead_trainer %></span>
+            </li>
+          <% end %>         
           <li class="col-xs-12 channel-course-vcount">
             <span><%= course.user_count %></span> Subscribed Users
           </li>
-
         </ul>
       </li>
       <li class="col-xs-6 col-sm-2 col-md-2 channel_courses course-featured-video">
