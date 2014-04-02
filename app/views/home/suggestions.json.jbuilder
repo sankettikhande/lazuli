@@ -1,1 +1,1 @@
-json.results @results.map{ |c| c.title}
+json.results @results.map{ |c| c.title.truncate(55)}
