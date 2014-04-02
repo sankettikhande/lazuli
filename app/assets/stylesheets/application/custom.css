@@ -493,7 +493,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .channel-course-trainer {font-family: 'MyriadProBold',Sans-Serif;color: #000}
 .channel-course-trainer span {font-family: 'MyriadProRegular',Sans-Serif;text-transform: capitalize;}
 .channel-course-vcount span {font-family: 'MyriadProBold',Sans-Serif;color: #000}
-.channel-course-vcount {font-family: 'MyriadProRegular',Sans-Serif;margin-top: 5px;}
+.channel-course-vcount {font-family: 'MyriadProRegular',Sans-Serif;margin-top: 5px;color: #000;}
 .channel-each-course .channel-course-descr{color:black;}
 
 
