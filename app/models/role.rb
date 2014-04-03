@@ -4,6 +4,7 @@ class Role < ActiveRecord::Base
   @@admin_roles = ['admin', 'channel_admin', 'course_admin']
 
   cattr_accessor :admin_roles
+  attr_accessible :name
   
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   has_and_belongs_to_many :users, :join_table => :users_roles
