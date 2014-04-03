@@ -4,13 +4,14 @@ $( document ).ready(function() {
     disableFadeOut: true
   });
   $('.parent-course-menu li').click(function(e){
-    $('li.active').removeClass('active');
+    $('.child-course-menu li.active, #accordion .active').removeClass('active');
     $(this).addClass('active');
   });
-  $('.level-bookmark li').click(function(e){
-    $('li.active').removeClass('active');    
-    $(this).addClass('active');    
-  });
+  // $('.level-bookmark li').click(function(e){
+  //   $('li.active').removeClass('active');
+  //   // $(this).parent().parent().removeClass("active");
+  //   $(this).addClass('active');
+  // });
   $("#watch_lator").click(function () {
     $("#watch_list_btn").data("watch", true);
     $(this).hide();
