@@ -8,10 +8,14 @@ class SharedController < ApplicationController
 	end
 
 	def search
-		@videos = []
+		@videos, @deleted_videos = [], []
 		klass = controller_name.classify
 		video_ids = klass.constantize.get_video_ids_for(current_user)
 		@videos = Video.sphinx_search(params, current_user, video_ids) unless video_ids.blank?
+		unless controller_name == "histories"
+			deleted_ids = klass.constantize.get_user_deleted_videos(current_user).map(&:id)
+			@deleted_videos = klass.constantize.search_user_deleted_videos(params[:sSearch],current_user,deleted_ids) unless deleted_ids.blank?
+		end
   end
 
   def destroy

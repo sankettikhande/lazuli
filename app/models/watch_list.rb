@@ -27,4 +27,11 @@ class WatchList < ActiveRecord::Base
   def self.get_video(user, video_id)
     find_by_user_id_and_video_id(user,video_id)
   end
+
+  def self.search_user_deleted_videos(query,current_user,ids)
+    query_string = query.gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
+    search_string = "@title #{query_string}*"
+    options = {:conditions => {:user_id => current_user.id}, :with => {:id => ids}}
+    WatchList.search(search_string, options)
+  end
 end

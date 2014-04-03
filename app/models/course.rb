@@ -10,7 +10,7 @@ class Course < ActiveRecord::Base
                     :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   #ASSOCIATIONS
-  belongs_to :channel, :counter_cache => :course_count
+  belongs_to :channel, :counter_cache => :course_count, :inverse_of => :courses
   has_many :topics, :dependent => :destroy
   has_many :user_channel_subscriptions, :dependent => :destroy
   has_many :channel_course_permissions, :dependent => :destroy
@@ -22,6 +22,7 @@ class Course < ActiveRecord::Base
 
   include Cacheable
   #VALIDATIONS
+  validates_presence_of :channel
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
   validates_presence_of :image, :message => "^Please upload the course logo."
   validates_presence_of :name, :message => "^Course Name can't be blank"

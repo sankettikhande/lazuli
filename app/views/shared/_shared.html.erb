@@ -50,16 +50,13 @@
 				<%end%>
 				<% unless deleted_objekts.blank? %>
 				<% deleted_objekts.each do |objekt| %>
+					<% video_id = params[:controller] == 'favourites' ? objekt.favouritable_id : objekt.video_id%>
 					<li class="col-xs-12 col-sm-6 col-md-4">
 						<ul class="box-record">
-							<li class="box-title"><input type="checkbox" name="<%= params[:controller] %>_ids[<%= objekt.id %>]" class="user_checkbox">
+							<li class="box-title"><input type="checkbox" name="<%= params[:controller] %>_ids[<%= video_id %>]" class="user_checkbox">
 								<span class="pull-right">
 									<!-- <button type="button" class="btn-trans">&times;</button> -->
-									<% if params[:controller] == 'favourites' %>
-										<%= link_to("&times;".html_safe, "#{params[:controller]}/#{objekt.favouritable_id}", :class => "btn-trans", :method => :delete, :remote => true)%>
-									<% elsif params[:controller] == 'watch_lists' %>
-										<%= link_to("&times;".html_safe, "#{params[:controller]}/#{objekt.video_id}", :class => "btn-trans", :method => :delete, :remote => true)%>
-									<% end%>
+										<%= link_to("&times;".html_safe, "#{params[:controller]}/#{video_id}", :class => "btn-trans", :method => :delete, :remote => true)%>
 								</span>
 							</li>
 							<li class="box-details">

@@ -33,4 +33,11 @@ class Favourite < ActiveRecord::Base
   def self.get_video(user, video_id, type="Video")
     find_by_favouritable_id_and_user_id_and_favouritable_type(video_id, user.id, type)
   end
+
+  def self.search_user_deleted_videos(query,current_user, ids)
+    query_string = query.gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
+    search_string = "@title #{query_string}*"
+    options = {:conditions => {:user_id => current_user.id}, :with => {:id => ids}}
+    Favourite.search(search_string, options)
+  end
 end
