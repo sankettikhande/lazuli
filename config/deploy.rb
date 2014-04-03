@@ -41,6 +41,22 @@ task :qa do
   set :user, "sodel"
   set :branch, "master"
   set :scm_verbose, true
+  set :delayed_job_args, "-n 2"
+  role :web, domain
+  role :app, domain
+  role :db, domain, :primary=>true
+end
+
+task :uat do
+  set :rvm_type, :system
+  set :use_sudo, true
+  set :rails_env, "staging"
+  set :deploy_to,  "/root/www/lazuli"
+  set :domain, "162.242.241.238"
+  set :user, "root"
+  set :branch, "master"
+  set :scm_verbose, true
+  set :delayed_job_args, "-n 2"
   role :web, domain
   role :app, domain
   role :db, domain, :primary=>true

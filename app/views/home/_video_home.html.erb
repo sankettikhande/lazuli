@@ -30,6 +30,7 @@
   <% end %>
   <% if topic.videos.count < 2 %>
     $(document).ready(function(){
+      $('.slider4<%= topic_index %>').bxSlider({infiniteLoop: false});
       $(".carousel-box-<%= topic_index + 1 %> .bx-controls-direction").hide();
     })
   <% end %>
