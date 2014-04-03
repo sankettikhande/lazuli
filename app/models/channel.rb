@@ -8,7 +8,7 @@ class Channel < ActiveRecord::Base
                   :url => "/system/:class/:attachment/:id/:style/:basename.:extension"
 
   #ASSOCIATIONS
-  has_many :courses, :dependent => :destroy
+  has_many :courses, :inverse_of => :channel, :dependent => :destroy
   has_many :channel_course_permissions, :dependent => :destroy
   has_many :user_channel_subscriptions, :dependent => :destroy
 

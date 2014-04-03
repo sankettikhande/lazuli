@@ -26,14 +26,14 @@
         <%= link_to button_field("fa fa-share", 'btn btn-link active', 'Share'), '#', :data => {:target => "#share_modal", :toggle => 'modal'} if !current_user.sharable_course?(@course.id) %>
       </span> 
       <span id='add-favourite' <%= add_fav %>>
-        <%= link_to button_field("fa fa-star", 'btn btn-link active', 'Add to Favourites'), favourites_path(item_id: @video.id, item_type: "Video"), :method => :post, :remote => true %>
+        <%= link_to button_field("fa fa-star", 'btn btn-link active', 'Add to Favourites'), favourites_path(item_id: @video.id, item_type: "Video", title: @video.title, :thumbnail => @video.get_best_thumbnail ), :method => :post, :remote => true %>
       </span>
       <span id='remove-favourite' <%= rem_fav %> >
         <%= link_to button_field("fa fa-star red-text", 'btn btn-link', 'Remove from Favourites'), delete_favs_favourites_path(item_id: @video.id, item_type: "Video"), :method => :delete, :remote => true %>
       </span>
 	    <%= hidden_field_tag "watch_list_btn", "", "data-watch"=> is_watch_listed(@video.id, @course.id), "data-video_id" => @video.id, "data-course_id" => @course.id %>
       <%= hidden_field_tag "history_btn", "", "data-watch"=> false %>
-      <%= link_to button_field("fa fa-clock-o", 'btn btn-link', ' Watch later'), add_to_watch_list_url(@video.id, @course.id), :method => :post, :remote => true, :id => "watch_lator" %>
+      <%= link_to button_field("fa fa-clock-o", 'btn btn-link', ' Watch later'), add_to_watch_list_url(@video.id, @course.id, :video_title => @video.title, :video_thumbnail => @video.get_best_thumbnail), :method => :post, :remote => true, :id => "watch_lator" %>
       <%= link_to button_field("fa fa-clock-o red-text", 'btn btn-link', ' Remove Watch later'), remove_from_watch_list_url(@video.id, @course.id), :remote => true, :id => "remove_watch_lator" %>
     </div>
   </div>
