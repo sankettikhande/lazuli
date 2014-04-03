@@ -1,13 +1,14 @@
-set :app_requirements, ['mysql', 'sphinx', 'imagemagick']
+set :app_requirements, ['mysql', 'sphinx', 'imagemagick', 'nginx']
 
 namespace :requirements do
   desc "Check required softwares are installed"
   task :check do
     util_bin_map = {:sphinx => 'indexer', :imagemagick => 'identify'}
     missing_requirments = []
+    puts app_requirements
     app_requirements.each do |r|
-      requirement_path = `which #{util_bin_map[r.to_sym] || r}`
-      missing_requirments << "'#{r}' is not installed" if requirement_path.strip.empty?  
+      requirement_path = capture "which #{util_bin_map[r.to_sym] || r}"
+      missing_requirments << "'#{r}' is not installed" if requirement_path.nil?
     end
     if missing_requirments.empty?
       logger.info "========== ALL GOOD !!! ALL REQUIRED SOFTWARES ARE INSTALLED ========="
