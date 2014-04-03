@@ -1,17 +1,23 @@
 <div id="flash"></div>
 <div class="row">
   <div class="col-sm-12 col-md-4">
-    <ul class="video-tags">
-      <div class="col-sm-3 col-xs-3 col-md-3 width55"><i class="fa fa-tag"></i> Tags:</div>
-      <div class="col-sm-9 col-xs-9 col-md-9 tage_name_list">
-        <% @video.tags.each do |tag| %>
-        <li>
-          <%= link_to tag.name, tag_videos_videos_path(:search_tag => tag.name) %>
-        </li>
-        <% end %>
+    <div class="tag-box">
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 nopadding-right" style="max-width:70px;">
+          <i class="fa fa-tag"></i> Tags:
+        </div>
+        <div class="col-xs-9 col-sm-9 col-md-9 nopadding-left">
+          <ul class="video-tags">
+            <% @video.tags.each do |tag| %>
+            <li>
+              <%= link_to tag.name, tag_videos_videos_path(:search_tag => tag.name) %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-	  </ul>
-	</div>
+    </div>
+  </div>
   <!-- col-8 ends -->
   <% if @favourite_video 
       add_fav = 'hidden' 

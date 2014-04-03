@@ -1,6 +1,6 @@
 <% @subscribed_courses.each do |subscribed_course| %>
   <div class="courses-list" id="subscribed_div_<%= subscribed_course.id %>">
-    <div class="row">
+    <div class="row margin-fix">
       <div class="col-xs-5 col-sm-2 col-md-2">
         <div class="course-logo-img">
           <%= link_to(image_tag(subscribed_course.channel.image.url(:medium), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), channel_url(subscribed_course.channel)) %>
