@@ -8,7 +8,7 @@ class Video < ActiveRecord::Base
   cattr_accessor :video_statuses
   has_many :bookmarks, :dependent => :destroy
   has_many :favourites, :as => :favouritable
-  has_many :watch_lists, :dependent => :destroy
+  has_many :watch_lists
   has_many :histories, :dependent => :destroy
   belongs_to :topic
 

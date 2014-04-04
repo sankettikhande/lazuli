@@ -8,7 +8,7 @@ class WatchListsController < SharedController
 	end
 
 	def add_to_watch_list
-		watchList = WatchList.new(:video_id => params[:id], :course_id => params[:course_id], :user_id => current_user.id)
+		watchList = WatchList.new(:video_id => params[:id], :course_id => params[:course_id], :user_id => current_user.id , :title => params[:video_title], :thumbnail => params[:video_thumbnail])
 		if watchList.save
 			@alertClass = "success"
 			@msg = "Video added to watch list"
