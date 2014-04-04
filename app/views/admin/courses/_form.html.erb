@@ -1,7 +1,7 @@
 <%= nested_form_for [:admin , @course], :html => {:class => 'course_form'} do |f| %>
 <%= errors_for @course unless @course.errors.blank? %>
 <div class="form-group">
-	<section class="container">
+	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="row" id="course_form_header">
@@ -9,8 +9,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
-	<div class="seperator12"></div>
+	</div>
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="add-new-course form-group">
