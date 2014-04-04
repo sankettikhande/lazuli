@@ -123,8 +123,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 }
 
 @media (max-width: 1024px) {
-
-.lazuli-course-dd .dropdown-submenu > a:after{
+.home-bc  .dropdown-submenu > a:after, .lazuli-course-dd .dropdown-submenu > a:after{
     display:none;}
 
 .lazuli-course-dd .dropdown-submenu .dropdown-menu {padding: 0}
