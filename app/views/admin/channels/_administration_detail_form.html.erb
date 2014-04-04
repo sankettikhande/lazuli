@@ -10,13 +10,12 @@
 	<div id="collapse_1" class="panel-collapse collapse">
 		<div class="panel-body form-group">
 			<div class="row">
-
 				<div class="col-sm-2">
 					<label for="cont-no" class="control-label">Full Name<%= required_field %></label>
 				</div>
 				<div class="col-sm-4">
 					<div class="control-group">
-						<%= f.hidden_field :admin_user_id, :class => 'select2', :id => "user_search_channel", :disabled => !current_user.is_admin? %>
+						<%= f.hidden_field :admin_user_id, :class => 'select2 validate[required]', :id => "user_search_channel", :disabled => !current_user.is_admin? %>
 					</div>
 				</div>
 
