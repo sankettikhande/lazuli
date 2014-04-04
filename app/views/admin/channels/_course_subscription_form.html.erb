@@ -2,10 +2,11 @@
 	<label class="control-label"> Available Subscriptions<%= required_field %></label>
 </div>
 <div class="col-sm-10">
-	<div class="checkbox-list">
+	<div class="row">
+      <div class="col-xs-12">
 		<% @subscriptions.each_with_index do |subscription, subs_index|%>
 			<% cs = f.object.course_first_subscription(subscription.id) %>
-			<div class="col-sm-3">
+			<div class="col-sm-4">
 				<% random = random_time %>
 				<%= check_box_tag "channel[courses_attributes][#{index}][course_subscriptions_attributes][#{cs.try(:id) || random}][subscription_id]", subscription.id, f.object.subscription_ids.include?(subscription.id), :class=>"require-one_#{index}" %>
 				<label><%= subscription.name %></label>
@@ -15,6 +16,7 @@
          <%= hidden_field_tag "channel[courses_attributes][#{index}][course_subscriptions_attributes][#{cs.try(:id)}][id]", cs.id if !cs.blank? %>
         </div>
 		<% end %>
+  </div>
 	</div>
 </div>
 <div class="seperator10"></div>
