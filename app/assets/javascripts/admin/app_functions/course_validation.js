@@ -1,5 +1,5 @@
-$(window).load(function(){
-  $(".formClass").validationEngine({
+$(document).ready(function(){
+  $(".course_form").validationEngine({
     validateNonVisibleFields: true,
     promptPosition : "bottomLeft",
     autoPositionUpdate: true,
@@ -17,9 +17,8 @@ $(window).load(function(){
       }
     }
   });
-});
 
-$(document).ready(function(){
+
   $('.require-one').click(function(){
     if ($('.require-one:checked').size() > 0)
       return true;

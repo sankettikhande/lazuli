@@ -1,4 +1,4 @@
-<%= nested_form_for [:admin , @course], :html => {:class => 'formClass'} do |f| %>
+<%= nested_form_for [:admin , @course], :html => {:class => 'course_form'} do |f| %>
 <%= errors_for @course unless @course.errors.blank? %>
 <div class="form-group">
 	<section class="container">
