@@ -13,9 +13,8 @@
              <div class="slider4">
               <% @recommended_videos.each_with_index do |video, index| %>
                 <div class="slide">
-                  <a href="<%= course_topic_video_url(video.topic.course_id, video.topic_id, video.id) %>">
-                    <%= image_tag(video_thumbnail_image(video, :medium => true), alt: "Image") %></a>
-                    <p class="video-title"><%= video.title %></p>
+                  <%= link_to(link_image_tag(video),course_topic_video_url(video.topic.course_id, video.topic_id, video.id)) %>
+                    <p class="video-title"><%= video.title.titleize.truncate(30) %></p>
                 </div>
               <% end %>
               </div>
@@ -42,5 +41,10 @@
         speed: 1000
       });
     });
+  <% end %>
+  <% if @recommended_videos.count < 2 %>
+    $(document).ready(function(){
+      $(".bx-controls-direction").hide();
+    })
   <% end %>
 </script>
