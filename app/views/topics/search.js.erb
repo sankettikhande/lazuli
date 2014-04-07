@@ -1,7 +1,7 @@
 <% unless @course_topics.count.zero?  %>
-	$(".course-topics-begin").html("<%= j(render 'topics/course_topics') %>");
+	$(".course-topics-begin").removeClass('nopadding-left').html("<%= j(render 'topics/course_topics') %>");
 <% else %>
-	$(".course-topics-begin").html("No Topics found for <%= params[:sSearch] %>");
+	$(".course-topics-begin").addClass('nopadding-left').html("<label>No Topics found for <%= params[:sSearch] %></label>");
 <% end %>
 
 

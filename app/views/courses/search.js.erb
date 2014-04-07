@@ -1,7 +1,7 @@
 <% unless @channel_courses.count.zero?  %>
-	$(".channel-courses-begin").html("<%= j(render 'courses/channel_courses') %>");
+	$(".channel-courses-begin").removeClass('nopadding-left').html("<%= j(render 'courses/channel_courses') %>");
 <% else %>
-	$(".channel-courses-begin").html("No Courses found for <%= params[:sSearch] %>");
+	$(".channel-courses-begin").addClass('nopadding-left').html("<label>No Courses found for <%= params[:sSearch] %></label>");
 <% end %>
 
 
