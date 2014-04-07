@@ -71,7 +71,7 @@ class Video < ActiveRecord::Base
     self.save!
     #private password setting remove for now
     #publish_privately
-    self.delay(:run_at => 5.minutes.from_now).get_vimeo_info
+    self.delay(:run_at => 5.minutes.from_now, :queue => 'thumbnail').get_vimeo_info
     return self
   end
 
@@ -84,7 +84,7 @@ class Video < ActiveRecord::Base
     if hashie_get_info(vimeo_data).video.first.is_transcoding == "0"
       self.set_vimeo_info(vimeo_data)
     else
-      self.delay(:run_at => 2.minutes.from_now).get_vimeo_info
+      self.delay(:run_at => 2.minutes.from_now,:queue => 'thumbnail').get_vimeo_info
     end
   end
 
