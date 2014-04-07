@@ -90,7 +90,7 @@ class Topic < ActiveRecord::Base
       update_attribute(:status, "Published")
     end
   end
-  handle_asynchronously :upload_to_vimeo
+  handle_asynchronously :upload_to_vimeo, :queue => "publish"
 
   def create_album(assign_video)
     if self.vimeo_album_id.blank?

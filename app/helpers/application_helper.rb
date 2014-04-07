@@ -56,6 +56,12 @@ module ApplicationHelper
     end
   end
 
+  def link_image_tag(image)
+    content_tag(:div, class: "play-overlay") do
+     image_tag(video_thumbnail_image(image, :medium => true), :alt => 'image') << content_tag(:div,'', :class => "play-btn")
+    end 
+  end  
+
   def link_raw_field(classes)
     content_tag(:i, '', class: classes)
   end
