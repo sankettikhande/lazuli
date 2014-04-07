@@ -564,7 +564,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .video-descr-text h4 {margin: 0;color: #464646}
 .video-descr-text p {color: #000}
 
-.course-menu {background: #095795;padding-top: 2px;padding-right: 10px;padding-bottom: 10px;}
+.course-menu {background: #095795;padding-top: 2px;padding-right: 10px;padding-bottom: 10px; margin-bottom: 5px;}
 .course-menu h5 {color: #fff;margin-top: 7px;margin-left: 10px;text-transform: capitalize;}
 .course-menu h5 a {text-decoration: underline;color: #fff;}
 .course-menu h5 a:hover {text-decoration: none;color: #fff;}
