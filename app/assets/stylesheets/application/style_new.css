@@ -80,3 +80,9 @@ span div.star-rating-on a {
 }
 
 .padding15{padding:0 15px;}
+
+/******* css for devise error *********/
+#error_explanation{
+	color: red;
+}
+#error_explanation h2 {display: none;}
