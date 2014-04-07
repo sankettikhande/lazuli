@@ -8,6 +8,7 @@ load "config/recipes/db"
 load "config/recipes/rvm"
 load "config/recipes/passenger"
 load "config/recipes/sphinx"
+load "config/recipes/delayed_job"
 ## To configure and index sphinx runc cap <env> sphinx:configure_and_index
 
 set :application, "lazuli"
@@ -41,7 +42,7 @@ task :qa do
   set :user, "sodel"
   set :branch, "master"
   set :scm_verbose, true
-  set :delayed_job_args, "-n 2"
+  set :delayed_job_args_per_role, {:worker_1 => "--queue=publish -i=1",:worker_2 => "--queue=publish -i=2", :worker_3 => "--queue=thumbnail -i=3", :worker_4 => "-i=4" }
   role :web, domain
   role :app, domain
   role :db, domain, :primary=>true
@@ -57,6 +58,7 @@ task :uat do
   set :branch, "master"
   set :scm_verbose, true
   set :delayed_job_args, "-n 2"
+  # set :delayed_job_args_per_role, {:worker_1 => "--queue=publish -i=1",:worker_2 => "--queue=publish -i=2", :worker_3 => "--queue=thumbnail -i=3", :worker_4 => "-i=4" }
   role :web, domain
   role :app, domain
   role :db, domain, :primary=>true
