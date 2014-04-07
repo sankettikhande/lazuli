@@ -19,14 +19,12 @@ $(document).ready(function(){
 	  }
 	});
 
-	if ($('#s2id_channel_id').val() != ''){
+	if ($('#channel_id').val() != ''){
 		$.each($(".select2me"), function (i, n) {
 			$(n).next().show().fadeTo(0, 0).height("0px").css("left", "auto");
 			$(n).prepend($(n).next());
 			$(n).delay(500).queue(function () {
-				if($(this).val() != 1){
-					$(this).removeClass("validate[required]");
-				}
+				$(this).removeClass("validate[required]");
 				$(this).dequeue();
 			});
 		});

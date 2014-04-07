@@ -19,6 +19,10 @@ footer .navbar-brand {padding-top: 10px;padding-bottom: 0}
 .seperator30 {min-height:30px;}
 .nopadding {padding:0;}
 .nomargin {margin:0}
+
+.nopadding-left {padding-left:0;}
+.nopadding-right {padding-right:0;}
+
 .nospace {margin:0;padding:0}
 
 .fa-2x {font-size: 200% !important}

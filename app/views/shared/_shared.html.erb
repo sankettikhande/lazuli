@@ -2,6 +2,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<ul class="row">
+				<% unless objekts.blank? %>
 				<% objekts.each do |objekt| %>
 					<li class="col-xs-12 col-sm-6 col-md-4">
 						<ul class="box-record">
@@ -45,6 +46,41 @@
 							</li>
 						</ul>
 					</li>
+				<% end %>
+				<%end%>
+				<% unless deleted_objekts.blank? %>
+				<% deleted_objekts.each do |objekt| %>
+					<% video_id = params[:controller] == 'favourites' ? objekt.favouritable_id : objekt.video_id%>
+					<li class="col-xs-12 col-sm-6 col-md-4">
+						<ul class="box-record">
+							<li class="box-title"><input type="checkbox" name="<%= params[:controller] %>_ids[<%= video_id %>]" class="user_checkbox">
+								<span class="pull-right">
+									<!-- <button type="button" class="btn-trans">&times;</button> -->
+										<%= link_to("&times;".html_safe, "#{params[:controller]}/#{video_id}", :class => "btn-trans", :method => :delete, :remote => true)%>
+								</span>
+							</li>
+							<li class="box-details">
+								<div class="row">
+									<div class="col-xs-6 col-sm-5">
+										<div class="item-thumb">
+											<%= link_to(image_tag(objekt.thumbnail, :alt => "", :class => "img-responsive center-block")) %>
+										</div>
+									</div>
+									<div class="col-xs-6 col-sm-7 nopadding-left">
+										<div class="row">
+											<div class="col-xs-12">
+												<div class="item-descr">
+													<%= objekt.title%>
+													<%#= link_to(objekt.title.titleize.truncate(32), course_topic_video_url(objekt.topic.course_id, objekt.topic_id, objekt.id))%>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+				<% end %>
 				<% end %>
 			</ul>
 		</div>

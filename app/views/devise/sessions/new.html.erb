@@ -1,70 +1,81 @@
 <section id="homepage">
-	<div class="row"> <!-- Row 1 -->
-		<div class="col-sm-5 pull-right">
-			<div id="flash"><%= flash_message %></div>
-			<div class="content-right">	
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="welcome-text">
-				        <h4>Lorem Ipsum Proin</h4>
-				        <h5>Gravida nibh vel velit auctor.</h5>
-				        <p>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-		  			</div>  <!-- welcome text ends -->
-					</div>
-				</div>
-				<div class="row visible-xs"> <!-- row 3 -->
-					<div class="col-xs-12">
-						<div class="three-btns">
-							<div class="row">
-							<div class="col-xs-4 text-left">
-									<a href="#" class="btn btn-block btn-primary">Courses</a>
-								</div>
-								<div class="col-xs-4 text-center">
-									<a data-toggle="modal" data-target="#login-modal" class="btn btn-block btn-primary">Login</a>
-								</div>
-								<div class="col-xs-4 text-right">
-									<a data-toggle="modal" data-target="#signup-modal" class="btn btn-block btn-primary">Sign Up</a>
-								</div>  									
-							</div>
-						</div>
-					</div>
-				</div> <!-- row 3 ends -->
-				<div class="seperator10 visible-xs"></div>
-				<form role="search" action = '/search' method = "get" id="main_search_form" >
-					<div class="row"> <!-- row 4 -->
-						<div class="col-xs-9 nopadding-right">
-							<div class="form-group srch-bar">
-								<div class="input-group">
-									<span class="input-group-addon btn-danger lens-btn"><i class="fa fa-search text-white"></i></span>
-									<input type="text" name="search" class="form-control typeahead home-srch-bar" id="main_search" data-provide="typeahead" data-items="4" data-source="[]" autocomplete="off" value="<%= params[:search] %>" placeholder="What do you want to learn?" title="Minimum 3 characters to be entered">
-								</div>
-							</div>
-						</div>
-						<div class="col-xs-3 nopadding-left">
-	            <button class="btn btn-danger btn-block search-btn" type="submit">Search</button>
-						</div>
-					</div> <!-- row 4 ends -->
-				</form> <!-- row 4 ends -->
-				<!-- row 5 -->
-				<%= render 'devise/sessions/browse_courses' %>
-				<!-- row 5 ends -->
-				<div class="seperator5"></div>
-				<div class="row hidden-xs"> <!-- row 6 -->
-					<div class="col-xs-12">
-	              <div class="welcome-quote">
-	                <h2>
-		                Tell me <span>and I forget.</span><br>
-		                Teach me <span>and I remember.</span><br>
-		                Involve me <span>and I learn.</span>
-	                </h2>
-		                <cite>Benjamin Franklin</cite>
-	              </div>
-	          </div>
-				</div> <!-- row 6 ends -->
+  <div class="row"> <!-- Row 1 -->
+    <div class="col-sm-5 pull-right">
+      <div id="flash"><%= flash_message %></div>
+      <div class="content-right">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="welcome-text">
+                <h4>Lorem Ipsum Proin</h4>
+                <h5>Gravida nibh vel velit auctor.</h5>
+                <p>Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
+            </div>  <!-- welcome text ends -->
+          </div>
+        </div>
+        <div class="row visible-xs"> <!-- row 3 -->
+          <div class="col-xs-12">
+            <div class="three-btns">
+              <div class="row">
+                <div class="col-xs-4 text-left">
+                  <button type="button" class="btn btn-primary btn-block dropdown-toggle text-left" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">&nbsp;&nbsp;
+                      &nbsp;Courses&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <% @courses.each do |course| %>
+                    <li>
+                      <%= link_to(course.name.titleize.truncate(20), course_video_path(course.id)) %>
+                    </li>
+                    <% end %>
+                    <li class="divider"></li>
+                    <li><%= link_to 'Browse Libary', browse_course_url %></li>
+                  </ul>
+                </div>
+                <div class="col-xs-4 text-center">
+                  <a data-toggle="modal" data-target="#login-modal" class="btn btn-block btn-primary">Login</a>
+                </div>
+                <div class="col-xs-4 text-right">
+                  <a data-toggle="modal" data-target="#signup-modal" class="btn btn-block btn-primary">Sign Up</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- row 3 ends -->
+        <div class="seperator10 visible-xs"></div>
+        <form role="search" action = '/search' method = "get" id="main_search_form" >
+          <div class="row"> <!-- row 4 -->
+            <div class="col-xs-9 nopadding-right">
+              <div class="form-group srch-bar">
+                <div class="input-group">
+                  <span class="input-group-addon btn-danger lens-btn"><i class="fa fa-search text-white"></i></span>
+                  <input type="text" name="search" class="form-control typeahead home-srch-bar" id="main_search" data-provide="typeahead" data-items="4" data-source="[]" autocomplete="off" value="<%= params[:search] %>" placeholder="What do you want to learn?" title="Minimum 3 characters to be entered">
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-3 nopadding-left">
+              <button class="btn btn-danger btn-block search-btn" type="submit">Search</button>
+            </div>
+          </div> <!-- row 4 ends -->
+        </form> <!-- row 4 ends -->
+        <!-- row 5 -->
+        <%= render 'devise/sessions/browse_courses' %>
+        <!-- row 5 ends -->
+        <div class="seperator5"></div>
+        <div class="row hidden-xs"> <!-- row 6 -->
+          <div class="col-xs-12">
+                <div class="welcome-quote">
+                  <h2>
+                    Tell me <span>and I forget.</span><br>
+                    Teach me <span>and I remember.</span><br>
+                    Involve me <span>and I learn.</span>
+                  </h2>
+                    <cite>Benjamin Franklin</cite>
+                </div>
+            </div>
+        </div> <!-- row 6 ends -->
 
-			</div> 
-		</div>
-		<%= render 'home/topic_videos'%>
-	</div> <!-- Row 1 ends -->
+      </div>
+    </div>
+    <%= render 'home/topic_videos'%>
+  </div> <!-- Row 1 ends -->
 
 </section>

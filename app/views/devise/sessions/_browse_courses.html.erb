@@ -4,7 +4,7 @@
 			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
 				Browse Courses&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
 			</button>
-			<ul class="dropdown-menu" role="menu">
+			<ul class="dropdown-menu home-bc" role="menu">
 				<% @courses.each do |course| %>
 					<% topics = course.topics %>
 						<li class="<%= 'dropdown-submenu' if topics.any? %>">

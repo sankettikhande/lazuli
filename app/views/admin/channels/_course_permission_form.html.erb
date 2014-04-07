@@ -2,7 +2,15 @@
 	<label class="control-label">Permissions</label>
 </div>
 <div class="col-sm-4">
-	<div class="col-sm-4"><label><%= f.check_box :permission_watch, :checked => 'checked' %> Watch </label></div>
-	<div class="col-sm-4"><label><%= f.check_box :permission_create %> Create </label></div>
-	<div class="col-sm-4"><label><%= f.check_box :permission_share %> Share </label ></div>
+  <div class="row">
+      <div class="col-sm-4">
+        <label><%= f.check_box :permission_watch, :checked => 'checked' %> Watch </label>
+      </div>
+      <div class="col-sm-4">
+        <label><%= f.check_box :permission_create %> Create </label>
+      </div>
+      <div class="col-sm-4">
+        <label><%= f.check_box :permission_share %> Share </label >
+      </div>
+  </div>
 </div>
