@@ -19,7 +19,9 @@ class Ability
         can :manage, Course do |course| 
             course.channel_admin_user_id == user.id || course.course_admin_user_id == user.id
         end
-        cannot :destroy, Course, :course_admin_user_id => user.id
+        cannot :destroy, Course do |course|
+            course.channel_admin_user_id != user.id
+        end
         can :manage, Channel, :admin_user_id => user.id
         cannot :destroy, Channel
         can [:get_channel,:channel_courses], Channel
