@@ -17,6 +17,8 @@
             <% end %>
           </ul>
           <% end %>
+        <% elsif(params[:controller] == "courses" && params[:action] == "show") %>
+         <li class="visible-xs offcanvas-toggler-btn"><a class="btn btn-success hand-cursor" data-toggle="offcanvas" title="Course Menu"><i class="fa fa-2x fa-exchange"></i></a></li>
         <% end %>
       </div>
       <div class="navbar-collapse collapse" id="footer-body">
