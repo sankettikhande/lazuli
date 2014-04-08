@@ -1,5 +1,5 @@
 <% @channel_courses.each do |course| %>
-<ul class="row channel-each-course">
+<ul class="row channel-each-course text-justify">
   <li class="col-xs-12">
     <ul class="row">
       <li class="col-xs-12 col-sm-8 col-md-8 channel-course-title" >
@@ -18,8 +18,10 @@
           </li>
         </ul>
       </li>
-      <li class="col-xs-6 col-sm-2 col-md-2 channel_courses course-featured-video">
+      <li class="col-xs-6 col-sm-2 col-md-2 channel_courses">
+        <div class='course-featured-video'>
         <%= displaying_videos_thumbnail(course) %>
+        </div>
       </li>
     </ul>
   </li>
