@@ -1,14 +1,14 @@
 <%= form_for(resource, :as => resource_name, :remote => true, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
   <%= devise_error_messages! %>
   <div class='row'>
-  	<div class="col-sm-6 confirm_errors">
+  	<div class="col-sm-7 confirm_errors">
   </div>
   </div>	
   <div class='row'>
-	  <div class="col-sm-8"><%= f.label :email %><br />
+	  <div class="col-sm-7"><%= f.label :email %><br />
 	  <%= f.email_field :email, :autofocus => true, :class => "form-control" %></div>
 	</div>
 	<div class='row'>
-	  <div class="col-sm-2 pull-right"><br /><%= f.submit "Submit", :class => 'btn btn-success btn-block' %></div>
+	  <div class="col-sm-2"><br /><%= f.submit "Submit", :class => 'btn btn-success btn-block' %></div>
   </div>
 <% end %>
