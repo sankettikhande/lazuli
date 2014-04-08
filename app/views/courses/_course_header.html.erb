@@ -7,7 +7,7 @@
             <%= image_tag(@course.channel.image.url, :alt => "Channel Logo", :class => "img-border") %>
           </div>
         </div>
-        <div class="col-xs-6 col-sm-8 col-md-9">
+        <div class="col-xs-12 col-sm-8 col-md-9">
           <div class="video-descr-text">
             <% bookmarks = @video.bookmarks.order(:bookmark_sec) %>  
             <% if bookmarks.any? && params[:t] %>
