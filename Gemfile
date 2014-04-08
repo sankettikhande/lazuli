@@ -28,7 +28,10 @@ gem "daemons"
 gem "delayed_job_web"
 gem "custom_error_message"
 gem 'thinking-sphinx', '~> 3.0.2'
-gem 'ts-delayed-delta', '~> 2.0.0'
+# gem 'ts-delayed-delta', '~> 2.0.0'
+gem 'ts-delayed-delta',
+  :git    => 'git://github.com/pat/ts-delayed-delta.git',
+  :branch => 'master'
 gem "validates_lengths_from_database"
 gem 'jquery-star-rating-rails'
 gem 'social-share-button'

@@ -5,6 +5,8 @@ development:
      enable_star: true
      min_infix_len: 0
      min_prefix_len: 1
+     delayed_job_queue: "sphinx_deltas"
+     delayed_job_priority: 0
 
 staging:
      mem_limit: 256M
@@ -12,6 +14,8 @@ staging:
      enable_star: true
      min_infix_len: 0
      min_prefix_len: 1
+     delayed_job_queue: "sphinx_deltas"
+     delayed_job_priority: 0
 
 production:
      mem_limit: 256M
@@ -19,4 +23,5 @@ production:
      enable_star: true
      min_infix_len: 0
      min_prefix_len: 1
-     
+     delayed_job_queue: "sphinx_deltas"
+     delayed_job_priority: 0
