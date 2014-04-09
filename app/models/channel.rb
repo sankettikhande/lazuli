@@ -23,7 +23,7 @@ class Channel < ActiveRecord::Base
   validates :user_name, :company_name, :company_number, :email, :presence => true
   validates_presence_of :name, :message => "^Channel name cann't be blank"
   validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, :unless => Proc.new {|c| c.email.blank?}
-  validates :admin_user_id, :presence => {:message => "Full name can't be blank."}
+  validates :admin_user_id, :presence => {:message => "^Administrator Details: Full name can't be blank."}
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validates_uniqueness_of :name, :message => "^Channel name has already been taken."
