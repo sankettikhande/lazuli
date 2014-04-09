@@ -6,9 +6,7 @@ $(document).ready(function(){
     onValidationComplete: function(form, status) {
       $('.formError').css("left","15px")
       if(status == true){
-        if ($('.require-one:checked').size() > 0)
-          return true;
-        else{
+        if ($('.require-one:checked').size() < 1) {
           alert("Please select atleast one subscriptions with price");          
           return false;
           }
