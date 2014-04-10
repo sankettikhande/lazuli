@@ -33,6 +33,7 @@ class Video < ActiveRecord::Base
   validates_presence_of :clip, :message => '^Please upload the video file'
   validates_attachment_content_type :clip, :content_type => ['video/x-msvideo','video/avi','video/quicktime','video/3gpp','video/x-ms-wmv','video/mp4','video/mpeg','video/x-flv', 'application/octet-stream']
   validates :status, :inclusion => {:in => @@video_statuses}
+  validates_uniqueness_of :title, :scope => :topic_id
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
   scope :published, where(:status => "Published")

@@ -30,7 +30,7 @@ class Course < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
   validate :course_name
   validate :course_subscription_params
-  accepts_nested_attributes_for :course_trainers, :reject_if => proc { |c| c[:name].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :course_trainers, :allow_destroy => true, :reject_if => proc{|a| a['name'].blank?}
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => proc { |a| !a['subscription_id'].present? }, :allow_destroy => true
   #SCOPES
@@ -228,6 +228,5 @@ class Course < ActiveRecord::Base
   private 
   def create_associations()
     self.channel_course_permissions.build if self.new_record? && self.channel_course_permissions.size.zero?
-    self.course_trainers.build if self.new_record? && self.course_trainers.size.zero?
   end
 end
