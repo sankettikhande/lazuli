@@ -21,7 +21,7 @@
                <ul class="trainers_list row">             
                 <% trainers.each do |trainer| %>
                   <li>
-                    <div class="trainer_info col-xs-12 col-sm-2">Name:</div><div class="trainer_name col-xs-12 col-sm-10"> <%=  trainer.name.titleize %></div>
+                    <div class="trainer_info col-xs-12 col-sm-2">Name:</div><div class="trainer_name col-xs-12 col-sm-10"> <%=  trainer.name.try(:titleize) %></div>
                     <div  class="trainer_info col-xs-12 col-sm-2">Biography:</div><div class="trainer_name col-xs-12 col-sm-10"><%=  trainer.biography %></div>
                      <div class="trainer_separator"></div> 
                   </li>                    

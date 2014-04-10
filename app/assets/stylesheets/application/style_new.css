@@ -86,3 +86,6 @@ span div.star-rating-on a {
 	color: red;
 }
 #error_explanation h2 {display: none;}
+
+.pagination span {margin-bottom: 5px !important;}
+.show-one img {width: 145px !important}

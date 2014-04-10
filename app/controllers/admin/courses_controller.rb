@@ -9,6 +9,7 @@ class Admin::CoursesController < AdminController
 
 	def new
 		@course = Course.new
+		@course.course_trainers.build
 	end
 
 	def create
