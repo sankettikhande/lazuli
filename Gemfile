@@ -34,6 +34,7 @@ gem 'ts-delayed-delta',
 gem "validates_lengths_from_database"
 gem 'jquery-star-rating-rails'
 gem 'social-share-button'
+gem 'browser'
 
 group :development do
   gem 'quiet_assets'

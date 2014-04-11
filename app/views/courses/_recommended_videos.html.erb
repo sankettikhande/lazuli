@@ -27,19 +27,45 @@
 </div>
 
 <script>
-  <% if !@recommended_videos.count.zero? %>
+<% if !@recommended_videos.count.zero? %>
+ <% if !browser.mobile? && !browser.tablet? && (@recommended_videos.count > 6) %>
     $(document).ready(function(){
       $('.slider4').bxSlider({
-//        slideWidth: 180,
         minSlides: 1,
         maxSlides: 6,
         moveSlides: 1,
-//        slideMargin: 10,
         pager: false,
-        infiniteLoop: false,
+        infiniteLoop: true,
         hideControlOnEnd: false,
         speed: 1000
       });
     });
+  <% elsif browser.tablet? && (@recommended_videos.count > 3) %>
+  alert("tablet")
+    $(document).ready(function(){
+      $('.slider4').bxSlider({
+        minSlides: 1,
+        maxSlides: 6,
+        moveSlides: 1,
+        pager: false,
+        infiniteLoop: true,
+        hideControlOnEnd: false,
+        speed: 1000
+      });
+    });
+  <% elsif (browser.mobile? || browser.android?) && (@recommended_videos.count > 2) %>
+    $(document).ready(function(){
+      alert("mobile")
+      $('.slider4').bxSlider({
+        minSlides: 1,
+        maxSlides: 6,
+        moveSlides: 1,
+        pager: false,
+        infiniteLoop: true,
+        hideControlOnEnd: false,
+        speed: 1000
+      });
+    });  
   <% end %>
+ <% end %> 
 </script>
