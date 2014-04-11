@@ -29,7 +29,7 @@
                 padding: '10px',
                 backgroundSize: '20px',
                 backgroundColor: '#fff',
-                backgroundImage: 'url(http://i.imgur.com/uM2gq.gif)',
+                backgroundImage: 'url("/assets/uM2gq.gif")',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center center',
                 height: '40px',
@@ -95,6 +95,12 @@
                 ) {
                     left = 0;
                     top = 0;
+                }
+                if ($this.innerHeight() > 700){
+                    height = $this.innerHeight();
+                }
+                else{
+                  height = 700;  
                 }
 
                 // overlay styles
