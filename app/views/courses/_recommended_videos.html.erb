@@ -41,7 +41,6 @@
       });
     });
   <% elsif browser.tablet? && (@recommended_videos.count > 3) %>
-  alert("tablet")
     $(document).ready(function(){
       $('.slider4').bxSlider({
         minSlides: 1,
@@ -55,7 +54,6 @@
     });
   <% elsif (browser.mobile? || browser.android?) && (@recommended_videos.count > 2) %>
     $(document).ready(function(){
-      alert("mobile")
       $('.slider4').bxSlider({
         minSlides: 1,
         maxSlides: 6,
