@@ -34,6 +34,7 @@ after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
 after "deploy:update", "deploy:cleanup"
 after "deploy:update", "sphinx:configure_and_symlink"
+after "deploy:update", "deploy:set_tmp_permission"
 after "deploy:update", "thinking_sphinx:index"
 after "deploy:update", "thinking_sphinx:start"
 before "deploy:update", "thinking_sphinx:stop"
@@ -70,6 +71,13 @@ task :uat do
   role :worker_2,domain
   role :db, domain, :primary=>true
 end
+
+namespace :deploy do
+  task :set_tmp_permission do
+    run "chmod -R 777 #{current_path}/tmp/"
+  end
+end
+
 
 # task :prod do
 #   set :rails_env, "production"
