@@ -30,7 +30,7 @@
       <div class="hidden-xs col-sm-2 col-md-2">
         <div class="course-featured-video">
             <a href="#">
-              <%= link_to(image_tag(video_thumbnail_image(video, :medium => true), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), course_topic_video_url(video.topic.course_id, video.topic_id, video.id) )%>
+              <%= link_to(link_image_tag(video), course_topic_video_url(video.topic.course_id, video.topic_id, video.id) )%>
             </a>
         </div>
       </div>

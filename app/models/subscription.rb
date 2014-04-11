@@ -1,5 +1,5 @@
 class Subscription < ActiveRecord::Base
-  attr_accessible :name, :days, :months, :years, :calculated_days
+  attr_accessible :name, :days, :months, :years, :calculated_days, :price , :is_trial_subscription
   #ASSOCIATIONS
   has_many :user_channel_subscriprions
 

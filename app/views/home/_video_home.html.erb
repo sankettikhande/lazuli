@@ -12,7 +12,6 @@
       <h4><%= topic.title.titleize %></h4>
     </div>
 </div>
-
 <script>
   <% if !topic.videos.count.zero? %>
     $(document).ready(function(){
@@ -31,6 +30,7 @@
   <% if topic.videos.count < 2 %>
     $(document).ready(function(){
       $('.slider4<%= topic_index %>').bxSlider({infiniteLoop: false});
+      $(".slider4<%= topic_index %> .slide").addClass("show-one");
       $(".carousel-box-<%= topic_index + 1 %> .bx-controls-direction").hide();
     })
   <% end %>

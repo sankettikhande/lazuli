@@ -58,7 +58,7 @@ module ApplicationHelper
 
   def link_image_tag(image)
     content_tag(:div, class: "play-overlay") do
-     image_tag(video_thumbnail_image(image, :medium => true), :alt => 'image') << content_tag(:div,'', :class => "play-btn")
+     image_tag(video_thumbnail_image(image, :medium => true), :alt => 'image', :class => "img-responsive center-block yellow-shadow") << content_tag(:div,'', :class => "play-btn")
     end 
   end  
 
@@ -192,10 +192,10 @@ module ApplicationHelper
   def displaying_videos_thumbnail(source)
     if source.is_a?(Course)
       video_to_display = source.course_first_video
-      link_to(image_tag(video_thumbnail_image(video_to_display, {:medium => true}), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), course_topic_video_path(source.id, video_to_display.topic.id, video_to_display.id)) if video_to_display
+      link_to(link_image_tag(video_to_display), course_topic_video_path(source.id, video_to_display.topic.id, video_to_display.id)) if video_to_display
     elsif source.is_a?(Topic)
       video_to_display = source.topic_first_video
-      link_to(image_tag(video_thumbnail_image(video_to_display, {:medium => true}), :alt => "Image", :class => "img-responsive center-block yellow-shadow" ), course_topic_video_path(source.course_id, source.id, video_to_display.id)) if video_to_display
+      link_to(link_image_tag(video_to_display), course_topic_video_path(source.course_id, source.id, video_to_display.id)) if video_to_display
     end
   end
 end

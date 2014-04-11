@@ -37,7 +37,7 @@ ul,ol,dd {list-style-type: none;padding: 0;margin: 0}
 .nopadding {padding:0;}
 .nomargin {margin:0}
 .nospace {margin:0;padding:0}
-.nopadding-left {padding-left: 0}
+.nopadding-left {padding-left: 0 !important;}
 .nopadding-right {padding-right: 0}
 .padding-top-10 {padding-top: 10px;}
 .margin-top-8 {margin-top: 8px;}
@@ -424,7 +424,9 @@ box-shadow:         0px 0px 5px 0px rgba(11,11,11, 0.75);}
 /*.video-slides .bx-viewport .slide img {max-width: 160px;height: auto;border: 3px solid #fff;margin: 10px auto 5px; }
 */
 
-.video-slides .slide {padding:10px 15px 0;margin: 0;width: 162px !important;}
+.bx-wrapper .bx-viewport .slider4 {left: 1.1%;right:1.1% }
+
+.video-slides .slide {padding:10px 5px 0;margin: 0 13px;width: 160px !important;}
 .video-slides .slide img {margin-bottom: 8px;}
 .video-slides .slide p {font-family: 'MyriadProRegular',Sans-Serif;color: #454746;}
 .video-slides .slide p:hover {color: #000;cursor: pointer;}
@@ -453,8 +455,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 .courses-list .remove-button {line-height: 80px;text-align: center;}
 
-.course-featured-video img{max-width: 100px;max-height: 70px;margin:8px 12px;border: 2px solid #fff;}
- 
+.course-featured-video {max-width: 100px;margin: 8px 0 10px 0;} 
 /****** =browse courses ***********/
 .course-each .list-content {border-bottom: 1px solid #eaeaea;padding-bottom: 5px;}
 .course-each .list-content li.title a {color: #000}
@@ -558,9 +559,10 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 }
 
 */
-.video-descr {background: #f5f5f5 !important;margin-top: 10px}
-.video-descr .channel-logo-pic {border: 1px solid #919191;height: 55px;}
+.video-descr {background: #f5f5f5 !important;margin-top: 10px;padding: 5px}
+.video-descr .channel-logo-pic {border: 1px solid #919191;height: 55px;max-width: 163px;}
 .video-descr .channel-logo-pic img {min-height: 100%;min-width: 100%;max-width: 100%;max-height: 100%}
+.video-descr-text {padding: 5px 3px;}
 .video-descr-text h4 {margin: 0;color: #464646}
 .video-descr-text p {color: #000}
 
@@ -649,10 +651,14 @@ li.box-details .item-viewed span {color: #000}
 @media (max-width: 350px) {
 .welcome-videos .slide {margin-left:57px }
 
-.video-slides .slide {width: 300px !important;padding: 10px 70px 0;}
+.video-slides .slide {width: 180px !important;padding: 10px 10px 0;margin: 0 45px}
+
+
 }
 @media (min-width: 351px) and (max-width: 370px) {
 .welcome-videos .slide {margin-left:80px}
+
+.video-slides .slide {margin: 0 80px}
 }
 @media (min-width: 371px) and (max-width: 480px) {
 .welcome-videos .slide {margin-left: 30px;margin-right: 30px;}
@@ -661,8 +667,8 @@ li.box-details .item-viewed span {color: #000}
 }
 @media (min-width: 481px) and (max-width: 640px) {
 
-.welcome-videos .slide {margin-left:70px; margin-right: 70px}
-
+.welcome-videos .slide {margin:0 60px}
+.video-slides .slide {margin: 0 16px}
 }
 @media (min-width: 641px) and (max-width: 980px) {
 
@@ -901,7 +907,11 @@ h4.page-header {font-size: 24px;}
   -ms-transition:.5s;
   -moz-transition:.5s;
   -webkit-transition:.5s;
-  /* ...and now for the proper property */
   transition:.5s;}
 .play-overlay img {cursor: pointer;}
-.play-btn {background:#333;background: rgba(0,0,0,0.8) url('/assets/frontend/play-icon.png') no-repeat center center;position: absolute;width: 100%;height: 100%;top:0;display:block;cursor: pointer;background-size: 30%;opacity: 0.9}
+.play-btn {background: rgba(0,0,0,0.4) url('/assets/frontend/play-icon.png') no-repeat center center;position: absolute;width: 100%;height: 100%;top:0;display:block;cursor: pointer;background-size: 30%;
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000)"; /* IE8 */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7F000000,endColorstr=#7F000000);   /* IE6 & 7 */
+      zoom: 1;
+
+}

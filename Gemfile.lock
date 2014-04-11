@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/pat/ts-delayed-delta.git
+  revision: 1c121b09bf68f6425f2abea2416005487ce092ea
+  branch: master
+  specs:
+    ts-delayed-delta (2.0.0)
+      delayed_job
+      thinking-sphinx
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -259,9 +268,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    ts-delayed-delta (2.0.0)
-      delayed_job
-      thinking-sphinx
     turbolinks (1.3.1)
       coffee-rails
     tzinfo (0.3.38)
@@ -325,7 +331,7 @@ DEPENDENCIES
   social-share-button
   therubyracer
   thinking-sphinx (~> 3.0.2)
-  ts-delayed-delta (~> 2.0.0)
+  ts-delayed-delta!
   turbolinks
   uglifier (>= 1.0.3)
   unicorn
