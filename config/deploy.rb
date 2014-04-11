@@ -34,6 +34,9 @@ after "deploy:start",   "delayed_job:start"
 after "deploy:restart", "delayed_job:restart"
 after "deploy:update", "deploy:cleanup"
 after "deploy:update", "sphinx:configure_and_symlink"
+after "deploy:update", "thinking_sphinx:index"
+after "deploy:update", "thinking_sphinx:start"
+before "deploy:update", "thinking_sphinx:stop"
 
 task :qa do
   set :rails_env, "staging"
