@@ -11,11 +11,9 @@ module HomeHelper
         video.get_best_thumbnail(1)
       elsif options[:small]
         video.get_best_thumbnail(0)
-      else
-       "process-thumb.png"
       end
     else
-     video.image.present? ? video.image.url : "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+     video.image.present? ? video.image.url : "process-thumb.png"
     end
   end
 
