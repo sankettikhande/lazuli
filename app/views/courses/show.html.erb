@@ -47,9 +47,7 @@
         <%= render 'video_options' if user_signed_in? %>
         <!-- rows ends -->
         <div class="row" id="place_video">
-          <% if current_user && current_user.permitted_courses.include?(@course) %>
-            <%= render 'embedded_video' %>
-          <% elsif @video.demo %>
+          <% if can? :show, @video %>
             <%= render 'embedded_video' %>
           <% else %>
             <%= render 'embedded_block_video' %>
