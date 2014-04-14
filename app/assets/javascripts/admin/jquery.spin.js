@@ -88,19 +88,13 @@
                 var left = $this.offset().left,
                     top = $this.offset().top,
                     width = $this.innerWidth(),
-                    height = $this.innerHeight();
+                    height = $(window).height();
                 if (
                     $this.css('position') === 'relative'
                     || $this.css('position') === 'absolute'
                 ) {
                     left = 0;
                     top = 0;
-                }
-                if ($this.innerHeight() > 700){
-                    height = $this.innerHeight();
-                }
-                else{
-                  height = 700;  
                 }
 
                 // overlay styles
