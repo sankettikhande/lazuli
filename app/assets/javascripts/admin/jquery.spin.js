@@ -29,7 +29,7 @@
                 padding: '10px',
                 backgroundSize: '20px',
                 backgroundColor: '#fff',
-                backgroundImage: 'url("/assets/uM2gq.gif")',
+                backgroundImage: 'url("http://i.imgur.com/uM2gq.gif")',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center center',
                 height: '40px',
@@ -88,7 +88,7 @@
                 var left = $this.offset().left,
                     top = $this.offset().top,
                     width = $this.innerWidth(),
-                    height = $(window).height();
+                    height = $(document).height();
                 if (
                     $this.css('position') === 'relative'
                     || $this.css('position') === 'absolute'

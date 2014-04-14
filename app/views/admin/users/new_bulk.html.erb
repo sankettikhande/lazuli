@@ -2,7 +2,7 @@
   	<div class="panel panel-default">
   		<div class="panel-body">
   			<div class="form-group">
-  				<%= nested_form_for @user, :url => create_bulk_admin_users_path, :remote => true, :html => {:id => 'multiple_user_form'} do |f| %>
+          <%= nested_form_for @user, :url => create_bulk_admin_users_path, :html => {:id => 'multiple_user_form'} do |f| %>
   					<div id='error_messages'></div>
   	  			<div class="row">
 	  				<div class="col-md-12">
@@ -69,4 +69,4 @@
 
 <script type="text/javascript">
 	$('#multiple_user_form').ajaxForm();
-</script>
+  </script>
