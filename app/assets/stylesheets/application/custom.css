@@ -169,7 +169,7 @@ p {font-family: 'MyriadProRegular',Sans-Serif;}
 #lazuli-top-menu .lazuli-dd-user-btn:hover button.btn {background: #000;border-color: #000}
 #lazuli-top-menu .lazuli-dd-user-btn button.text-btn {border-top-right-radius: 0;border-bottom-right-radius: 0}
 
-.login-options li a {text-transform: capitalize;}
+.login-options li a {text-transform: capitalize;padding-left: 15px !important;padding-right: 15px !important;display: block;}
 
 /************* +Multilevel Ends ****************************/
 
@@ -460,14 +460,14 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .course-each .list-content {border-bottom: 1px solid #eaeaea;padding-bottom: 5px;}
 .course-each .list-content li.title a {color: #000}
 
-.course-logo-img img {margin: 12px auto;max-width: 150px;max-height: 70px;border:2px solid #fff;}
+.course-logo-img img {margin: 12px 5px;max-width: 110px;max-height: 70px;border:2px solid #fff;}
 .course-logo-img h4.company-name {margin-top: 8px}
 /************ =Channel Page*************************/
 .fr-channel-info {padding:10px;border: 1px solid #ccc;border-radius: 6px}
 
 .fr-company-logo {padding: 5px 10px}
 .fr-company-logo img {max-width: 200px;height: auto;border: 1px solid #ccc;}
-.fr-company-logo h4 {text-transform: uppercase;text-align: center;max-width: 200px;}
+.fr-company-logo h4 {text-transform: uppercase;text-align: left;max-width: 200px;}
 
 .fr-company-decsr {padding: 15px 10px}
 .fr-company-decsr p {font-size: 1em}
