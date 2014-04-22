@@ -17,6 +17,7 @@ class Topic < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:course_id, :channel_id] , :message => "^Same topic name has already been taken for this course."
   validate :check_uniqueness_of_title
   validates :status, :inclusion => {:in => @@topic_statuses}
+  validate :check_offices_number
 
   scope :published, where(:status => ["Published", "PartialPublished"])
   scope :bookmarked, where(:is_bookmark_video => true)
@@ -176,4 +177,17 @@ class Topic < ActiveRecord::Base
     update_column(:status, "Published") if self.videos.all? {|v| v.published? }
     update_column(:status, "Saved") if self.videos.all? {|v| v.saved? }
   end
+
+  private
+  
+  def vidoes_count_valid?
+    videos.reject(&:marked_for_destruction?).count >= 1
+  end
+
+  def check_offices_number
+    unless vidoes_count_valid?
+      errors.add(:base, "Atleast one video must be present.")
+    end
+  end
+
 end
