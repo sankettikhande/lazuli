@@ -64,7 +64,7 @@ class Admin::CoursesController < AdminController
 		if params[:topic_course]
 			@is_trial_subscription = @course_subscriptions.keep_if{|cs| cs.is_trial_subscription?}
 		else
-			@course_subscriptions.delete_if{|cs| cs.is_trial_subscription? && !@course.has_trial_videos?}
+			@course_subscriptions.delete_if{|cs| cs.is_trial_subscription? && !@course.has_trial_videos?(check_published = false)}
 			@courses_permissions = @course.channel_course_permissions.first
 		end
 		respond_to do |format|

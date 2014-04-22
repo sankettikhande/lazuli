@@ -205,16 +205,22 @@ class Course < ActiveRecord::Base
      Video.published.demo_videos.joins(:topic => [:course]).where("courses.id = ? AND topics.status IN (?)", self.id, ["published","partialPublished"]).order('id desc').limit(1).first
   end
 
-  def has_trial_videos?
+  def has_trial_videos?(check_published)
     @course_trial_videos = []
-    self.topics.published.includes(:videos).each do |topic|
-      @course_trial_videos.concat(topic.videos.published.trial_videos)
-    end
+    if check_published == true
+      self.topics.published.includes(:videos).each do |topic|
+        @course_trial_videos.concat(topic.videos.published.trial_videos)
+      end
+    else
+      self.topics.includes(:videos).each do |topic|
+        @course_trial_videos.concat(topic.videos.trial_videos)
+      end
+    end  
     return @course_trial_videos.present?
   end
 
   def available_course_subscriptions
-    self.course_subscriptions.order('subscription_id').delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?}
+    self.course_subscriptions.order('subscription_id').delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?(check_published = true)}
   end
 
   def self.public_courses options
