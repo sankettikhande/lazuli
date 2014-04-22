@@ -1,6 +1,6 @@
 <%= javascript_include_tag "utils.js"%>
 <%= javascript_include_tag "admin/app_functions/topics.js"%>
-<%= nested_form_for [:admin , @topic], :html => {:class => "formClass"} do |f| %>
+<%= nested_form_for [:admin , @topic], :html => {:class => "topicFrom"} do |f| %>
 <%= errors_for @topic unless @topic.errors.blank? %>
 	<div class="form-group">
 		<div class="panel panel-default">
@@ -90,4 +90,3 @@
 <% end %>
 
 <%= render 'bookmark', :topic => @topic %>
-<%= javascript_include_tag "admin/app_functions/jquery_validation.js"%>
