@@ -25,6 +25,7 @@ class Topic < ActiveRecord::Base
 
   after_save :update_videos_sphinx_delta
   after_save :change_status
+  after_destroy :delete_vimeo_album
 
   before_update :change_video_status
 
@@ -62,13 +63,9 @@ class Topic < ActiveRecord::Base
   end
 
 
-  # def delete_album_and_videos
-  #   self.videos.each do |video|
-  #     VimeoLib.video.delete(video.try(:vimeo_id))
-  #   end
-  #   VimeoLib.album.delete(self.vimeo_album_id)
-  # end
-  # handle_asynchronously :delete_album_and_videos
+  def delete_vimeo_album
+    VimeoLib.album.delete(self.vimeo_album_id)
+  end
 
   def published?
     self.status == "Published"

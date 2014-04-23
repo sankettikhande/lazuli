@@ -43,6 +43,7 @@ class Video < ActiveRecord::Base
   after_save :update_bookmarks, :if => :bookmarked?
   after_create :update_admins_and_creator_ids
   after_destroy :change_status
+  after_destroy :delete_vimeo_video
   
   def upload_single_video
     video = self.upload
@@ -54,7 +55,10 @@ class Video < ActiveRecord::Base
   handle_asynchronously :upload_single_video
 
   def delete_vimeo_video
-    VimeoLib.video.delete(self.vimeo_id)
+    if self.vimeo_id.present?
+      self.remove_video_from_album
+      VimeoLib.video.delete(self.vimeo_id)
+    end
   end
 
   def remove_video_from_album

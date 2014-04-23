@@ -82,6 +82,7 @@
   					<% if !f.object.new_record? %>
   						<button type="submit" class="btn purple" value="Publish" name="Publish">Publish</button>
   					<% end %>
+  					<%= link_to "Cancel", "#{admin_contents_url}#topics", :data => {'no-turbolink' => true}, :class => 'btn default' %>
   				</div>
   			</div>
 			</div>
