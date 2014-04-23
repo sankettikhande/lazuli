@@ -25,7 +25,7 @@ class Topic < ActiveRecord::Base
 
   after_save :update_videos_sphinx_delta
   after_save :change_status
-  after_destroy :delete_vimeo_album
+  after_destroy :delete_vimeo_album, :if => :vimeo_album_id?
 
   before_update :change_video_status
 
