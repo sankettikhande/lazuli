@@ -3,7 +3,7 @@ class Video < ActiveRecord::Base
   @@video_statuses = ['Published', 'InProcess', 'PartialPublished', 'Saved']
   # attr_accessible :title, :body
   serialize :vimeo_data
-  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes
+  attr_accessible :title, :description, :summary, :trial, :demo, :sequence_number, :image, :tag_list, :clip, :vimeo_id, :vimeo_data, :vimeo_url, :password, :bookmarks_attributes, :thumbnail_control
   attr_accessor :bookmarks_from_params
   cattr_accessor :video_statuses
   has_many :bookmarks, :dependent => :destroy
@@ -34,6 +34,7 @@ class Video < ActiveRecord::Base
   validates_attachment_content_type :clip, :content_type => ['video/x-msvideo','video/avi','video/quicktime','video/3gpp','video/x-ms-wmv','video/mp4','video/mpeg','video/x-flv', 'application/octet-stream']
   validates :status, :inclusion => {:in => @@video_statuses}
   validates_uniqueness_of :title, :scope => :topic_id
+  validates_presence_of :image, :if => :check_thumbnail_control, :message => "can't be blank when thumbnail control selected"
   accepts_nested_attributes_for :bookmarks, :allow_destroy => true
 
   scope :published, where(:status => "Published")
@@ -44,6 +45,10 @@ class Video < ActiveRecord::Base
   after_create :update_admins_and_creator_ids
   after_destroy :change_status
   
+  def check_thumbnail_control
+    self.thumbnail_control == true
+  end
+
   def upload_single_video
     video = self.upload
     video.topic.create_album_for_single_video(video) if video.topic.vimeo_album_id.blank?
