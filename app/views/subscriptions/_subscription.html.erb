@@ -33,7 +33,7 @@
             <% end %>
           </ul>
       </div>
-      <div class="col-sm-2 col-md-2">
+      <div class="col-sm-2 col-md-2" style="overflow:hidden">
         <div class="remove-button">
           <div class="form-group">
             <%= link_to("Remove", subscription_url(subscribed_course), :method => :delete,:confirm => 'Are you sure you want to remove this subscription?', :remote => true, :class => "btn btn-danger #{'disabled' unless subscribed_course.subscription_expired?}", :id => "subscription#{subscribed_course.id}")%>
