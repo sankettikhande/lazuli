@@ -454,10 +454,9 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 .list-content .breadcrumb a {font-size: 14px}
 
 .courses-list .remove-button {line-height: 80px;text-align: center;}
+.browse-allc.course-featured-video {margin-left: 12px !important;}
 
-.courses-list-box .course-featured-video {margin-left: 45px;}
-
-.course-featured-video {margin: 8px 0 10px 12px;}
+.course-featured-video {margin: 8px 0 10px 45px;}
 .course-featured-video a {width: 100px;display: block;float: none;}
 
 /****** =browse courses ***********/
@@ -636,7 +635,7 @@ footer .navbar-toggle .fa {font-size: 18px;}
 .fav-page {margin-top: 5px}
 .fav-content {margin-top: 5px}
 
-.video-slides {max-height: 174px;overflow: hidden;}
+.video-slides {max-height: 180px;overflow: hidden;}
 .video-slides .slide {height: 160px;overflow: hidden;}
 
 .welcome-videos .slide {display: inline-block;}
@@ -661,7 +660,8 @@ li.box-details .subs-date a{color: #f00;font-size: 12px}
 li.box-details .item-viewed {color: #464646}
 li.box-details .item-viewed span {color: #000}
 
-.courses-list-box .courses-list .list-content {border-bottom: none}
+.courses-list.partners-list .list-content,.courses-list-box .courses-list .list-content {border-bottom: none}
+
 /**************  MEDIA QUERIES ******************/
 /**** =Carousel Responsive *****************/
 @media (max-width: 350px) {
@@ -746,7 +746,7 @@ footer .navbar-inverse .navbar-toggle:hover {color: #dedede;}
 
 .content-right {margin-left:10px;margin-top: 50px;margin-right: 0}
 .content-left {margin-left:10px;}
-.courses-list-box .course-featured-video {margin-left: 0 !important;}
+.course-featured-video {margin-left: 0 !important;}
 
 
 #lazuli-top-menu .btn-group > .btn:last-child:not(:first-child),#lazuli-top-menu .btn-group > .dropdown-toggle:not(:first-child) {border-bottom-left-radius: 4px;border-top-left-radius: 4px;}
@@ -954,6 +954,7 @@ h4.page-header {font-size: 24px;}
 
 @media (min-width: 768px) and (max-width: 1199px) {
 
-.course-featured-video {margin-left:-10px;}
-.courses-list-box .course-featured-video {margin-left: 15px;}
+.course-featured-video {margin-left: 15px;}
+.browse-allc.course-featured-video {margin-left: -10px !important}
+
 }
