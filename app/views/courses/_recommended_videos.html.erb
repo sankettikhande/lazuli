@@ -10,7 +10,7 @@
               No Recommended videos available
             </div >
             <% else %>
-             <div class="slider4">
+             <div class="slider4 no-slide">
               <% @recommended_videos.each_with_index do |video, index| %>
                 <div class="slide">
                   <%= link_to(link_image_tag(video),course_topic_video_url(video.topic.course_id, video.topic_id, video.id)) %>
@@ -27,43 +27,52 @@
 </div>
 
 <script>
-<% if !@recommended_videos.count.zero? %>
- <% if !browser.mobile? && !browser.tablet? && (@recommended_videos.count > 6) %>
+  <% if !@recommended_videos.count.zero? %>
     $(document).ready(function(){
-      $('.slider4').bxSlider({
-        minSlides: 1,
-        maxSlides: 6,
-        moveSlides: 1,
-        pager: false,
-        infiniteLoop: true,
-        hideControlOnEnd: false,
-        speed: 1000
+      slider_change();
+      $(window).resize(function(){
+        slider_change(); 
       });
     });
-  <% elsif browser.tablet? && (@recommended_videos.count > 3) %>
-    $(document).ready(function(){
-      $('.slider4').bxSlider({
-        minSlides: 1,
-        maxSlides: 6,
-        moveSlides: 1,
-        pager: false,
-        infiniteLoop: true,
-        hideControlOnEnd: false,
-        speed: 1000
-      });
-    });
-  <% elsif (browser.mobile? || browser.android?) && (@recommended_videos.count > 2) %>
-    $(document).ready(function(){
-      $('.slider4').bxSlider({
-        minSlides: 1,
-        maxSlides: 6,
-        moveSlides: 1,
-        pager: false,
-        infiniteLoop: true,
-        hideControlOnEnd: false,
-        speed: 1000
-      });
-    });  
   <% end %>
- <% end %> 
+  function slider_change(){
+    if($(window).width() < 360 ){
+      <% if @recommended_videos.count > 1 %>
+       $(document).ready(function(){
+        $('.slider4').bxSlider({minSlides: 1,maxSlides: 1,moveSlides: 1,pager: false,speed: 1000});
+       });
+      <% end %>  
+    }else if($(window).width() > 365 && $(window).width() <= 480){
+      <% if @recommended_videos.count > 2 %>
+       $(document).ready(function(){
+        $('.slider4').bxSlider({minSlides: 1,maxSlides: 2,moveSlides: 1,pager: false,speed: 1000});
+       });
+      <% end %> 
+    }else if($(window).width() > 480 && $(window).width() <= 690){
+      <% if @recommended_videos.count > 3 %>
+       $(document).ready(function(){
+        $('.slider4').bxSlider({minSlides: 1,maxSlides: 3,moveSlides: 1,pager: false,speed: 1000});
+       });
+      <% end %>   
+    }else if($(window).width() > 690 && $(window).width() <= 768){
+      <% if @recommended_videos.count > 4 %>
+        $(document).ready(function(){
+        $('.slider4').bxSlider({minSlides: 1,maxSlides: 4,moveSlides: 1,pager: false,speed: 1000});
+       });
+      <% end %>
+    }else if($(window).width() > 768 && $(window).width() <= 1024){
+      <% if @recommended_videos.count > 5 %>
+        $(document).ready(function(){
+        $('.slider4').bxSlider({minSlides: 1,maxSlides: 5,moveSlides: 1,pager: false,speed: 1000});
+       });
+      <% end %>   
+    }else if($(window).width() > 1024){
+      <% if @recommended_videos.count > 6 %>
+       $(document).ready(function(){
+        $('.slider4').bxSlider({minSlides: 1,maxSlides: 6,moveSlides: 1,pager: false,speed: 1000});
+       });
+      <% end %>  
+    }
+}
 </script>
+ 

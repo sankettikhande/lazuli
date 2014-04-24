@@ -5,7 +5,7 @@ class ContactUsController < ApplicationController
 		@contact_us.email=current_user.email if user_signed_in?	   
 	    respond_to do |format|
 	      if @contact_us.save
-	      	Emailer.delay.sent_contact_us(@contact_us)
+	      	Emailer.delay(:queue => "mail_sender").sent_contact_us(@contact_us)
 	        format.js
 	        flash[:success] = "Your message has been sent successfully.!!!"
 	      else       

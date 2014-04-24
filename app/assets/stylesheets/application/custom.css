@@ -635,7 +635,7 @@ footer .navbar-toggle .fa {font-size: 18px;}
 .fav-page {margin-top: 5px}
 .fav-content {margin-top: 5px}
 
-.video-slides {max-height: 180px;overflow: hidden;}
+.video-slides {max-height: 174px;overflow: hidden;}
 .video-slides .slide {height: 160px;overflow: hidden;}
 
 .welcome-videos .slide {display: inline-block;}
@@ -678,7 +678,7 @@ li.box-details .item-viewed span {color: #000}
 }
 @media (min-width: 371px) and (max-width: 480px) {
 .welcome-videos .slide {margin-left: 30px;margin-right: 30px;}
-.video-slides .slide {width: 180px !important;padding: 10px 20px 0;margin: 0 20px;float: left;}
+.video-slides .slide {width: 180px !important;padding: 10px 20px 0;margin: 0 19px;float: left;}
 
 }
 @media (min-width: 481px) and (max-width: 640px) {
@@ -957,4 +957,4 @@ h4.page-header {font-size: 24px;}
 .course-featured-video {margin-left: 15px;}
 .browse-allc.course-featured-video {margin-left: -10px !important}
 
-}
+.no-slide .slide img{height: 95px !important;width: 150px !important;}
