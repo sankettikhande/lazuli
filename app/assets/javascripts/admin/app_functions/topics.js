@@ -7,12 +7,15 @@ $(document).ready(function(){
       $('.formError').css("left","15px")
       if(status == true){
         $(window).spin();
-        alert("It will take a few minutes to publish the video. \nEditing the videos are disabled until the video is published..");
         return true
       }
     }
   });
 
+  $(".publish_alert").click(function(){
+    if($(".topicFrom").validationEngine('validate') == true)
+    alert("It will take a few minutes to publish the video. \nEditing the videos are disabled until the video is published..");
+  })
 
 	var arguments = ['course','get_channel_info.json','admin/courses','topic_channel_id','t-channel','id','name']
 	getJsonDatas.apply(null,arguments)

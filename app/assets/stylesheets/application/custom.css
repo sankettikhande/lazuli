@@ -656,11 +656,15 @@ li.box-details .item-title a {color: #095795;}
 li.box-details .item-categ a {font-family: 'MyriadProBold',Sans-Serif;color: #464646}
 li.box-details .item-descr a {color:#464646;font-family: 'MyriadProRegular',Sans-Serif}
 li.box-details .subs-period a {color: #464646;}
-li.box-details .subs-date a{color: #f00;font-size: 12px}
+li.box-details .subs-date a{color: #f00;font-size: 12px;}
 li.box-details .item-viewed {color: #464646}
 li.box-details .item-viewed span {color: #000}
 
 .courses-list.partners-list .list-content,.courses-list-box .courses-list .list-content {border-bottom: none}
+
+.courses-list.partners-list .list-content li.descr {padding-right: 10px;}
+
+.partial-courses-list-box ul.list-content {border-bottom: none;}
 
 /**************  MEDIA QUERIES ******************/
 /**** =Carousel Responsive *****************/
