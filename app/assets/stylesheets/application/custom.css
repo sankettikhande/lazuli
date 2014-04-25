@@ -953,8 +953,7 @@ h4.page-header {font-size: 24px;}
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
-
-.course-featured-video {margin-left: 15px;}
-.browse-allc.course-featured-video {margin-left: -10px !important}
-
-.no-slide .slide img{height: 95px !important;width: 150px !important;}
+  .course-featured-video {margin-left: 15px;}
+  .browse-allc.course-featured-video {margin-left: -10px !important}
+  .no-slide .slide img{height: 95px !important;width: 150px !important;}
+}
