@@ -4,16 +4,18 @@ module HomeHelper
 	end
 
 	def video_thumbnail_image(video, options={})
-		if video.vimeo_data
-      if options.blank?
-        video.get_best_thumbnail
-      elsif options[:medium]
-        video.get_best_thumbnail(1)
-      elsif options[:small]
-        video.get_best_thumbnail(0)
+    unless(video.thumbnail_control == true)
+  		if video.vimeo_data
+        if options.blank?
+          video.get_best_thumbnail
+        elsif options[:medium]
+          video.get_best_thumbnail(1)
+        elsif options[:small]
+          video.get_best_thumbnail(0)
+        end
       end
     else
-     video.image.present? ? video.image.url : "process-thumb.png"
+      video.image.present? ? video.image.url : "process-thumb.png"
     end
   end
 

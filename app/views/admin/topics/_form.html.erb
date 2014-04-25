@@ -1,6 +1,6 @@
 <%= javascript_include_tag "utils.js"%>
 <%= javascript_include_tag "admin/app_functions/topics.js"%>
-<%= nested_form_for [:admin , @topic], :html => {:class => "formClass"} do |f| %>
+<%= nested_form_for [:admin , @topic], :html => {:class => "topicFrom"} do |f| %>
 <%= errors_for @topic unless @topic.errors.blank? %>
 	<div class="form-group">
 		<div class="panel panel-default">
@@ -82,6 +82,7 @@
   					<% if !f.object.new_record? %>
   						<button type="submit" class="btn purple" value="Publish" name="Publish">Publish</button>
   					<% end %>
+  					<%= link_to "Cancel", "#{admin_contents_url}#topics", :data => {'no-turbolink' => true}, :class => 'btn default' %>
   				</div>
   			</div>
 			</div>
@@ -90,4 +91,3 @@
 <% end %>
 
 <%= render 'bookmark', :topic => @topic %>
-<%= javascript_include_tag "admin/app_functions/jquery_validation.js"%>
