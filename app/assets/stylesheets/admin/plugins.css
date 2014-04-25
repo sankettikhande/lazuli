@@ -423,6 +423,7 @@ Fileuploader plugin css changes
   background-color: #fff ;
   background-image: none ;
   filter:none ;
+  word-wrap: break-word;
 }
 
 .fileupload .close {
