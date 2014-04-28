@@ -7,7 +7,8 @@
       </div>
       <div class="fileupload-preview fileupload-exists thumbnail thumb-prash"></div>
       <% image_presence = video_form.object.image.present? ? true : false %>
-    <label class="thumbnail_class">Select Image <%= video_form.radio_button :thumbnail_control, 1, :class=>"thumbnail_control_check", :onclick=>"alertRadioValue(#{image_presence}, event);" %></label> 
+
+    <label class="thumbnail_class">Select Image <%= video_form.radio_button :thumbnail_control, true, :class => "checkbox", :onclick=>"alertRadioValue(#{image_presence}, event);" %></label> 
     </div>
     </div>
     <div class="col-xs-6">
@@ -16,7 +17,8 @@
       </div>
       <div>
         <label>Vimeo Image
-        <%= video_form.radio_button :thumbnail_control, 0, checked:"checked", :class=>"thumbnail_control_check1" %></label></div>
+          <%= video_form.object.thumbnail_control %>
+        <%= video_form.radio_button :thumbnail_control, false, :class => "checkbox thumbnail_control_check1", :disabled => video_form.object.new_record? %></label></div>
     </div>
   </div>
   <div>
