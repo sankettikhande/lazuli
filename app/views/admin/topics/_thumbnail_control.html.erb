@@ -1,0 +1,42 @@
+<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="row">
+    <div class="col-xs-6">
+      <div>
+      <div class="fileupload-new thumbnail thumb-prash">
+        <%= image_tag video_form.object.image.url %> 
+      </div>
+      <div class="fileupload-preview fileupload-exists thumbnail thumb-prash"></div>
+      <% image_presence = video_form.object.image.present? ? true : false %>
+    <label class="thumbnail_class">Select Image <%= video_form.radio_button :thumbnail_control, 1, :class=>"thumbnail_control_check", :onclick=>"alertRadioValue(#{image_presence}, event);" %></label> 
+    </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="thumbnail thumb-prash">
+        <%= image_tag thumbnail_image(video_form.object) %>
+      </div>
+      <div>
+        <label>Vimeo Image
+        <%= video_form.radio_button :thumbnail_control, 0, checked:"checked", :class=>"thumbnail_control_check1" %></label></div>
+    </div>
+  </div>
+  <div>
+    <span class="btn purple btn-file">
+      <span class="fileupload-new"><i class="fa fa-paper-clip"></i> <%= add_video_image_title(video_form.object) %> </span>
+    <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+      <%= video_form.file_field :image, :class => "default"%>
+    </span>
+      <a href="#" class="btn red fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Remove</a>
+  </div>
+</div>
+<script type="text/javascript">
+function alertRadioValue(obj, event){
+  var ids_image = $(event.target).attr("id")
+  var count_of_image = $("#"+ids_image).closest("label").prev().has("img").length
+  if(count_of_image == 0 && obj == false){
+    alert("Please upload image");
+    $("#"+ids_image).prop('checked', false);
+    $(".thumbnail_control_check1").prop('checked', true);
+   }
+  return true;
+ }
+</script>

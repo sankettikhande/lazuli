@@ -1,4 +1,22 @@
 $(document).ready(function(){
+  $(".topicFrom").validationEngine({
+    validateNonVisibleFields: true,
+    promptPosition : "bottomLeft",
+    autoPositionUpdate: true,
+    onValidationComplete: function(form, status) {
+      $('.formError').css("left","15px")
+      if(status == true){
+        $(window).spin();
+        return true
+      }
+    }
+  });
+
+  $(".publish_alert").click(function(){
+    if($(".topicFrom").validationEngine('validate') == true)
+    alert("It will take a few minutes to publish the video. \nEditing the videos are disabled until the video is published..");
+  })
+
 	var arguments = ['course','get_channel_info.json','admin/courses','topic_channel_id','t-channel','id','name']
 	getJsonDatas.apply(null,arguments)
 	$('.course_id').live('change',function(){

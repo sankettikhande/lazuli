@@ -88,6 +88,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<%=f.submit 'Save', :class => "btn green", :id => "course_edit_form"%>
+			<%= link_to "Cancel", "#{admin_contents_url}#courses", :data => {'no-turbolink' => true}, :class => 'btn default' %>
 		</div>
 	</div>
 	<% end %>

@@ -47,7 +47,7 @@ task :qa do
   set :branch, "master"
   set :scm_verbose, true
 
-  set :delayed_job_args_per_role, {:worker_1 => "--queues=publish,thumbnail -i=1", :worker_2 =>"--queue=sphinx_deltas -i=2"}
+  set :delayed_job_args_per_role, {:worker_1 => "--queues=publish,thumbnail,mail_sender -i=1", :worker_2 =>"--queue=sphinx_deltas -i=2"}
   role :web, domain
   role :app, domain
   role :worker_1,domain
@@ -64,7 +64,7 @@ task :uat do
   set :user, "root"
   set :branch, "master"
   set :scm_verbose, true
-  set :delayed_job_args_per_role, {:worker_1 => "--queues=publish,thumbnail -i=1", :worker_2 =>"--queue=sphinx_deltas -i=2"}
+  set :delayed_job_args_per_role, {:worker_1 => "--queues=publish,thumbnail,mail_sender -i=1", :worker_2 =>"--queue=sphinx_deltas -i=2"}
   role :web, domain
   role :app, domain
   role :worker_1,domain
