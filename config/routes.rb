@@ -134,6 +134,7 @@ Lazuli::Application.routes.draw do
   resources :user_reviews, :only => [:create] 
 
   resources :contact_us, :only => [:create]
+  resources :user_share_videos, :only => [:create]
   
   resources :users
       
@@ -155,4 +156,5 @@ Lazuli::Application.routes.draw do
   match '/favourites/search' => 'favourites#search', :as => :search_favourites
   match '/histories/search' => 'histories#search', :as => :search_histories
   match '/watch_lists/search' => 'watch_lists#search', :as => :search_watch_lists
+  match 'count/user_share_videos/:token' => "user_share_videos#count_views", :as => :count_views
 end
