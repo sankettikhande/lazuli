@@ -223,6 +223,10 @@ class Course < ActiveRecord::Base
     self.course_subscriptions.order('subscription_id').delete_if{|cs| cs.subscription_id == 1 && !self.has_trial_videos?(check_published = true)}
   end
 
+  def is_public?
+    self.channel.channel_type == 'public'
+  end
+    
   def self.public_courses options
     sort_options, search_options, sphinx_options, select_option = {}, {}, {}, {}
     options[:sSearch] = options[:sSearch].gsub(/([_@#!%()\-=;><,{}\~\[\]\.\/\?\"\*\^\$\+\-]+)/, ' ')
