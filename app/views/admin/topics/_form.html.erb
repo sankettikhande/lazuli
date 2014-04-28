@@ -77,10 +77,10 @@
 				<div class="seperator5"></div>
 				<div class="row">
   				<div class="col-md-12">
-  					<button type="submit" class="btn blue" value="Publish" name="SavePub">Save and Publish</button>
-  					<button type="submit" class="btn green" value="Save" name="Save">Save</button>
+  					<%= button_tag 'Save and Publish', :class=>"btn blue publish_alert", :value => "Publish", :name => "SavePub" %>
+  					<%= button_tag 'Save', :class=>"btn green", :value=>"Save", :name=>"Save" %>
   					<% if !f.object.new_record? %>
-  						<button type="submit" class="btn purple" value="Publish" name="Publish">Publish</button>
+  						<%= button_tag 'Publish', :class=>"btn purple publish_alert", :value => "Publish", :name => "Publish" %>
   					<% end %>
   					<%= link_to "Cancel", "#{admin_contents_url}#topics", :data => {'no-turbolink' => true}, :class => 'btn default' %>
   				</div>
