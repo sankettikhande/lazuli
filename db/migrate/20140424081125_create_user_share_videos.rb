@@ -3,8 +3,8 @@ class CreateUserShareVideos < ActiveRecord::Migration
     create_table :user_share_videos do |t|
       t.string :title
       t.string :email
-      t.integer :duration, :default => 30
-      t.integer :no_of_allowable_views, :default => 10
+      t.integer :duration
+      t.integer :no_of_allowable_views
     	t.integer :user_id
       t.integer :topic_id
       t.integer :video_id

@@ -10,9 +10,9 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="row">
-              <div class="col-xs-12 form-group">
+              <div class="col-xs-12 form-group" title="Only one email at a time">
                 <label class="control-label">Send To</label>
-                <%= f.email_field :email, :autofocus => true, :class => 'form-control', :placeholder => 'Enter A Valid email address'%>
+                <%= f.hidden_field :email, :autofocus => true, :class => 'select2 multiple_emails', :placeholder => 'Type a mail-id, press Enter'%>
               </div>
          </div>
          <div class="row">
@@ -54,4 +54,5 @@
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+<%= javascript_include_tag "application/main_app/user_share_videos.js"%>
 <%=javascript_include_tag "application/main_app/devise.js"%>
