@@ -1,0 +1,12 @@
+Hi,<br/><br/>
+
+Please visit the link To watch the video.<br/>
+<%= course_topic_video_url(@user_share_video.course_id, @user_share_video.topic_id, @user_share_video.video_id, :token => @user_share_video.u_token) %><br/>
+
+You can watch this video <%= @user_share_video.no_of_allowable_views %> times within <%= @user_share_video.duration %> Days.<br/>
+
+
+Thanks,<br/>
+<%= @user.name %><br/>
+<%= @user.email %>
+ 

@@ -263,8 +263,12 @@ class User < ActiveRecord::Base
     self.subscribed_course_ids.include?(course_id)
   end
 
-  def sharable_course? course_id
-    self.user_channel_subscriptions.where(:permission_share => true).pluck(:course_id).include?(course_id)
+  def sharable_course? course
+    if course.is_public?
+      self.user_channel_subscriptions.where("permission_share = ? OR permission_create = ?", true, true).pluck(:course_id).include?(course.id) || self.is_admin?
+    else
+      self.is_course_admin_for?(course)
+    end
   end
 
   def trial_course? course_id
@@ -277,6 +281,10 @@ class User < ActiveRecord::Base
     else
       self.subscribed_course_ids.include?(video_course_id) || video.demo
     end
+  end
+
+  def is_course_admin_for?(course)
+    course.course_admin_user_id == self.id
   end
 
   def wachable_admin_channel_course? course_id

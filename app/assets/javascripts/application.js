@@ -26,6 +26,8 @@
 //= require ./application/bootstrap3-typeahead.js
 //= require social-share-button
 //= require ./application/jquery.bxslider.min.js
+//= require ./admin/app.js
+//= require ./admin/select2.min
 
 $( function() {
     $("button[data-href]").click( function() {
