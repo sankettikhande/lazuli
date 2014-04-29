@@ -465,7 +465,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 .course-logo-img {padding-left: 8px;}
 .course-logo-img img {margin: 12px 5px;width: 110px;height: 70px;border:2px solid #fff;text-align: left;}
-h4.company-name {margin-top: 8px;padding-left: 5px;font-size: 16px;text-transform: uppercase;}
+h4.company-name {margin-top: 8px;padding-left: 5px;font-size: 16px;text-transform: uppercase;text-align: left;}
 /*.course-logo-img h4 a {font-size: 16px;text-transform: capitalize;}
 */
 .course-offered {padding-left: 5px;}
@@ -956,8 +956,14 @@ h4.page-header {font-size: 24px;}
 
 }
 
-@media (min-width: 768px) and (max-width: 1199px) {
-  .course-featured-video {margin-left: 15px;}
-  .browse-allc.course-featured-video {margin-left: -10px !important}
-  .no-slide .slide img{height: 95px !important;width: 150px !important;}
+@media (min-width: 768px) and (max-width: 991px) {
+.course-featured-video {margin-left:-20px !important;}
+.browse-allc.course-featured-video {margin-left: -10px !important}
 }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+.course-featured-video {margin-left: 15px;}
+.browse-allc.course-featured-video {margin-left: -10px !important}
+}
+.no-slide .slide img{height: 95px !important;width: 150px !important;}
