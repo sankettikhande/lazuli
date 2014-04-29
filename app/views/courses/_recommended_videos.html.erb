@@ -14,7 +14,7 @@
               <% @recommended_videos.each_with_index do |video, index| %>
                 <div class="slide">
                   <%= link_to(link_image_tag(video),course_topic_video_url(video.topic.course_id, video.topic_id, video.id)) %>
-                    <p class="video-title"><%= video.title.titleize.truncate(30) %></p>
+                    <p class="video-title"><%= video.title.titleize.truncate(25) %></p>
                 </div>
               <% end %>
               </div>
