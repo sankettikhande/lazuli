@@ -47,7 +47,8 @@
         <%= render 'video_options' if user_signed_in? %>
         <!-- rows ends -->
         <div class="row" id="place_video">
-          <% if can? :show, @video %>
+          <%= hidden_field_tag "share_video_token", "", "data-token" => params[:token],"data-token_validity" => @valid_token  if params[:token] %>
+          <% if (can? :show, @video)  || @valid_token %>
             <%= render 'embedded_video' %>
           <% else %>
             <%= render 'embedded_block_video' %>

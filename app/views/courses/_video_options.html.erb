@@ -29,7 +29,7 @@
   <div class="col-sm-12 col-md-8">
     <div class="video-save-options">
       <span>
-        <%= link_to button_field("fa fa-share", 'btn btn-link active', 'Share'), '#', :data => {:target => "#share_modal", :toggle => 'modal'} if !current_user.sharable_course?(@course.id) %>
+          <%= link_to button_field("fa fa-share", 'btn btn-link active', 'Share'), '#', :data => {:target => "#video_share_modal", :toggle => 'modal'} if current_user.sharable_course?(@course)%>
       </span> 
       <span id='add-favourite' <%= add_fav %>>
         <%= link_to button_field("fa fa-star", 'btn btn-link active', 'Add to Favourites'), favourites_path(item_id: @video.id, item_type: "Video", title: @video.title, :thumbnail => @video.get_best_thumbnail ), :method => :post, :remote => true %>
@@ -45,8 +45,8 @@
   </div>
   <!-- col-4 ends -->
 </div>
-
-<div class="modal fade" id="share_modal" tabindex="-1" role="dialog" aria-labelledby="share_modal" aria-hidden="true" data-backdrop="true">
+<!-- Social share options commented as currently not required-->
+<!-- <div class="modal fade" id="share_modal" tabindex="-1" role="dialog" aria-labelledby="share_modal" aria-hidden="true" data-backdrop="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -54,8 +54,11 @@
         <h4 class="modal-title">Share</h4>
       </div>
       <div class='modal-body'>
-        <%= social_share_button_tag(@course.name, :url => course_topic_video_url(@course.id, @topic.id, @video.id)) %>        
+        <%#= social_share_button_tag(@course.name, :url => course_topic_video_url(@course.id, @topic.id, @video.id)) %>        
       </div>
     </div>
   </div>
+</div> -->
+<div class="modal" id="video_share_modal" tabindex="-1" role="dialog" aria-labelledby="share-modal" aria-hidden="true" data-backdrop="true">
+  <%= render 'home/user_share_videos', :video_id => @video.id, :course_id =>@course.id, :topic_id => @topic.id%>
 </div>

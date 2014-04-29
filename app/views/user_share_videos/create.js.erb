@@ -1,0 +1,6 @@
+<% if @user_share_video.errors.blank? %> 
+  	window.location.href = "<%= root_url %>"  
+<% else %>   
+	$('.error').addClass('error_message_tag').show().html('<%= error_message_tag(@user_share_video.errors.full_messages) %>')
+	$(window).spin('stop')
+<% end %>
