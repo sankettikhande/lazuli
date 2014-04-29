@@ -3,6 +3,8 @@ class Course < ActiveRecord::Base
   attr_accessible :name, :description, :trainer_name, :trainer_biography, :image, :channel_id,
                   :channel_course_permissions_attributes, 
                   :course_subscriptions_attributes, :subscription_ids, :course_trainers_attributes
+  @@update_delta = true
+  cattr_accessor :update_delta
 
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                     :default_url => ":class/:style/missing.gif", 
@@ -34,7 +36,8 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :channel_course_permissions, :allow_destroy => true
   accepts_nested_attributes_for :course_subscriptions, :reject_if => proc { |a| !a['subscription_id'].present? }, :allow_destroy => true
   #SCOPES
-  after_save :set_channel_permission, :update_topics_sphinx_delta
+  after_save :set_channel_permission 
+  after_save :update_topics_sphinx_delta, :if => :update_delta_needed?
   after_initialize :create_associations
   before_update :update_course_admin_user_ids, :if => :course_admin_user_id_changed?
   before_update :update_user_channel_subscriptions_channel_id, :if => :channel_id_changed?
@@ -50,6 +53,10 @@ class Course < ActiveRecord::Base
       permission.channel_id = self.channel_id
       permission.save
     end
+  end
+
+  def update_delta_needed?
+    Course.update_delta
   end
 
   def courses_trainer_name
