@@ -5,52 +5,51 @@
       <h4 class="modal-title">Share Video</h4>    
     </div>
     <div class="modal-body">
-       <%= form_for :user_share_video, :remote => true, :url => user_share_videos_url do |f| %>
-       <div class ="error"></div>     
+      <%= form_for :user_share_video, :remote => true, :url => user_share_videos_url do |f| %>
+      <div class ="error"></div>     
       <div class="row">
         <div class="col-xs-12">
           <div class="row">
-              <div class="col-xs-12 form-group" title="Only one email at a time">
-                <label class="control-label">Send To</label>
-                <%= f.hidden_field :email, :autofocus => true, :class => 'select2 multiple_emails', :placeholder => 'Type a mail-id, press Enter'%>
-              </div>
-         </div>
-         <div class="row">
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label class="control-label">Mail Subject</label>
-               <%= f.text_field :title, :class => 'form-control', :placeholder => 'Enter subject of mail.', :rows => 3 %>             
+            <div class="col-xs-12 form-group" title="Only one email at a time">
+              <label class="control-label">Send To</label>
+              <%= f.hidden_field :email, :autofocus => true, :class => 'select2 multiple_emails', :placeholder => 'Type a mail-id, press Enter'%>
             </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label class="control-label">Mail Subject</label>
+             <%= f.text_field :title, :class => 'form-control', :placeholder => 'Enter subject of mail.', :rows => 3 %>             
           </div>
         </div>
-         <div class="row">
-              <div class="col-xs-12 form-group">
-                <label class="control-label">Days To Allow</label>
-                <%= f.text_field :duration, :value => 30, :autofocus => true, :class => 'form-control', :placeholder =>'Allowable Duration.' %>
-              </div>
-         </div>
-         <div class="row">
-              <div class="col-xs-12 form-group">
-                <label class="control-label">No Of Views To Allow</label>
-                <%= f.text_field :no_of_allowable_views, :value => 15 ,:autofocus => true, :class => 'form-control', :placeholder => 'Allowable Views.' %>
-              </div>
-         </div>
-        <%= f.hidden_field :video_id, :value => video_id %>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-group">
+          <label class="control-label">Days To Allow</label>
+          <%= f.text_field :duration, :value => 30, :autofocus => true, :class => 'form-control', :placeholder =>'Allowable Duration.' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 form-group">
+          <label class="control-label">No Of Views To Allow</label>
+          <%= f.text_field :no_of_allowable_views, :value => 15 ,:autofocus => true, :class => 'form-control', :placeholder => 'Allowable Views.' %>
+        </div>
+      </div>
+        <%= f.hidden_field :video_id, :value => video.id %>
         <%= f.hidden_field :course_id, :value => course_id %>
-        <%= f.hidden_field :topic_id, :value => topic_id %>                                                                                  
-        </div>
-      </div>
-      <div class="seperator-10"></div>                                                          
-        <div class="row">                    
-          <div class="col-xs-12 text-center">
-            <div class="form-group">
-              <%= f.submit 'Submit', :class=>"btn btn-success", data: { disable_with: "Please wait..." } %>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>                                
-            </div>
+        <%= f.hidden_field :topic_id, :value => topic_id %>
+        <%= f.hidden_field :video_title, :value => video.title %>
+      <div class="seperator-10"></div>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <div class="form-group">
+            <%= f.submit 'Submit', :class=>"btn btn-success", data: { disable_with: "Please wait..." } %>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
           </div>
         </div>
-        <% end %>                                                      
       </div>
+      <% end %>                                                      
+    </div>
 
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

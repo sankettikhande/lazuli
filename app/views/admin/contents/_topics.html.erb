@@ -34,6 +34,7 @@
     { "mData": "actions", "bSortable": false, "sClass" : "text-center" }];
     var optionNames = ["Topic Name", "Course Name", "Channel Name"];
     var optionValues = ["title", "course_name", "channel_name"];
-    loadContents(tableId, url, aoColumns, optionNames, optionValues);
-  })
+    var aoSorting = [[ 1, "asc" ]];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues,aoSorting);
+  });
 </script>
