@@ -1,7 +1,7 @@
 <% @course_topics.each do |topic| %>
   <ul class="row channel-each-course">
     <div class="col-xs-7 col-sm-10 col-md-10">
-      <li class="col-xs-12 channel-course-title"><%= link_to topic.title.titleize, course_topic_url(topic.course_id, topic.id) %></li>
+      <li class="col-xs-12 channel-course-title"><%= link_to topic.title.titleize, course_topic_url(topic.course_id, topic.id), "data-no-turbolink" => true %></li>
 
       <li class="col-xs-12">
         <ul class="row">
