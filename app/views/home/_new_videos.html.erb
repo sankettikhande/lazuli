@@ -11,7 +11,7 @@
           <% end %>
          <div class="slider4"> 
           <% @videos.each_with_index do |video, index| %>
-            <div class="slide">
+            <div class="slide" data-no-turbolink="true">
                 <%= link_to(link_image_tag(video),course_topic_video_url(video.course.id, video.topic_id, video.id)) %>
                 <p class="video_title"><%= video.title.titleize.truncate(25) %></p>
             </div>
