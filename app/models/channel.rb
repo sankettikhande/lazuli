@@ -2,6 +2,8 @@ class Channel < ActiveRecord::Base
   attr_accessible :name, :contact_number, :email, :user_name, :channel_type, :company_name, :company_contact_name, :company_postal_address, :company_address, :company_description, :company_number, :admin_user_id, :created_by, :image, :courses_attributes, :website, :facebook_page, :twitter_page
   # attr_accessible :courses_attributes
 
+  @@update_channel_delta = true
+  cattr_accessor :update_channel_delta
   has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, 
                   :default_url => ":class/:style/missing.gif", 
                   :path => ":rails_root/public/system/:class/:attachment/:id/:style/:basename.:extension",
@@ -32,7 +34,7 @@ class Channel < ActiveRecord::Base
 
   #SCOPES
   after_save :set_channel_permission, :on => :create
-  after_save :update_topics_sphinix_deltas
+  after_save :update_topics_sphinix_deltas, :if => :update_channel_delta_needed?
   after_destroy :remove_channel_admin_role
   before_save :update_channel_admin_user_ids, :if => :admin_user_id_changed?
   after_create :user_assign_role
@@ -42,6 +44,9 @@ class Channel < ActiveRecord::Base
 
 
   #INSTANCE METHODS
+  def update_channel_delta_needed?
+    Channel.update_channel_delta
+  end
   def subscription_types
     Subscription.all.map(&:name).join(", ")
   end
