@@ -30,6 +30,10 @@ class Topic < ActiveRecord::Base
   before_update :change_video_status
 
   def update_videos_sphinx_delta
+    Course.update_delta = false
+    Channel.update_channel_delta = false
+    course.update_attribute(:delta, true)
+    channel.update_attribute(:delta, true)
     videos.each do |v|
       v.delta = true
       v.save
