@@ -46,7 +46,7 @@ Lazuli::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( ie.js admin.js utils.js admin.css admin/app_functions/* admin/jquery.dataTables.js admin/DT_bootstrap.js admin/jquery.form.js application/main_app/* froogaloop2/* jquery-star-rating.js ie/respond.min.js ie/excanvas.min.js application/jquery.metadata.js admin/font.css)
+  config.assets.precompile += %w( ie.js admin.js utils.js admin.css admin/app_functions/* admin/jquery.dataTables.js admin/DT_bootstrap.js admin/jquery.form.js application/main_app/* froogaloop2/* jquery-star-rating.js ie/respond.min.js ie/excanvas.min.js application/jquery.metadata.js admin/font.css admin/uniform.default.css admin/validationEngine.jquery.css )
   
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
