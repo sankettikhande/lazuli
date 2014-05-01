@@ -458,6 +458,7 @@ ul.list-content {list-style-type:none;padding-left: 0;}
 
 .course-featured-video {margin: 8px 0 10px 45px;}
 .course-featured-video a {width: 100px;display: block;float: none;}
+.course-featured-video .play-overlay img {width:100px;height:75px;}
 
 /****** =browse courses ***********/
 .list-content {border-bottom: 1px solid #eaeaea;padding-bottom: 5px;}
