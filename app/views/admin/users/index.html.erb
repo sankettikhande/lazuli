@@ -74,6 +74,7 @@
     { "mData": "actions", "bSortable": false, "sClass" : "text-center"}];
     var optionNames = ["User Name", "Full Name", "Email", "Contact Number", "Company Name"];
     var optionValues = ["name", "actual_name", "email", "phone_number", "company_name"];
-    loadContents(tableId, url, aoColumns, optionNames, optionValues);
+    var aoSorting = [[1,'asc']];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues, aoSorting);
   })
 </script>

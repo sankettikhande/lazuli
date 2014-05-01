@@ -53,7 +53,7 @@
   </div>
 </div> -->
 <div class="modal" id="video_share_modal" tabindex="-1" role="dialog" aria-labelledby="share-modal" aria-hidden="true" data-backdrop="true">
-  <%= render 'home/user_share_videos', :video_id => @video.id, :course_id =>@course.id, :topic_id => @topic.id%>
+  <%= render 'home/user_share_videos', :video => @video, :course_id =>@course.id, :topic_id => @topic.id%>
 </div>
 
 <script type="text/javascript">

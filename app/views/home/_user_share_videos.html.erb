@@ -34,22 +34,23 @@
                 <label class="control-label">No Of Views To Allow</label>
                 <%= f.text_field :no_of_allowable_views, :value => 15 ,:autofocus => true, :class => 'form-control', :placeholder => 'Allowable Views.' %>
               </div>
-         </div>
-        <%= f.hidden_field :video_id, :value => video_id %>
-        <%= f.hidden_field :course_id, :value => course_id %>
-        <%= f.hidden_field :topic_id, :value => topic_id %>                                                                                  
         </div>
+        <%= f.hidden_field :video_id, :value => video.id %>
+        <%= f.hidden_field :course_id, :value => course_id %>
+        <%= f.hidden_field :topic_id, :value => topic_id %>
+        <%= f.hidden_field :video_title, :value => video.title %>
       </div>
-      <div class="seperator-10"></div>                                                          
-        <div class="row">                    
+      </div>
+      <div class="seperator-10"></div>
+        <div class="row">
           <div class="col-xs-12 text-center">
             <div class="form-group">
               <%= f.submit 'Submit', :class=>"btn btn-success", data: { disable_with: "Please wait..." } %>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>                                
+              <button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>                            
             </div>
           </div>
         </div>
-        <% end %>                                                      
+        <% end %>
       </div>
 
   </div><!-- /.modal-content -->

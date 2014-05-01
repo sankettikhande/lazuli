@@ -32,7 +32,8 @@
     { "mData": "vimeo_url", "bSortable": false, "sClass" : "text-center"}];
     var optionNames = ["Title", "Topic Name", "Course Name", "Tags", "Channel Name"];
     var optionValues = ["title", "topic_name", "course_name", "tags", "channel_name"];
-    loadContents(tableId, url, aoColumns, optionNames, optionValues);
+    var aoSorting = [[ 1, "asc" ]];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues,aoSorting);
   })
 </script>
 

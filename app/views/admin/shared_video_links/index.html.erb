@@ -1,0 +1,41 @@
+<%= javascript_include_tag "admin/jquery.dataTables.js", "admin/DT_bootstrap.js" %>
+<section class="container">  
+  <div class="row">    
+    <div class="seperator5"></div>
+    <div class="portlet-body flip-scroll">
+      <table class="table table-bordered table-striped table-condensed flip-content table-hover datatable" id="video_links">
+        <thead class="flip-content">
+          <tr>
+              <th width='15%;'>Video Title</th>
+              <th width='15%;'>Email IDs</th>
+              <th width='35%;'>Video Link</th>
+              <th width='8%;'>Views Left</th>            
+              <th width='15%;'>Expires In</th>
+              <th width='8%'>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+ 
+<%= javascript_include_tag 'admin/app_functions/users' %>
+
+<script>
+  $(document).ready(function(){
+    var tableId = '#video_links';
+    var url = "/admin/shared_video_links/search.json";
+    var aoColumns = [{ "mData": "video_title"},
+    { "mData": "email"},
+    { "mData": "link","bSortable": false},
+    { "mData": "no_of_views_remaining","bSortable": false},
+    { "mData": "ends_on"},
+    { "mData": "actions","bSortable": false}];
+    var optionNames = ["Video Title", "Email IDs"];
+    var optionValues = ["video_title","email"];
+    var aoSorting = [[ 4, "asc" ]];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues,aoSorting);
+  })
+</script>
