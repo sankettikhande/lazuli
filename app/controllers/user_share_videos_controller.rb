@@ -10,7 +10,7 @@ class UserShareVideosController < ApplicationController
 	      if @user_share_video.save
 	      	Emailer.delay(:queue => 'mail_sender').share_video(@user_share_video)
 	        format.js
-	        flash[:success] = "Your message has been sent successfully.!!!"
+	        flash[:success] = "Video shared successfully.!!!"
 	      else       
 	        format.js
 	      end
