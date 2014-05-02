@@ -39,6 +39,7 @@
     { "mData": "actions", "bSortable": false, "sClass" : "text-center"}];
     var optionNames = ["Channel Name"];
     var optionValues = ["name"];
-    loadContents(tableId, url, aoColumns, optionNames, optionValues);
+    var aoSorting = [[ 1, "asc" ]];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues,aoSorting);
   })
 </script>

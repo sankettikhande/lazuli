@@ -33,6 +33,7 @@
     { "mData": "created_time"}];
     var optionNames = ["Name", "Email ID", "Subject", "Message","created_time"];
     var optionValues = ["name","email", "subject", "message","created_time"];
-    loadMessages(tableId, url, aoColumns, optionNames, optionValues);
+    var aoSorting = [[ 4, "desc" ]];
+    loadContents(tableId, url, aoColumns, optionNames, optionValues,aoSorting);
   })
 </script>

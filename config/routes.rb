@@ -34,6 +34,12 @@ Lazuli::Application.routes.draw do
       collection do
         get 'search'
       end
+    end
+
+    resources :shared_video_links do
+      collection do
+        get 'search'
+      end
     end    
 
     resources	:contents do
