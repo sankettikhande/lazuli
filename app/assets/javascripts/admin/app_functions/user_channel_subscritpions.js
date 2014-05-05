@@ -8,13 +8,13 @@ $('body').on('focus',".date-picker", function(){
       var course_id = $(this).closest(".fields").find(".courses_id").attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
-              url: "/admin/channels/"+val+"/channel_courses.js",
-              data: {id: val},
-              dataType: "html",
-              success: function(data){
-                $("#"+course_id).html(data);
-              }
-            });
+        url: "/admin/channels/"+val+"/channel_courses.js",
+        data: {id: val},
+        dataType: "html",
+        success: function(data){
+          $("#"+course_id).html("<option value='' selected='selected'>Please Select</option>").append(data);
+        }
+      });
      });
 
     $('.date-picker').datepicker({
@@ -42,14 +42,13 @@ $('body').on('focus',".date-picker", function(){
       var permission_id = $(this).closest(".fields").find('.permissions').attr('id');
       var val = $("option:selected",this).val();
       $.ajax({
-              url: "/admin/courses/"+val+"/course_subscription_types.js",
-              data: {id: val, subscription_id: subscription_id},
-              dataType: "html",
-              success: function(data){
-                console.log(data)
-                $("#"+subscription_id).html(data);
-              }
-            });
+        url: "/admin/courses/"+val+"/course_subscription_types.js",
+        data: {id: val, subscription_id: subscription_id},
+        dataType: "html",
+        success: function(data){
+          $("#"+subscription_id).html("<option value='' selected='selected'>Please Select</option>").append(data);
+        }
+      });
 
       $.ajax({
         url: "/admin/courses/"+val+"/course_permissions.js",
