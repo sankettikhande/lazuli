@@ -9,7 +9,11 @@ $('body').on('focus',".date-picker", function(){
       var val = $("option:selected",this).val();
       $.ajax({
               url: "/admin/channels/"+val+"/channel_courses.js",
-              data: {id: val, course_id: course_id}
+              data: {id: val},
+              dataType: "html",
+              success: function(data){
+                $("#"+course_id).html(data);
+              }
             });
      });
 
@@ -39,8 +43,18 @@ $('body').on('focus',".date-picker", function(){
       var val = $("option:selected",this).val();
       $.ajax({
               url: "/admin/courses/"+val+"/course_subscription_types.js",
-              data: {id: val, subscription_id: subscription_id, permission_id: permission_id}
+              data: {id: val, subscription_id: subscription_id},
+              dataType: "html",
+              success: function(data){
+                console.log(data)
+                $("#"+subscription_id).html(data);
+              }
             });
+
+      $.ajax({
+        url: "/admin/courses/"+val+"/course_permissions.js",
+        data: {id: val, permission_id: permission_id}
+      });
     })
 
     $('.subscriptions_id').on('change', function(){

@@ -28,11 +28,14 @@ $(document).ready(function(){
 		videoAccordionForm();
 	})
 	$('.channels_id').change(function(){
-    var course_id = $(this).closest(".form-group").next().find(".courses_id").attr('id');
     var val = $("option:selected",this).val();
     $.ajax({
             url: "/admin/channels/"+val+"/channel_courses.js",
-            data: {id: val, course_id: course_id}
+            data: {id: val},
+            dataType: "html",
+            success: function(data){
+               $("#topic_course_id").html(data);
+            }
           });
     });
   $("#list_set_1").click(function(){

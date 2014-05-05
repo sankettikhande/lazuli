@@ -65,12 +65,16 @@ class Admin::CoursesController < AdminController
 			@is_trial_subscription = @course_subscriptions.keep_if{|cs| cs.is_trial_subscription?}
 		else
 			@course_subscriptions.delete_if{|cs| cs.is_trial_subscription? && !@course.has_trial_videos?(check_published = false)}
-			@courses_permissions = @course.channel_course_permissions.first
 		end
 		respond_to do |format|
 			format.js
 		end
 	end
+
+	def course_permissions
+		@course = Course.cached_find(params[:id])
+		@courses_permissions = @course.channel_course_permissions.first
+	end	
 
 	def course_videos
 		@course = Course.cached_find(params[:id])
