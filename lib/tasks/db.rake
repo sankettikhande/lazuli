@@ -116,4 +116,12 @@ namespace :db do
       end
     end
   end
+
+  task :delete_histories_of_deleted_videos => :environment do
+    videos_in_history = History.pluck(:video_id)
+    videos_available = Video.where(:id => videos_in_history).pluck(:id).uniq
+    unavailable_video_ids = videos_in_history - videos_available
+    History.where(:video_id => unavailable_video_ids).delete_all
+    puts "deleted successfully!!!!"
+  end
 end
