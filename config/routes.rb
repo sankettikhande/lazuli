@@ -54,6 +54,7 @@ Lazuli::Application.routes.draw do
         get 'get_channel_info'
         get 'course_subscription_types'
         get 'course_videos'
+        get 'course_permissions'
       end
       collection do
         get 'search'
