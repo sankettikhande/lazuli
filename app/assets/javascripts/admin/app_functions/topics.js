@@ -34,7 +34,7 @@ $(document).ready(function(){
             data: {id: val},
             dataType: "html",
             success: function(data){
-               $("#topic_course_id").html(data);
+               $("#topic_course_id").html("<option value='' selected='selected'>Please Select</option>").append(data);
             }
           });
     });
