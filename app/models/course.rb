@@ -26,7 +26,6 @@ class Course < ActiveRecord::Base
   #VALIDATIONS
   validates_presence_of :channel
   validates_lengths_from_database :limit => {:string => 255, :text => 1023}
-  validates_presence_of :image, :message => "^Please upload the course logo."
   validates_presence_of :name, :message => "^Course Name can't be blank"
   validates_attachment_size :image, :less_than => 3.megabytes
   validates_attachment_content_type :image, :content_type => ['image/jpeg', 'image/png','image/gif','image/jpg']
