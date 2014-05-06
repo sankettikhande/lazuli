@@ -63,6 +63,8 @@ class Admin::CoursesController < AdminController
 		@course_subscriptions = @course.subscriptions
 		if params[:topic_course]
 			@is_trial_subscription = @course_subscriptions.keep_if{|cs| cs.is_trial_subscription?}
+		elsif @course.is_public? && !current_user.is_admin?
+			@course_subscriptions.keep_if{|cs| cs.is_trial_subscription? && @course.has_trial_videos?(check_published = false)}
 		else
 			@course_subscriptions.delete_if{|cs| cs.is_trial_subscription? && !@course.has_trial_videos?(check_published = false)}
 		end
