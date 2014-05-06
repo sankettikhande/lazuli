@@ -48,7 +48,7 @@
 				<div class="seperator10"></div>
 				<div class="row">
 					<div class="col-sm-2">
-						<label for="course-logo" class="control-label">Course Logo<%= required_field %></label>
+						<label for="course-logo" class="control-label">Course Logo</label>
 					<p class="logo-up-size">(200px x 150px)</p>
 					</div>
 					<div class="col-md-4">
@@ -66,6 +66,7 @@
 						</span>
 						<a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none; margin-left:5px;"></a>
 					 </div>
+					 <div>(Note : A logo makes your course seem professional)</div>
 					</div>
 					<%= f.fields_for :channel_course_permissions do |course_permission_form| %>
 						<%= render 'course_permission_form', :f => course_permission_form %>

@@ -23,11 +23,11 @@ module HomeHelper
     if course.image.present?
       course.image.url(options[:image_size])
     else
-      "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+      'no_logo.png'
     end
   end
 
   def channel_thumbnail_image(channel, options={})
-    channel.image.present? ? channel.image.url(options[:image_size]) : "http://b.vimeocdn.com/thumbnails/defaults/default.480x640.jpg"
+    channel.image.present? ? channel.image.url(options[:image_size]) : 'no_logo.png'
   end
 end
