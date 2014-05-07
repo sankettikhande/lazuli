@@ -1,8 +1,8 @@
 <%= render 'shared/shared_header'%>
-<%= render 'shared/user_actions' %>
 <% @all_videos = (@videos + @deleted_videos) %>
 <% if @all_videos.any? %>
   <%= form_for @all_videos, :url => url, :remote => true, :method => :post, :html =>{ :id => "remove_videos" }  do |f| %>
+  	<%= render 'shared/user_actions' %> 
 		<%= render 'shared/shared', :objekts => @videos, :deleted_objekts => @deleted_videos %>
 	<% end %>
 <% else %>
