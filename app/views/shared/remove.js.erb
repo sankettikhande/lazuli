@@ -1,5 +1,5 @@
 <% if @videos.blank? && @deleted_videos.blank? %>
 	$("#remove_videos").html("<%= j(render 'shared/no_file') %>");
 <% else %>
-	$("#remove_videos").html("<%= j(render 'shared/shared', :objekts => @videos, :deleted_objekts => @deleted_videos ) %>");
+	$("#video_search_results").html("<%= j(render 'shared/shared', :objekts => @videos, :deleted_objekts => @deleted_videos ) %>");
 <% end %>
