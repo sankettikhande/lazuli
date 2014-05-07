@@ -22,6 +22,7 @@ $(document).ready(function(){
       return true;
     else{
       alert("Please select atleast one subscriptions with price");
+      $(this).closest('span').addClass("checked");
       $(this).attr("checked", "checked");
       }
   });
